@@ -1,0 +1,44 @@
+%Latex Template for the Thesis document for the German University in Cairo (GUC)
+%It will be used mainly for M.Sc and PhD theses,
+%however can be modified for B.Sc. thesis as well
+%Copyrights: The Multi-Robot Systems Research Group - Mechatronics Engineering
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,a4paper,oneside]{book}
+\input{Sections/01_class_and_packages}
+\input{Sections/02_new_commands}
+\input{Sections/03_Authors_info} %change your info
+
+\begin{document}
+\include{Sections/04_titlepage}
+%\include{Sections/04_titlepage} %change number of supervisors, Date
+\include{Sections/07_declaration} %change degree
+\include{Sections/08_acknowledgments}
+\include{Sections/05_list_publications} %Activate in case of publications
+\include{Sections/09_abstract}
+\include{Sections/10_toc_figures_tables}
+%\include{Sections/11_dedication}
+%========================================================
+%redefine page style:
+\pagestyle{headings}
+\pagenumbering{arabic}
+%include chapters in the following part:
+%========================================
+\include{chapters/introduction}
+\include{chapters/background}
+\include{chapters/Methodology}
+\include{chapters/results}
+\include{chapters/conclusion}
+\include{chapters/future_work}
+
+
+%Add the appendix here:
+%==========================
+\include{chapters/appendix}     
+
+
+%Add the bibliography here:
+%=============================
+\include{chapters/bibliography}
+
+
+\end{document}

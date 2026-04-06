@@ -1,0 +1,41 @@
+\chapter{Introduction}\label{chap:intro}
+
+
+\section{Motivation} \label{sec:s1}
+
+The global e-learning sector has grown substantially over the past decade, with projections estimating its market value to exceed USD~848 billion by 2030 \cite{factors_e-learning_2023}. A significant driver of this growth is the integration of artificial intelligence into digital learning platforms, which has enabled more personalised educational experiences through adaptive content delivery and intelligent tutoring \cite{Gligorea2023Adaptive, Strielkowski2024AI‐driven}. However, the majority of existing adaptive learning systems focus primarily on cognitive performance indicators such as quiz scores, task completion rates, and knowledge-tracing metrics \cite{vistorte_integrating_2024, yuvaraj_affective_2025}. While these indicators are valuable, they offer an incomplete picture of the learner's experience, as they do not account for the affective dimension of learning.
+
+Emotions play a well-documented role in shaping how learners engage with educational material. Affective states such as curiosity and enjoyment can promote sustained attention and deeper processing, whereas frustration, boredom, and confusion---if left unaddressed---tend to reduce motivation and hinder knowledge retention [CITE]. Research in educational psychology has established that emotional responses are not peripheral to learning but are closely intertwined with cognitive processes including attention regulation, memory consolidation, and self-efficacy [CITE]. In the context of online learning, where instructor--student interaction is limited, learners who experience persistent negative emotions may disengage without any external signal reaching the system \cite{anwar_emotions_2023}. This makes the ability to detect and respond to learner emotions a meaningful requirement for effective adaptive systems.
+
+Facial expression recognition (FER) has emerged as a practical, non-intrusive approach for capturing emotional cues in real time. Unlike physiological sensors or self-report questionnaires, FER relies only on a standard webcam, making it well suited for deployment in typical e-learning environments \cite{aly_enhancing_2023, gupta_edfa_2023}. Recent advances in deep learning have improved the accuracy and efficiency of FER models, enabling them to classify expressions such as happiness, sadness, anger, surprise, and neutral states under varied lighting and pose conditions \cite{aly_comprehensive_2025, aly_revolutionizing_2025}. These capabilities position FER as a viable sensing modality for bridging the gap between emotion detection and instructional adaptation in online education.
+
+
+\section{Problem Statement}
+
+Despite notable progress in both facial expression recognition and adaptive learning, a persistent gap exists between the two fields. On one side, FER research has achieved increasingly high classification accuracy on benchmark datasets, yet most studies treat emotion recognition as a standalone pattern-recognition task and do not demonstrate how the predicted labels would be consumed by a downstream educational system \cite{lek_academic_2023, fernandez-herrero_evaluating_2024}. Systematic reviews of intelligent tutoring systems similarly observe that affective awareness is frequently discussed as a desirable feature but is rarely implemented through an explicit, technically documented pipeline \cite{zerkouk_comprehensive_2025}. On the other side, adaptive platforms that do personalise content often derive learner state from self-report instruments, clickstream heuristics, or pre-configured rule tables rather than from real-time vision-based affect sensing \cite{sayed_ai-based_2023}.
+
+Recent work has begun to address this disconnect. Several studies have proposed architectures that combine emotion detection with some form of instructional adjustment---for example, using reinforcement learning to select interventions based on detected affect \cite{govea_implementation_2024, meng_self-evolving_2025}, or integrating multimodal recognition with adaptive content delivery \cite{gong_design_2025, kong_real-time_2025}. However, these systems tend to be complex, multi-component frameworks that are difficult to reproduce or adapt at a smaller scale. What remains underexplored is a lightweight, clearly documented prototype that connects a trained FER model to a defined set of pedagogical actions---such as pacing adjustment, hint delivery, or encouragement prompts---through an explicit mapping logic that can be inspected, modified, and evaluated independently of the recognition model.
+
+
+\section{Research Aim and Objectives}
+
+The aim of this thesis is to design and develop a prototype system that integrates a deep-learning-based facial expression recognition module with an adaptive learning mechanism, whereby detected emotional states are mapped to specific instructional actions within an online learning context. Rather than advancing FER accuracy in isolation or proposing a purely theoretical adaptation framework, this work focuses on connecting the two through an explicit and reproducible pipeline.
+
+To achieve this aim, the following objectives are defined:
+
+\begin{enumerate}
+    \item Review existing FER architectures and benchmark datasets to select an approach suitable for recognising learning-relevant emotional states.
+    \item Develop and train a convolutional neural network (CNN)-based FER model capable of classifying facial expressions in real time from webcam input.
+    \item Define a rule-based mapping that translates detected emotions into adaptive instructional actions, including pacing adjustment, hint delivery, and encouragement prompts.
+    \item Implement a prototype adaptive learning pipeline that integrates the FER module with the mapping logic to deliver emotion-responsive content.
+    \item Evaluate the prototype by measuring both the classification accuracy of the FER model and the appropriateness of the triggered adaptations through controlled testing scenarios.
+\end{enumerate}
+
+
+\section{Research Questions}
+
+\section{Thesis Contributions }
+\section{Thesis Organization}
+
+
+\newpage

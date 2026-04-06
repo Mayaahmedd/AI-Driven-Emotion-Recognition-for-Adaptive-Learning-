@@ -1,0 +1,9 @@
+project_name: FER_Module
+num_classes: 7
+image_size: 224
+batch_size: 32
+epochs: 10
+learning_rate: 0.0001
+model_name: resnet50
+dataset_name: fer2013
+device: auto
