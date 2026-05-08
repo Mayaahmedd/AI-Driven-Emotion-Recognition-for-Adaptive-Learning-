@@ -1,0 +1,113 @@
+\chapter{Background}\label{chap:background-foundations}
+
+\section{Emotion Recognition in Learning}
+
+Emotion recognition means identifying what a learner is feeling from observable signals, such as facial expressions in video frames \cite{lek_academic_2023,florestiyanto_emotion_2024}. In this thesis, the task is Facial Expression Recognition (FER), which is the use of computer vision to detect emotion-related facial patterns automatically \cite{lek_academic_2023}. FER is useful in learning systems because it can capture signals continuously without asking the learner to stop and fill in surveys \cite{vistorte_integrating_2024}.
+
+Educational research usually focuses on academic emotions, not only basic emotions like happiness or fear \cite{pekrun_control-value_2006,dmello_language_2012}. Academic emotions are feelings linked to studying and solving tasks, such as engagement, confusion, frustration, and boredom \cite{dmello_language_2012}. These states matter because they affect attention, effort, and persistence during learning \cite{pekrun_control-value_2006,tyng_influences_2017}.
+
+The DAiSEE dataset is an educational video dataset where clips are labeled for engagement, boredom, confusion, and frustration \cite{gupta_daisee_2016}. A dataset is a structured collection of examples used to train and test machine learning models \cite{lek_academic_2023}. In this thesis, DAiSEE-style labels are used as the emotion targets for the FER module \cite{gupta_daisee_2016}.
+
+\section{Deep Learning Components Used in This Thesis}
+
+Deep learning is a machine learning approach where a model learns many layers of representations directly from data \cite{aly_revolutionizing_2025}. A neural network is the model structure used in deep learning; it maps input values to output predictions through connected layers \cite{gupta_edfa_2023}. In FER, deep learning helps the system learn complex facial patterns that are hard to write as manual rules \cite{lek_academic_2023}.
+
+A Convolutional Neural Network (CNN) is a neural network designed for images \cite{aly_revolutionizing_2025}. It uses convolution filters to detect local patterns, such as edges, textures, and face parts, then combines them into higher-level features \cite{gupta_edfa_2023}. In this thesis, the CNN backbone is ResNet50, which is a 50-layer residual network widely used as an image feature extractor \cite{he_resnet_2016,asaju_adaptive_2022,aly_revolutionizing_2025}.
+
+A feature extractor is the part of a model that converts raw images into compact numeric representations called features \cite{komaravalli_detecting_2023}. A backbone is the main feature extractor network used before the final prediction layers \cite{aly_revolutionizing_2025}. Here, ResNet50 is used as the backbone to extract frame-level facial features before temporal modeling \cite{asaju_affects_2021,asaju_adaptive_2022}.
+
+Transfer learning means starting from a model that was pre-trained on a large dataset, then fine-tuning it for the target task \cite{komaravalli_detecting_2023}. Pre-trained means the model has already learned generic visual patterns before this project-specific training step \cite{aly_revolutionizing_2025}. This approach is useful when educational FER datasets are smaller than general image datasets \cite{lek_academic_2023}.
+
+Some reviewed studies also use other backbone families. Xception and EfficientNet are CNN architectures designed to improve feature quality and efficiency \cite{komaravalli_detecting_2023,shiri_detection_2024}. A Vision Transformer (ViT) is a model that applies transformer attention to image patches instead of convolution filters \cite{tulsani_realtime_2025,su_leveraging_2024}. A transformer is a sequence model that uses self-attention to model dependencies between elements in parallel \cite{su_leveraging_2024,liu_dynamic_nodate}.
+
+InceptionNet is another CNN family that uses multi-branch convolution blocks with different kernel sizes in parallel \cite{gupta_daisee_2016}. It is often used as a benchmark backbone in FER studies \cite{gupta_daisee_2016}.
+
+Classical components also appear in hybrid FER pipelines. A Support Vector Machine (SVM) is a classifier that separates classes by finding a maximum-margin boundary in feature space \cite{rao_recognition_2021,turkes_enhanced_2025}. PCA and SVD are dimensionality reduction methods that compress features while keeping major information patterns \cite{santoni_convolutional_2023}. SMOTE is an oversampling method that creates synthetic minority examples to reduce class imbalance \cite{santoni_convolutional_2023}.
+
+Some models use specialized feature terms. A GCN, or Graph Convolutional Network, learns from graph-structured inputs such as landmark graphs \cite{rianto_engagement_2025}. Action Units are localized facial muscle movement codes used in facial analysis \cite{santoni_convolutional_2023,rianto_engagement_2025}. LDAM is an imbalance-aware loss that increases class margins for better minority-class separation \cite{rianto_engagement_2025}.
+
+\section{Temporal Modeling in Video}
+
+Temporal modeling means learning how information changes over time, not only what appears in one single frame \cite{asaju_adaptive_2022,mehta_three-dimensional_2022}. In educational FER, many states build gradually, so a short frame sequence often gives better evidence than one image \cite{abedi_improving_2021}. For this reason, this thesis models emotion from sampled video frames, not isolated still images.
+
+Frame sampling means selecting a fixed number of frames from each video clip for processing \cite{abedi_improving_2021}. This makes training stable because each sample has the same temporal length \cite{mehta_three-dimensional_2022}. It also reduces computation compared with using all frames in long clips \cite{asaju_adaptive_2022}.
+
+An LSTM (Long Short-Term Memory) is a recurrent neural network that stores useful past information while processing sequences step by step \cite{hochreiter_lstm_1997,leong_deep_2020}. A BiLSTM (Bidirectional LSTM) reads the sequence in both forward and backward directions, so each time step can use past and future context \cite{asaju_adaptive_2022,tulsani_realtime_2025}. In this thesis, BiLSTM is used after the ResNet50 features to capture temporal emotion patterns in the video clip.
+
+A 3D CNN uses 3D convolutions over height, width, and time together, so it learns spatial and temporal patterns in one operation \cite{mehta_three-dimensional_2022}. C3D is an early 3D CNN design used for short video clips \cite{gupta_daisee_2016}. LRCN means Long-term Recurrent Convolutional Network, which combines CNN frame features with a recurrent temporal module \cite{gupta_daisee_2016}.
+
+\section{Attention Mechanisms}
+
+An attention mechanism is a learnable weighting method that tells the model which parts of its input are more important for the current prediction \cite{vaswani_attention_2017,mehta_three-dimensional_2022,su_leveraging_2024}. Instead of treating all features equally, attention gives larger weights to more informative signals \cite{liu_dynamic_nodate}. This usually improves focus and reduces noise in difficult real-world data \cite{aly_revolutionizing_2025}.
+
+SE attention in this thesis refers to a squeeze-and-excitation style block that recalibrates feature channels by learning channel-wise importance weights \cite{hu_squeeze_2018,aly_revolutionizing_2025}. Channel means one dimension of the feature representation produced by the backbone \cite{liu_dynamic_nodate}. This helps the model strengthen useful facial cues and weaken less relevant channels before temporal encoding.
+
+Temporal attention means applying attention over time steps in a sequence \cite{mehta_three-dimensional_2022}. The model learns which frames in the clip carry the strongest emotional evidence and gives them more influence in the final video representation \cite{su_leveraging_2024,liu_dynamic_nodate}. In this thesis, temporal attention is used after BiLSTM to produce the final sequence feature for classification.
+
+CBAM, or Convolutional Block Attention Module, is an attention block that combines channel and spatial attention in CNN features \cite{aly_revolutionizing_2025}. A Temporal Convolutional Network (TCN) is a sequence model that uses 1D temporal convolutions instead of recurrent units to capture time dependencies \cite{abedi_improving_2021,aly_revolutionizing_2025}. MTCNN is a cascaded face detector that finds and aligns face regions before expression classification \cite{tulsani_realtime_2025}.
+
+DTFormer means Differential Temporal Transformer, which is a transformer-style temporal module designed to model fine-grained frame-to-frame emotional change \cite{liu_dynamic_nodate}. In reviewed FER work, it is combined with adaptive global attention for dynamic learner expression recognition \cite{liu_dynamic_nodate}.
+
+\section{Multilabel Classification and Class Imbalance}
+
+Multilabel classification means one input sample can have more than one active label at the same time \cite{lek_academic_2023}. This is different from single-label classification, where each sample belongs to exactly one class \cite{gupta_daisee_2016}. In practice, a learner clip can show mixed academic affect, so multilabel output is used in this thesis.
+
+A sigmoid activation is a function that converts each output logit into a value between 0 and 1, which can be interpreted as per-label probability \cite{mehta_three-dimensional_2022}. Because sigmoid is applied per label, each label decision is independent from the others \cite{rianto_engagement_2025}. This is why sigmoid is commonly used in multilabel settings.
+
+A loss function is the training objective that measures the difference between model predictions and true labels \cite{abedi_improving_2021}. Weighted loss means giving more weight to under-represented classes so the model does not ignore them during optimization \cite{mehta_three-dimensional_2022,rianto_engagement_2025}. In this thesis, weighted binary cross-entropy is used to handle label imbalance.
+
+Controlled oversampling means increasing the frequency of minority patterns in training data in a planned way, so learning is less biased toward majority classes \cite{santoni_convolutional_2023}. Oversampling does not change the model structure; it changes what the model sees during training \cite{abedi_improving_2021}. This thesis uses controlled oversampling to improve balance across emotion labels.
+
+Threshold tuning means selecting decision cutoffs for each label instead of using one fixed default threshold for all labels \cite{rianto_engagement_2025}. After training, the threshold for each label is adjusted to improve validation performance, especially F1 \cite{mehta_three-dimensional_2022}. This is important in imbalanced multilabel tasks because one threshold rarely fits all labels equally well.
+
+\section{Evaluation Metrics for Multilabel FER}
+
+F1 score combines precision and recall into one value \cite{rianto_engagement_2025}. Precision measures how many predicted positives are correct, and recall measures how many real positives are found \cite{fu_integrating_2025}. F1 is useful when class frequencies are imbalanced, which is common in educational emotion data \cite{mehta_three-dimensional_2022}.
+
+Macro F1 means F1 is computed for each label separately, then averaged equally across labels \cite{rianto_engagement_2025}. This metric treats minority and majority labels with the same importance \cite{mehta_three-dimensional_2022}. It is useful when we want fair performance across all emotion labels.
+
+Micro F1 pools decisions from all labels before computing one global F1 value \cite{fu_integrating_2025}. This metric gives more influence to frequent labels because they contribute more total decisions \cite{rianto_engagement_2025}. Micro F1 is useful for overall system-level performance.
+
+Weighted F1 averages per-label F1 using label frequency as weights \cite{fu_integrating_2025}. It balances between macro and micro behavior by keeping per-label structure while still considering prevalence \cite{rianto_engagement_2025}. This helps summarize practical performance on imbalanced data.
+
+Label accuracy means accuracy computed separately for each label \cite{mehta_three-dimensional_2022}. It shows how well each emotion label is recognized, which is important because some labels are harder than others \cite{lek_academic_2023}. In this thesis, label-level reporting is used together with F1 metrics for a complete evaluation view.
+
+MSE, or Mean Squared Error, is the average squared difference between predicted and target numeric values \cite{mehta_three-dimensional_2022}. It is used when the output is treated as a regression value, such as continuous engagement level prediction \cite{su_leveraging_2024}. Top-1 accuracy means the prediction is counted correct when the model's highest-score class matches the true class \cite{gupta_daisee_2016}.
+
+\section{Adaptive Learning and Intelligent Tutoring Systems}\label{sec:bg:adaptive}
+
+Adaptive learning systems are educational technologies that personalize instruction along several dimensions---content sequencing, pacing, difficulty, hints, and feedback---using data collected during the learning process \cite{gligorea_adaptive_2023,strielkowski_span_2025,zerkouk_comprehensive_2025}. Their defining property is a closed-loop interaction between learner and machine: the system observes the learner's behaviour and outcomes, updates an internal estimate of the learner's state, and selects the next instructional action accordingly \cite{gligorea_adaptive_2023,zerkouk_comprehensive_2025}. Conceptually, this places adaptive learning within the broader class of \emph{sequential decision-making} problems, where each instructional choice has both immediate and long-term effects on learning outcomes \cite{kabudi_ai-enabled_2021}. The adaptation component of this thesis adopts exactly this view: at every interaction step, the tutor must decide an action that is appropriate for the learner's current cognitive and affective condition.
+
+\subsection{Intelligent Tutoring Systems}\label{sec:bg:its}
+
+An Intelligent Tutoring System (ITS) is a computer-based learning environment that delivers individualized tutoring by reasoning over an internal learner model, a domain model, and a pedagogical model \cite{zerkouk_comprehensive_2025,kabudi_ai-enabled_2021}. Classical ITS architectures rely on hand-crafted pedagogical rules to choose hints, examples, or remediation, which limits their ability to optimize long-term learning trajectories across diverse learner populations \cite{guzman_developing_2025}. Recent ITS research replaces these rigid rules with data-driven pedagogical policies, using machine learning to decide when to give hints, change difficulty, or schedule review \cite{axak_adaptive_nodate,deshmukh_developing_2025,guzman_developing_2025,meng_self-evolving_2025}. This shift connects ITS design directly to decision-making frameworks studied in machine learning, in particular reinforcement learning.
+
+\subsection{Knowledge Tracing and Deep Knowledge Tracing}\label{sec:bg:kt}
+
+Knowledge tracing (KT) is the task of estimating a learner's evolving mastery of skills or concepts from observed interactions, typically sequences of exercises tagged with whether the learner answered correctly \cite{urbaite_adaptive_2026,kuling_ken_2025}. Accurate knowledge tracing is a prerequisite for principled adaptive instruction, because the next pedagogical decision depends on what the learner currently knows and is ready to learn next \cite{kuling_ken_2025,urbaite_adaptive_2026}.
+
+Deep Knowledge Tracing (DKT) refers to the family of neural-network-based knowledge tracing models, in which recurrent or memory-augmented networks learn rich, continuous representations of learner mastery directly from raw interaction sequences \cite{urbaite_adaptive_2026,kuling_ken_2025,guzman_developing_2025}. Compared with classical knowledge-tracing models, deep knowledge tracing captures temporal dependencies between exercises more flexibly and can be combined with downstream decision-making components such as exercise recommenders or reinforcement-learning-based tutors \cite{fu_integrating_2025,guzman_developing_2025,meng_self-evolving_2025}.
+
+\section{Reinforcement Learning}\label{sec:bg:rl}
+
+The closed-loop, sequential nature of adaptive instruction motivates reinforcement learning (RL) as a unifying decision-making framework. RL studies how an agent can learn to act in an environment so as to maximize expected long-term reward \cite{sutton_rl_book_2018}. The standard formalism is the Markov Decision Process (MDP), specified by a state space, an action space, a transition function, a reward function, and a discount factor \cite{sutton_rl_book_2018}. At each step the agent observes a state, selects an action according to its policy, receives a scalar reward, and transitions to a new state; the learning objective is a policy that maximizes the expected discounted sum of future rewards \cite{sutton_rl_book_2018}.
+
+This formulation maps almost directly onto adaptive learning: the state encodes a learner's cognitive and affective condition, the action is a pedagogical decision such as selecting an explanation strategy or the difficulty of the next exercise, and the reward measures progress toward learning objectives \cite{axak_adaptive_nodate,perez_emotions_2024,gong_design_2025}. This correspondence is what makes RL a natural choice for tutoring systems that must balance immediate engagement with long-term mastery \cite{axak_adaptive_nodate,deshmukh_developing_2025,fu_integrating_2025}. In this thesis the same view is adopted: the adaptation module is treated as an RL agent whose state combines emotion-aware signals from the FER module with task-progress information.
+
+\subsection{Value-Based Methods and Q-Learning}\label{sec:bg:qlearning}
+
+A central object in many RL algorithms is the action-value function $Q^{\pi}(s,a)$, defined as the expected discounted return obtained by taking action $a$ in state $s$ and following policy $\pi$ thereafter \cite{sutton_rl_book_2018}. The optimal action-value function $Q^{\star}$ satisfies the Bellman optimality equation, and an optimal policy can be obtained by acting greedily with respect to $Q^{\star}$ \cite{sutton_rl_book_2018}. \emph{Q-learning} is an off-policy temporal-difference algorithm that iteratively updates an estimate of $Q^{\star}$ from observed transitions, without requiring a model of the environment \cite{sutton_rl_book_2018}. In its tabular form, Q-learning is theoretically well understood but is restricted to small, discrete state spaces \cite{sutton_rl_book_2018}.
+
+\subsection{Deep Q-Networks}\label{sec:bg:dqn}
+
+The Deep Q-Network (DQN) algorithm extends Q-learning to high-dimensional state spaces by representing the action-value function with a deep neural network \cite{mnih_dqn_2015}. Two algorithmic innovations make deep Q-learning practical. First, an \emph{experience replay} buffer stores past transitions and samples mini-batches from it, which decorrelates consecutive updates and improves data efficiency \cite{mnih_dqn_2015}. Second, a periodically updated \emph{target network} provides stable bootstrapping targets, mitigating the divergence often observed when value-based RL is combined with non-linear function approximation \cite{mnih_dqn_2015}.
+
+DQN and its variants are now common building blocks in adaptive-learning research, where the same ingredients are used to train dynamic instructional policies \cite{axak_adaptive_nodate,sayed_ai-based_2023,kong_real-time_2025,gong_design_2025,govea_implementation_2024}. In this thesis the adaptation module follows the same recipe: a deep Q-network, an experience replay buffer, and a target network are trained on a state representation that combines emotion-aware features with task-progress signals.
+
+\section{Simulation-Based Evaluation in RL Tutoring Systems}\label{sec:bg:simulation}
+
+Reinforcement learning is fundamentally a trial-and-error procedure: an agent must explore many state--action sequences before a useful policy emerges \cite{sutton_rl_book_2018}. Carrying out this exploration directly with human learners is generally impractical, because early policies are by definition under-trained, the sample requirements of RL are large, and any policy update during deployment may inadvertently degrade the learning experience \cite{azoulay_adaptive_2021,axak_adaptive_nodate}. For these reasons, RL-based tutoring research typically trains and evaluates policies inside a learner simulator before any human study \cite{azoulay_adaptive_2021,axak_adaptive_nodate,deshmukh_developing_2025,weitekamp_tutorgym_2025}.
+
+A learner simulator is an executable model of student behaviour that, given the current state and a tutor action, returns a next state and a reward signal \cite{azoulay_adaptive_2021,weitekamp_tutorgym_2025,axak_adaptive_nodate}. Simulators may incorporate parameters of cognition, such as mastery and response accuracy; behaviour, such as help-seeking and response time; or affect, such as engagement and frustration \cite{axak_adaptive_nodate,perez_emotions_2024}. In the methodology of this thesis the simulator plays three complementary roles. First, it makes policy training feasible by providing a safe, repeatable, and unbounded stream of interactions \cite{azoulay_adaptive_2021,deshmukh_developing_2025}. Second, it supports controlled comparison: rule-based, bandit-style, and RL policies can be evaluated under identical learner trajectories, isolating the contribution of the learning algorithm \cite{azoulay_adaptive_2021,axak_adaptive_nodate,weitekamp_tutorgym_2025}. Third, it enables systematic ablation, in particular contrasting emotion-aware and emotion-agnostic state representations under matched simulation conditions \cite{weitekamp_tutorgym_2025}.
+
+The principal limitation of this evaluation strategy is the gap between simulated and real learners: a policy that performs well in simulation may behave differently when deployed on actual students, because real learner dynamics are richer and only partially observable \cite{urbaite_adaptive_2026}. This thesis therefore treats simulation results as evidence about algorithmic behaviour rather than as direct estimates of classroom performance.

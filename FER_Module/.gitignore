@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+checkpoints/
+logs/
+.ipynb_checkpoints/
+.DS_Store
+.venv/lib/python3.9/site-packages/torch/lib/libtorch_cpu.dylib
+data/frames.zip

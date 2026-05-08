@@ -1,0 +1,110 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Models
+*.pt
+*.pth
+*.ckpt
+
+# Datasets
+datasets/
+data/
+
+# Outputs
+runs/
+checkpoints/
+outputs/
+logs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual env
+venv/
+.env
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+
+# Model files
+*.pt
+*.pth
+*.ckpt
+
+# Zip files
+*.zip
+
+# Results/checkpoints
+checkpoints/
+RESULTS/
+
+# Data
+data/
+frames/
+
+# Kaggle outputs
+working/
+
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Models
+*.pt
+*.pth
+*.ckpt
+
+# Datasets
+datasets/
+data/
+
+# Training outputs
+runs/
+wandb/
+checkpoints/
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Models
+*.pt
+*.pth
+*.ckpt
+
+# Datasets
+datasets/
+data/
+
+# Training outputs
+runs/
+wandb/
+checkpoints/
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
