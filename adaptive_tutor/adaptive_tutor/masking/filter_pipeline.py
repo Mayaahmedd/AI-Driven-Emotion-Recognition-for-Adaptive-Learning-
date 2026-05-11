@@ -51,6 +51,29 @@ def _project_candidate(candidate: str, allowed: frozenset[str]) -> tuple[str, tu
     return chosen, (f"filter_pipeline:clamped_to:{chosen}",)
 
 
+@dataclass(frozen=True, slots=True)
+class ActionFilterTrace:
+    """Structured Phase 7 audit flags for one filter call (before emergency recovery).
+
+    Booleans refer to the **requested** ``candidate`` action. ``prerequisites_met``
+    means the prerequisite stage did not remove the candidate (given the
+    candidate survived earlier stages).
+    """
+
+    mask_passed: bool
+    cooldown_blocked: bool
+    prerequisites_met: bool
+    whipsaw_blocked: bool
+
+    def to_json_dict(self) -> dict[str, bool]:
+        return {
+            "mask_passed": self.mask_passed,
+            "cooldown_blocked": self.cooldown_blocked,
+            "prerequisites_met": self.prerequisites_met,
+            "whipsaw_blocked": self.whipsaw_blocked,
+        }
+
+
 def run_filter_pipeline(
     candidate: str,
     state_pre: LearnerState,
@@ -58,11 +81,11 @@ def run_filter_pipeline(
     context: ActionFilterContext,
     cooldown: CooldownTracker,
     whipsaw: WhipsawTracker,
-) -> tuple[str, frozenset[str], tuple[str, ...]]:
-    """Return ``(chosen_action, final_allowed_set, audit_trail)``."""
+) -> tuple[str, frozenset[str], tuple[str, ...], ActionFilterTrace]:
+    """Return ``(chosen_action, final_allowed_set, audit_trail, trace)``."""
     reasons: list[str] = []
 
-    allowed, rs = mask_by_curriculum_and_dataset(
+    allowed_m, rs = mask_by_curriculum_and_dataset(
         ASSISTMENTS_ACTIONS,
         concept_slug=context.concept_slug,
         teacher=context.teacher,
@@ -71,25 +94,38 @@ def run_filter_pipeline(
         strict_dataset=context.strict_dataset,
     )
     reasons.extend(rs)
+    mask_passed = candidate in allowed_m
 
-    allowed, rs = cooldown.filter(allowed, state_pre.timestep)
+    allowed_cd, rs = cooldown.filter(allowed_m, state_pre.timestep)
     reasons.extend(rs)
+    cooldown_blocked = candidate in allowed_m and candidate not in allowed_cd
 
-    allowed, rs = filter_by_prerequisites(
-        allowed,
+    allowed_pr, rs = filter_by_prerequisites(
+        allowed_cd,
         teacher=context.teacher,
         concept_slug=context.concept_slug,
         mastery_by_slug=context.mastery_by_slug,
         threshold=context.prereq_mastery_threshold,
     )
     reasons.extend(rs)
+    prerequisites_met = not (candidate in allowed_cd and candidate not in allowed_pr)
 
-    allowed, rs = whipsaw.opposite_pair_filter(allowed)
+    allowed_w1, rs = whipsaw.opposite_pair_filter(allowed_pr)
     reasons.extend(rs)
 
-    allowed, rs = whipsaw.filter(allowed)
+    allowed_w2, rs = whipsaw.filter(allowed_w1)
     reasons.extend(rs)
 
+    whipsaw_blocked = candidate in allowed_pr and candidate not in allowed_w2
+
+    trace = ActionFilterTrace(
+        mask_passed=mask_passed,
+        cooldown_blocked=cooldown_blocked,
+        prerequisites_met=prerequisites_met,
+        whipsaw_blocked=whipsaw_blocked,
+    )
+
+    allowed = allowed_w2
     if not allowed:
         reasons.append("filter_pipeline:allowed_empty_recover")
         allowed = frozenset({"encouragement", "retry_current_skill"}) & frozenset(
@@ -100,4 +136,4 @@ def run_filter_pipeline(
 
     chosen, extra = _project_candidate(candidate, allowed)
     reasons.extend(extra)
-    return chosen, allowed, tuple(reasons)
+    return chosen, allowed, tuple(reasons), trace

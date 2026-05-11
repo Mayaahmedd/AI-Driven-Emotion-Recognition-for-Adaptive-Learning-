@@ -25,6 +25,7 @@ from typing import Any
 
 from adaptive_tutor.masking import (
     ActionFilterContext,
+    ActionFilterTrace,
     CooldownTracker,
     WhipsawTracker,
     run_filter_pipeline,
@@ -186,6 +187,7 @@ class TutoringEnvironment:
         state_pre_action = self._snapshot()
         action_requested = action
         filter_reasons: tuple[str, ...] = ()
+        filt_trace: ActionFilterTrace | None = None
         if self._enable_action_filter:
             ctx = ActionFilterContext(
                 teacher=self._teacher,
@@ -196,7 +198,7 @@ class TutoringEnvironment:
                 mastery_by_slug=self._mastery_by_slug,
                 prereq_mastery_threshold=self._prereq_threshold,
             )
-            action, _allowed, filter_reasons = run_filter_pipeline(
+            action, _allowed, filter_reasons, filt_trace = run_filter_pipeline(
                 action,
                 state_pre_action,
                 context=ctx,
@@ -252,6 +254,16 @@ class TutoringEnvironment:
             "action": action,
             "action_requested": action_requested,
             "action_filter": filter_reasons,
+            "action_filter_trace": (
+                filt_trace.to_json_dict()
+                if filt_trace is not None
+                else {
+                    "mask_passed": True,
+                    "cooldown_blocked": False,
+                    "prerequisites_met": True,
+                    "whipsaw_blocked": False,
+                }
+            ),
             "r_components": r_components,
         }
         self._mastery_by_slug[self._slug] = state.mastery

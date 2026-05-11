@@ -23,8 +23,8 @@ class ConceptRolloutOutcome:
 
     record: PPOStepRecord
     concept_slug: str
-    micro_trace: tuple[tuple[float, str, float], ...]
-    """Per DQN step: ``(mastery_after_step, action_executed, step_reward)``."""
+    micro_trace: tuple[tuple[float, str, float, int, int, float], ...]
+    """Per DQN step: ``(mastery, action, reward, correct, hint_flag, frustrated)``."""
     final_state: LearnerState
 
 
@@ -63,7 +63,7 @@ def collect_concept_rollout(
     state = seg_state
     done = False
     steps = 0
-    trace: list[tuple[float, str, float]] = []
+    trace: list[tuple[float, str, float, int, int, float]] = []
     guard = env.segment_micro_step_cap + 32
 
     while (not done) and steps < guard:
@@ -77,7 +77,16 @@ def collect_concept_rollout(
             rng=rng,
         )
         steps += 1
-        trace.append((state.mastery, str(info["action"]), float(step_r)))
+        trace.append(
+            (
+                state.mastery,
+                str(info["action"]),
+                float(step_r),
+                int(info["correct"]),
+                1 if str(info["action"]) == "give_hint" else 0,
+                float(state.rolling_emotions.frustrated),
+            )
+        )
 
     r_concept = concept_rollout_reward(
         mastery_start=mastery0,

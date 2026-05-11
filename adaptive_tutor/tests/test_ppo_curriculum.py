@@ -88,7 +88,7 @@ def test_collect_concept_rollout_runs_with_dqn_under_phase7() -> None:
 
     assert 0 <= out.record.concept_index < n
     assert len(out.micro_trace) >= 1
-    m0, action0, _r0 = out.micro_trace[0]
+    m0, action0, _r0, _c0, _h0, _f0 = out.micro_trace[0]
     assert 0.0 <= m0 <= 1.0
     assert action0 in ASSISTMENTS_ACTIONS
     assert len(buf) >= 1

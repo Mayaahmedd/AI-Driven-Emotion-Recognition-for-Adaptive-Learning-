@@ -116,7 +116,7 @@ def test_run_filter_pipeline_deterministic_fallback() -> None:
         strict_dataset=False,
         mastery_by_slug={},
     )
-    chosen, allowed, rs = run_filter_pipeline(
+    chosen, allowed, rs, trace = run_filter_pipeline(
         "give_hint",
         _minimal_state(0),
         context=ctx,
@@ -125,6 +125,7 @@ def test_run_filter_pipeline_deterministic_fallback() -> None:
     )
     assert chosen in allowed
     assert chosen in ASSISTMENTS_ACTIONS
+    assert trace.mask_passed
 
 
 def test_environment_prereq_clamps_escalation() -> None:
