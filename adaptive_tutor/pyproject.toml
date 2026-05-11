@@ -1,0 +1,79 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# ------------------------------------------------------------------------------
+# Project metadata
+# ------------------------------------------------------------------------------
+[project]
+name = "adaptive_tutor"
+version = "0.1.0"
+description = "Hybrid Adaptive Tutoring System with Multilabel FER-Based Emotional Modeling"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Adaptive Tutor Team" }]
+license = { text = "Proprietary - Bachelor Thesis" }
+
+# Runtime dependencies are deliberately conservative for Phase 0/1.
+# Heavier deps (gymnasium, networkx, shap, fastapi, etc.) will be added in
+# the phases that need them so a CI install for early phases stays light.
+dependencies = [
+    "torch>=2.1,<3",
+    "numpy>=1.26,<3",
+    "pydantic>=2.5,<3",
+    "hydra-core>=1.3,<2",
+    "omegaconf>=2.3,<3",
+    "rich>=13.7,<14",                  # nicer console logging
+    "tensorboard>=2.15,<3",
+]
+
+[project.optional-dependencies]
+# `pip install -e .[dev]` for the development toolchain.
+dev = [
+    "pytest>=8.0,<9",
+    "pytest-cov>=4.1,<6",
+    "mypy>=1.8,<2",
+    "ruff>=0.4,<1",
+]
+# `pip install -e .[wandb]` to opt into Weights & Biases.
+wandb = ["wandb>=0.16,<1"]
+# Will be expanded as later phases land.
+sim = ["gymnasium>=0.29,<2"]
+graph = ["networkx>=3.2,<4"]
+explain = ["shap>=0.45,<1"]
+api = ["fastapi>=0.110,<1", "uvicorn>=0.27,<1"]
+
+[project.scripts]
+adaptive-tutor-train = "adaptive_tutor.scripts.train:main"
+
+# ------------------------------------------------------------------------------
+# Tooling: ruff, mypy, pytest
+# ------------------------------------------------------------------------------
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["adaptive_tutor*"]
+exclude = ["tests*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "SIM", "TID", "RUF"]
+ignore = ["E501"]  # line length handled by formatter
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_decorators = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "gpu: requires a GPU/MPS backend",
+]
