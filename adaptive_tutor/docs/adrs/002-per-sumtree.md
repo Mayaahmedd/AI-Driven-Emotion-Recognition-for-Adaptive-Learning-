@@ -1,4 +1,4 @@
-# ADR-002 — Prioritized Experience Replay: Sum-Tree Implementation Choices
+# ADR-002 â€” Prioritized Experience Replay: Sum-Tree Implementation Choices
 
 **Status:** Accepted
 **Owner:** Infrastructure Engineer
@@ -41,8 +41,8 @@ indices  : [0]                              ? root (sum of all priorities)
 
 Two auxiliary arrays:
 
-- `priority: np.ndarray, shape (2N-1,), dtype=float32` — the tree node values.
-- `data: object[]` (or contiguous tensors when transitions are fixed-size) — the transitions themselves, indexed `0 .. N-1`. Leaf `i` corresponds to `data[i - (N - 1)]`.
+- `priority: np.ndarray, shape (2N-1,), dtype=float32` â€” the tree node values.
+- `data: object[]` (or contiguous tensors when transitions are fixed-size) â€” the transitions themselves, indexed `0 .. N-1`. Leaf `i` corresponds to `data[i - (N - 1)]`.
 
 ### 2.2 Operations and complexity
 
@@ -74,7 +74,7 @@ To reduce variance of the sampled batch's empirical distribution, we partition $
 
 ### 2.4 Priority transform
 
-Stored priorities are $|\delta_i| + \epsilon$ ("the absolute TD error plus a small constant"), **not** $(|\delta_i| + \epsilon)^\alpha$. The exponent $\alpha$ is applied only at sampling time conceptually — but because all priorities in the tree are raised to the same $\alpha$, we **store $(|\delta_i| + \epsilon)^\alpha$ directly**. Sampling becomes proportional to the stored value and we save a per-sample power operation. `?` is therefore fixed at insertion; changing ? retroactively requires a tree rebuild.
+Stored priorities are $|\delta_i| + \epsilon$ ("the absolute TD error plus a small constant"), **not** $(|\delta_i| + \epsilon)^\alpha$. The exponent $\alpha$ is applied only at sampling time conceptually â€” but because all priorities in the tree are raised to the same $\alpha$, we **store $(|\delta_i| + \epsilon)^\alpha$ directly**. Sampling becomes proportional to the stored value and we save a per-sample power operation. `?` is therefore fixed at insertion; changing ? retroactively requires a tree rebuild.
 
 ### 2.5 IS-weight annealing
 
@@ -82,9 +82,9 @@ $\beta$ is linearly annealed from $\beta_0 = 0.4$ to $\beta_1 = 1.0$ over the tr
 
 ### 2.6 New transitions get max priority
 
-A freshly pushed transition has not yet been used for an update, so its TD error is unknown. We assign it priority `max_priority_seen_so_far` to guarantee it is sampled at least once before its priority is corrected. This is critical — without it, fresh transitions can be starved indefinitely.
+A freshly pushed transition has not yet been used for an update, so its TD error is unknown. We assign it priority `max_priority_seen_so_far` to guarantee it is sampled at least once before its priority is corrected. This is critical â€” without it, fresh transitions can be starved indefinitely.
 
-### 2.7 Dual-critic PER (cross-reference ADR-001 §R4)
+### 2.7 Dual-critic PER (cross-reference ADR-001 Â§R4)
 
 In the dual-critic setting we store *two* priorities per transition (`?_perf`, `?_flow`) and combine them as
 
@@ -107,22 +107,22 @@ Circular buffer: when capacity is reached, the oldest transition is overwritten.
 
 - **Proportional vs rank-based.** Proportional is simpler, faster, and within statistical noise of rank-based for typical RL settings; rank-based is preferred only when TD-error distributions are pathologically heavy-tailed, which our reward design prevents.
 - **Sum-tree over heap-based variants.** Sum-tree gives $O(\log N)$ sampling proportional to weight; heaps would give $O(\log N)$ top-k retrieval but not weighted sampling.
-- **NumPy-backed flat array.** Pure-Python sum-trees are 50–100× slower; sticking to NumPy lets us push >10k transitions/sec on a laptop.
+- **NumPy-backed flat array.** Pure-Python sum-trees are 50â€“100Ã— slower; sticking to NumPy lets us push >10k transitions/sec on a laptop.
 - **Stored pre-exponent (?) priorities.** Halves the per-sample work; ? changes are rare.
 - **`max_priority` for new transitions.** Otherwise zero-priority newcomers can starve.
 - **Periodic resync.** Numerical drift is real in float32 sum-trees at large $N$; the resync cost is amortized.
 
 ## 4. Consequences
 
-- Memory: `~ 12 N bytes` for the tree (float32 × (2N?1)) plus the transition payload itself.
-- Hot path is `update_priority`, called once per transition per gradient step — must be vectorized when batched. We provide a `update_priorities(idxs, priorities)` batched API.
+- Memory: `~ 12 N bytes` for the tree (float32 Ã— (2N?1)) plus the transition payload itself.
+- Hot path is `update_priority`, called once per transition per gradient step â€” must be vectorized when batched. We provide a `update_priorities(idxs, priorities)` batched API.
 - Resampling is not deterministic across hardware unless we seed `numpy.random.Generator` per buffer (we do).
 
 ## 5. Alternatives considered
 
-- **Rank-based PER** — rejected for v1 (added complexity for marginal gains).
-- **Reservoir + importance sampling** — does not give proportional control over priorities.
-- **Off-the-shelf libraries (e.g., `stable-baselines3`, `tianshou`)** — rejected for the core buffer because we need dual-critic priorities and tight integration with our `Transition` schema. We may import their tests as regression checks.
+- **Rank-based PER** â€” rejected for v1 (added complexity for marginal gains).
+- **Reservoir + importance sampling** â€” does not give proportional control over priorities.
+- **Off-the-shelf libraries (e.g., `stable-baselines3`, `tianshou`)** â€” rejected for the core buffer because we need dual-critic priorities and tight integration with our `Transition` schema. We may import their tests as regression checks.
 
 ## 6. Test plan (referenced from `tests/test_per.py` when Phase 5 lands)
 

@@ -1,4 +1,4 @@
-"""adaptive_tutor.core — frozen contracts everyone else codes against.
+"""adaptive_tutor.core â€” frozen contracts everyone else codes against.
 
 This package is the *bottom* of the project dependency DAG. It MUST NOT
 import from any other ``adaptive_tutor.*`` package. CI enforces this rule.

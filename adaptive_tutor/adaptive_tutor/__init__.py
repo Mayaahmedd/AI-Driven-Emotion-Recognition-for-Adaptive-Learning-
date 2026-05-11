@@ -1,4 +1,4 @@
-"""adaptive_tutor — Hybrid Adaptive Tutoring System.
+"""adaptive_tutor â€” Hybrid Adaptive Tutoring System.
 
 Top-level package. Re-exports the most commonly used public symbols from
 ``adaptive_tutor.core`` so consumers can write::
@@ -17,7 +17,7 @@ __version__ = "0.1.0"
 # Re-exports populated by Phase 1 once core/types.py and core/protocols.py
 # exist. We import lazily-safe symbols here; failure to import these is a
 # packaging bug and should surface at import time.
-from adaptive_tutor.core.types import (  # noqa: F401
+from adaptive_tutor.core.types import (
     CompositeAction,
     EmotionVector,
     LearnerState,
@@ -29,7 +29,6 @@ from adaptive_tutor.core.types import (  # noqa: F401
 )
 
 __all__ = [
-    "__version__",
     "CompositeAction",
     "EmotionVector",
     "LearnerState",
@@ -38,4 +37,5 @@ __all__ = [
     "MicroAction",
     "PerformanceFeatures",
     "Transition",
+    "__version__",
 ]

@@ -1,4 +1,4 @@
-# ADR-001 — Dual-Critic Gradient Detachment & Adaptive-Weighting Stability
+# ADR-001 â€” Dual-Critic Gradient Detachment & Adaptive-Weighting Stability
 
 **Status:** Accepted
 **Owners:** RL Architect, Research Auditor
@@ -10,8 +10,8 @@
 
 The architecture uses two critics that share a state encoder:
 
-- $Q_{\text{perf}}(s, a)$ — value of action $a$ at state $s$ measured against **performance reward** $r^{\text{perf}}$ (correctness, mastery gain, retention).
-- $Q_{\text{flow}}(s, a)$ — value of action $a$ at state $s$ measured against **emotional-flow reward** $r^{\text{flow}}$ (engagement gain, frustration/boredom/confusion penalty).
+- $Q_{\text{perf}}(s, a)$ â€” value of action $a$ at state $s$ measured against **performance reward** $r^{\text{perf}}$ (correctness, mastery gain, retention).
+- $Q_{\text{flow}}(s, a)$ â€” value of action $a$ at state $s$ measured against **emotional-flow reward** $r^{\text{flow}}$ (engagement gain, frustration/boredom/confusion penalty).
 
 A single composite Q-value drives action selection:
 
@@ -34,7 +34,7 @@ Two coupled failure modes appear if this is implemented naively:
 
 We adopt the following five rules. They are mandatory in every dual-critic implementation in this codebase.
 
-### Rule R1 — Two independent value heads on a shared encoder
+### Rule R1 â€” Two independent value heads on a shared encoder
 
 ```
 state s ??? encoder ?(s) ????? head_perf ??? Q_perf(s, a)
@@ -43,7 +43,7 @@ state s ??? encoder ?(s) ????? head_perf ??? Q_perf(s, a)
 
 Both heads receive gradients from their *own* TD losses, but the encoder receives **only their sum**. To prevent F1 we balance the encoder gradient magnitudes with **GradNorm** (Chen et al., 2018) or a simpler **fixed-ratio scaling** with `?_perf`, `?_flow` decay parameters. v1 uses the simpler fixed-ratio scaling; GradNorm is a Phase-12 ablation.
 
-### Rule R2 — Detach the weights from the value path
+### Rule R2 â€” Detach the weights from the value path
 
 When the composite value $Q$ is used by the policy (for action selection or in the policy gradient), the weights $w_{\text{perf}}$ and $w_{\text{flow}}$ are **detached from the computation graph**:
 
@@ -54,7 +54,7 @@ Q_composite = (1 - w_flow_det) * Q_perf + w_flow_det * Q_flow
 
 This breaks the gradient path `policy ? action ? next emotions ? weights ? Q`, preventing F2. The weights still vary with state at inference and during forward passes, but the **agent cannot learn to manipulate them**.
 
-### Rule R3 — Separate target networks per critic
+### Rule R3 â€” Separate target networks per critic
 
 Each critic has its own Polyak-averaged target network:
 
@@ -65,7 +65,7 @@ $$
 
 We do **not** share the target encoder, even though we share the online encoder. The asymmetry is intentional: sharing the online encoder reduces parameter count and forces a common state representation; separating target encoders prevents the slow-moving target from coupling the two TD signals.
 
-### Rule R4 — Independent priorities in PER
+### Rule R4 â€” Independent priorities in PER
 
 The PER priority for transition $i$ is
 
@@ -75,7 +75,7 @@ $$
 
 where $\delta_i^{\text{perf}}$ and $\delta_i^{\text{flow}}$ are the **per-critic** TD errors. Using only the composite TD error biases sampling toward whichever objective is dominating, defeating the purpose of the dual critic.
 
-### Rule R5 — Numerical clamps on the weights
+### Rule R5 â€” Numerical clamps on the weights
 
 Always clamp:
 
@@ -102,7 +102,7 @@ Defaults: $w_{\min} = 0.05$, $w_{\max} = 0.80$. Without clamps, a learner with $
 
 **Negative / costs**
 
-- ~2× parameter count for value heads (encoder is shared, so total is much less than 2× the network).
+- ~2Ã— parameter count for value heads (encoder is shared, so total is much less than 2Ã— the network).
 - Extra hyperparameters: $\lambda_{\text{perf}}, \lambda_{\text{flow}}, \tau_{\text{perf}}, \tau_{\text{flow}}, w_{\min}, w_{\max}, \alpha_p, \alpha_f$. All exposed in `configs/agents/dual_critics.yaml`.
 
 ## 5. Alternatives considered
@@ -114,9 +114,9 @@ Defaults: $w_{\min} = 0.05$, $w_{\max} = 0.80$. Without clamps, a learner with $
 
 ## 6. Test plan (referenced from `tests/test_dual_critics.py` when Phase 11 lands)
 
-- Unit test: weight detachment — verify `Q_composite.backward()` does not produce gradients on the FER inputs.
-- Unit test: clamp — verify $w_{\text{flow}}$ stays in `[w_min, w_max]` across pathological FER inputs (all zeros, all ones).
-- Unit test: per-critic PER priorities — verify priorities track both `?_perf` and `?_flow` independently.
+- Unit test: weight detachment â€” verify `Q_composite.backward()` does not produce gradients on the FER inputs.
+- Unit test: clamp â€” verify $w_{\text{flow}}$ stays in `[w_min, w_max]` across pathological FER inputs (all zeros, all ones).
+- Unit test: per-critic PER priorities â€” verify priorities track both `?_perf` and `?_flow` independently.
 - Stability test: run 10k steps on a fixed simulator cohort and verify TD-loss variance for each critic is bounded.
 
 ## 7. References

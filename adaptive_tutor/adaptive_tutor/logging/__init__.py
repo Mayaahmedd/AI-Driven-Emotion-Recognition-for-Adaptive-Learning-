@@ -1,11 +1,11 @@
-"""adaptive_tutor.logging — unified metric + trace logging sink.
+"""adaptive_tutor.logging â€” unified metric + trace logging sink.
 
 Public surface:
 
     from adaptive_tutor.logging import ExperimentLogger, LoggerConfig
 
 Everything else is private. This package never imports from anywhere else
-in the codebase except ``adaptive_tutor.utils`` — it sits one level above
+in the codebase except ``adaptive_tutor.utils`` â€” it sits one level above
 ``utils`` in the dependency DAG.
 """
 

@@ -77,6 +77,11 @@ runs/
 wandb/
 checkpoints/
 
+# adaptive_tutor local toolchain (uv-installed standalone Python + cache)
+.tools/
+.uv-pythons/
+.uv-cache/
+
 # macOS
 .DS_Store
 

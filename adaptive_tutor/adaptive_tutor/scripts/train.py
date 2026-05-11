@@ -1,4 +1,4 @@
-"""adaptive-tutor-train — CLI scaffolding (Phase 0 placeholder).
+"""adaptive-tutor-train â€” CLI scaffolding (Phase 0 placeholder).
 
 This is a deliberately tiny entry point so that the project is *runnable*
 from the moment Phase 0 lands. Later phases will replace the body with the
@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import argparse
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from adaptive_tutor import __version__
 from adaptive_tutor.logging import ExperimentLogger, LoggerConfig
@@ -27,14 +27,14 @@ from adaptive_tutor.utils.seeding import SeedConfig, seed_everything
 
 def _build_experiment_id(name: str, seed: int) -> str:
     """Compose a stable, sortable, machine+human readable experiment id."""
-    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    ts = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     return f"{name}__seed{seed}__{ts}"
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="adaptive-tutor-train",
-        description=f"adaptive_tutor v{__version__} — Phase 0 placeholder trainer.",
+        description=f"adaptive_tutor v{__version__} â€” Phase 0 placeholder trainer.",
     )
     parser.add_argument("--experiment-name", default="exp_dev")
     parser.add_argument("--seed", type=int, default=0)

@@ -1,4 +1,4 @@
-# ADR-005 — Explainer JSON Schema Versioning
+# ADR-005 â€” Explainer JSON Schema Versioning
 
 **Status:** Accepted
 **Owners:** Explainability Engineer, API Architect
@@ -122,8 +122,8 @@ provenance:
 
 Two explicit categories:
 
-- **`provenance.raw_fer_frames`** — raw FER inputs MAY be included only when the consumer is the dashboard *running on the same device*. Server-side persistence of raw FER frames is **forbidden** by default. The field is therefore absent in v1.0.0 and only added (as opt-in) in a later MINOR version.
-- **`learner_id`** — explanations are pseudonymous; the real learner ID is stored separately and joined only by authorized consumers.
+- **`provenance.raw_fer_frames`** â€” raw FER inputs MAY be included only when the consumer is the dashboard *running on the same device*. Server-side persistence of raw FER frames is **forbidden** by default. The field is therefore absent in v1.0.0 and only added (as opt-in) in a later MINOR version.
+- **`learner_id`** â€” explanations are pseudonymous; the real learner ID is stored separately and joined only by authorized consumers.
 
 ### 2.6 Storage format
 
@@ -161,8 +161,8 @@ Readers automatically migrate to the latest schema by default; the call site can
 ## 5. Alternatives considered
 
 - **Protobuf with FileDescriptors.** Stricter and faster but adds toolchain weight and is harder for a teacher dashboard to inspect by hand. Rejected for v1.
-- **JSON without explicit version.** Rejected — guarantees silent breakage.
-- **A database table per schema.** Rejected — couples evaluation to a DB at a time when the rest of the system is file-based.
+- **JSON without explicit version.** Rejected â€” guarantees silent breakage.
+- **A database table per schema.** Rejected â€” couples evaluation to a DB at a time when the rest of the system is file-based.
 
 ## 6. Test plan (referenced from `tests/test_explanation_schema.py` when Phase 12 lands)
 

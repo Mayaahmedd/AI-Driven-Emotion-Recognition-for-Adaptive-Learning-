@@ -34,7 +34,7 @@ class MaskError(AdaptiveTutorError):
     """An action chosen despite being masked, or a malformed mask shape.
 
     Raised by safety / action-mask code paths (Phase 7). Action-masking
-    bugs are *critical* — they imply the agent picked an action it should
+    bugs are *critical* â€” they imply the agent picked an action it should
     have been structurally prevented from picking, which would invalidate
     safety claims of the system.
     """

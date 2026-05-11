@@ -5,9 +5,9 @@ Why one class
 We want every metric to land in three places without the call site having
 to know any of them exist:
 
-1. **TensorBoard** ó always on; the local truth.
-2. **Weights & Biases** ó opt-in via ``WANDB_ENABLED=1`` (decision 20.11).
-3. **JSONL trace files** ó append-only structured records, parsed later by
+1. **TensorBoard** ¬ù always on; the local truth.
+2. **Weights & Biases** ¬ù opt-in via ``WANDB_ENABLED=1`` (decision 20.11).
+3. **JSONL trace files** ¬ù append-only structured records, parsed later by
    the offline-eval harness and the dashboard back-end.
 
 A single ``ExperimentLogger`` owns the artifact directory and routes
@@ -40,13 +40,14 @@ explainer schema (ADR-005).
 
 from __future__ import annotations
 
+import contextlib
 import json
 import logging
 import os
 import threading
 import time
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -152,15 +153,14 @@ class _TBSink:
         if self._writer is not None:
             try:
                 self._writer.flush()
-            except Exception as e:  # pragma: no cover
+            except Exception as e:  # pragma: no cover - non-fatal sink failure
                 _LOG.warning("TB flush failed: %s", e)
+                return
 
     def close(self) -> None:
         if self._writer is not None:
-            try:
+            with contextlib.suppress(Exception):  # pragma: no cover
                 self._writer.close()
-            except Exception:  # pragma: no cover
-                pass
             self._writer = None
 
 
@@ -206,10 +206,8 @@ class _WandbSink:
 
     def close(self) -> None:
         if self._run is not None:
-            try:
+            with contextlib.suppress(Exception):  # pragma: no cover
                 self._run.finish()
-            except Exception:  # pragma: no cover
-                pass
             self._run = None
 
 
@@ -232,8 +230,11 @@ class _JsonlSink:
         if self._fh is not None:
             return self._fh
         self._path.parent.mkdir(parents=True, exist_ok=True)
-        # Line-buffered append; explicit utf-8.
-        self._fh = open(self._path, mode="a", encoding="utf-8")
+        # Append-mode handle kept open for the lifetime of the sink.
+        # The matching ``close`` method is responsible for releasing it; the
+        # ``SIM115`` rule is suppressed because a context-manager would close
+        # the file after every write and defeat the buffer.
+        self._fh = open(self._path, mode="a", encoding="utf-8")  # noqa: SIM115
         return self._fh
 
     def write(self, record: dict[str, Any]) -> None:
@@ -253,19 +254,16 @@ class _JsonlSink:
         fh = self._ensure()
         fh.write("\n".join(self._buf) + "\n")
         fh.flush()
-        try:
+        # Not all filesystems support fsync; suppress when unavailable.
+        with contextlib.suppress(OSError):  # pragma: no cover
             os.fsync(fh.fileno())
-        except OSError:  # pragma: no cover ó not all filesystems support fsync
-            pass
         self._buf.clear()
 
     def close(self) -> None:
         self.flush()
         if self._fh is not None:
-            try:
+            with contextlib.suppress(Exception):  # pragma: no cover
                 self._fh.close()
-            except Exception:  # pragma: no cover
-                pass
             self._fh = None
 
 
@@ -284,7 +282,7 @@ class ExperimentLogger:
             logger.log_scalar("env/episode_return", 12.3, step=42)
             logger.log_trace("episode_end", {"return": 12.3, "len": 137})
 
-    Failures inside any sink are logged at WARNING level but do not raise ó
+    Failures inside any sink are logged at WARNING level but do not raise ¬ù
     a flaky W&B network must never crash a 10-hour training run.
     """
 
@@ -350,7 +348,7 @@ class ExperimentLogger:
             return
         record = {
             "schema": _TRACE_SCHEMA,
-            "ts": datetime.now(timezone.utc).isoformat(),
+            "ts": datetime.now(UTC).isoformat(),
             "step": int(step) if step is not None else None,
             "kind": kind,
             "payload": payload,

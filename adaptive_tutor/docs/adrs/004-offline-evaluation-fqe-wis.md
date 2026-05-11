@@ -1,4 +1,4 @@
-# ADR-004 — Offline Policy Evaluation: FQE / WIS Test Harness
+# ADR-004 â€” Offline Policy Evaluation: FQE / WIS Test Harness
 
 **Status:** Accepted
 **Owner:** Evaluation Scientist
@@ -15,7 +15,7 @@ The system is **simulator-first** in v1. After Phase 14 it may be deployed again
 Two complementary estimators are industry-standard:
 
 - **Importance-sampling family (IS / WIS / step-WIS / PDIS).** Unbiased (for IS) but high variance. Sensitive to action-coverage of $\pi_b$.
-- **Direct method (FQE — Fitted Q Evaluation).** Low variance, biased by model class. Robust when $\pi_b$ is unknown or has poor coverage.
+- **Direct method (FQE â€” Fitted Q Evaluation).** Low variance, biased by model class. Robust when $\pi_b$ is unknown or has poor coverage.
 
 The combination of the two (or the *doubly robust* estimator that mixes them) is the de facto standard for medical-, dialogue-, and tutoring-style OPE.
 
@@ -53,7 +53,7 @@ When $\pi_b$ is unknown (the typical case for logged real-learner data), we fit 
 
 #### 2.1.2 Action masking and zero ratios
 
-Both $\pi_e$ and $\pi_b$ pass through the **same safety mask**. If the mask makes $\pi_e(a \mid s) = 0$ for a logged action, the ratio is set to $0$ for that step (and downstream — this is the correct PDIS behavior for action-conditioned non-coverage).
+Both $\pi_e$ and $\pi_b$ pass through the **same safety mask**. If the mask makes $\pi_e(a \mid s) = 0$ for a logged action, the ratio is set to $0$ for that step (and downstream â€” this is the correct PDIS behavior for action-conditioned non-coverage).
 
 ### 2.2 Fitted Q Evaluation (FQE)
 
@@ -71,7 +71,7 @@ $$
 
 #### 2.2.1 Model class & overfitting control
 
-- MLP, 2–3 hidden layers, width matched to the policy critic (config-driven).
+- MLP, 2â€“3 hidden layers, width matched to the policy critic (config-driven).
 - 5-fold cross-validation on $\mathcal{D}$; the reported $\hat J^{\text{FQE}}$ is the mean of held-out predictions; the std across folds is reported as a "model-class variance" bar.
 - Early stopping on a held-out fold's TD-loss.
 
@@ -103,7 +103,7 @@ OfflineReport(
 )
 ```
 
-Confidence intervals are produced by **bootstrap over trajectories** (1000 resamples) — not over transitions, because transitions inside a trajectory are correlated.
+Confidence intervals are produced by **bootstrap over trajectories** (1000 resamples) â€” not over transitions, because transitions inside a trajectory are correlated.
 
 ## 3. Rationale
 
@@ -120,9 +120,9 @@ Confidence intervals are produced by **bootstrap over trajectories** (1000 resam
 
 ## 5. Alternatives considered
 
-- **Marginalized Importance Sampling (MIS)** — better for long horizons, but more complex; reserved for Phase-14+ if PDIS variance becomes the bottleneck.
-- **Direct simulator evaluation only.** Rejected — defeats the purpose of OPE (sim-to-real gap).
-- **Off-the-shelf libraries (DICE, d3rlpy)** — we may import them as reference implementations, but the report integration is custom.
+- **Marginalized Importance Sampling (MIS)** â€” better for long horizons, but more complex; reserved for Phase-14+ if PDIS variance becomes the bottleneck.
+- **Direct simulator evaluation only.** Rejected â€” defeats the purpose of OPE (sim-to-real gap).
+- **Off-the-shelf libraries (DICE, d3rlpy)** â€” we may import them as reference implementations, but the report integration is custom.
 
 ## 6. Test plan (referenced from `tests/test_offline_eval.py` when Phase 13 lands)
 

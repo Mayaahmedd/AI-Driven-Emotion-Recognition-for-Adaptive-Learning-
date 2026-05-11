@@ -4,9 +4,9 @@ This directory contains the canonical, versioned design notes for the `adaptive_
 
 ## Status legend
 
-- `Proposed` — under discussion
-- `Accepted` — currently in force
-- `Superseded` — replaced by a later ADR
+- `Proposed` â€” under discussion
+- `Accepted` â€” currently in force
+- `Superseded` â€” replaced by a later ADR
 
 ## Index
 
@@ -22,4 +22,4 @@ This directory contains the canonical, versioned design notes for the `adaptive_
 
 - ADR file names: `NNN-kebab-case-title.md`.
 - Each ADR has sections: `Context`, `Decision`, `Rationale`, `Consequences`, `Alternatives Considered`, `References`.
-- Math is rendered with LaTeX (`$...$` for inline, `$$...$$` for block) and cross-referenced from code via docstrings of the form `See ADR-001 §3`.
+- Math is rendered with LaTeX (`$...$` for inline, `$$...$$` for block) and cross-referenced from code via docstrings of the form `See ADR-001 Â§3`.
