@@ -139,7 +139,7 @@ def test_collect_transition_pushes_replay() -> None:
     agent = DoubleDQNAgent(hidden=(16,), device=torch.device("cpu"))
     buf = UniformReplayBuffer(100, seed=1)
     s, _ = env.reset()
-    _, _done, _info = collect_transition(
+    _, _done, _info, _r = collect_transition(
         env,
         agent,
         buf,

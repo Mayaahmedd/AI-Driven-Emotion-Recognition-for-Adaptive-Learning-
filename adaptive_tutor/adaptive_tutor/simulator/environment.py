@@ -100,10 +100,62 @@ class TutoringEnvironment:
         self._whipsaw = WhipsawTracker(
             window=whipsaw_window, max_pace_switches=whipsaw_max_pace_switches
         )
+        self._in_concept_segment: bool = False
+        self._segment_step_cap: int = int(max_episode_steps)
+        self._segment_mastery_threshold: float = float(mastery_threshold)
+
+    def get_state(self) -> LearnerState:
+        """Current learner-state snapshot (read-only builder view)."""
+        return self._snapshot()
+
+    def start_concept_segment(
+        self,
+        *,
+        concept_slug: str,
+        concept_index: int,
+        dataset_skill_slug: str | None = None,
+        pacing_factor: float = 1.0,
+        difficulty_bias: float = 0.0,
+    ) -> LearnerState:
+        """Switch the active concept for a PPO macro-step without a full cold reset.
+
+        Resets Phase 7 trackers and the env step counter for this segment only.
+        Per-concept mastery accumulated in :class:`StateBuilder` persists.
+        Rolling emotion windows persist (learner-centric signal).
+
+        Parameters
+        ----------
+        pacing_factor:
+            Multiplies ``max_episode_steps`` to cap micro-steps on this concept
+            (clamped to ``[0.25, 3.0]`` ground room for thesis demos).
+        difficulty_bias:
+            In ``[-1, 1]`` shifts the mastery termination threshold for this
+            segment only (easier teaching when positive).
+        """
+        self._slug = str(concept_slug)
+        self._index = int(concept_index)
+        self._dataset_skill_slug = (dataset_skill_slug or self._slug)
+        self._builder.switch_concept(concept_id=self._slug, concept_index=self._index)
+        self._env_step = 0
+        self._cooldown.reset()
+        self._whipsaw.reset()
+        pf = max(0.25, min(3.0, float(pacing_factor)))
+        self._segment_step_cap = max(1, int(self._max_episode_steps * pf))
+        db = max(-1.0, min(1.0, float(difficulty_bias)))
+        self._segment_mastery_threshold = max(
+            0.4, min(0.98, self._mastery_threshold + 0.12 * db)
+        )
+        self._in_concept_segment = True
+        return self._snapshot()
 
     @property
-    def action_space(self) -> tuple[str, ...]:
-        return ASSISTMENTS_ACTIONS
+    def current_concept_slug(self) -> str:
+        return self._slug
+
+    @property
+    def segment_micro_step_cap(self) -> int:
+        """Max env steps for the active segment, or full episode when not in a segment."""
+        return self._segment_step_cap if self._in_concept_segment else self._max_episode_steps
 
     def reset(self) -> tuple[LearnerState, dict[str, Any]]:
         """Start a new episode; windows cleared, latent learner re-seeded from params."""
@@ -114,6 +166,9 @@ class TutoringEnvironment:
         self._mastery_by_slug = dict(self._initial_mastery_snapshot)
         self._builder.reset(concept_id=self._slug, concept_index=self._index)
         self._learner = SyntheticLearner.from_params(self._params)
+        self._in_concept_segment = False
+        self._segment_step_cap = int(self._max_episode_steps)
+        self._segment_mastery_threshold = float(self._mastery_threshold)
         return self._snapshot(), {}
 
     def step(self, action: str) -> tuple[LearnerState, float, bool, dict[str, Any]]:
@@ -180,9 +235,15 @@ class TutoringEnvironment:
         self._env_step += 1
 
         state = self._snapshot()
+        step_cap = self._segment_step_cap if self._in_concept_segment else self._max_episode_steps
+        mastery_target = (
+            self._segment_mastery_threshold
+            if self._in_concept_segment
+            else self._mastery_threshold
+        )
         done = (
-            state.mastery >= self._mastery_threshold
-            or self._env_step >= self._max_episode_steps
+            state.mastery >= mastery_target
+            or self._env_step >= step_cap
             or emotion.frustrated >= self._frustration_terminal_threshold
         )
         info: dict[str, Any] = {

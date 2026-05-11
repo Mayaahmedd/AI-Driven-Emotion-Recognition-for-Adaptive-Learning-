@@ -1,7 +1,7 @@
 """Training utilities for factorised Double DQN (Phase 8).
 
-The canonical interaction loop (**DQN** ? decode string ? **Phase 7 env**
-``step`` ? **reward** ? **replay**) lives here so
+The canonical interaction loop (**DQN** -> decode string -> **Phase 7 env**
+``step`` -> **reward** -> **replay**) lives here so
 :class:`~adaptive_tutor.simulator.environment.TutoringEnvironment` stays
 policy-agnostic.
 """
@@ -85,12 +85,12 @@ def collect_transition(
     num_concepts: int,
     epsilon: float,
     rng: random.Random,
-) -> tuple[LearnerState, bool, dict[str, Any]]:
-    """Select meso heads ? decode ? ``env.step`` (Phase 7 inside) ? store transition.
+) -> tuple[LearnerState, bool, dict[str, Any], float]:
+    """Select meso heads -> decode -> ``env.step`` (Phase 7 inside) -> store transition.
 
     Returns
     -------
-    next_state, done, info
+    next_state, done, info, reward
     """
     s_idx, d_idx, p_idx, _decoded_preview = agent.act(
         state, num_concepts=num_concepts, epsilon=epsilon, rng=rng
@@ -110,4 +110,4 @@ def collect_transition(
         info=_info_to_transition_tuple(info),
     )
     buffer.add(tr)
-    return s_next, done, info
+    return s_next, done, info, reward
