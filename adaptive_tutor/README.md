@@ -1,16 +1,16 @@
 # adaptive_tutor
 
-Hybrid Adaptive Tutoring System with Multilabel FER-Based Emotional Modeling.
+Bachelor-thesis scope: interpretable RL tutoring with multilabel FER, a **teacher/ScienceQA curriculum layer**, and an **ASSISTments behaviour/statistics layer** joined explicitly in the state builder and simulator (see [ADR-006](docs/adrs/006-scope-reset-bachelor-thesis.md)).
 
-This package implements the RL + bandit + dual-critic adaptation engine that consumes the existing `FER_Module/` multilabel model and produces tutoring actions. The architecture and implementation roadmap live in [`docs/adrs/`](docs/adrs/) and the master planning document is in the parent thesis.
+This package wires the existing `FER_Module/` multilabel stack to tutoring actions (macro + meso), curriculum memory, learner-state features, and a lightweight ASSISTments-calibrated simulator. Roadmap: [`docs/adrs/`](docs/adrs/).
 
 ## Current status
 
 | Phase | Description | Status |
 |---|---|---|
-| 0 | Project skeleton, configs, seeding, logger | **In progress** (this commit) |
-| 1 | Core types, protocols, registry, FER adapter | **In progress** (this commit) |
-| 2+ | Curriculum / memory / replay / agents / etc. | Planned |
+| 0–2 | Skeleton, core, FER, curriculum providers | Shipped / in progress |
+| 3–4 | State builder, synthetic environment | Shipped |
+| 5+ | Replay, rewards, DQN/PPO, evaluation | Planned |
 
 See [`docs/adrs/000-index.md`](docs/adrs/000-index.md) for the architectural decision records.
 
@@ -35,14 +35,17 @@ pytest -q
 
 ```
 adaptive_tutor/
-??? adaptive_tutor/      # the Python package
-?   ??? core/            # frozen types + protocols + registry
-?   ??? fer/             # adapter to the existing FER_Module
-?   ??? logging/         # unified TB + W&B + JSONL logger
-?   ??? utils/           # seeding, hashing, etc.
-??? configs/             # Hydra-resolved YAMLs
-??? docs/adrs/           # architecture decision records
-??? scripts/             # CLI entry points
-??? tests/               # pytest suite
-??? pyproject.toml
+├── adaptive_tutor/      # the Python package
+│   ├── core/            # frozen types + protocols + registry
+│   ├── fer/             # adapter to the existing FER_Module
+│   ├── memory/          # teacher + dataset curriculum providers
+│   ├── state/           # learner state + rolling features
+│   ├── simulator/       # synthetic student + gym-style env
+│   ├── logging/         # unified TB + W&B + JSONL logger
+│   └── utils/           # seeding, hashing, etc.
+├── configs/             # Hydra-resolved YAMLs
+├── docs/adrs/           # architecture decision records
+├── scripts/             # CLI entry points
+├── tests/               # pytest suite
+└── pyproject.toml
 ```

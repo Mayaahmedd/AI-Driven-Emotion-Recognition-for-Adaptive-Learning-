@@ -1,0 +1,18 @@
+# Teacher-authored curriculum config.
+#
+# This file tells the orchestrator to load a curriculum from a single
+# YAML/JSON file written by a human (a teacher, the thesis author, or
+# the output of an offline ScienceQA extraction script).
+#
+# To switch curricula, change `path` only. Everything else - validation,
+# version hashing, slug-to-index mapping - is handled by
+# `TeacherCurriculumProvider`.
+
+provider: teacher
+
+# Path is relative to the adaptive_tutor project root (folder with pyproject.toml).
+path: curriculum/examples/math_basic.yaml
+
+# If True (default) the provider is loaded eagerly at construction. Set
+# to False for tests that want to inspect the provider before loading.
+eager: true

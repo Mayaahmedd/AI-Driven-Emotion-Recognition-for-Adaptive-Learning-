@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "adaptive_tutor"
 version = "0.1.0"
-description = "Hybrid Adaptive Tutoring System with Multilabel FER-Based Emotional Modeling"
+description = "Interpretable RL tutoring: FER signals, teacher curriculum, ASSISTments-grounded behaviour"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Adaptive Tutor Team" }]
@@ -25,6 +25,7 @@ dependencies = [
     "omegaconf>=2.3,<3",
     "rich>=13.7,<14",                  # nicer console logging
     "tensorboard>=2.15,<3",
+    "pyyaml>=6.0,<7",                  # teacher curriculum YAML loader
 ]
 
 [project.optional-dependencies]
@@ -45,6 +46,7 @@ api = ["fastapi>=0.110,<1", "uvicorn>=0.27,<1"]
 
 [project.scripts]
 adaptive-tutor-train = "adaptive_tutor.scripts.train:main"
+adaptive-tutor-demo = "adaptive_tutor.demos.run_episode:main"
 
 # ------------------------------------------------------------------------------
 # Tooling: ruff, mypy, pytest

@@ -1,29 +1,29 @@
-"""adaptive_tutor — Hybrid Adaptive Tutoring System.
+"""adaptive_tutor — Adaptive tutoring with FER, curriculum memory, and RL.
 
-Top-level package. Re-exports the most commonly used public symbols from
-``adaptive_tutor.core`` so consumers can write::
+Top-level re-exports::
 
-    from adaptive_tutor import LearnerState, EmotionVector, CompositeAction
+    from adaptive_tutor import (
+        EmotionVector, MacroAction, MesoAction, CompositeAction,
+        LearnerState, PerformanceFeatures, Transition,
+    )
 
-The package is intentionally split into small sub-packages (see ``docs/adrs/``
-and the planning document) so that the RL stack, bandit stack, curriculum
-providers, simulator, and dashboard back-end can evolve independently.
+Modules are split so curriculum structure (teacher/ScienceQA YAML) stays
+separate from behavioural data (ASSISTments) and from RL state, simulator,
+and future trainers (see ``docs/adrs/006-scope-reset-bachelor-thesis.md``).
 """
 
 from __future__ import annotations
 
 __version__ = "0.1.0"
 
-# Re-exports populated by Phase 1 once core/types.py and core/protocols.py
-# exist. We import lazily-safe symbols here; failure to import these is a
-# packaging bug and should surface at import time.
 from adaptive_tutor.core.types import (
     CompositeAction,
     EmotionVector,
-    LearnerState,
     MacroAction,
     MesoAction,
-    MicroAction,
+)
+from adaptive_tutor.state.state import (
+    LearnerState,
     PerformanceFeatures,
     Transition,
 )
@@ -34,7 +34,6 @@ __all__ = [
     "LearnerState",
     "MacroAction",
     "MesoAction",
-    "MicroAction",
     "PerformanceFeatures",
     "Transition",
     "__version__",

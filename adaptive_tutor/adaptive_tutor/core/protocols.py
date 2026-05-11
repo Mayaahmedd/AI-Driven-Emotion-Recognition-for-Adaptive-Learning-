@@ -8,9 +8,9 @@ Structural subtyping ("duck typing with type checks") lets us:
    without forcing it to inherit a particular base class. This keeps
    third-party objects (e.g., a research baseline imported from another
    package) usable without wrappers.
-2. Compose providers cheaply. The ``HybridCurriculumProvider`` (Phase 2)
-   does not subclass ``CurriculumProvider``; it just exposes the right
-   methods. mypy still verifies the contract.
+2. Compose providers cheaply. Each concrete curriculum provider exposes
+   the right methods without inheriting from a shared abstract base.
+   mypy still verifies the contract.
 3. Mock cleanly in tests. ``unittest.mock.MagicMock(spec=Policy)``
    produces a checked mock without any ABC dance.
 
@@ -37,9 +37,16 @@ existing ones.
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping, Sequence
-from typing import Any, Protocol, runtime_checkable
+from typing import TYPE_CHECKING, Any, Protocol, runtime_checkable
 
-from adaptive_tutor.core.types import CompositeAction, LearnerState, Transition
+from adaptive_tutor.core.types import CompositeAction
+
+if TYPE_CHECKING:
+    # LearnerState and Transition live in adaptive_tutor.state so the
+    # state shape can evolve without forcing core to follow. They appear
+    # only in annotations here; ``from __future__ import annotations``
+    # makes those strings at runtime, so no runtime import is needed.
+    from adaptive_tutor.state.state import LearnerState, Transition
 
 # ---------------------------------------------------------------------------
 # Policy & critic
@@ -50,19 +57,12 @@ from adaptive_tutor.core.types import CompositeAction, LearnerState, Transition
 class Policy(Protocol):
     """Anything that can produce a :class:`CompositeAction` from a state.
 
-    The exact action shape depends on the controller (PPO sets ``macro``,
-    DQN sets ``meso``, bandit sets ``micro``). A "controller" object may
-    set only a *subset* of fields and leave others ``None``; the
-    orchestrator composes the final action across controllers.
+    PPO supplies ``macro``; DQN supplies ``meso``. The orchestrator
+    merges them into one :class:`CompositeAction` before the environment
+    step.
 
     The optional ``mask`` argument is the per-head action mask from the
-    safety layer (see Phase 7). Implementations MUST respect it; any
-    chosen action that has a zero-mask entry is a critical bug and the
-    safety layer will raise :class:`MaskError` downstream.
-
-    ``update`` returns a dict of metrics that the trainer logs.
-    ``save``/``load`` use file paths so implementations choose their own
-    serialization format (torch ``.pt``, parquet, json, ...).
+    safety layer (Phase 7). Implementations MUST respect it.
     """
 
     def act(self, s: LearnerState, mask: Mapping[str, Any] | None = None) -> CompositeAction: ...
@@ -78,11 +78,8 @@ class Policy(Protocol):
 class Critic(Protocol):
     """A value function ``V(s) -> R`` or ``Q(s, a) -> R``.
 
-    We deliberately collapse V and Q under one protocol; the
-    ``action`` argument may be ``None`` for value functions. The dual
-    critics (Q_perf, Q_flow) each implement this protocol independently;
-    the composite weighting lives in
-    ``rl/critics/weighting.py`` (Phase 11).
+    The ``action`` argument may be ``None`` for state-value baselines.
+    Bachelor scope uses a single critic on a composite reward.
     """
 
     def value(self, s: LearnerState, action: CompositeAction | None = None) -> float: ...
@@ -148,8 +145,9 @@ class CurriculumProvider(Protocol):
 
     See ADR section *"Curriculum / memory provider design"* in the master
     plan for the rationale. Implementations may be backed by a public
-    dataset, teacher YAML, AI generation, textbook ingestion, or hybrid
-    compositions thereof.
+    dataset, teacher YAML, AI generation, textbook ingestion, or explicit
+    runtime composition of structure vs. behaviour statistics (no merged
+    curriculum provider abstraction).
 
     Required semantics:
 

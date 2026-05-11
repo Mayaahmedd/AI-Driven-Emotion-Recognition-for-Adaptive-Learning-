@@ -1,0 +1,17 @@
+# ASSISTments dataset config.
+#
+# Behaviour + statistics only (ADR-006). Paths are relative to the
+# ``adaptive_tutor`` project folder (the directory that contains this file's
+# parent ``configs/`` and ``pyproject.toml``), unless you pass an absolute path.
+#
+# Default points at the bundled synthetic fixture for fast tests. For the
+# 2012-2013 export at the repository root, use:
+#   path: ../2012-2013-data-with-predictions-4-final.csv
+#
+# Raw ScienceQA JSON under ``ScienceQA_DATA/`` is not read by
+# ``DatasetCurriculumProvider`` � convert to teacher YAML first (see
+# ``tools/extract_scienceqa_curriculum.py``).
+
+provider: assistments
+path: curriculum/examples/assistments_synthetic.csv
+eager: true

@@ -1,72 +1,47 @@
 # adaptive_tutor / configs / base.yaml
 #
-# Top-level default config. Composed by Hydra; validated by Pydantic schemas
-# in adaptive_tutor.utils.config (added in a later phase). For Phase 0/1 the
-# only field that is *consumed* by the code base is `seed`; the other fields
-# are placeholders that document the intended hyperparameter surface so we
-# can build experiments incrementally without YAML churn.
-#
-# Style conventions:
-#   - All numeric hyperparameters have an explicit type and unit comment.
-#   - Coefficients/weights default to performance-dominant (decision 20.9).
-#   - Anything still under design carries a TODO(Phase XX) marker.
+# Defaults aligned with **implemented** thesis-phase code (Phases 0–6).
+# See ADR-006 for scope; keys here are not loaded by a central Hydra schema yet —
+# the demo runner and unit tests use explicit Python APIs.
 
 # ----- Run identity ----------------------------------------------------------
 experiment_name: "exp_dev"
 seed: 0
-device: "auto"          # "cpu" | "mps" | "cuda" | "auto"
+device: "auto"
 log_dir: "runs"
 wandb:
-  enabled: false        # toggled by env var WANDB_ENABLED=1 at runtime
+  enabled: false
   project: "adaptive-tutor"
   entity: null
   tags: []
 
-# ----- Environment / simulator ----------------------------------------------
+# ----- Environment / curriculum / FER (documentation + future trainer) -------
 env:
   max_episode_steps: 200
   fer:
     consume_raw_vector: true
     rolling_window:
-      length: 8                # number of past meso steps summarised
+      length: 8
       summary: ["mean", "slope"]
   curriculum:
-    provider: "hybrid"         # "dataset" | "teacher" | "hybrid" | "llm" | "textbook"
+    provider: "teacher"
     granularity: "topic"
     static: true
-  simulator:
-    cohort_size: 64
-    forgetting_enabled: true
-    domain_randomization: true
+# Phase-8+ trainer may read these; :class:`TutoringEnvironment` uses constructor args today.
+# env.simulator:
+#   cohort_size: 64
 
-# ----- Reward defaults (performance-dominant) -------------------------------
+# ----- Reward ---------------------------------------------------------------
+# Implemented as :class:`adaptive_tutor.rewards.RewardEngine` (single scalar formula).
+# YAML block kept for documentation only until a config loader wires coefficients.
 rewards:
-  lambda_perf: 1.0
-  lambda_emo:  0.5
-  lambda_cost: 0.2
-  emotion_weights:
-    engaged:    +1.0
-    confused:   -0.5
-    bored:      -0.5
-    frustrated: -1.0
-  performance_weights:
-    mastery_gain: 1.0
-    correctness:  0.5
-    retention:    0.5
-  cost_weights:
-    interventions_per_step: 0.5
-    wasted_time:            0.5
+  note: "see adaptive_tutor.rewards.RewardEngine bachelor-thesis defaults"
 
-# ----- Agents (filled in by later phases) ------------------------------------
+# ----- Agents (skeleton for future DQN / PPO only) --------------------------
 agents:
   dqn:
     gamma: 0.99
     target_tau: 0.005
-    per:
-      alpha: 0.6
-      beta_start: 0.4
-      beta_end: 1.0
-      epsilon: 1.0e-6
     network:
       hidden: [256, 256]
       dueling: true
@@ -77,27 +52,14 @@ agents:
     entropy_coef: 0.01
     value_clip: 0.2
     rollout_steps_macro: 256
-  bandit:
-    type: "linear_thompson"
-    prior_var: 1.0
-    noise_var: 0.1
-  dual_critics:
-    w_flow_min: 0.05
-    w_flow_max: 0.80
-    w_eps: 1.0e-6
-    lambda_perf: 1.0
-    lambda_flow: 1.0
 
-# ----- Safety / action mask --------------------------------------------------
+# ----- Safety / action mask (Phase 7 — not wired in runtime yet) ----------
 safety:
   cooldown_steps:
     encouragement: 5
-    break:        20
-    reflection:   10
+    break: 20
+    reflection: 10
   max_interventions_per_episode: 12
-  anti_whipsaw:
-    ui_min_dwell:    3
-    pace_min_dwell:  3
 
 # ----- Logging cadence -------------------------------------------------------
 logging:

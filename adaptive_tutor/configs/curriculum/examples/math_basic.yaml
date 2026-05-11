@@ -1,0 +1,64 @@
+# Small math curriculum used for thesis demos and tests.
+#
+# All concept_ids are snake_case. Prerequisites form a small DAG and
+# fit the MAX_PREREQUISITES=5 rule. Slugs deliberately match the
+# Slugs align with slugified skill names in the synthetic ASSISTments CSV
+# so runtime lookups (state builder, simulator) can join YAML concepts to
+# :class:`SkillStats` by matching ``concept_id``.
+
+version: "1.0.0"
+
+concepts:
+  - concept_id: addition_whole_numbers
+    name: "Addition of whole numbers"
+    subject: mathematics
+    grade: 2
+    skills: [addition_whole_numbers]
+    instruction: "Add two non-negative integers using place value."
+    prerequisites: []
+    difficulty: 0.10
+
+  - concept_id: subtraction_whole_numbers
+    name: "Subtraction of whole numbers"
+    subject: mathematics
+    grade: 2
+    skills: [subtraction_whole_numbers]
+    instruction: "Subtract one non-negative integer from another, possibly with borrowing."
+    prerequisites: [addition_whole_numbers]
+    difficulty: 0.20
+
+  - concept_id: multiplication_whole_numbers
+    name: "Multiplication of whole numbers"
+    subject: mathematics
+    grade: 3
+    skills: [multiplication_whole_numbers]
+    instruction: "Multiply two non-negative integers."
+    prerequisites: [addition_whole_numbers]
+    difficulty: 0.30
+
+  - concept_id: division_whole_numbers
+    name: "Division of whole numbers"
+    subject: mathematics
+    grade: 4
+    skills: [division_whole_numbers]
+    instruction: "Divide non-negative integers, with or without remainder."
+    prerequisites: [multiplication_whole_numbers, subtraction_whole_numbers]
+    difficulty: 0.45
+
+  - concept_id: fractions_basic
+    name: "Basic fractions"
+    subject: mathematics
+    grade: 4
+    skills: [fractions_basic]
+    instruction: "Read and compare fractions with the same denominator."
+    prerequisites: [division_whole_numbers]
+    difficulty: 0.55
+
+  - concept_id: equation_solving_two_or_fewer_steps
+    name: "Equation solving (two or fewer steps)"
+    subject: mathematics
+    grade: 6
+    skills: [equation_solving_two_or_fewer_steps]
+    instruction: "Solve linear equations that require at most two steps."
+    prerequisites: [subtraction_whole_numbers, multiplication_whole_numbers]
+    difficulty: 0.65
