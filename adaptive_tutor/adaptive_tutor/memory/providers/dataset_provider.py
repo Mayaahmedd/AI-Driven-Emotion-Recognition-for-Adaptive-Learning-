@@ -164,6 +164,9 @@ class RawTransition:
     reward: float
     next_state: dict[str, Any]
     done: bool
+    correct: int = 0
+    hint_count: int = 0
+    attempt_count: int = 1
 
 
 # ----- The provider --------------------------------------------------------
@@ -294,7 +297,10 @@ class DatasetCurriculumProvider(BaseCurriculumProvider):
             running_hinted = 0
             prev_state = _initial_state_dict(slug)
             for i, row in enumerate(rows):
-                correct = int(row.get("correct", 0))
+                correct_raw = float(row.get("correct", 0))
+
+# Convert ASSISTMENTS correctness into binary success
+                correct = 1 if correct_raw >= 0.5 else 0
                 hint = int(row.get("hint_count", 0))
                 attempts = int(row.get("attempt_count", 1))
                 emotion = _emotion_from_row(row)
@@ -326,6 +332,9 @@ class DatasetCurriculumProvider(BaseCurriculumProvider):
                     reward=reward,
                     next_state=next_state,
                     done=(i == len(rows) - 1),
+                    correct=correct,
+                    hint_count=hint,
+                    attempt_count=attempts,
                 )
 
                 running_correct += correct

@@ -6,6 +6,7 @@ import json
 import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query
@@ -15,15 +16,59 @@ from adaptive_tutor.core.types import EmotionVector
 from adaptive_tutor.dashboard.render import render_dashboard_page, render_explain_form
 from adaptive_tutor.experiments.store import get_last_experiment
 from adaptive_tutor.explainability import explain_action
+from adaptive_tutor.memory.providers.dataset_provider import (
+    ASSISTMENTS_ACTIONS,
+    DatasetCurriculumProvider,
+    SkillStats,
+)
+from adaptive_tutor.memory.providers.teacher_provider import TeacherCurriculumProvider
 from adaptive_tutor.state.state import LearnerState, PerformanceFeatures
 
 _LOG = logging.getLogger("uvicorn.error")
+
+
+def _skill_stats_from_last_run(concept_index: int) -> SkillStats | None:
+    """Cohort :class:`SkillStats` from the latest experiment's resolved CSV paths."""
+    exp = get_last_experiment()
+    if exp is None:
+        return None
+    cfg = exp.get("config_resolved") or {}
+    dpath = cfg.get("dataset_path")
+    tph = cfg.get("teacher_path")
+    if not dpath or not tph:
+        return None
+    try:
+        teacher = TeacherCurriculumProvider(Path(str(tph)))
+        n = teacher.num_concepts()
+        idx = max(0, min(n - 1, int(concept_index)))
+        slug = teacher.concept_slug(idx)
+        dataset = DatasetCurriculumProvider(Path(str(dpath)))
+        return dataset.stats(slug)
+    except Exception:
+        return None
+
+
+def _skill_slug_from_last_run(concept_index: int) -> str:
+    exp = get_last_experiment()
+    if exp is None:
+        return "dashboard_demo"
+    cfg = exp.get("config_resolved") or {}
+    tph = cfg.get("teacher_path")
+    if not tph:
+        return "dashboard_demo"
+    try:
+        teacher = TeacherCurriculumProvider(Path(str(tph)))
+        idx = max(0, min(teacher.num_concepts() - 1, int(concept_index)))
+        return teacher.concept_slug(idx)
+    except Exception:
+        return "dashboard_demo"
 
 
 def _learner_state_from_flat(
     *,
     mastery: float,
     concept_index: int,
+    concept_id: str,
     engaged: float,
     confused: float,
     bored: float,
@@ -31,7 +76,7 @@ def _learner_state_from_flat(
     timestep: int,
 ) -> LearnerState:
     return LearnerState(
-        current_concept_id="dashboard_demo",
+        current_concept_id=concept_id,
         current_concept_index=max(0, int(concept_index)),
         mastery=max(0.0, min(1.0, float(mastery))),
         perf=PerformanceFeatures(
@@ -89,15 +134,19 @@ def create_app() -> FastAPI:
         engaged: float = Query(0.5, ge=0.0, le=1.0),
         confused: float = Query(0.25, ge=0.0, le=1.0),
         frustrated: float = Query(0.15, ge=0.0, le=1.0),
+        bored: float = Query(0.1, ge=0.0, le=1.0),
         concept_index: int = Query(0, ge=0),
         timestep: int = Query(0, ge=0),
     ) -> HTMLResponse:
+        cid = _skill_slug_from_last_run(concept_index)
+        skill_stats = _skill_stats_from_last_run(concept_index)
         st = _learner_state_from_flat(
             mastery=mastery,
             concept_index=concept_index,
+            concept_id=cid,
             engaged=engaged,
             confused=confused,
-            bored=0.1,
+            bored=bored,
             frustrated=frustrated,
             timestep=timestep,
         )
@@ -109,24 +158,31 @@ def create_app() -> FastAPI:
         }
         expl: dict[str, Any] | None = None
         err: str | None = None
-        try:
-            expl = dict(
-                explain_action(
+        a = (action or "").strip()
+        if a not in ASSISTMENTS_ACTIONS:
+            err = (
+                f"Unknown action {a!r}. Use one of: {', '.join(ASSISTMENTS_ACTIONS)}."
+            )
+        else:
+            try:
+                expl = explain_action(
                     st,
-                    action,
+                    a,
                     phase7=neutral_p7,
                     r_components=None,
                     correct=None,
+                    skill_stats=skill_stats,
                 )
-            )
-        except (ValueError, TypeError) as e:
-            err = str(e)
+            except Exception as e:
+                _LOG.exception("explain_action failed")
+                err = str(e)
         return HTMLResponse(
             render_explain_form(
                 action=action,
                 mastery=mastery,
                 engaged=engaged,
                 confused=confused,
+                bored=bored,
                 frustrated=frustrated,
                 explanation=expl,
                 error=err,
@@ -188,6 +244,7 @@ def create_app() -> FastAPI:
             st = _learner_state_from_flat(
                 mastery=float(data.get("mastery", mastery)),
                 concept_index=int(data.get("current_concept_index", concept_index)),
+                concept_id=str(data.get("current_concept_id", _skill_slug_from_last_run(concept_index))),
                 engaged=float(data.get("engaged", data.get("rolling_engaged", engaged))),
                 confused=float(data.get("confused", confused)),
                 bored=float(data.get("bored", bored)),
@@ -195,9 +252,11 @@ def create_app() -> FastAPI:
                 timestep=int(data.get("timestep", timestep)),
             )
         else:
+            cid = _skill_slug_from_last_run(concept_index)
             st = _learner_state_from_flat(
                 mastery=mastery,
                 concept_index=concept_index,
+                concept_id=cid,
                 engaged=engaged,
                 confused=confused,
                 bored=bored,
@@ -210,15 +269,24 @@ def create_app() -> FastAPI:
             "prerequisites_met": True,
             "whipsaw_blocked": False,
         }
-        return dict(
-            explain_action(
+        a = (action or "").strip()
+        if a not in ASSISTMENTS_ACTIONS:
+            raise HTTPException(
+                status_code=400,
+                detail=f"unknown action {a!r}; expected one of {list(ASSISTMENTS_ACTIONS)}",
+            )
+        try:
+            return explain_action(
                 st,
-                action,
+                a,
                 phase7=neutral_p7,
                 r_components=None,
                 correct=None,
+                skill_stats=_skill_stats_from_last_run(concept_index),
             )
-        )
+        except Exception as e:
+            _LOG.exception("explain_action failed")
+            raise HTTPException(status_code=500, detail=str(e)) from e
 
     return app
 

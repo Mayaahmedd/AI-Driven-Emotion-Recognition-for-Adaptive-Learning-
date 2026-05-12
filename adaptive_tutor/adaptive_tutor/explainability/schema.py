@@ -28,7 +28,7 @@ class Phase7Checks(BaseModel):
 class ExplanationRecord(BaseModel):
     """Validated explanation object returned by :func:`explain_action`."""
 
-    model_config = ConfigDict(frozen=True)
+    model_config = ConfigDict(frozen=True, extra="ignore")
 
     action: str
     action_requested: str
@@ -36,8 +36,19 @@ class ExplanationRecord(BaseModel):
     phase7_checks: Phase7Checks
     reward_signal: dict[str, float]
     explanation_text: str
+    dataset_evidence: dict[str, float] = Field(default_factory=dict)
 
 
 def validate_explanation_dict(data: dict[str, Any]) -> ExplanationRecord:
-    """Strict parse for saved artefacts and tests."""
-    return ExplanationRecord.model_validate(data)
+    """Strict parse for saved artefacts and tests (ignores API aliases)."""
+    keys = (
+        "action",
+        "action_requested",
+        "top_drivers",
+        "phase7_checks",
+        "reward_signal",
+        "explanation_text",
+        "dataset_evidence",
+    )
+    slim = {k: data[k] for k in keys if k in data}
+    return ExplanationRecord.model_validate(slim)

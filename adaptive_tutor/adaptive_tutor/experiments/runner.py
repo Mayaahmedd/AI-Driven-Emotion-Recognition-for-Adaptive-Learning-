@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import random
 from pathlib import Path
 from typing import Any
@@ -34,10 +35,16 @@ def _project_root() -> Path:
 
 
 def _default_teacher_path() -> Path:
+    env = os.environ.get("ADAPTIVE_TUTOR_TEACHER_PATH")
+    if env:
+        return Path(env).expanduser().resolve()
     return _project_root() / "configs" / "curriculum" / "examples" / "math_basic.yaml"
 
 
 def _default_dataset_path() -> Path:
+    env = os.environ.get("ADAPTIVE_TUTOR_DATASET_PATH")
+    if env:
+        return Path(env).expanduser().resolve()
     return _project_root() / "configs" / "curriculum" / "examples" / "assistments_synthetic.csv"
 
 
@@ -70,8 +77,12 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
         seed (int): default 0
         episodes (int): default 10
         policy (str): ``random`` | ``heuristic`` | ``dqn`` | ``ppo``
-        teacher_path (str): default bundled math_basic.yaml
-        dataset_path (str): default bundled assistments_synthetic.csv
+        teacher_path (str): default bundled math_basic.yaml, or env
+            ``ADAPTIVE_TUTOR_TEACHER_PATH``
+        dataset_path (str): default bundled CSV, or env
+            ``ADAPTIVE_TUTOR_DATASET_PATH`` (your ASSISTments export)
+        strict_dataset_stats (bool): if True, Phase-7 mask blocks escalation
+            when the active skill is missing from the cohort CSV
         max_episode_steps (int): default 80
         dqn_epsilon (float): default 0.1
         ppo_segments_per_episode (int): default 3
@@ -89,6 +100,7 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
         "log_steps": False,
         "mastery_threshold": 0.85,
         "concept_index": 0,
+        "strict_dataset_stats": False,
     }
     cfg: dict[str, Any] = {**defaults, **config}
     cfg["teacher_path"] = cfg.get("teacher_path") or str(_default_teacher_path())
@@ -108,6 +120,8 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
     n_ep = max(1, int(cfg["episodes"]))
     log_steps = bool(cfg["log_steps"])
     mt = float(cfg["mastery_threshold"])
+    strict_ds = bool(cfg["strict_dataset_stats"])
+    ds_slugs = frozenset(dataset.all_stats().keys())
 
     dqn: DoubleDQNAgent | None = None
     ppo: CurriculumPolicy | None = None
@@ -129,6 +143,10 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
             concept_index=idx0,
             num_concepts=n_concepts,
             teacher=teacher,
+            dataset=dataset,
+            dataset_slugs_for_mask=ds_slugs,
+            dataset_skill_slug=slug0,
+            strict_dataset_stats=strict_ds,
             seed=base_seed + ep,
             max_episode_steps=max_steps,
             mastery_threshold=0.9,
@@ -221,6 +239,7 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
         "frustration_rate": comparison_ready_metrics["frustration_rate"],
         "comparison_ready_metrics": comparison_ready_metrics,
         "dataset_metrics": compute_dataset_metrics(dataset),
+        "dataset_source_label": "cohort_csv",
         "episode_summaries": episode_summaries,
         "config_resolved": cfg,
     }

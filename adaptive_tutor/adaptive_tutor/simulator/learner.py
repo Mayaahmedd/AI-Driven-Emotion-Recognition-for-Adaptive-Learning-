@@ -1,5 +1,12 @@
 """Synthetic latent learner: emotions plus simple tutor-action effects.
 
+.. deprecated::
+    Primary rollouts should use ASSISTments replay transitions when a
+    :class:`~adaptive_tutor.memory.providers.dataset_provider.DatasetCurriculumProvider`
+    is attached to :class:`~adaptive_tutor.simulator.environment.TutoringEnvironment`.
+    This class remains **only** for explicit fallback when no logged trajectory
+    is available or the replay trace is exhausted.
+
 This is **not** a cognitive model; it is a deterministic finite-state
 emotion prior that makes the environment respond differently to tutor
 actions. The observed ``LearnerState`` that RL trains on still comes

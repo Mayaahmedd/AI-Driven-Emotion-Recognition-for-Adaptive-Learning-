@@ -158,7 +158,10 @@ def render_dashboard_page(experiment: dict[str, Any] | None) -> str:
         body_experiment = """
 <div class="alert">
   <strong>No experiment loaded yet.</strong> Run a batch in another terminal (same Python environment), then refresh this page.
-  <div style="margin-top:0.6rem"><code>python3 -c "from adaptive_tutor.experiments import run_experiment; run_experiment({'seed':0,'episodes':5,'policy':'heuristic','max_episode_steps':24})"</code></div>
+  <p style="margin:0.6rem 0 0.25rem;font-size:0.9rem">Use your ASSISTments CSV (columns: <code>skill</code>, <code>correct</code>, optional hints / attempts / confidence):</p>
+  <div style="margin-top:0.35rem"><code>export ADAPTIVE_TUTOR_DATASET_PATH="/absolute/path/to/assistments_slice.csv"<br/>
+  export ADAPTIVE_TUTOR_TEACHER_PATH="/path/to/math_basic.yaml"  # optional<br/>
+  python3 -c "from adaptive_tutor.experiments import run_experiment; run_experiment(dict(seed=0,episodes=5,policy='heuristic',max_episode_steps=24))"</code></div>
 </div>
 """
     else:
@@ -217,6 +220,7 @@ def render_dashboard_page(experiment: dict[str, Any] | None) -> str:
 
         cfg = experiment.get("config_resolved") or {}
         cfg_bits = ""
+        prov = ""
         if isinstance(cfg, Mapping):
             cfg_bits = (
                 f"<p style='color:var(--muted);font-size:0.88rem;margin:0 0 1rem'>"
@@ -225,9 +229,37 @@ def render_dashboard_page(experiment: dict[str, Any] | None) -> str:
                 f"Max steps: {_esc(cfg.get('max_episode_steps'))}"
                 f"</p>"
             )
+            dp = str(cfg.get("dataset_path") or "")
+            tp = str(cfg.get("teacher_path") or "")
+            n_rows_raw = dm.get("n_rows")
+            try:
+                n_rows_val = float(n_rows_raw) if n_rows_raw is not None else 0.0
+            except (TypeError, ValueError):
+                n_rows_val = 0.0
+            syn = "synthetic" in dp.lower()
+            warn = ""
+            if syn or (n_rows_val > 0 and n_rows_val < 30):
+                warn = (
+                    "<div class=\"alert\" style=\"background:#eff6ff;border-color:#93c5fd;color:#1e3a8a\">"
+                    "<strong>Cohort note:</strong> This snapshot is from a small or example CSV. "
+                    "For a real ASSISTments cut, set <code>ADAPTIVE_TUTOR_DATASET_PATH</code> "
+                    "(or pass <code>dataset_path</code> into <code>run_experiment</code>).</div>"
+                )
+            prov = (
+                "<div class='teach-box' style='margin-top:0.25rem'><p style='margin:0 0 0.4rem 0;"
+                "font-size:0.9rem'><strong>Provenance</strong></p>"
+                "<ul style='margin:0;font-size:0.86rem;color:var(--muted)'>"
+                f"<li>Cohort CSV: <code>{_esc(dp)}</code></li>"
+                f"<li>Teacher YAML: <code>{_esc(tp)}</code></li>"
+                "<li>The simulator calibrates latent learner parameters from per-skill "
+                "statistics in that CSV (when the active concept matches a skill row).</li>"
+                "</ul></div>"
+                f"{warn}"
+            )
 
         body_experiment = f"""
 {cfg_bits}
+{prov}
 {cards}
 <h2>Episode overview</h2>
 {ep_table}
@@ -284,6 +316,7 @@ def render_explain_form(
     mastery: float,
     engaged: float,
     confused: float,
+    bored: float,
     frustrated: float,
     explanation: dict[str, Any] | None,
     error: str | None,
@@ -335,6 +368,7 @@ def render_explain_form(
         <label>Mastery 0&ndash;1<br/><input name="mastery" type="number" step="0.05" min="0" max="1" value="{mastery}" style="width:100%"/></label>
         <label>Engaged<br/><input name="engaged" type="number" step="0.05" min="0" max="1" value="{engaged}" style="width:100%"/></label>
         <label>Confused<br/><input name="confused" type="number" step="0.05" min="0" max="1" value="{confused}" style="width:100%"/></label>
+        <label>Bored<br/><input name="bored" type="number" step="0.05" min="0" max="1" value="{bored}" style="width:100%"/></label>
         <label>Frustrated<br/><input name="frustrated" type="number" step="0.05" min="0" max="1" value="{frustrated}" style="width:100%"/></label>
       </p>
       <p><button type="submit" style="background:var(--accent);color:#fff;border:none;padding:0.5rem 1.2rem;border-radius:8px;font-weight:600;cursor:pointer">Generate explanation</button></p>

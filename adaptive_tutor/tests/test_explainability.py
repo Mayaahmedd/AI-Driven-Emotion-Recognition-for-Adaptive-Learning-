@@ -74,3 +74,42 @@ def test_explain_action_from_env_step() -> None:
     exp = explain_action_from_env_info(st0, info)
     validate_explanation_dict(exp)
     assert exp["action"] == info["action"]
+
+
+def test_explain_action_dataset_grounded() -> None:
+    from adaptive_tutor.memory.providers.dataset_provider import DatasetCurriculumProvider
+
+    csv = _REPO / "configs" / "curriculum" / "examples" / "assistments_synthetic.csv"
+    ds = DatasetCurriculumProvider(csv)
+    skill_stats = ds.stats("addition_whole_numbers")
+    st = LearnerState(
+        current_concept_id="addition_whole_numbers",
+        current_concept_index=0,
+        mastery=0.35,
+        perf=PerformanceFeatures(0.35, 0.2, 2),
+        rolling_emotions=EmotionVector(
+            engaged=0.5, confused=0.4, bored=0.1, frustrated=0.2
+        ),
+        engagement_trend=0.0,
+        confusion_trend=0.0,
+        frustration_trend=0.0,
+        boredom_trend=0.0,
+        timestep=1,
+    )
+    raw = explain_action(
+        st,
+        "give_hint",
+        skill_stats=skill_stats,
+        phase7={
+            "mask_passed": True,
+            "cooldown_blocked": False,
+            "prerequisites_met": True,
+            "whipsaw_blocked": False,
+        },
+    )
+    validate_explanation_dict(raw)
+    assert raw["dataset_evidence"]["skill_correctness"] == skill_stats.mean_correctness
+    joined = " ".join(str(d["feature"]) for d in raw["top_drivers"])
+    assert "ASSISTments" in joined
+    assert raw["phase7_flags"]["mask_passed"] is True
+    assert "correctness" in raw["reward_components"]

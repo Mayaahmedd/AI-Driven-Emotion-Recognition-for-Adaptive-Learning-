@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from typing import Any
 
@@ -27,10 +28,16 @@ def _project_root() -> Path:
 
 
 def _default_teacher_yaml() -> Path:
+    env = os.environ.get("ADAPTIVE_TUTOR_TEACHER_PATH")
+    if env:
+        return Path(env).expanduser().resolve()
     return _project_root() / "configs" / "curriculum" / "examples" / "math_basic.yaml"
 
 
 def _default_dataset_csv() -> Path:
+    env = os.environ.get("ADAPTIVE_TUTOR_DATASET_PATH")
+    if env:
+        return Path(env).expanduser().resolve()
     return _project_root() / "configs" / "curriculum" / "examples" / "assistments_synthetic.csv"
 
 
@@ -59,6 +66,10 @@ def run_full_evaluation(
             concept_index=0,
             num_concepts=n,
             teacher=teacher,
+            dataset=dataset,
+            dataset_slugs_for_mask=frozenset(dataset.all_stats().keys()),
+            dataset_skill_slug=slug0,
+            strict_dataset_stats=False,
             seed=seed,
             max_episode_steps=max_episode_steps,
             mastery_threshold=0.9,

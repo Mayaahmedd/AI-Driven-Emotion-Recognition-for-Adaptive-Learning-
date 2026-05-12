@@ -22,7 +22,6 @@ from adaptive_tutor.replay import UniformReplayBuffer
 from adaptive_tutor.rewards import RewardEngine, default_reward_engine
 from adaptive_tutor.simulator import (
     TutoringEnvironment,
-    calibrate_from_stats,
     heuristic_tutor_policy,
     random_tutor_policy,
 )
@@ -92,19 +91,17 @@ def run_demo_episode(
     joint = select_first_joint_concept(teacher, dataset)
 
     n_concepts = len(teacher.get_concepts())
-    params = calibrate_from_stats(joint.skill_stats)
     mastery_seed = _seed_mastery_for_concept(teacher, joint.concept_id)
 
     env = TutoringEnvironment(
         concept_slug=joint.concept_id,
         concept_index=joint.concept_index,
         num_concepts=n_concepts,
-        params=params,
-        skill_stats=joint.skill_stats,
         max_episode_steps=max_steps,
         seed=seed,
         reward_engine=engine,
         teacher=teacher,
+        dataset=dataset,
         dataset_slugs_for_mask=frozenset(dataset.all_stats().keys()),
         dataset_skill_slug=joint.dataset_skill_slug,
         strict_dataset_stats=False,
