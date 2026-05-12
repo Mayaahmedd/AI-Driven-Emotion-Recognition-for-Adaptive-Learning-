@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import json
+
 import pytest
 
 from adaptive_tutor.experiments import clear_last_experiment, get_last_experiment, run_experiment
+import adaptive_tutor.experiments.store as store_module
 
 
 @pytest.fixture(autouse=True)
@@ -51,3 +54,19 @@ def test_run_experiment_random_and_ppo_smoke() -> None:
         }
     )
     assert p["policy"] == "ppo"
+
+
+def test_store_reload_from_disk_after_memory_clear(monkeypatch: pytest.MonkeyPatch, tmp_path) -> None:
+    cache = tmp_path / "r.json"
+    monkeypatch.setenv("ADAPTIVE_TUTOR_EXPERIMENT_CACHE", str(cache))
+    clear_last_experiment()
+    run_experiment(
+        {"seed": 0, "episodes": 1, "policy": "heuristic", "max_episode_steps": 3}
+    )
+    assert cache.is_file()
+    store_module._last = None  # type: ignore[attr-defined]  # simulate other process
+    again = get_last_experiment()
+    assert again is not None
+    assert again["policy"] == "heuristic"
+    data = json.loads(cache.read_text(encoding="utf-8"))
+    assert data["policy"] == "heuristic"

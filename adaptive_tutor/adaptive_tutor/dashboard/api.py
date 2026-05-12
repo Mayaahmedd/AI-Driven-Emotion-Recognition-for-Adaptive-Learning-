@@ -3,14 +3,21 @@
 from __future__ import annotations
 
 import json
+import logging
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import HTMLResponse
 
 from adaptive_tutor.core.types import EmotionVector
+from adaptive_tutor.dashboard.render import render_dashboard_page, render_explain_form
 from adaptive_tutor.experiments.store import get_last_experiment
 from adaptive_tutor.explainability import explain_action
 from adaptive_tutor.state.state import LearnerState, PerformanceFeatures
+
+_LOG = logging.getLogger("uvicorn.error")
 
 
 def _learner_state_from_flat(
@@ -47,10 +54,84 @@ def _learner_state_from_flat(
 
 
 def create_app() -> FastAPI:
+    @asynccontextmanager
+    async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+        import adaptive_tutor.dashboard.api as api_mod
+
+        paths = sorted(
+            getattr(r, "path", "")
+            for r in app.routes
+            if getattr(r, "path", None)
+        )
+        _LOG.info(
+            "adaptive_tutor dashboard API loaded from %s (paths: %s)",
+            api_mod.__file__,
+            ", ".join(paths),
+        )
+        yield
+
     app = FastAPI(
         title="Adaptive Tutor (read-only research dashboard)",
         version="0.1.0",
+        lifespan=lifespan,
     )
+
+    @app.get("/", response_class=HTMLResponse)
+    @app.get("/dashboard", response_class=HTMLResponse)
+    def dashboard_home() -> HTMLResponse:
+        return HTMLResponse(render_dashboard_page(get_last_experiment()))
+
+    @app.get("/explain/view", response_class=HTMLResponse)
+    @app.get("/explain", response_class=HTMLResponse)
+    def explain_view_ui(
+        action: str = Query("give_hint"),
+        mastery: float = Query(0.35, ge=0.0, le=1.0),
+        engaged: float = Query(0.5, ge=0.0, le=1.0),
+        confused: float = Query(0.25, ge=0.0, le=1.0),
+        frustrated: float = Query(0.15, ge=0.0, le=1.0),
+        concept_index: int = Query(0, ge=0),
+        timestep: int = Query(0, ge=0),
+    ) -> HTMLResponse:
+        st = _learner_state_from_flat(
+            mastery=mastery,
+            concept_index=concept_index,
+            engaged=engaged,
+            confused=confused,
+            bored=0.1,
+            frustrated=frustrated,
+            timestep=timestep,
+        )
+        neutral_p7 = {
+            "mask_passed": True,
+            "cooldown_blocked": False,
+            "prerequisites_met": True,
+            "whipsaw_blocked": False,
+        }
+        expl: dict[str, Any] | None = None
+        err: str | None = None
+        try:
+            expl = dict(
+                explain_action(
+                    st,
+                    action,
+                    phase7=neutral_p7,
+                    r_components=None,
+                    correct=None,
+                )
+            )
+        except (ValueError, TypeError) as e:
+            err = str(e)
+        return HTMLResponse(
+            render_explain_form(
+                action=action,
+                mastery=mastery,
+                engaged=engaged,
+                confused=confused,
+                frustrated=frustrated,
+                explanation=expl,
+                error=err,
+            )
+        )
 
     @app.get("/experiment/latest")
     def experiment_latest() -> dict[str, Any]:

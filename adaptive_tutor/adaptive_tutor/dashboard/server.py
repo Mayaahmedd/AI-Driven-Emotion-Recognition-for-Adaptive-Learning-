@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 
-def main() -> None:
+def run_uvicorn() -> None:
     import uvicorn
 
     uvicorn.run(
@@ -12,6 +12,10 @@ def main() -> None:
         port=8765,
         reload=False,
     )
+
+
+def main() -> None:
+    run_uvicorn()
 
 
 if __name__ == "__main__":

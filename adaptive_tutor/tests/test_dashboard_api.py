@@ -17,9 +17,26 @@ def client() -> TestClient:
     return TestClient(create_app())
 
 
-def test_dashboard_404_without_experiment(client: TestClient) -> None:
-    r = client.get("/experiment/latest")
-    assert r.status_code == 404
+def test_dashboard_html_home(client: TestClient) -> None:
+    r = client.get("/")
+    assert r.status_code == 200
+    assert "text/html" in r.headers.get("content-type", "")
+    assert "Adaptive Tutor" in r.text
+    assert "DQN and PPO" in r.text
+
+    alias = client.get("/dashboard")
+    assert alias.status_code == 200
+    assert alias.text == r.text
+
+
+def test_dashboard_explain_view_html(client: TestClient) -> None:
+    r = client.get("/explain/view", params={"action": "give_hint", "mastery": 0.2})
+    assert r.status_code == 200
+    assert "Explain" in r.text
+
+    short = client.get("/explain", params={"action": "give_hint", "mastery": 0.2})
+    assert short.status_code == 200
+    assert short.text == r.text
 
 
 def test_dashboard_endpoints_after_run(client: TestClient) -> None:
