@@ -11,6 +11,7 @@ from adaptive_tutor.memory.providers.dataset_provider import (
     ASSISTMENTS_ACTIONS,
     DatasetCurriculumProvider,
 )
+from adaptive_tutor.memory.providers.teacher_provider import TeacherCurriculumProvider
 from adaptive_tutor.rewards import default_reward_engine
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -65,22 +66,49 @@ def test_iter_transitions_done_flag_terminates_groups() -> None:
         assert dones[-1] is True, f"done flag is not on last transition for {key}"
 
 
-def test_rewards_are_finite_and_bounded() -> None:
+def test_iter_transitions_has_no_dataset_layer_reward() -> None:
     p = DatasetCurriculumProvider(_CSV)
     for t in p.iter_transitions():
-        # Coefficients sum to at most ~1.3 in absolute terms.
-        assert -2.0 < t.reward < 2.0
-        assert t.reward == t.reward  # not NaN
+        assert t.reward is None
 
 
-def test_iter_transitions_reward_matches_reward_engine() -> None:
-    """First synthetic row is addition, correct=1, hint=0; reward = engine(state emotion)."""
+def test_materialised_replay_reward_matches_reward_engine() -> None:
+    """Reward materialised in ASSISTMENTSReplayBuffer matches :class:`RewardEngine`."""
+    from adaptive_tutor.replay import ASSISTMENTSReplayBuffer
+
     p = DatasetCurriculumProvider(_CSV)
-    t = next(p.iter_transitions())
+    teacher = TeacherCurriculumProvider(
+        _REPO_ROOT / "configs" / "curriculum" / "examples" / "math_basic.yaml"
+    )
+    if teacher.num_concepts() < 1:
+        pytest.skip("teacher fixture missing")
     eng = default_reward_engine()
-    emotion = t.next_state["emotion"]
-    expected = eng.compute_scalar(correct=1, hint_count=0, emotion=emotion)
-    assert t.reward == pytest.approx(expected)
+    buf = ASSISTMENTSReplayBuffer(capacity=512, seed=0)
+    buf.load_from_provider(p, teacher, eng, num_concepts=teacher.num_concepts())
+    raw = next(p.iter_transitions())
+    emotion = raw.next_state.get("emotion") or {}
+    expected = eng.compute_scalar(
+        correct=int(raw.correct),
+        hint_count=int(raw.hint_count),
+        emotion=emotion,
+    )
+    # All buffer transitions for this row share the same reward formula; compare one sample.
+    batch = buf.sample(1)
+    assert batch
+    assert batch[0].r == pytest.approx(expected)
+
+
+def test_correct_column_float_threshold(tmp_path: Path) -> None:
+    pth = tmp_path / "f.csv"
+    pth.write_text(
+        "user_id,skill,correct,hint_count,attempt_count\n"
+        "u1,Algebra,0.75,0,1\n"
+        "u1,Algebra,0.2,0,1\n",
+        encoding="utf-8",
+    )
+    p = DatasetCurriculumProvider(pth)
+    outcomes = [t.correct for t in p.iter_transitions()]
+    assert outcomes == [1, 0]
 
 
 def test_emotion_keys_match_fer_vocabulary() -> None:

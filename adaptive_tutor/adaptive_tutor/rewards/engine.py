@@ -2,10 +2,10 @@
 
 Why a separate module
 ---------------------
-The bachelor-thesis formula must match everywhere: ASSISTments offline
-``iter_transitions``, synthetic :class:`~adaptive_tutor.simulator.environment.TutoringEnvironment`
-rollouts, and future DQN/PPO training. A single :class:`RewardEngine`
-avoid scattering coefficients across adapters.
+The bachelor-thesis formula must match everywhere: ASSISTments offline replay
+buffers, synthetic :class:`~adaptive_tutor.simulator.environment.TutoringEnvironment`
+rollouts, and DQN/PPO training. A single :class:`RewardEngine` avoids scattering
+coefficients across adapters.
 
 Design
 ------

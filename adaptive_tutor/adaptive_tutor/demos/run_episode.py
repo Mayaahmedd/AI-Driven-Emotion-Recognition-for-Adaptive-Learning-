@@ -87,7 +87,7 @@ def run_demo_episode(
 
     engine = reward_engine or default_reward_engine()
     teacher = TeacherCurriculumProvider(tp)
-    dataset = DatasetCurriculumProvider(dp, reward_engine=engine)
+    dataset = DatasetCurriculumProvider(dp)
     joint = select_first_joint_concept(teacher, dataset)
 
     n_concepts = len(teacher.get_concepts())

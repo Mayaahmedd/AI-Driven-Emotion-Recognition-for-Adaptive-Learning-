@@ -21,9 +21,11 @@ from adaptive_tutor.evaluation.simulator_metrics import compute_episode_metrics
 from adaptive_tutor.experiments.store import set_last_experiment
 from adaptive_tutor.memory.providers.dataset_provider import DatasetCurriculumProvider
 from adaptive_tutor.memory.providers.teacher_provider import TeacherCurriculumProvider
-from adaptive_tutor.replay import UniformReplayBuffer
+from adaptive_tutor.replay import ASSISTMENTSReplayBuffer, UniformReplayBuffer
+from adaptive_tutor.rewards import default_reward_engine
 from adaptive_tutor.rl.dqn import DoubleDQNAgent
-from adaptive_tutor.rl.ppo import CurriculumPolicy
+from adaptive_tutor.rl.dqn.trainer import train_double_dqn_batch
+from adaptive_tutor.rl.ppo import CurriculumPolicy, PPOStepRecord, ppo_policy_update
 from adaptive_tutor.simulator.environment import TutoringEnvironment
 from adaptive_tutor.simulator.policies import heuristic_tutor_policy, random_tutor_policy
 
@@ -101,6 +103,14 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
         "mastery_threshold": 0.85,
         "concept_index": 0,
         "strict_dataset_stats": False,
+        "offline_replay_capacity": 200_000,
+        "dqn_batch_size": 32,
+        "dqn_gamma": 0.99,
+        "dqn_lr": 1e-3,
+        "dqn_offline_updates_per_ep": 50,
+        "ppo_lr": 3e-4,
+        "ppo_offline_updates_per_ep": 40,
+        "ppo_offline_batch_size": 32,
     }
     cfg: dict[str, Any] = {**defaults, **config}
     cfg["teacher_path"] = cfg.get("teacher_path") or str(_default_teacher_path())
@@ -137,7 +147,76 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
 
     base_seed = int(cfg["seed"])
 
+    offline_buffer: ASSISTMENTSReplayBuffer | None = None
+    dqn_opt: torch.optim.Optimizer | None = None
+    ppo_opt: torch.optim.Optimizer | None = None
+    reward_engine = default_reward_engine()
+    if pol_name in {"dqn", "ppo"}:
+        offline_buffer = ASSISTMENTSReplayBuffer(
+            capacity=max(1000, int(cfg["offline_replay_capacity"])),
+            seed=base_seed,
+        )
+        loaded = offline_buffer.load_from_provider(
+            dataset,
+            teacher,
+            reward_engine,
+            num_concepts=n_concepts,
+        )
+        if loaded == 0:
+            raise RuntimeError(
+                "ASSISTMENTS replay buffer is empty; check dataset_path and CSV contents"
+            )
+    if pol_name == "dqn" and dqn is not None:
+        dqn_opt = torch.optim.Adam(dqn.online.parameters(), lr=float(cfg["dqn_lr"]))
+    if pol_name == "ppo" and ppo is not None:
+        ppo_opt = torch.optim.Adam(ppo.parameters(), lr=float(cfg["ppo_lr"]))
+
+    batch_size = max(4, int(cfg["dqn_batch_size"]))
+    gamma = float(cfg["dqn_gamma"])
+    dqn_updates = max(1, int(cfg["dqn_offline_updates_per_ep"]))
+    ppo_updates = max(1, int(cfg["ppo_offline_updates_per_ep"]))
+    ppo_batch = max(4, int(cfg["ppo_offline_batch_size"]))
+
     for ep in range(n_ep):
+        dqn_train_loss = 0.0
+        ppo_train_loss = 0.0
+
+        if pol_name == "dqn" and offline_buffer is not None and dqn_opt is not None:
+            assert dqn is not None
+            losses: list[float] = []
+            for _ in range(dqn_updates):
+                batch = offline_buffer.sample(batch_size)
+                if len(batch) < batch_size:
+                    break
+                losses.append(
+                    train_double_dqn_batch(
+                        dqn,
+                        batch,
+                        num_concepts=n_concepts,
+                        gamma=gamma,
+                        optimizer=dqn_opt,
+                    )
+                )
+            dqn_train_loss = _mean(losses)
+
+        if pol_name == "ppo" and offline_buffer is not None and ppo_opt is not None:
+            assert ppo is not None
+            rows = offline_buffer.ppo_rows
+            rng_off = random.Random(base_seed + ep * 71)
+            ppo_losses: list[float] = []
+            for _ in range(ppo_updates):
+                k = min(ppo_batch, len(rows))
+                if k < 4:
+                    break
+                sample = rng_off.sample(rows, k)
+                batch_recs: list[PPOStepRecord] = []
+                for obs, cidx, r in sample:
+                    with torch.no_grad():
+                        lp = float(ppo.log_prob_of(obs, cidx).item())
+                    batch_recs.append(PPOStepRecord(obs, cidx, lp, r))
+                ppo_losses.append(ppo_policy_update(ppo, ppo_opt, batch_recs))
+            ppo_train_loss = _mean(ppo_losses)
+
         env = TutoringEnvironment(
             concept_slug=slug0,
             concept_index=idx0,
@@ -152,6 +231,7 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
             mastery_threshold=0.9,
             frustration_terminal_threshold=0.95,
             enable_action_filter=True,
+            reward_engine=reward_engine,
         )
         traj: Trajectory = []
         R = 0.0
@@ -194,16 +274,33 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
         ep_m = compute_episode_metrics(traj, mastery_threshold=mt)
         episode_trajs.append(traj)
         episode_rewards.append(R)
-        episode_summaries.append(
-            {
-                "episode": int(ep),
-                "total_reward": float(R),
-                "length": int(ep_m["episode_length"]),
-                "mastery_gain": float(ep_m["mastery_gain"]),
-                "learning_rate": float(ep_m["learning_rate"]),
-                "frustration_rate": float(ep_m["frustration_rate"]),
-            }
-        )
+        if pol_name == "dqn" and log_steps:
+            print(
+                f"[experiment] episode {ep + 1}/{n_ep} "
+                f"dqn_offline_loss_mean={dqn_train_loss:.6f} "
+                f"rollout_return={R:.4f} replay_size={len(offline_buffer or [])}",
+                flush=True,
+            )
+        if pol_name == "ppo" and log_steps:
+            print(
+                f"[experiment] episode {ep + 1}/{n_ep} "
+                f"ppo_offline_loss_mean={ppo_train_loss:.6f} "
+                f"session_return={R:.4f} replay_size={len(offline_buffer or [])}",
+                flush=True,
+            )
+        summary_ep: dict[str, Any] = {
+            "episode": int(ep),
+            "total_reward": float(R),
+            "length": int(ep_m["episode_length"]),
+            "mastery_gain": float(ep_m["mastery_gain"]),
+            "learning_rate": float(ep_m["learning_rate"]),
+            "frustration_rate": float(ep_m["frustration_rate"]),
+        }
+        if pol_name == "dqn":
+            summary_ep["dqn_offline_loss_mean"] = float(dqn_train_loss)
+        if pol_name == "ppo":
+            summary_ep["ppo_offline_loss_mean"] = float(ppo_train_loss)
+        episode_summaries.append(summary_ep)
         if log_steps:
             for si, row in enumerate(traj):
                 step_logs.append({"episode": int(ep), "step": si, **dict(row)})
@@ -234,6 +331,9 @@ def run_experiment(config: dict[str, Any]) -> dict[str, Any]:
             }
         ),
         "policy": pol_name,
+        "offline_replay_transitions": (
+            int(len(offline_buffer)) if offline_buffer is not None else 0
+        ),
         "avg_reward": _mean(episode_rewards),
         "avg_learning_rate": comparison_ready_metrics["learning_rate"],
         "frustration_rate": comparison_ready_metrics["frustration_rate"],

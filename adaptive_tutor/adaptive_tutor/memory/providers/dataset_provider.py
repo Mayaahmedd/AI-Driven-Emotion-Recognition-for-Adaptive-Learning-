@@ -69,11 +69,9 @@ The rule based action labelling is:
 This labelling is intentionally simple. It is documented here so the
 thesis defence can cite the exact rule.
 
-Scalar rewards for each transition come from :class:`~adaptive_tutor.rewards.RewardEngine`
-(instantiated via ``reward_engine`` on this provider, defaulting to the
-process-wide bachelor coefficients). That keeps offline CSV iteration
-and the synthetic environment on the same formula without embedding
-reward arithmetic in this adapter.
+Rewards are **not** computed in this module. They are materialised by
+:class:`~adaptive_tutor.rewards.RewardEngine` in the replay buffer, the
+environment, or training code so the dataset layer stays read-only.
 """
 
 from __future__ import annotations
@@ -91,7 +89,6 @@ from adaptive_tutor.memory.providers.base import (
     BaseCurriculumProvider,
     ConceptNode,
 )
-from adaptive_tutor.rewards import RewardEngine, default_reward_engine
 
 _LOG = logging.getLogger(__name__)
 
@@ -126,6 +123,9 @@ class SkillStats:
     * the :class:`StateBuilder` / simulator (optional lookup tuple via
       :func:`skill_stats_as_tuple`),
     * cohort calibration in :mod:`adaptive_tutor.simulator.calibration`.
+
+    ``mean_correctness`` is the fraction of rows with ``correct >= 0.5``
+    after float coercion (binary outcome rate).
     """
 
     skill: str
@@ -153,6 +153,9 @@ class RawTransition:
     * ``state`` and ``next_state`` are simple ``dict`` for legibility;
       Phase 4's state builder converts them into tensors.
     * ``action`` is one of :data:`ASSISTMENTS_ACTIONS`.
+    * ``reward`` is always ``None`` here; compute it in
+      :class:`~adaptive_tutor.replay.assistments_replay_buffer.ASSISTMENTSReplayBuffer`
+      or :class:`~adaptive_tutor.simulator.environment.TutoringEnvironment`.
     * ``done`` ends a transition sequence when the user moves to a
       different skill (one user, one skill, one mini-episode).
     """
@@ -161,7 +164,7 @@ class RawTransition:
     skill: str
     state: dict[str, Any]
     action: str
-    reward: float
+    reward: float | None
     next_state: dict[str, Any]
     done: bool
     correct: int = 0
@@ -181,10 +184,6 @@ class DatasetCurriculumProvider(BaseCurriculumProvider):
         Path to a CSV file with the documented column set.
     eager:
         If ``True`` (default), load and validate immediately.
-    reward_engine:
-        Optional :class:`~adaptive_tutor.rewards.RewardEngine` for
-        ``iter_transitions`` rewards. Defaults to the process-wide
-        bachelor-thesis engine.
     """
 
     PROVIDER_NAME = "assistments"
@@ -194,13 +193,11 @@ class DatasetCurriculumProvider(BaseCurriculumProvider):
         path: str | Path,
         *,
         eager: bool = True,
-        reward_engine: RewardEngine | None = None,
     ) -> None:
         super().__init__()
         self.path = Path(path)
         self._rows: list[dict[str, Any]] = []
         self._stats: dict[str, SkillStats] = {}
-        self._reward_engine = reward_engine or default_reward_engine()
         if eager:
             self.load()
 
@@ -297,21 +294,17 @@ class DatasetCurriculumProvider(BaseCurriculumProvider):
             running_hinted = 0
             prev_state = _initial_state_dict(slug)
             for i, row in enumerate(rows):
-                correct_raw = float(row.get("correct", 0))
-
-# Convert ASSISTMENTS correctness into binary success
+                correct_raw = _float(row.get("correct", 0), column="correct")
                 correct = 1 if correct_raw >= 0.5 else 0
-                hint = int(row.get("hint_count", 0))
-                attempts = int(row.get("attempt_count", 1))
+                hint = max(0, int(round(_float(row.get("hint_count", 0), column="hint_count"))))
+                attempts = max(
+                    1,
+                    int(round(_float(row.get("attempt_count", 1), column="attempt_count"))),
+                )
                 emotion = _emotion_from_row(row)
 
                 # Action label derives from the *current* row.
                 action = _label_action(correct, hint, attempts, emotion)
-
-                # Compute reward from the spec's simple formula.
-                reward = self._reward_engine.compute_scalar(
-                    correct=correct, hint_count=hint, emotion=emotion
-                )
 
                 next_state = {
                     "mastery": _clip01((running_correct + correct) / (i + 1)),
@@ -329,7 +322,7 @@ class DatasetCurriculumProvider(BaseCurriculumProvider):
                     skill=slug,
                     state=prev_state,
                     action=action,
-                    reward=reward,
+                    reward=None,
                     next_state=next_state,
                     done=(i == len(rows) - 1),
                     correct=correct,
@@ -391,7 +384,8 @@ def _aggregate_stats(rows: list[dict[str, Any]]) -> dict[str, SkillStats]:
         c_sum = h_sum = a_sum = t_sum = 0.0
         frust_sum = eng_sum = 0.0
         for r in group:
-            c_sum += _float(r.get("correct", 0), column="correct")
+            cr = _float(r.get("correct", 0), column="correct")
+            c_sum += 1.0 if cr >= 0.5 else 0.0
             h_sum += _float(r.get("hint_count", 0), column="hint_count")
             a_sum += _float(r.get("attempt_count", 1), column="attempt_count")
             t_sum += _float(r.get("ms_first_response", 0), column="ms_first_response")

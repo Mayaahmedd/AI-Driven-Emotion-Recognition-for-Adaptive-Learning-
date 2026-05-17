@@ -19,6 +19,7 @@ Why three files and not one
   makes the data flow obvious in a thesis defence.
 """
 
+from adaptive_tutor.state.assistments_state import learner_state_from_assistments_dict
 from adaptive_tutor.state.builder import StateBuilder
 from adaptive_tutor.state.features import (
     WINDOW_LENGTH,
@@ -36,6 +37,7 @@ from adaptive_tutor.state.state import (
 __all__ = [
     "LearnerState",
     "PerformanceFeatures",
+    "learner_state_from_assistments_dict",
     "StateBuilder",
     "Transition",
     "WINDOW_LENGTH",
