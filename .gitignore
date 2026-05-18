@@ -116,3 +116,8 @@ checkpoints/
 ScienceQA_DATA/val/8984/image.png
 /ScienceQA_DATA
 2012-2013-data-with-predictions-4-final.csv
+
+# RL_Module runtime outputs
+RL_Module/logs/
+RL_Module/models/
+RL_Module/videos/
