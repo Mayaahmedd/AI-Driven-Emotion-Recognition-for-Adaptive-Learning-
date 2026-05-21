@@ -14,62 +14,60 @@ MODULE_ROOT = Path(__file__).resolve().parent
 LOGS_DIR = MODULE_ROOT / "logs"
 MODELS_DIR = MODULE_ROOT / "models"
 VIDEOS_DIR = MODULE_ROOT / "videos"
-LOG_DIR = "logs/"
-MODEL_DIR = "models/"
+LOG_DIR = "logs/"  # DEFAULT: legacy string path for scripts expecting relative logs/
+MODEL_DIR = "models/"  # DEFAULT: legacy string path
 
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 MODELS_DIR.mkdir(parents=True, exist_ok=True)
 VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Experiment
-SEEDS = [42, 0, 1, 7, 13, 21, 99, 100, 200, 314]
-DEFAULT_SEED = 42
-TOTAL_TIMESTEPS = 50_000
+SEEDS = [42, 0, 1, 7, 13, 21, 99, 100, 200, 314]  # DEFAULT: 10 seeds for CI reporting
+DEFAULT_SEED = 42  # DEFAULT: reproducible baseline
+TOTAL_TIMESTEPS = 50_000  # DEFAULT: full training budget per algorithm/seed
 TRAINING_TIMESTEPS = TOTAL_TIMESTEPS
-EVAL_EPISODES = 1_000
-MAX_EPISODE_STEPS = 50
-N_STUDENTS = 10_000
+EVAL_EPISODES = 1_000  # DEFAULT: post-training evaluation episodes
+MAX_EPISODE_STEPS = 50  # DEFAULT: matches MDP horizon in spec
+N_STUDENTS = 10_000  # DEFAULT: synthetic population size
 POPULATION_SIZE = N_STUDENTS
 
 # FER
-USE_REAL_FER = False
-FER_CONFIDENCE_THRESHOLD = 0.5
-FER_PERSISTENT_EMOTION_STEPS = 3
+USE_REAL_FER = False  # DEFAULT: simulation mode until FER_Module is wired
+FER_CONFIDENCE_THRESHOLD = 0.5  # DEFAULT: minimum confidence to accept live FER label
+FER_PERSISTENT_EMOTION_STEPS = 3  # SOURCE: MaTHiSiS Paper 9 - 3-step persistence window
 
 # Rendering
-RENDER_MODE = None  # None | "human" | "rgb_array"
+RENDER_MODE = None  # DEFAULT: None | "human" | "rgb_array"
 
 # PPO (MaskablePPO)
-PPO_LEARNING_RATE = 3e-4
-PPO_GAMMA = 0.99
-PPO_CLIP_RANGE = 0.2
-PPO_N_STEPS = 2048
-PPO_BATCH_SIZE = 64
-PPO_ENT_COEF = 0.01
-PPO_NET_ARCH = [256, 256, 256]
+PPO_LEARNING_RATE = 3e-4  # DEFAULT: SB3 default for continuous control
+PPO_GAMMA = 0.99  # DEFAULT: standard discounted MDP
+PPO_CLIP_RANGE = 0.2  # SOURCE: Schulman et al. (2017) PPO paper default
+PPO_N_STEPS = 2048  # DEFAULT: rollout length per PPO update
+PPO_BATCH_SIZE = 64  # DEFAULT: minibatch size
+PPO_ENT_COEF = 0.01  # DEFAULT: entropy bonus for exploration
+PPO_NET_ARCH = [256, 256, 256]  # DEFAULT: MLP depth for tutoring state-action mapping
 
 # DQN
-DQN_LEARNING_RATE = 1e-3
-DQN_BATCH_SIZE = 32
-DQN_GAMMA = 0.99
-DQN_TRAIN_FREQ = 4
-DQN_TARGET_UPDATE_INTERVAL = 500
-DQN_EXPLORATION_FRACTION = 0.1
-DQN_EXPLORATION_FINAL_EPS = 0.05
-DQN_NET_ARCH = [64, 64]
-
-# Hybrid
-HYBRID_PPO_WEIGHT = 0.6
-HYBRID_DQN_WEIGHT = 0.4
+DQN_LEARNING_RATE = 1e-3  # DEFAULT: SB3 DQN default
+DQN_BATCH_SIZE = 32  # DEFAULT: replay minibatch
+DQN_GAMMA = 0.99  # DEFAULT: discounted return
+DQN_TRAIN_FREQ = 4  # DEFAULT: gradient steps per env step
+DQN_TARGET_UPDATE_INTERVAL = 500  # DEFAULT: target network sync period
+DQN_EXPLORATION_FRACTION = 0.1  # DEFAULT: epsilon decay over first 10% of training
+DQN_EXPLORATION_FINAL_EPS = 0.05  # DEFAULT: residual exploration
+DQN_NET_ARCH = [64, 64]  # DEFAULT: smaller net for reactive Q-learning
 
 # Bandit
+# SOURCE: Li et al. (2010) LinUCB - alpha=1.0 is the standard default
 BANDIT_ALPHA = 1.0
-BANDIT_EMOTION_DELTA_THRESHOLD = 0.3
+# DEFAULT: any emotion category change (|delta emotion_id| >= 1) triggers bandit
+BANDIT_EMOTION_DELTA_THRESHOLD = 1
 
 # Algorithms
-ALGORITHMS = ("PPO", "DQN", "PPO_DQN", "Bandit_DQN", "Rule", "Random")
+ALGORITHMS = ("PPO", "DQN", "Bandit_DQN", "Rule", "Random")
 
-# Action and emotion names (spec Phase 6)
+# Action and emotion names
 ACTION_NAMES = [
     "easier_question",
     "harder_question",
@@ -85,7 +83,9 @@ ACTION_NAMES = [
 
 EMOTION_NAMES = ["confused", "bored", "frustrated", "engaged"]
 
-# Best actions per emotion_id (spec Phase 6)
+# BEST_ACTION_MAP: used ONLY in evaluation/metrics.py and explainability/explainer.py
+# as a post-training measurement tool. NOT imported by reward_function.py.
+# NOT used during training in any way.
 BEST_ACTION_MAP = {
     0: [2, 9, 7],   # confused -> hint, explanation, strategy
     3: [1, 4, 6],   # engaged -> harder, scaffold, reflection
@@ -94,15 +94,49 @@ BEST_ACTION_MAP = {
 }
 
 # Dropout: consecutive steps with persistent_flag before terminated
-PERSISTENT_FLAG_DROPOUT_STEPS = 5
+PERSISTENT_FLAG_DROPOUT_STEPS = 5  # SOURCE: MaTHiSiS Paper 9 - persistent affect dropout
+
+# Masking / persistent-frustration thresholds live in mdp_definition.py (single source
+# of truth). Re-exported here for ergonomic config.X access. sensitivity_analysis.py
+# patches mdp_definition, config, and student_env module attributes together.
+from RL_Module.mdp_definition import (
+    FRUSTRATION_PERSISTENT_ON,
+    FRUSTRATION_PERSISTENT_OFF,
+    FRUSTRATION_PERSISTENT_STEPS,
+    FRUSTRATION_BLOCK_HARDER,
+    FRUSTRATION_BLOCK_STRATEGY,
+    ENGAGEMENT_MIN_REFLECTION,
+    KNOWLEDGE_MIN_AUTONOMY,
+    KNOWLEDGE_MAX_SCAFFOLD,
+)
+
+# Reward internal thresholds
+# SOURCE: D'Mello & Graesser (2012) - frustration above moderate disrupts learning
+FRUSTRATION_HIGH_THRESHOLD = 0.6  # DEFAULT: upper tertile
+FRUSTRATION_PENALTY_HIGH = 0.5  # magnitude subtracted via W * frustration_term
+PERSISTENT_PENALTY = 1.0  # magnitude when persistent_flag is True
+WRONG_ANSWER_PENALTY = 0.5  # magnitude subtracted when last answer wrong
+
+# Optimal zone (flow) - SOURCE: Csikszentmihalyi (1990)
+ZONE_BONUS = 1.0
+ZONE_MIN_KNOWLEDGE = 0.5  # DEFAULT: midpoint
+ZONE_MIN_ENGAGEMENT = 0.6  # DEFAULT: above moderate engagement
+ZONE_MAX_FRUSTRATION = 0.3
+ZONE_MAX_CONFUSION = 0.4
+ZONE_MAX_BOREDOM = 0.3
+
+# Sensitivity analysis switch - True only during sensitivity_analysis.py runs
+USE_SENSITIVITY_WEIGHTS = False
+SENSITIVITY_WEIGHTS: dict = {}
 
 
 def set_all_seeds(seed: int) -> None:
-    """Set all random seeds before train/eval (spec Phase 6)."""
+    """Set all random seeds before train/eval."""
     random.seed(seed)
     np.random.seed(seed)
     try:
         import torch
+
         torch.manual_seed(seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed_all(seed)

@@ -1,4 +1,4 @@
-# RL_Module — Adaptive Tutoring via Reinforcement Learning
+# RL_Module ï¿½ Adaptive Tutoring via Reinforcement Learning
 
 MDP-based adaptive tutor parallel to `FER_Module/`. The FER module outputs one of four emotions; this module learns which teaching action to take.
 
@@ -31,11 +31,11 @@ pytest RL_Module/tests/ -q
 
 | Drawer | Purpose |
 |--------|---------|
-| `mdp_definition.py` | MDP constants — single source of truth |
+| `mdp_definition.py` | MDP constants ï¿½ single source of truth |
 | `config.py` | Seeds, hyperparams, paths |
 | `environment/` | Gymnasium `StudentEnv`, synthetic students |
 | `reward/` | Weighted reward with thesis citations |
-| `agents/` | PPO, DQN, hybrid, bandit+DQN, rule, random |
+| `agents/` | PPO, DQN, bandit+DQN, rule, random |
 | `evaluation/` | Metrics, plots, ablation |
 | `fer_interface/` | FER adapter (synthetic or live) |
 | `explainability/` | JSONL action explanations |
@@ -54,3 +54,23 @@ Note: `logging_utils/` avoids shadowing Python's stdlib `logging` module.
 ## Demo render
 
 Set `RENDER_MODE = "human"` in `config.py` or pass `render_mode="human"` when creating `StudentEnv`.
+
+## Live viewer (during training)
+
+Run training in one terminal and the live viewer in another. The viewer reads the step CSV every 0.5 seconds.
+
+```bash
+# Terminal 1 ï¿½ training
+python -m RL_Module.main_experiment --algo PPO --seed 42
+
+# Terminal 2 ï¿½ live viewer
+python -m RL_Module.evaluation.live_viewer --algo PPO --seed 42
+```
+
+## Sensitivity analysis
+
+```bash
+python -m RL_Module.evaluation.sensitivity_analysis
+```
+
+Outputs `RL_Module/logs/sensitivity_analysis.csv` and `RL_Module/logs/threshold_sensitivity.csv`.

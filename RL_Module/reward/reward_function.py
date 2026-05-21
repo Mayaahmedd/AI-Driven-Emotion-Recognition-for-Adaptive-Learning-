@@ -1,5 +1,21 @@
 """
-Reward function R - weighted sum with thesis citations in comments.
+Reward function R - equal weighting across outcome dimensions.
+
+Equal weights (W = 1/7) are used deliberately to avoid introducing researcher
+bias into the learning signal. This design choice follows the principle of
+minimal assumptions: in the absence of empirical data quantifying the relative
+importance of each affective dimension, equal weighting is the most
+epistemically honest approach (Dawes, 1979).
+
+The priority ordering of outcomes is instead encoded in:
+  - The transition function (which dimensions change most per action)
+  - The action masking rules (which prevent harmful actions)
+  - The optimal zone bonus (which rewards holistic good states)
+
+Reference: Dawes, R.M. (1979). The robust beauty of improper linear models
+in decision making. American Psychologist, 34(7), 571-582.
+
+This module contains ZERO references to action IDs in the reward signal.
 """
 
 from __future__ import annotations
@@ -8,62 +24,14 @@ from typing import Any, Optional, Union
 
 import numpy as np
 
-from RL_Module.mdp_definition import ID_TO_EMOTION, StudentState, normalized_knowledge_gain
-
-# Weights (cite in thesis)
-W_KNOWLEDGE = 0.40      # Hake (1998)
-W_ENGAGEMENT = 0.20     # Fredricks et al. (2004)
-W_CONFUSION = 0.15      # Sweller (1988)
-W_BOREDOM = 0.10        # D'Mello et al. (2012)
-W_FRUSTRATION = 0.15    # Kort et al. (2001) - high frustration only
-W_PERSISTENT = 0.30     # systemic failure
-W_OPTIMAL = 0.20        # Csikszentmihalyi (1990)
-
-BONUS_MAP = {
-    ("confused", 2): 0.20,
-    ("confused", 9): 0.25,
-    ("confused", 7): 0.20,
-    ("frustrated", 5): 0.25,
-    ("frustrated", 8): 0.15,
-    ("bored", 3): 0.20,
-    ("bored", 8): 0.20,
-    ("engaged", 6): 0.25,
-    ("engaged", 1): 0.20,
-}
-
-PENALTY_MAP = {
-    ("frustrated", 1): -0.25,
-    ("frustrated", 6): -0.20,
-    ("confused", 1): -0.20,
-    ("bored", 9): -0.10,
-}
+from RL_Module import config
+from RL_Module.mdp_definition import StudentState
 
 
 def _to_state(state: Union[np.ndarray, StudentState]) -> StudentState:
     if isinstance(state, np.ndarray):
         return StudentState.from_vec(state)
     return state
-
-
-def _in_optimal_zone(s: StudentState) -> bool:
-    return (
-        s.knowledge > 0.5
-        and s.engagement > 0.6
-        and s.frustration < 0.3
-        and s.confusion < 0.4
-        and s.boredom < 0.3
-    )
-
-
-def _frustration_penalty(s: StudentState, persistent_flag: bool) -> float:
-    """Productive frustration - MaTHiSiS Paper 9."""
-    if persistent_flag:
-        return W_PERSISTENT
-    if s.frustration > 0.6:
-        return W_FRUSTRATION
-    if 0.3 < s.frustration <= 0.6:
-        return 0.0
-    return 0.0
 
 
 def compute_reward(
@@ -73,13 +41,35 @@ def compute_reward(
     persistent_flag: bool = False,
     last_answer_correct: bool = True,
     last_answer_wrong: Optional[bool] = None,
-    use_emotion_bonuses: bool = True,
     **kwargs: Any,
 ) -> float:
     """
-  R = weighted sum, clipped to [-1, +1].
-  Accepts obs vectors (6,) or StudentState. Supports last_answer_correct or last_answer_wrong.
+    Equal-weight reward (Dawes, 1979).
+
+    Seven terms with per-term weights (default W = 1/7 each):
+      + delta_k_norm, + delta_e, - confusion, - boredom,
+      + frustration_term, + zone_bonus, - wrong_answer_term
+
+    The action parameter is retained for API compatibility but is never used.
+    Sensitivity overrides use W_knowledge, W_engagement, W_affective, etc.
     """
+    sw = config.SENSITIVITY_WEIGHTS if config.USE_SENSITIVITY_WEIGHTS else {}
+
+    w_default = sw.get("W", 1.0 / 7.0)
+    w_k = sw.get("W_knowledge", w_default)
+    w_e = sw.get("W_engagement", w_default)
+    w_conf = sw.get("W_confusion", sw.get("W_affective", w_default))
+    w_bored = sw.get("W_boredom", sw.get("W_affective", w_default))
+    w_frust = sw.get("W_frustration", sw.get("W_affective", w_default))
+    w_zone = sw.get("W_zone", w_default)
+    w_wrong = sw.get("W_wrong", w_default)
+
+    frust_high = sw.get("frustration_high_threshold", config.FRUSTRATION_HIGH_THRESHOLD)
+    frust_pen = sw.get("frustration_penalty_high", config.FRUSTRATION_PENALTY_HIGH)
+    persist_pen = sw.get("persistent_penalty", config.PERSISTENT_PENALTY)
+    zone_bonus_val = sw.get("zone_bonus", config.ZONE_BONUS)
+    wrong_pen = sw.get("wrong_answer_penalty", config.WRONG_ANSWER_PENALTY)
+
     prev = _to_state(prev_state)
     new = _to_state(new_state)
 
@@ -88,26 +78,37 @@ def compute_reward(
     elif "last_answer_wrong" in kwargs and kwargs["last_answer_wrong"] is not None:
         last_answer_wrong = bool(kwargs["last_answer_wrong"])
 
-    emotion = ID_TO_EMOTION[new.emotion_id]
+    delta_k_norm = np.clip(
+        (new.knowledge - prev.knowledge) / (1.0 - prev.knowledge + 1e-8),
+        -1.0,
+        1.0,
+    )
+    delta_e = new.engagement - prev.engagement
 
-    dk_norm = normalized_knowledge_gain(prev.knowledge, new.knowledge)
-    r = W_KNOWLEDGE * dk_norm
-    r += W_ENGAGEMENT * (new.engagement - prev.engagement)
-    r -= W_CONFUSION * new.confusion
-    r -= W_BOREDOM * new.boredom
-    r -= _frustration_penalty(new, persistent_flag)
+    if persistent_flag:
+        frustration_term = -persist_pen
+    elif new.frustration > frust_high:
+        frustration_term = -frust_pen
+    else:
+        frustration_term = 0.0  # productive frustration (0.3 < f <= high): no penalty
 
-    if _in_optimal_zone(new):
-        r += W_OPTIMAL
+    in_zone = (
+        new.knowledge > config.ZONE_MIN_KNOWLEDGE
+        and new.engagement > config.ZONE_MIN_ENGAGEMENT
+        and new.frustration < config.ZONE_MAX_FRUSTRATION
+        and new.confusion < config.ZONE_MAX_CONFUSION
+        and new.boredom < config.ZONE_MAX_BOREDOM
+    )
+    zone_bonus = zone_bonus_val if in_zone else 0.0
+    wrong_term = wrong_pen if last_answer_wrong else 0.0
 
-    if use_emotion_bonuses:
-        key = (emotion, action)
-        r += BONUS_MAP.get(key, 0.0)
-        r += PENALTY_MAP.get(key, 0.0)
-        if last_answer_wrong:
-            if action == 9:
-                r += 0.20
-            elif action == 2:
-                r += 0.15
-
-    return float(np.clip(r, -1.0, 1.0))
+    total = (
+        w_k * delta_k_norm
+        + w_e * delta_e
+        - w_conf * new.confusion
+        - w_bored * new.boredom
+        + w_frust * frustration_term
+        + w_zone * zone_bonus
+        - w_wrong * wrong_term
+    )
+    return float(np.clip(total, -1.0, 1.0))

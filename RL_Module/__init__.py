@@ -1,4 +1,4 @@
-"""RL-based adaptive tutoring system (MDP + 6 algorithms)."""
+"""RL-based adaptive tutoring system (MDP + 5 algorithms)."""
 
 from __future__ import annotations
 

@@ -14,13 +14,12 @@ from RL_Module.agents.base_agent import BaseAgent
 from RL_Module.agents.bandit_dqn import BanditDQNAgent
 from RL_Module.agents.dqn_agent import DQNAgent, make_env
 from RL_Module.agents.ppo_agent import PPOAgent, make_masked_env
-from RL_Module.agents.ppo_dqn_hybrid import PPODQNHybridAgent
 from RL_Module.environment.student_env import StudentEnv
 from RL_Module.explainability.explainer import Explainer
 from RL_Module.logging_utils.csv_logger import EpisodeLogger, StepLogger
 from RL_Module.mdp_definition import BEST_ACTION_MAP, ID_TO_EMOTION, normalized_knowledge_gain
 
-RL_ALGORITHMS = ("PPO", "DQN", "PPO_DQN", "Bandit_DQN")
+RL_ALGORITHMS = ("PPO", "DQN", "Bandit_DQN")
 
 
 def confidence_interval(values: List[float], z: float = 1.96) -> Tuple[float, float, float]:
@@ -47,6 +46,22 @@ def _is_success(final_knowledge: float, final_frustration: float, final_confusio
 
 def _adaptation_match(emotion_id: int, action: int) -> bool:
     return action in BEST_ACTION_MAP.get(emotion_id, set())
+
+
+def compute_adaptation_accuracy(episode_log: List[Dict[str, Any]]) -> float:
+    """
+    Measures how often the agent chose a pedagogically appropriate action
+    for the student's emotional state. Computed POST-TRAINING only - never
+    used during training. Delegates to _adaptation_match (single source of truth).
+    """
+    if not episode_log:
+        return 0.0
+    hits = sum(
+        1
+        for row in episode_log
+        if _adaptation_match(int(round(float(row["emotion_id"]))), int(row["action_id"]))
+    )
+    return hits / len(episode_log)
 
 
 def evaluate(
@@ -230,14 +245,13 @@ def run_ablation(
     eval_episodes: int = 100,
     seed: int = config.DEFAULT_SEED,
 ) -> Dict[str, Any]:
-    """Version A: no emotion. Version B: full. All 4 RL algorithms."""
+    """Version A: no emotion. Version B: full. All 3 RL algorithms."""
     results: Dict[str, Any] = {"A": {}, "B": {}, "delta": {}}
 
     for label, ablation in [("A", True), ("B", False)]:
         for algo_name, agent_cls in [
             ("PPO", PPOAgent),
             ("DQN", DQNAgent),
-            ("PPO_DQN", PPODQNHybridAgent),
             ("Bandit_DQN", BanditDQNAgent),
         ]:
             if algo_name == "PPO":
@@ -252,7 +266,6 @@ def run_ablation(
             eval_env = StudentEnv(
                 population_seed=seed,
                 use_emotion=not ablation,
-                use_emotion_bonuses=not ablation,
                 ablation_no_emotion=ablation,
             )
             key = f"{algo_name}_{label}"

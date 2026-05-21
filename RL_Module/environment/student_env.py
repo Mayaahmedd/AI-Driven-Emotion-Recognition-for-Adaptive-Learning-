@@ -52,14 +52,12 @@ class StudentEnv(gym.Env):
         max_episode_steps: int = config.MAX_EPISODE_STEPS,
         population_seed: Optional[int] = None,
         use_emotion: bool = True,
-        use_emotion_bonuses: bool = True,
         ablation_no_emotion: bool = False,
     ):
         super().__init__()
         self.render_mode = render_mode
         self.max_episode_steps = max_episode_steps
         self.use_emotion = use_emotion
-        self.use_emotion_bonuses = use_emotion_bonuses
         self.ablation_no_emotion = ablation_no_emotion
 
         self.observation_space = spaces.Box(
@@ -284,7 +282,6 @@ class StudentEnv(gym.Env):
             self._state,
             persistent_flag=self._persistent_frustration_flag,
             last_answer_wrong=self._last_answer_wrong,
-            use_emotion_bonuses=self.use_emotion_bonuses and not self.ablation_no_emotion,
         )
         self._last_reward = reward
         self._cumulative_reward += reward

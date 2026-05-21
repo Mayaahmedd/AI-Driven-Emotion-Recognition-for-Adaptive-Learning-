@@ -19,7 +19,6 @@ from RL_Module.environment.student_env import StudentEnv, mask_fn
 def make_masked_env(
     seed: int,
     use_emotion: bool = True,
-    use_emotion_bonuses: bool = True,
     ablation_no_emotion: bool = False,
     algo_tag: str = "ppo",
 ) -> gym.Env:
@@ -28,7 +27,6 @@ def make_masked_env(
         max_episode_steps=config.MAX_EPISODE_STEPS,
         population_seed=seed,
         use_emotion=use_emotion,
-        use_emotion_bonuses=use_emotion_bonuses,
         ablation_no_emotion=ablation_no_emotion,
     )
     env = Monitor(

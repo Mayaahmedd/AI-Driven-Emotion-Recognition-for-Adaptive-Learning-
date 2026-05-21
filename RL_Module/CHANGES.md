@@ -100,7 +100,7 @@ Full audit and correction per Phase 0-10 specification.
 
 ## Second Pass
 
-Surgical API alignment with Step 1 integration script and Step 2E2G spec items.
+Surgical API alignment with Step 1 integration script and Step 2Eï¿½2G spec items.
 
 ### environment/student_env.py
 - **Bug:** No public `frustration`, `emotion_id`, `persistent_flag` accessors (only `_state` / private flag).
@@ -145,7 +145,7 @@ Surgical API alignment with Step 1 integration script and Step 2E2G spec items.
 - **Fix:** Added `AGENT_ALIASES`, `run_single()`, aggregated summary row per algorithm, spawn pool runner.
 
 ### agents/ppo_agent.py, agents/dqn_agent.py
-- **Bug:** `Monitor` without `filename=`  collision risk for parallel seeds (NEW BUG 9).
+- **Bug:** `Monitor` without `filename=` ï¿½ collision risk for parallel seeds (NEW BUG 9).
 - **Fix:** `filename=monitor_{algo_tag}_seed{seed}` via `algo_tag` parameter.
 
 ### __init__.py
@@ -157,14 +157,14 @@ Surgical API alignment with Step 1 integration script and Step 2E2G spec items.
 
 ## Third Pass
 
-Scale-only bugs found via 3,000-step training, parallel-run inspection, and T1–T13 code audit.
+Scale-only bugs found via 3,000-step training, parallel-run inspection, and T1ï¿½T13 code audit.
 
 ### agents/bandit_dqn.py (BUG T6)
 - **Bug:** `LinUCB.select()` called `np.linalg.inv(self.A[a])` with no fallback; ill-conditioned A matrices after many updates raise `LinAlgError` and crash Bandit+DQN mid-run.
 - **Fix:** `try/except np.linalg.LinAlgError` with fallback `A_inv = np.eye(self.d)`.
 
 ### explainability/explainer.py (BUG T7)
-- **Bug:** `explain()` wrote and flushed every call; at 50k steps × 6 algos × 10 seeds JSONL files grow to hundreds of MB with severe IO cost.
+- **Bug:** `explain()` wrote and flushed every call; at 50k steps ï¿½ 6 algos ï¿½ 10 seeds JSONL files grow to hundreds of MB with severe IO cost.
 - **Fix:** `_write_count` counter; disk write only when `_write_count % 10 == 0` (~90% fewer lines). `reason_for()` in env remains no-IO.
 
 ### main_experiment.py (CLI alias)
@@ -177,3 +177,81 @@ Scale-only bugs found via 3,000-step training, parallel-run inspection, and T1–T
 
 ### Verified OK (no change)
 - ActionMasker + `mask_fn`; cooldowns and `consecutive_flag_steps` reset in `__init__`/`reset()`; hybrid `_ppo`/`_dqn` paths; fresh eval `StudentEnv`; int-key `BEST_ACTION_MAP`; `SummaryWriter(append=False)`; lazy pygame; `StudentEnv ? DQNSafeEnv ? Monitor`; `set_all_seeds` before population.
+
+## Fourth Pass
+
+Theory-grounded reward redesign (Dawes, 1979 equal weighting).
+
+### reward/reward_function.py
+- **Change:** Removed `W_KNOWLEDGE`ï¿½`W_OPTIMAL`, `BONUS_MAP`, `PENALTY_MAP`, and all action-dependent bonuses.
+- **Change:** Equal weight `W = 1/7` across seven terms: knowledge gain, engagement change, confusion, boredom, frustration, zone bonus, wrong-answer penalty.
+- **Change:** `action` parameter retained for API compatibility but never used in the body.
+- **Change:** Sensitivity override via `config.USE_SENSITIVITY_WEIGHTS` / `config.SENSITIVITY_WEIGHTS`.
+
+### config.py
+- **Change:** Added `FRUSTRATION_HIGH_THRESHOLD`, `FRUSTRATION_PENALTY_HIGH`, `PERSISTENT_PENALTY`, `WRONG_ANSWER_PENALTY`, `ZONE_*` constants.
+- **Change:** Added `USE_SENSITIVITY_WEIGHTS` and `SENSITIVITY_WEIGHTS` for sensitivity runs.
+- **Change:** `BEST_ACTION_MAP` comment clarifies evaluation/explainer-only use (not reward).
+- **Change:** Deleted `HYBRID_PPO_WEIGHT` and `HYBRID_DQN_WEIGHT`.
+- **Change:** `BANDIT_EMOTION_DELTA_THRESHOLD` retyped to `int = 1` with citation.
+
+### evaluation/metrics.py
+- **Change:** Added `compute_adaptation_accuracy(episode_log)` ï¿½ post-training metric using `config.BEST_ACTION_MAP` int keys.
+
+### evaluation/sensitivity_analysis.py (new)
+- **Change:** Weight configs (equal, knowledge_priority, affective_priority) and threshold configs (default, stricter, looser); Spearman rank correlation output.
+
+## Fifth Pass
+
+Principled defaults, hybrid routing, live viewer, clipping documentation.
+
+### config.py
+- **Change:** Every constant annotated with `# SOURCE:`, `# DEFAULT:`, or `# SENSITIVITY:` comment.
+
+### agents/ppo_dqn_hybrid.py
+- **Change:** Replaced fixed 0.6/0.4 weighted ensemble with `route_decision()` conditional routing (DQN on state_delta > 0.15, frustration rising, or confusion > 0.6; else PPO).
+- **Change:** Exposed `last_agent_used` instance attribute (no CSV column ï¿½ logging unchanged per scope).
+
+### mdp_definition.py
+- **Change:** Added CLIPPING EXPLAINED module docstring (state, reward, normalized gain); no behavior change.
+
+### evaluation/live_viewer.py (new)
+- **Change:** Separate-process pygame viewer tailing `steps_{algo}_seed{N}.csv` at 2 Hz.
+
+### tests/test_reward_signs.py
+- **Change:** Replaced action-dependent bonus test with knowledge-gain and action-invariance tests.
+
+### README.md
+- **Change:** Live viewer two-terminal usage instructions.
+
+## Sixth Pass
+
+Correctness audit fixes (B1-B6, T1): sensitivity overrides, threshold dedup, dead parameters.
+
+### B1 - Threshold sensitivity was a no-op
+- **Bug:** `sensitivity_analysis.py` patched `config.FRUSTRATION_BLOCK_*` only; `student_env.py` uses bare names captured from `mdp_definition` at import time.
+- **Fix:** `_patch_thresholds` updates `mdp_definition`, `config`, and `student_env` module attributes together.
+
+### B2 - Weight sensitivity silently failed
+- **Bug:** `compute_reward` read only `SENSITIVITY_WEIGHTS["W"]`; `knowledge_priority` / `affective_priority` keys were ignored.
+- **Fix:** Per-term overrides (`W_knowledge`, `W_engagement`, `W_affective`, etc.) and sensitivity threshold keys in `reward_function.py`.
+
+### B3 - Duplicate masking thresholds
+- **Bug:** Same constants in `mdp_definition.py` and `config.py`; env used `mdp_definition` only.
+- **Fix:** `config.py` re-exports from `mdp_definition` (single source of truth).
+
+### B4 - Incomplete factorial sweep
+- **Bug:** Six separate runs (3 weights + 3 thresholds), not 3x3 combined.
+- **Fix:** `run_factorial()` nested loop: 9 cells x 6 algorithms = 54 rows in `sensitivity_factorial.csv`.
+
+### B5 - Dead `use_emotion_bonuses`
+- **Bug:** Threaded through env/agents/ablation but unused after bonus maps removed.
+- **Fix:** Removed from `StudentEnv`, `make_env`, `make_masked_env`, `run_ablation`, and `compute_reward`.
+
+### B6 - Dead frustration branch
+- **Bug:** `elif 0.3 < f <= HIGH` and `else` both returned `0.0`.
+- **Fix:** Collapsed to single `else: frustration_term = 0.0` (productive frustration).
+
+### T1 - Two adaptation-accuracy implementations
+- **Bug:** `compute_adaptation_accuracy` used `config.BEST_ACTION_MAP` (lists); `_adaptation_match` used `mdp_definition.BEST_ACTION_MAP` (sets).
+- **Fix:** `compute_adaptation_accuracy` delegates to `_adaptation_match`.

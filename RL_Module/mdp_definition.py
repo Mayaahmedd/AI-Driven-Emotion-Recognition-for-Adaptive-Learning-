@@ -1,4 +1,25 @@
-"""MDP definition: S, A, P, R, gamma - imported by every other module."""
+"""MDP definition: S, A, P, R, gamma - imported by every other module.
+
+CLIPPING EXPLAINED
+==================
+Clipping constrains a value to stay within [low, high].
+Formula: clip(x, low, high) = max(low, min(high, x))
+
+Used in three places:
+
+1. State variables (student_model.py):
+   knowledge = clip(knowledge + delta, 0, 1)
+   Prevents knowledge from going below 0 (impossible) or above 1 (fully mastered).
+
+2. Reward function (reward_function.py):
+   reward = clip(total, -1.0, 1.0)
+   Prevents extreme reward values from destabilizing neural network weight updates.
+   SOURCE: Mnih et al. (2015) DQN paper clips rewards for the same reason.
+
+3. Normalized knowledge gain (reward_function.py):
+   delta_k_norm = clip((k_new - k_old) / (1 - k_old + 1e-8), -1, 1)
+   The 1e-8 epsilon prevents division by zero when k_old = 1.0.
+"""
 
 from __future__ import annotations
 

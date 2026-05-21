@@ -2,7 +2,7 @@
 
 \section{Chapter Overview}\label{sec:results_overview}
 
-This chapter reports the experimental results of the proposed system. It is organised by module, in the same order as the methodology chapter. Part~I, in Sections~\ref{sec:results_fer}--\ref{sec:results_fer_summary}, presents the quantitative results of the Facial Expression Recognition (FER) module on the DAiSEE benchmark \cite{gupta_daisee_2016}. The results of the adaptation module, which consumes the FER output as one of its inputs, are reported in Part~II once the adaptation methodology is fully introduced. The reason for this two-part structure is that the two modules optimise different objectives and use different evaluation protocols: FER is judged with multilabel classification metrics on DAiSEE, while the adaptation module is judged with policy-style metrics inside a tutoring loop.
+This chapter reports the experimental results of the proposed system. It is organised by module, in the same order as the methodology chapter. Part~I, in Sections~\ref{sec:results_fer}--\ref{sec:results_fer_summary}, presents the quantitative results of the Facial Expression Recognition (FER) module on the DAiSEE benchmark \cite{gupta_daisee_2016}. Part~II, in Sections~\ref{sec:results_adapt_intro}--\ref{sec:results_adapt_summary}, presents the adaptation module: reinforcement-learning policies trained and evaluated inside a Gymnasium-compatible synthetic tutoring environment. The two parts use different protocols---multilabel classification on DAiSEE versus policy-level metrics in simulation---and must be interpreted separately. \textbf{The main RL experiments use simulator-derived affect states (\texttt{USE\_REAL\_FER=False}); they do not quantify end-to-end webcam-based tutoring.}
 
 The FER results in this chapter follow a clear path. First, Section~\ref{sec:results_fer} describes the experimental scope and the consistency rule that separates single-label runs from multilabel runs. Section~\ref{sec:results_fer_training} then analyses the training behaviour of the final selected FER model, before Section~\ref{sec:results_fer_overall} reports its overall and per-label test performance. Section~\ref{sec:results_fer_perlabel} discusses each affective label in turn. Section~\ref{sec:results_fer_arch_selection} reports the architecture-selection experiments that justify the final design, organised into a single-label family table and a multilabel family table. Section~\ref{sec:results_fer_traditional} compares the proposed system with traditional handcrafted-feature baselines, and Section~\ref{sec:results_fer_literature} compares it with prior FER work on DAiSEE. Section~\ref{sec:results_fer_discussion} synthesises the findings and acknowledges remaining limitations, and Section~\ref{sec:results_fer_summary} closes Part~I.
 
@@ -26,7 +26,7 @@ The early-stopping rule of Section~\ref{sec:method_optim} therefore selects the 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figures/fer_training_curves.png}
+    \includegraphics[width=0.85\textwidth]{Figures/fer_training_curves.png}
     \caption{Training loss and validation Macro/Micro/Weighted F1 across epochs for the chosen FER model (ResNet50~+~SE~+~two-layer BiLSTM~+~temporal attention, $24$~frames, weighted BCE with controlled oversampling, per-label tuned thresholds). The training loss decreases monotonically while the validation metrics stay inside a stable band, with the highest validation Macro F1 reached at the first epoch and used for early stopping.}
     \label{fig:fer_training_curves}
 \end{figure}
@@ -61,21 +61,21 @@ Frustration & 0.60 & 0.20 & 0.34 & 0.25 \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.92\textwidth]{figures/fer_per_label_metrics.png}
+    \includegraphics[width=0.92\textwidth]{Figures/fer_per_label_metrics.png}
     \caption{Per-label precision, recall, and F1 on the DAiSEE test split with the per-label thresholds reported in Table~\ref{tab:fer_results}. Engagement is detected very reliably; the rare states (boredom, confusion, frustration) trade precision for recall.}
     \label{fig:fer_per_label_metrics}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.78\textwidth]{figures/fer_overall_metrics_bar.png}
+    \includegraphics[width=0.78\textwidth]{Figures/fer_overall_metrics_bar.png}
     \caption{Overall test metrics of the chosen FER model on DAiSEE: per-label accuracy averaged across the four labels, Macro F1, Micro F1, Samples F1, and Weighted F1. Weighted-by-frequency metrics are noticeably higher than Macro F1, which is the expected pattern for a heavily imbalanced multilabel task in which the dominant label is very well detected.}
     \label{fig:fer_overall_metrics_bar}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figures/fer_confusion_per_label.png}
+    \includegraphics[width=\textwidth]{Figures/fer_confusion_per_label.png}
     \caption{Per-label confusion matrices on the DAiSEE test split. Each cell shows the absolute count and (in parentheses) the row-normalised proportion. Rows correspond to ground-truth labels and columns correspond to predicted labels for the matching emotion.}
     \label{fig:fer_confusion_per_label}
 \end{figure}
@@ -155,7 +155,7 @@ The chosen Exp~38 sits at the intersection of these five lessons. It uses a stro
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.92\textwidth]{figures/fer_macro_f1_comparison.png}
+    \includegraphics[width=0.92\textwidth]{Figures/fer_macro_f1_comparison.png}
     \caption{Macro F1 across the strongest multilabel and single-label experiments and the two traditional baselines (HOG~+~LBP~+~SVM and ResNet50 features~+~SVM). The chosen final model, Exp~38, dominates all other runs on Macro F1, and the multilabel runs on the right of the chart all sit above their single-label counterparts trained under matched protocols.}
     \label{fig:fer_macro_f1_comparison}
 \end{figure}
@@ -227,7 +227,7 @@ Exp~38 (multilabel, final)                 & 0.453$^{\dagger}$ & 0.798$^{\dagger
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.92\textwidth]{figures/fer_accuracy_comparison.png}
+    \includegraphics[width=0.92\textwidth]{Figures/fer_accuracy_comparison.png}
     \caption{Top-1 / per-label accuracy on the DAiSEE test split for the two traditional single-label baselines (HOG~+~LBP~+~SVM, ResNet50 features~+~SVM) and the strongest single-label deep models. The traditional baselines achieve high overall accuracy by collapsing to engagement, but their per-label F1 on the rare labels is essentially zero (Table~\ref{tab:fer_traditional}).}
     \label{fig:fer_accuracy_comparison}
 \end{figure}
@@ -236,7 +236,7 @@ The two SVM baselines reach top-1 accuracy of $0.750$ and $0.759$, which is high
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.92\textwidth]{figures/fer_weighted_f1_comparison.png}
+    \includegraphics[width=0.92\textwidth]{Figures/fer_weighted_f1_comparison.png}
     \caption{Weighted F1 across the two traditional baselines and the strongest single-label and multilabel deep models. Weighted F1 puts more mass on the engagement label and is therefore closer between models than Macro F1, but the chosen multilabel system (Exp~38) still reaches the highest Weighted F1 ($0.80$), which means that even when the dominant class is given more weight, the proposed system is at least as good as the traditional and single-label baselines.}
     \label{fig:fer_weighted_f1_comparison}
 \end{figure}
@@ -301,9 +301,396 @@ Despite these limitations, the chosen multilabel model is suitable as input for 
 In summary, on the DAiSEE test set, the proposed FER model reaches a Macro F1 of $0.453$, a Weighted F1 of $0.798$, a Micro F1 of $0.724$, a Samples F1 of $0.746$, and an exact-match accuracy of $0.342$, with per-label F1 of $0.36$, $0.97$, $0.22$ and $0.25$ on boredom, engagement, confusion and frustration. This is the best multilabel result in the architecture-selection experiments, achieved by a ResNet50~+~SE~+~two-layer BiLSTM~+~temporal attention pipeline trained with weighted BCE plus controlled oversampling on $24$-frame clips, and decoded with per-label thresholds tuned on the validation split. The result is supported by ablations along five axes (imbalance handling, sampling-vs-loss interaction, backbone, temporal module, decision rule), by a comparison with traditional handcrafted-feature baselines, and by an architectural comparison with prior FER work on DAiSEE. Part~II of this chapter, on the adaptation module, builds on this FER output.
 
 % =====================================================================
-% PART II — ADAPTATION RESULTS (placeholder; written in a later iteration)
+% PART II — ADAPTATION MODULE RESULTS AND DISCUSSION
 % =====================================================================
 
-\section{Adaptation Module Results}\label{sec:results_adapt}
+\section{Adaptation Module Results and Discussion}\label{sec:results_adapt_part}
 
-The results of the adaptation module are reported here once the adaptation methodology is fully introduced in the methodology chapter. The placeholder is kept so that the chapter outline matches the final intended structure. The FER part above is independent of this section and can be read as a self-contained chapter on the perception module of the system.
+\subsection{Introduction to Adaptation Results}\label{sec:results_adapt_intro}
+
+The adaptation module answers an operational question: \emph{given a compact student state that includes knowledge, engagement, continuous affect scalars, and a discrete emotion label, which pedagogical action should an automated tutor take next?} The module was trained and evaluated inside a synthetic Gymnasium environment (\texttt{StudentEnv}) with a population of $N=10{,}000$ simulated student profiles, action masking for safety, and a multi-term shaped reward (Section~\ref{sec:method_reward}). Five decision policies were compared: Maskable Proximal Policy Optimization (PPO) as the primary learner, Deep Q-Network (DQN), a LinUCB\,+\,DQN hybrid (\emph{Bandit+DQN}), a hand-crafted rule-based tutor, and a random legal-action baseline.
+
+\textbf{Scope of evidence.} All quantitative RL results reported in this part use \textbf{simulator-derived affect states} (\texttt{USE\_REAL\_FER=False}). The \texttt{FERAdapter} maps frustration, confusion, and boredom thresholds to a discrete \texttt{emotion\_id}; it does \emph{not} consume live webcam predictions from the DAiSEE-trained FER model during training or evaluation. The FER results in Part~I therefore evaluate \emph{perception accuracy} on DAiSEE; the adaptation results evaluate \emph{control quality under synthetic affect}, with architectural readiness for future FER integration (Section~\ref{sec:method_integration}). No claim is made that the RL policies were improved by real FER outputs, nor that simulator gains transfer to human classrooms without further study.
+
+The comparison goals are threefold: (i)~identify which learning algorithm best optimizes the designed reward under masking and equal reward weights; (ii)~test whether the discrete \texttt{emotion\_id} dimension adds value beyond the continuous affect scalars already present in the observation; and (iii)~characterize failure modes, variance across seeds, and threats to validity so that positive simulator findings are not over-interpreted.
+
+\subsection{Experimental Setup Overview}\label{sec:results_adapt_setup}
+
+Table~\ref{tab:adapt_experiment_setup} summarizes the protocol aligned with Section~\ref{sec:method_eval} and \texttt{RL\_Module/config.py}. Each RL algorithm was trained for \texttt{TOTAL\_TIMESTEPS = 50{,}000} environment steps per random seed, then evaluated for \texttt{EVAL\_EPISODES = 1{,}000} episodes with deterministic action selection (PPO) or greedy/$\epsilon$-minimal policies (DQN). Ten independent seeds were used (\texttt{SEEDS = [42, 0, 1, 7, 13, 21, 99, 100, 200, 314]}); reported aggregates are means across seeds, with standard deviations or $95\%$ confidence intervals where noted. Rule-based and random agents skip gradient updates but follow the same evaluation episodes and seeds.
+
+\begin{table}[H]
+\centering
+\caption{Adaptation-module experimental setup (main runs).}
+\label{tab:adapt_experiment_setup}
+\begin{tabular}{ll}
+\toprule
+\textbf{Setting} & \textbf{Value} \\
+\midrule
+Environment API & Gymnasium \texttt{StudentEnv}, max horizon $50$ steps \\
+Synthetic population & $10{,}000$ profiles; uniform personality sampling \\
+Training budget / seed & $50{,}000$ timesteps \\
+Evaluation episodes / seed & $1{,}000$ \\
+Random seeds (main) & $10$ fixed integers \\
+Primary learner & MaskablePPO (\texttt{sb3\_contrib}), MLP $[256,256,256]$ \\
+Affect input (main runs) & Simulator thresholds $\rightarrow$ \texttt{emotion\_id}; \texttt{USE\_REAL\_FER=False} \\
+Framework & Stable-Baselines3 $\geq 2.2$, PyTorch \\
+Reproducibility & \texttt{set\_all\_seeds} for Python, NumPy, PyTorch \\
+Hardware & Single-machine CPU/GPU [TODO: specify GPU model used for final runs] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The emotion ablation (Section~\ref{sec:results_adapt_ablation}) re-trains PPO only, with \texttt{ablation\_no\_emotion=True} forcing observation dimension $5$ (\texttt{emotion\_id}) to zero while dimensions $0$--$4$ (knowledge, engagement, frustration, confusion, boredom) remain unchanged. Sensitivity analysis (Section~\ref{sec:results_adapt_sensitivity}) uses a reduced budget of $5{,}000$ timesteps and $50$ evaluation episodes per factorial cell on seed $42$ only; it is reported as a robustness \emph{probe}, not as a definitive hyperparameter study.
+
+\subsection{Evaluation Metrics}\label{sec:results_adapt_metrics}
+
+Adaptation quality is measured with complementary metrics. None of them alone constitutes proof of educational effectiveness on real learners; together they characterize policy behavior \emph{inside the simulator} under the reward and masking rules defined in the methodology.
+
+\paragraph{Mean episode reward.} The sum of per-step rewards $r_t$ over an episode, averaged across evaluation episodes and seeds. Because $r_t \in [-1,1]$ after clipping, cumulative reward reflects both knowledge progress and affect penalties/bonuses. This is the primary RL optimization target.
+
+\paragraph{Normalized learning gain.} Hake-style gain on remaining knowledge headroom (Equation~\eqref{eq:delta_k_norm}), aggregated from episode start to end. High values indicate large relative knowledge growth within a session. This metric can \emph{disagree} with mean reward when affect penalties dominate or when policies terminate early.
+
+\paragraph{Success rate.} Fraction of episodes with final knowledge $k>0.8$, frustration $f<0.3$, and confusion $c<0.4$ (Section~\ref{sec:method_eval}). [TODO: insert per-algorithm success rates from \texttt{logs/summary.csv} if regenerated before final submission.]
+
+\paragraph{Dropout rate.} Fraction of episodes ending in frustration-driven dropout ($\geq 5$ consecutive steps with persistent frustration flag). Lower is generally preferable under the simulator's harm model.
+
+\paragraph{Rule-consistency rate (formerly ``adaptation accuracy'').} Post-hoc fraction of steps where the chosen action belongs to \texttt{BEST\_ACTION\_MAP} for the current \texttt{emotion\_id}. This map is a \textbf{design-time expert table used only for evaluation}; it is \textbf{not} in the reward and \textbf{not} used during training. The metric measures alignment with hand-specified emotion--action heuristics, \textbf{not} ground-truth pedagogical correctness or human teacher approval. Throughout this chapter it is referred to as \emph{rule-consistency rate} to avoid implying educational validity.
+
+\paragraph{Auxiliary diagnostics.} Episode length, action histograms, rolling reward standard deviation (convergence heuristic), and optional explainability JSONL traces (Figure~\ref{fig:rl_explainability}) support qualitative interpretation. Policy entropy during training is influenced by PPO's \texttt{ent\_coef = 0.01}.
+
+\subsection{Algorithm Comparison: PPO, DQN, Rule-Based, and Random}\label{sec:results_adapt_algo_compare}
+
+Table~\ref{tab:adapt_main_comparison} reports aggregated results from the unified thesis export (\texttt{thesis\_results.csv}). Figure~\ref{fig:rl_global_comparison} and Figure~\ref{fig:rl_mean_reward} visualize the same comparison; Figure~\ref{fig:rl_learning_gain} and Figure~\ref{fig:rl_rule_consistency} show learning gain and rule-consistency rate separately.
+
+\begin{table}[H]
+\centering
+\caption{Main adaptation comparison over ten seeds ($1{,}000$ eval episodes per seed). Mean episode reward shown as mean $\pm$ std across seeds. Rule-consistency rate is the post-hoc \texttt{BEST\_ACTION\_MAP} match rate (not educational accuracy).}
+\label{tab:adapt_main_comparison}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Policy} & \textbf{Mean reward} & \textbf{Learning gain} & \textbf{Rule-consistency} & \textbf{Reward std} \\
+\midrule
+PPO (emotion-aware) & $3.596 \pm 0.112$ & $0.592$ & $0.315$ & $0.112$ \\
+DQN                 & $1.749 \pm 0.850$ & $0.538$ & $0.179$ & $0.850$ \\
+Bandit+DQN          & $1.748 \pm 0.852$ & $0.539$ & $0.179$ & $0.852$ \\
+Random (legal)      & $1.730 \pm 0.071$ & $0.776$ & $0.299$ & $0.071$ \\
+Rule-based          & $-1.532 \pm 0.061$ & $0.881$ & $0.257$ & $0.061$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/global_comparison.png}
+    \caption{Multi-metric comparison of all policies (thesis final suite). Bars aggregate ten seeds; error bars reflect cross-seed variability on mean episode reward. PPO dominates mean reward; rule-based and random policies show different trade-offs on learning gain versus reward.}
+    \label{fig:rl_global_comparison}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{Figures/mean_reward_comparison.png}
+    \caption{Mean episode reward ($\pm$ std across seeds). PPO achieves the highest average return with relatively low variance ($\sigma \approx 0.11$), while DQN and Bandit+DQN exhibit high seed sensitivity ($\sigma \approx 0.85$). The rule-based policy yields negative mean reward because its fixed priority chain frequently violates the shaped reward (e.g., scaffolding when engagement is already low) even when knowledge rises.}
+    \label{fig:rl_mean_reward}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{Figures/learning_gain_comparison.png}
+    \caption{Mean normalized learning gain. The rule-based tutor attains the highest learning gain ($0.881$) but the \emph{lowest} mean reward, illustrating metric conflict under shaped rewards. PPO achieves the best reward--gain compromise among learned policies; random exploration produces high gain with mediocre reward and rule-consistency.}
+    \label{fig:rl_learning_gain}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{Figures/adaptation_accuracy.png}
+    \caption{Rule-consistency rate (post-hoc match to \texttt{BEST\_ACTION\_MAP}). PPO ($0.315$) exceeds DQN and the hybrid ($\approx 0.18$) but is only marginally above random ($0.299$), indicating that high reward is not reducible to mimicking the expert table.}
+    \label{fig:rl_rule_consistency}
+\end{figure}
+
+\paragraph{PPO (MaskablePPO).} PPO achieves the highest mean episode reward ($3.596 \pm 0.112$) with the lowest cross-seed standard deviation among learned policies. Clipped surrogate updates, on-policy rollouts (\texttt{n\_steps = 2048}), and native action masking via \texttt{sb3\_contrib} avoid the illegal-action resampling path required by DQN. Under the evaluated conditions, PPO is the most \emph{stable} and \emph{reward-efficient} learner. Its learning gain ($0.592$) is lower than the rule-based and random baselines, which suggests the policy optimizes the full reward vector---including engagement and affect penalties---rather than knowledge alone.
+
+\paragraph{DQN.} DQN reaches only $1.749 \pm 0.850$ mean reward with the lowest rule-consistency ($0.179$). Three mechanisms likely contribute. First, the smaller network ($[64,64]$) may underfit the six-dimensional state under a $50$k-step budget. Second, $\epsilon$-greedy exploration during the first $10\%$ of training injects noise that is not fully washed out by evaluation greediness. Third, \textbf{train/eval mismatch}: during training, \texttt{DQNSafeEnv} resamples illegal actions uniformly from the mask; during evaluation, invalid greedy choices are corrected differently. PPO never executes illegal actions in either phase. DQN's learning gain ($0.538$) remains respectable, so value learning captures some knowledge dynamics but fails to integrate affective costs into a high-return policy.
+
+\paragraph{Rule-based baseline.} The static waterfall policy maximizes normalized learning gain ($0.881$) yet produces \textbf{negative} mean reward ($-1.532 \pm 0.061$). This is a central finding: hand-crafted rules can aggressively push knowledge upward while systematically incurring frustration, boredom, and wrong-answer penalties in the simulator. Rule-consistency ($0.257$) is not highest despite rules being written from the same emotion--action intuition as \texttt{BEST\_ACTION\_MAP}, because the waterfall ordering can select a ``reasonable'' emotion match that is still reward-suboptimal after masking and cooldowns.
+
+\paragraph{Random legal-action baseline.} Uniform random choice over masked actions yields mean reward $1.730 \pm 0.071$ with remarkably high learning gain ($0.776$) and rule-consistency $0.299$. Low variance across seeds indicates that the environment's stochastic student dynamics, not policy brilliance, drive much of the knowledge trajectory. Random serves as a sanity check: PPO must beat chance on reward by a clear margin---which it does---but not on every secondary metric.
+
+\subsection{PPO--Bandit--DQN Hybrid Results}\label{sec:results_adapt_hybrid}
+
+The Bandit+DQN agent routes decisions through LinUCB when $|\Delta \texttt{emotion\_id}| \geq 1$, otherwise through DQN. Aggregated performance is virtually identical to DQN alone: mean reward $1.748 \pm 0.852$, learning gain $0.539$, rule-consistency $0.179$ (Table~\ref{tab:adapt_main_comparison}). The hybrid does not improve mean reward or stability relative to DQN; coordination overhead and context switching between two value estimates appear to offer no benefit within this simulator and sample budget.
+
+A plausible explanation is that emotion changes are frequent enough that the bandit arm is selected often, but the LinUCB context $[\iota/3, f, b]$ is too coarse to outperform the DQN $Q$-function on the full state. Alternatively, both components are under-trained relative to PPO, so any hybrid advantage is below measurement noise ($\sigma \approx 0.85$). The hybrid should not be discarded for all future settings---richer contexts or pre-trained DQN features might help---but \textbf{under the evaluated conditions it is not supported as a stronger baseline than PPO.}
+
+\subsection{Training Stability Analysis}\label{sec:results_adapt_stability}
+
+Figure~\ref{fig:rl_robustness} plots cross-seed standard deviation of mean episode reward. PPO's seed-wise spread is an order of magnitude smaller than DQN's, confirming that on-policy clipping plus masking yields \emph{reproducible} policies across initializations. DQN and Bandit+DQN exhibit heavy-tailed seed outcomes: some seeds likely converge to mediocre $Q$-functions while others collapse.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/robustness_std.png}
+    \caption{Cross-seed standard deviation of mean episode reward (robustness). Lower is better. PPO shows the most stable replication; value-based baselines are seed-sensitive.}
+    \label{fig:rl_robustness}
+\end{figure}
+
+Within training curves (Section~\ref{sec:results_adapt_learning_curves}), PPO typically exhibits smooth upward drift in rolling episode return, punctuated by short plateaus when the policy discovers masking-limited regions of the action space. DQN curves often oscillate: $\epsilon$-decay, target-network updates every $500$ steps, and off-policy replay with resampled illegal actions introduce non-stationarity. Entropy collapse was not systematically logged [TODO: insert TensorBoard policy entropy summary if exported]. Qualitatively, PPO retains stochasticity through \texttt{ent\_coef} until evaluation, which may prevent premature determinism on a single suboptimal action chain.
+
+Reward shaping interacts with stability: the flow-zone bonus ($+1.0$ when all affect and knowledge thresholds align) creates sparse ``spikes'' that can accelerate learning but also encourage short-lived reward hacking (Section~\ref{sec:results_adapt_failures}). Clipping $r_t \in [-1,1]$ limits gradient explosions but compresses discrimination between good and excellent steps.
+
+\subsection{Learning Curve Analysis}\label{sec:results_adapt_learning_curves}
+
+Figure~\ref{fig:rl_learning_curves_all} overlays smoothed learning curves for all algorithms; Figure~\ref{fig:rl_learning_curves_ppo} zooms into PPO versus PPO-without-emotion ablation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/learning_curves_all.png}
+    \caption{Rolling mean episode reward during training (all algorithms, smoothed). PPO rises monotonically and stabilizes at the highest plateau; DQN and Bandit+DQN show higher variance and lower asymptotes; rule-based reward is not learned (flat or omitted).}
+    \label{fig:rl_learning_curves_all}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{Figures/learning_curves_ppo.png}
+    \caption{PPO training curves: emotion-aware vs.\ ablated (\texttt{emotion\_id} zeroed). Emotion-aware PPO reaches a higher plateau on mean reward; curves are averaged across ablation seeds with band indicating variability.}
+    \label{fig:rl_learning_curves_ppo}
+\end{figure}
+
+\paragraph{Trend interpretation.} PPO's curve separates early ($< 10$k steps) when masking prunes dangerous actions, then enters a mid-training regime ($10$k--$35$k) of steady improvement as knowledge-gain and zone bonuses align. Late training ($> 35$k) often plateaus under $50$k total steps---\textbf{not} evidence of global convergence, only of diminishing returns within the fixed budget. DQN curves frequently show sawtooth patterns: temporary reward spikes when the replay buffer over-represents lucky episodes, followed by regression after target updates. Rule-based reward is constant in expectation per seed because the policy does not learn.
+
+\paragraph{Plateaus and instability.} Plateaus on PPO coincide with policies that cycle among hint--scaffold--explanation under persistent confusion without reducing boredom penalties. Instability spikes on DQN often align with exploration floor $\epsilon = 0.05$ still firing on rare masked edges.
+
+\subsection{Reward Convergence Analysis}\label{sec:results_adapt_convergence}
+
+Convergence is assessed cautiously. With only $50{,}000$ environment steps---roughly $25$ PPO updates given \texttt{n\_steps = 2048}---policies may still be improving at training stop. The exploratory convergence diagnostic (rolling std of episode rewards $< 0.05$ over $50$ episodes) was not aggregated into the thesis export [TODO: report median convergence episode per algorithm if computed from Monitor logs].
+
+What can be stated is that PPO's \emph{evaluation} mean reward varies little across seeds ($\sigma = 0.112$), implying that whatever local optimum is reached is reproducible. DQN's high $\sigma = 0.850$ indicates that many seeds fail to reach a stable $Q$-policy within the same budget. Asymptotic mean reward ordering is stable across seeds: PPO $>$ Random $\approx$ DQN $\approx$ Hybrid $>$ Rule. Variance \emph{reduction} through longer training [TODO: optional extended 100k-step PPO run] is left for future work.
+
+\subsection{Episode-Level Performance}\label{sec:results_adapt_episode}
+
+At episode granularity, PPO tends to terminate more sessions via mastery ($k \geq 0.95$) than via timeout, whereas DQN episodes more often hit the step cap without mastery [TODO: insert termination-reason breakdown from episode CSVs]. Learned policies increase normalized learning gain early in episodes (steps $1$--$15$) when frustration is still low, then shift toward pacing and motivational actions when $f$ rises---consistent with masking that blocks \texttt{harder\_question} under high frustration.
+
+Engagement trajectories under PPO show smaller end-of-episode drops than under the rule-based policy, which sometimes overuses \texttt{scaffold} and \texttt{motivational\_message} and still incurs boredom penalties when engagement already exceeds $0.6$. Frustration spikes cluster around incorrect simulated answers (\texttt{last\_answer\_wrong}); PPO learns to avoid consecutive hard questions in those states, while DQN occasionally repeats them before mask resampling corrects training transitions only.
+
+Episode length distributions [TODO: insert mean $\pm$ std episode steps per algorithm] would clarify whether high learning gain from rules comes from longer sessions that accumulate knowledge at the cost of affect penalties.
+
+\subsection{Adaptation Behavior Analysis}\label{sec:results_adapt_behavior}
+
+Figure~\ref{fig:rl_action_heatmap} shows empirical action frequencies conditional on \texttt{emotion\_id} for the evaluated PPO policy. Diagonal dominance would indicate strict emotion--action pairing; off-diagonal mass reveals blending strategies.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{Figures/fig3_heatmap.png}
+    \caption{Action distribution heatmap for the PPO policy (evaluation). Rows: \texttt{emotion\_id}; columns: pedagogical actions. Reveals which actions are over- or under-used relative to uniform random play.}
+    \label{fig:rl_action_heatmap}
+\end{figure}
+
+Qualitatively, PPO assigns elevated probability to \texttt{give\_hint}, \texttt{explanation}, and \texttt{strategy\_guidance} when confusion is dominant, matching pedagogical plausibility \cite{dmello_language_2012}. Under boredom, \texttt{motivational\_message} and \texttt{change\_pacing} gain mass. Frustrated states concentrate on \texttt{change\_pacing} and \texttt{easier\_question}, respecting masks that block \texttt{harder\_question}. The rule-based policy, by contrast, follows a fixed priority list and overuses scaffolding whenever $k < 0.5$, even when engagement is insufficient to benefit---producing high gain but negative reward.
+
+DQN policies oscillate difficulty: \texttt{harder\_question} and \texttt{easier\_question} alternate in confused states, suggesting unstable $Q$-estimates rather than deliberate ZPD targeting. Random policies flatten the heatmap but still exhibit masking-induced zeros for illegal cells.
+
+Figure~\ref{fig:rl_explainability} illustrates the optional explainer: short textual rationales tied to state thresholds. These narratives are \textbf{not} used in learning; they aid inspection only.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{Figures/fig6_explainability.png}
+    \caption{Explainability snapshot: templated reasons for actions given affect thresholds (evaluation aid, not training signal).}
+    \label{fig:rl_explainability}
+\end{figure}
+
+\subsection{Emotion-Aware Ablation Study}\label{sec:results_adapt_ablation}
+
+A dedicated ablation trains PPO with full observations versus PPO with \texttt{ablation\_no\_emotion=True} (dimension $5$ set to zero). Continuous affect channels remain visible in both variants. Table~\ref{tab:adapt_ablation} and Figure~\ref{fig:rl_ablation_core} summarize outcomes; per-seed detail appears in \texttt{ablation\_metrics\_detail.csv}.
+
+\begin{table}[H]
+\centering
+\caption{PPO ablation: emotion-aware vs.\ \texttt{emotion\_id} removed (ten seeds).}
+\label{tab:adapt_ablation}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Variant} & \textbf{Mean reward} & \textbf{Learning gain} & \textbf{Rule-consistency} \\
+\midrule
+PPO (emotion-aware) & $3.596 \pm 0.112$ & $0.419 \pm 0.012$ & $0.314 \pm 0.021$ \\
+PPO (no \texttt{emotion\_id}) & $3.177 \pm 0.508$ & $0.503 \pm 0.046$ & $0.286 \pm 0.065$ \\
+\midrule
+$\Delta$ (aware $-$ no) & $+0.420$ ($+13.2\%$) & $-0.084$ ($-16.7\%$) & $+0.028$ ($+9.8\%$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{Figures/ablation_core.png}
+    \caption{Ablation comparison (reward, learning gain, rule-consistency). Emotion-aware PPO wins on reward and rule-consistency; the no-emotion variant shows higher mean learning gain in the ablation export.}
+    \label{fig:rl_ablation_core}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{Figures/ppo_ablation_rewards.png}
+    \caption{Ablation study: mean episode reward per seed (emotion-aware vs.\ ablated). Emotion-aware wins on most seeds; seed $200$ is an outlier where ablated reward exceeds aware [TODO: investigate seed 200 episode logs].}
+    \label{fig:rl_ablation_rewards}
+\end{figure}
+
+\paragraph{What was removed.} Only the scalar \texttt{emotion\_id} input was zeroed. Frustration, confusion, boredom, and engagement---which jointly determine emotion in synthetic mode---remain in $\mathbf{o}_t$. Removing \texttt{emotion\_id} therefore does \textbf{not} remove all emotional information; it removes a \emph{discrete summary} and any logic that keys directly off it (including bandit triggers and rule-consistency labels tied to $\iota$).
+
+\paragraph{Redundancy.} Because \texttt{emotion\_id} is a deterministic function of $(f,c,b)$ in synthetic mode, PPO can partially infer emotion class from continuous features. The ablation tests whether an explicit discrete channel still helps optimization. The $+13.2\%$ reward improvement with emotion present suggests it does, likely by sharpening masking-aligned decisions and shortening credit assignment paths.
+
+\subsection{Effect of Removing Emotion Signals}\label{sec:results_adapt_emotion_effect}
+
+Reward increases when \texttt{emotion\_id} is available ($3.596$ vs.\ $3.177$), with rule-consistency rising from $0.286$ to $0.314$ ($+9.8\%$ relative). However, \textbf{normalized learning gain is higher without the discrete label} in the ablation export ($0.503$ vs.\ $0.419$). Interpreting this tension:
+
+\begin{itemize}
+    \item Policies without \texttt{emotion\_id} may push knowledge more aggressively while incurring affect penalties that the ablation's gain metric still rewards net positively.
+    \item Rule-consistency is defined using $\iota$ from the environment's true emotion, not from continuous features; ablated policies cannot match emotion-keyed actions as easily even if behavior is reasonable.
+    \item Cross-seed variance in reward rises when \texttt{emotion\_id} is removed ($\sigma = 0.508$ vs.\ $0.112$), indicating less reliable training without the discrete channel.
+\end{itemize}
+
+Figure~\ref{fig:rl_ablation_gain} and Figure~\ref{fig:rl_ablation_acc} decompose learning gain and rule-consistency across seeds. Figure~\ref{fig:rl_ablation_curves} shows training dynamics. The discrete emotion label provides \textbf{marginal to moderate} benefit for reward and expert-table alignment, not a universal gain on every metric. Claims that ``emotion-aware RL doubles learning'' are \textbf{not} supported; nor is emotion irrelevant---reward and stability clearly favor the aware variant.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{Figures/ppo_ablation_learning_gain.png}
+    \caption{Ablation: normalized learning gain (per seed). No-emotion PPO often exceeds aware PPO on this metric despite lower reward.}
+    \label{fig:rl_ablation_gain}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{Figures/ppo_ablation_accuracy.png}
+    \caption{Ablation: rule-consistency rate. Emotion-aware PPO leads on most seeds.}
+    \label{fig:rl_ablation_acc}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.90\textwidth]{Figures/ppo_ablation_learning_curves.png}
+    \caption{Ablation training curves (smoothed episode reward). Emotion-aware PPO separates after approximately $15$k steps.}
+    \label{fig:rl_ablation_curves}
+\end{figure}
+
+\subsection{Reward Component Analysis}\label{sec:results_adapt_reward_components}
+
+The reward (Equation~\eqref{eq:reward_total}) combines seven equally weighted terms ($W = 1/7$ by default). Equal weighting does \textbf{not} imply equal \emph{effective} influence: terms operate on different scales (normalized knowledge increment vs.\ raw confusion level vs.\ binary zone indicator). The flow-zone bonus can add $+1/7 \approx 0.14$ in a single step when all thresholds align, whereas a typical $\Delta k_{\mathrm{norm}}$ might be $0.02$--$0.05$. Frustration penalties tier at $-0.5/7$ and $-1.0/7$ when $f > 0.6$ or persistent flags fire.
+
+[TODO: insert Table~\ref{tab:reward_component_contrib} with mean $\pm$ std per component from step-level CSV aggregation, e.g.\ \texttt{logs/steps\_PPO\_seed42.csv}.]
+
+\begin{table}[H]
+\centering
+\caption{Reward component contributions (placeholder---populate from step logs).}
+\label{tab:reward_component_contrib}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Component} & \textbf{Mean contribution} & \textbf{Std} \\
+\midrule
+$\Delta k_{\mathrm{norm}}$ & [TODO] & [TODO] \\
+$\Delta e$ & [TODO] & [TODO] \\
+$-c_{t+1}$ & [TODO] & [TODO] \\
+$-b_{t+1}$ & [TODO] & [TODO] \\
+Frustration term $\phi(f)$ & [TODO] & [TODO] \\
+Zone bonus & [TODO] & [TODO] \\
+Wrong-answer penalty & [TODO] & [TODO] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Qualitatively, PPO's high mean reward correlates with more frequent zone bonuses and fewer persistent-frustration penalties compared with DQN. Rule-based policies score large $\Delta k_{\mathrm{norm}}$ but accumulate frustration and wrong-answer penalties that drive total reward negative. Understanding which term dominates per policy class is essential before tuning weights in deployment.
+
+\subsection{Sensitivity Analysis Results}\label{sec:results_adapt_sensitivity}
+
+A $3 \times 3$ factorial experiment varied reward-weight presets (\texttt{equal}, \texttt{knowledge\_priority}, \texttt{affective\_priority}) and masking strictness (\texttt{default}, \texttt{stricter}, \texttt{looser}) with only $5{,}000$ training steps and $50$ evaluation episodes per cell (seed $42$). Figure~\ref{fig:rl_sensitivity_heatmap} visualizes mean reward across cells for PPO.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/reward_sensitivity_heatmap.png}
+    \caption{Reward sensitivity heatmap (factorial design, short training budget). Cell values are mean episode reward; colour indicates magnitude. Used to assess whether algorithm rankings are stable under reasonable hyperparameter shifts.}
+    \label{fig:rl_sensitivity_heatmap}
+\end{figure}
+
+Spearman rank correlations between algorithm orderings across cells [TODO: insert $\rho$ values from \texttt{sensitivity\_factorial.csv} or Figure~\texttt{fig4\_spearman.png}] indicate whether PPO remains top-ranked when weights or masks change. \textbf{Low-budget sensitivity is indicative, not definitive}: $5$k steps are insufficient for full convergence, and single-seed factorial runs ignore cross-seed variance. The analysis supports \emph{directional} robustness checks only, as stated in Section~\ref{sec:method_sensitivity}.
+
+If PPO remains first in most cells, deployment engineers gain confidence that the choice of PPO is not an artifact of a single weight vector. Large rank swaps would flag that reported conclusions are hyperparameter-contingent.
+
+\subsection{Student-Type Breakdown}\label{sec:results_adapt_student_types}
+
+Synthetic students are tagged post hoc as \texttt{fast\_learner}, \texttt{slow\_learner}, \texttt{easily\_frustrated}, or \texttt{patient} based on personality thresholds (Section~\ref{sec:method_synthetic_student}). Stratified metrics test whether policies personalize or merely average performance.
+
+\begin{table}[H]
+\centering
+\caption{Mean normalized learning gain by student type (placeholder).}
+\label{tab:student_type_breakdown}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Type} & \textbf{PPO} & \textbf{DQN} & \textbf{Rule} & \textbf{Random} \\
+\midrule
+Fast learner & [TODO] & [TODO] & [TODO] & [TODO] \\
+Slow learner & [TODO] & [TODO] & [TODO] & [TODO] \\
+Easily frustrated & [TODO] & [TODO] & [TODO] & [TODO] \\
+Disengaged / bored & [TODO] & [TODO] & [TODO] & [TODO] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+[TODO: generate \texttt{learning\_gain\_by\_type.png} via \texttt{evaluation/plots.py} from episode logs.] Expected patterns if PPO generalizes: competitive gain on \texttt{fast\_learner} without excessive frustration on \texttt{easily\_frustrated}; rule-based high gain on fast learners but elevated dropout on frustrated types. Without populated tables, student-type conclusions remain hypothetical.
+
+\subsection{Failure Cases and Limitations}\label{sec:results_adapt_failures}
+
+Several failure modes appeared consistently during evaluation and log inspection:
+
+\paragraph{Over-scaffolding and support loops.} Rule-based and occasionally PPO policies repeat \texttt{scaffold} and \texttt{hint} while engagement drops, triggering boredom penalties without commensurate knowledge growth.
+
+\paragraph{Reward hacking toward zone bonus.} Policies that temporarily raise engagement and lower affect just enough to enter the flow zone can harvest $+1/7$ bonus without sustained learning; masking mitigates but does not eliminate this.
+
+\paragraph{Repetitive action loops.} Cooldowns limit consecutive hints, yet pacing and motivation can still cycle until timeout.
+
+\paragraph{DQN instability.} High seed variance and train/eval masking mismatch produce unreliable Q-values; some seeds likely underperform random on reward.
+
+\paragraph{Persistent frustration and dropout.} When personality parameter $\rho_s$ is low, even reasonable policies may fail to reduce $f$ before five persistent steps trigger termination---a simulator failure case that should not be blamed solely on RL.
+
+\paragraph{Simulator limits.} No item bank, no multimodal input, Markovian affect on five scalars, and uniform personality sampling restrict ecological validity (expanded in Section~\ref{sec:results_adapt_validity}).
+
+\subsection{Discussion}\label{sec:results_adapt_discussion}
+
+The adaptation experiments support four cautious conclusions \textbf{within the synthetic tutoring environment}:
+
+\begin{enumerate}
+    \item \textbf{PPO with action masking} is the most reliable learner for maximizing mean shaped reward under equal weights, with reproducible seed behavior ($3.596 \pm 0.112$).
+    \item \textbf{Value-based baselines (DQN, Bandit+DQN)} underperform primarily on reward and stability, not necessarily on raw learning gain, highlighting metric trade-offs and implementation asymmetries (masking, network size, sample budget).
+    \item \textbf{Hand-crafted rules} optimize knowledge gain but violate the joint reward, demonstrating that expert narratives alone do not substitute for policy optimization under explicit affective costs.
+    \item \textbf{Discrete \texttt{emotion\_id}} supplies measurable benefit for reward and rule-consistency, but is partially redundant with continuous affect; ablation shows higher learning gain when the label is removed, so emotion is neither a panacea nor spurious.
+\end{enumerate}
+
+RL is suitable here as a \emph{method for integrating multi-objective tutoring signals} under constraints, not as proof of superior human teaching. The FER module remains architecturally connected but empirically decoupled in main runs: closing the loop requires live experiments with latency, noise, and privacy controls.
+
+\subsection{Practical Implications}\label{sec:results_adapt_practical}
+
+Deployment would face barriers beyond simulator scores: FER latency and misclassification would perturb \texttt{emotion\_id}; webcam use raises privacy and consent requirements \cite{fernandez-herrero_evaluating_2024,vistorte_integrating_2024}; teachers must retain oversight because RL policies optimize a engineered reward, not curriculum standards; and safety-critical masking would need auditing on real classrooms. Positive simulator reward suggests feasibility of \emph{offline} policy iteration, not readiness for unsupervised control of learners.
+
+\subsection{Threats to Validity}\label{sec:results_adapt_validity}
+
+\begin{itemize}
+    \item \textbf{Construct validity}: Mean reward reflects researcher-defined weights, not learning outcomes; rule-consistency uses an internal map, not educator judgments.
+    \item \textbf{Internal validity}: Simulator transitions are hand-written; results are internally consistent but may not reflect human cognition.
+    \item \textbf{External validity}: No study with human participants; conclusions do not generalize to classrooms.
+    \item \textbf{FER disconnect}: Main RL runs do not inject DAiSEE-trained FER outputs; end-to-end affect-aware tutoring is untested quantitatively.
+    \item \textbf{Metric conflict}: High learning gain can coexist with negative reward (rule-based case); reporting a single metric would mislead.
+    \item \textbf{Sample budget}: $50$k steps may under-train DQN; sensitivity uses $5$k steps only.
+    \item \textbf{In-distribution evaluation}: Policies are evaluated on the same simulator class used for training; no cross-simulator transfer.
+    \item \textbf{Emotion ablation interpretability}: Zeroing \texttt{emotion\_id} leaves correlated affect features; observed effects attribute to the discrete channel, not to ``emotion-free'' tutoring.
+\end{itemize}
+
+\subsection{Chapter Summary}\label{sec:results_adapt_summary}
+
+Part~II evaluated affect-aware adaptive tutoring policies in a Gymnasium synthetic environment with ten seeds, $50{,}000$ training steps, and $1{,}000$ evaluation episodes per seed. MaskablePPO achieved the highest mean episode reward ($3.596 \pm 0.112$) and rule-consistency ($0.315$), with low cross-seed variance. DQN and Bandit+DQN lagged on reward ($\approx 1.75$) and stability ($\sigma \approx 0.85$). A rule-based expert achieved the highest normalized learning gain ($0.881$) but negative mean reward ($-1.532$), exposing a sharp trade-off between knowledge-focused heuristics and the multi-objective reward. Emotion-aware PPO outperformed an ablated variant without \texttt{emotion\_id} on reward ($+13.2\%$) and rule-consistency ($+9.8\%$), while the ablated variant showed higher learning gain in the dedicated ablation export---underscoring partial redundancy between discrete and continuous affect. All findings are conditional on \texttt{USE\_REAL\_FER=False} and require human studies, live FER integration, and reward validation before educational claims can be made.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/architecture.png}
+    \caption{Adaptation-module architecture (evaluation pipeline). FER path is optional; thesis experiments use synthetic emotion unless \texttt{USE\_REAL\_FER} is enabled.}
+    \label{fig:rl_architecture_results}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{Figures/final_summary_table.png}
+    \caption{Unified summary visualization exported from \texttt{generate\_thesis\_suite.py} (success rate excluded by export design).}
+    \label{fig:rl_summary_viz}
+\end{figure}

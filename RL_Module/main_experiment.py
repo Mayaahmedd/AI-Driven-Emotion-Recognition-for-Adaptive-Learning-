@@ -1,5 +1,5 @@
 """
-Main experiment runner: train + evaluate all 6 algorithms x 10 seeds.
+Main experiment runner: train + evaluate all 5 algorithms x 10 seeds.
 """
 
 from __future__ import annotations
@@ -21,7 +21,6 @@ from RL_Module import config
 from RL_Module.agents.bandit_dqn import BanditDQNAgent
 from RL_Module.agents.dqn_agent import DQNAgent, make_env
 from RL_Module.agents.ppo_agent import PPOAgent, make_masked_env
-from RL_Module.agents.ppo_dqn_hybrid import PPODQNHybridAgent
 from RL_Module.agents.random_agent import RandomAgent
 from RL_Module.agents.rule_based import RuleBasedAgent
 from RL_Module.environment.student_env import StudentEnv
@@ -33,16 +32,14 @@ from RL_Module.logging_utils.csv_logger import SummaryWriter
 AGENT_REGISTRY = {
     "PPO": PPOAgent,
     "DQN": DQNAgent,
-    "PPO_DQN": PPODQNHybridAgent,
     "Bandit_DQN": BanditDQNAgent,
     "Rule": RuleBasedAgent,
     "Random": RandomAgent,
 }
 
-ALGO_ORDER = ["PPO", "DQN", "PPO_DQN", "Bandit_DQN", "Rule", "Random"]
+ALGO_ORDER = ["PPO", "DQN", "Bandit_DQN", "Rule", "Random"]
 
 AGENT_ALIASES = {
-    "PPO+DQN": "PPO_DQN",
     "Bandit+DQN": "Bandit_DQN",
 }
 
@@ -66,13 +63,6 @@ def train_agent(algorithm: str, seed: int) -> None:
 
     if algorithm == "PPO":
         env = make_masked_env(seed, algo_tag=algorithm)
-    elif algorithm == "PPO_DQN":
-        env = make_masked_env(seed, algo_tag=algorithm)
-        agent.train(env, config.TRAINING_TIMESTEPS, seed)
-        agent.save(str(model_path(algorithm, seed)))
-        env.close()
-        print(f"[train] {algorithm} seed={seed} -> {model_path(algorithm, seed)}")
-        return
     else:
         env = make_env(seed, algo_tag=algorithm)
 
@@ -88,11 +78,7 @@ def load_agent(algorithm: str, seed: int):
     agent = cls() if algorithm != "Random" else RandomAgent(seed)
     path = model_path(algorithm, seed)
     if agent.needs_training():
-        if algorithm == "PPO_DQN":
-            ppo_path = Path(f"{path}_ppo.zip")
-            if ppo_path.exists() or Path(f"{path}_ppo").exists():
-                agent.load(str(path))
-        elif path.exists() or Path(f"{path}.zip").exists():
+        if path.exists() or Path(f"{path}.zip").exists():
             agent.load(str(path))
     return agent
 
