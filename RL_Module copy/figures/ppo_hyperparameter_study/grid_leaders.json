@@ -1,0 +1,49 @@
+{
+  "best_reward": {
+    "config_id": "b25ae03c7afc",
+    "learning_rate": 0.001,
+    "batch_size": 256,
+    "n_steps": 512,
+    "clip_range": 0.2,
+    "ent_coef": 0.001,
+    "n_epochs": 5,
+    "mean_episode_reward": 3.6652760302500615,
+    "success_rate": 0.165,
+    "learning_gain": 0.46307148244195845,
+    "final_knowledge": 0.62594241023939,
+    "adaptation_accuracy": 0.5454713989483037,
+    "balanced_score": 1.531469042201842
+  },
+  "best_mastery": {
+    "config_id": "48c5abe0b1fc",
+    "learning_rate": 0.0003,
+    "batch_size": 128,
+    "n_steps": 512,
+    "clip_range": 0.2,
+    "ent_coef": 0.1,
+    "n_epochs": 3,
+    "mean_episode_reward": 3.347254513013886,
+    "success_rate": 0.417,
+    "learning_gain": 0.6102059124701068,
+    "final_knowledge": 0.7251629570844117,
+    "adaptation_accuracy": 0.666739041993549,
+    "balanced_score": 3.202391602857979
+  },
+  "best_balanced": {
+    "config_id": "48c5abe0b1fc",
+    "learning_rate": 0.0003,
+    "batch_size": 128,
+    "n_steps": 512,
+    "clip_range": 0.2,
+    "ent_coef": 0.1,
+    "n_epochs": 3,
+    "mean_episode_reward": 3.347254513013886,
+    "success_rate": 0.417,
+    "learning_gain": 0.6102059124701068,
+    "final_knowledge": 0.7251629570844117,
+    "adaptation_accuracy": 0.666739041993549,
+    "balanced_score": 3.202391602857979
+  },
+  "n_configs": 2304,
+  "screening_seed": 42
+}

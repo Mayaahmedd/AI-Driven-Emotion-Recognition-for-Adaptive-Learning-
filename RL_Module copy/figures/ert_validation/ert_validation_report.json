@@ -1,0 +1,329 @@
+{
+  "seeds": [
+    42,
+    7,
+    13,
+    21,
+    99,
+    314
+  ],
+  "eval_episodes_per_seed": 500,
+  "per_seed": [
+    {
+      "seed": 42,
+      "total_steps": 24987,
+      "action_counts": {
+        "encouragement": 3408,
+        "scaffold": 6490,
+        "hint": 5660,
+        "simplify_problem": 640,
+        "harder_problem": 2753,
+        "explanation": 1505,
+        "break": 1371,
+        "no_action": 3160
+      },
+      "action_frequencies": {
+        "hint": 0.2265,
+        "scaffold": 0.2597,
+        "encouragement": 0.1364,
+        "simplify_problem": 0.0256,
+        "harder_problem": 0.1102,
+        "break": 0.0549,
+        "explanation": 0.0602,
+        "no_action": 0.1265
+      },
+      "shannon_entropy": 1.8851,
+      "unique_state_bins": 21025,
+      "rule_frequencies": {
+        "T2_mod_frustration_encourage": 0.1943,
+        "fallback_hint": 0.1897,
+        "T5_flow_no_action": 0.1265,
+        "T1_mod_confusion_scaffold": 0.1161,
+        "T4_low_knowledge_scaffold": 0.1038,
+        "T3_boredom_harder": 0.0844,
+        "T1_high_confusion_explain": 0.0629,
+        "T0_break": 0.0549,
+        "T2_high_frustration_simplify": 0.0301,
+        "T4_high_knowledge_harder": 0.0257,
+        "T6_low_engagement_encourage": 0.0115
+      },
+      "no_action_freq": 0.1265
+    },
+    {
+      "seed": 7,
+      "total_steps": 24935,
+      "action_counts": {
+        "scaffold": 6524,
+        "harder_problem": 2680,
+        "encouragement": 3394,
+        "no_action": 3171,
+        "hint": 5631,
+        "explanation": 1570,
+        "break": 1334,
+        "simplify_problem": 631
+      },
+      "action_frequencies": {
+        "hint": 0.2258,
+        "scaffold": 0.2616,
+        "encouragement": 0.1361,
+        "simplify_problem": 0.0253,
+        "harder_problem": 0.1075,
+        "break": 0.0535,
+        "explanation": 0.063,
+        "no_action": 0.1272
+      },
+      "shannon_entropy": 1.8841,
+      "unique_state_bins": 21154,
+      "rule_frequencies": {
+        "T2_mod_frustration_encourage": 0.1935,
+        "fallback_hint": 0.1857,
+        "T5_flow_no_action": 0.1272,
+        "T1_mod_confusion_scaffold": 0.1168,
+        "T4_low_knowledge_scaffold": 0.1098,
+        "T3_boredom_harder": 0.0839,
+        "T1_high_confusion_explain": 0.0648,
+        "T0_break": 0.0535,
+        "T2_high_frustration_simplify": 0.0302,
+        "T4_high_knowledge_harder": 0.0236,
+        "T6_low_engagement_encourage": 0.0109
+      },
+      "no_action_freq": 0.1272
+    },
+    {
+      "seed": 13,
+      "total_steps": 24993,
+      "action_counts": {
+        "encouragement": 3411,
+        "harder_problem": 2621,
+        "explanation": 1687,
+        "hint": 5586,
+        "scaffold": 6520,
+        "break": 1457,
+        "simplify_problem": 666,
+        "no_action": 3045
+      },
+      "action_frequencies": {
+        "hint": 0.2235,
+        "scaffold": 0.2609,
+        "encouragement": 0.1365,
+        "simplify_problem": 0.0266,
+        "harder_problem": 0.1049,
+        "break": 0.0583,
+        "explanation": 0.0675,
+        "no_action": 0.1218
+      },
+      "shannon_entropy": 1.8944,
+      "unique_state_bins": 21147,
+      "rule_frequencies": {
+        "T2_mod_frustration_encourage": 0.1925,
+        "fallback_hint": 0.1821,
+        "T5_flow_no_action": 0.1218,
+        "T1_mod_confusion_scaffold": 0.1182,
+        "T4_low_knowledge_scaffold": 0.1097,
+        "T3_boredom_harder": 0.0846,
+        "T1_high_confusion_explain": 0.0697,
+        "T0_break": 0.0583,
+        "T2_high_frustration_simplify": 0.031,
+        "T4_high_knowledge_harder": 0.0202,
+        "T6_low_engagement_encourage": 0.0117
+      },
+      "no_action_freq": 0.1218
+    },
+    {
+      "seed": 21,
+      "total_steps": 24960,
+      "action_counts": {
+        "harder_problem": 2689,
+        "explanation": 1623,
+        "encouragement": 3402,
+        "scaffold": 6505,
+        "hint": 5486,
+        "break": 1432,
+        "simplify_problem": 665,
+        "no_action": 3158
+      },
+      "action_frequencies": {
+        "hint": 0.2198,
+        "scaffold": 0.2606,
+        "encouragement": 0.1363,
+        "simplify_problem": 0.0266,
+        "harder_problem": 0.1077,
+        "break": 0.0574,
+        "explanation": 0.065,
+        "no_action": 0.1265
+      },
+      "shannon_entropy": 1.895,
+      "unique_state_bins": 21302,
+      "rule_frequencies": {
+        "T2_mod_frustration_encourage": 0.194,
+        "fallback_hint": 0.1762,
+        "T5_flow_no_action": 0.1265,
+        "T1_mod_confusion_scaffold": 0.1214,
+        "T4_low_knowledge_scaffold": 0.109,
+        "T3_boredom_harder": 0.0841,
+        "T1_high_confusion_explain": 0.0667,
+        "T0_break": 0.0574,
+        "T2_high_frustration_simplify": 0.031,
+        "T4_high_knowledge_harder": 0.0236,
+        "T6_low_engagement_encourage": 0.0102
+      },
+      "no_action_freq": 0.1265
+    },
+    {
+      "seed": 99,
+      "total_steps": 24977,
+      "action_counts": {
+        "scaffold": 6476,
+        "explanation": 1639,
+        "hint": 5530,
+        "encouragement": 3422,
+        "no_action": 3231,
+        "harder_problem": 2619,
+        "break": 1418,
+        "simplify_problem": 642
+      },
+      "action_frequencies": {
+        "hint": 0.2214,
+        "scaffold": 0.2593,
+        "encouragement": 0.137,
+        "simplify_problem": 0.0257,
+        "harder_problem": 0.1049,
+        "break": 0.0568,
+        "explanation": 0.0656,
+        "no_action": 0.1294
+      },
+      "shannon_entropy": 1.8929,
+      "unique_state_bins": 21219,
+      "rule_frequencies": {
+        "T2_mod_frustration_encourage": 0.1962,
+        "fallback_hint": 0.1659,
+        "T5_flow_no_action": 0.1294,
+        "T4_low_knowledge_scaffold": 0.1225,
+        "T1_mod_confusion_scaffold": 0.1163,
+        "T3_boredom_harder": 0.0842,
+        "T1_high_confusion_explain": 0.0679,
+        "T0_break": 0.0568,
+        "T2_high_frustration_simplify": 0.0306,
+        "T4_high_knowledge_harder": 0.0206,
+        "T6_low_engagement_encourage": 0.0095
+      },
+      "no_action_freq": 0.1294
+    },
+    {
+      "seed": 314,
+      "total_steps": 24934,
+      "action_counts": {
+        "scaffold": 6534,
+        "hint": 5563,
+        "encouragement": 3349,
+        "harder_problem": 2647,
+        "break": 1373,
+        "explanation": 1615,
+        "simplify_problem": 648,
+        "no_action": 3205
+      },
+      "action_frequencies": {
+        "hint": 0.2231,
+        "scaffold": 0.2621,
+        "encouragement": 0.1343,
+        "simplify_problem": 0.026,
+        "harder_problem": 0.1062,
+        "break": 0.0551,
+        "explanation": 0.0648,
+        "no_action": 0.1285
+      },
+      "shannon_entropy": 1.8889,
+      "unique_state_bins": 21167,
+      "rule_frequencies": {
+        "T2_mod_frustration_encourage": 0.193,
+        "fallback_hint": 0.1737,
+        "T5_flow_no_action": 0.1285,
+        "T4_low_knowledge_scaffold": 0.1184,
+        "T1_mod_confusion_scaffold": 0.1165,
+        "T3_boredom_harder": 0.0845,
+        "T1_high_confusion_explain": 0.0673,
+        "T0_break": 0.0551,
+        "T2_high_frustration_simplify": 0.0307,
+        "T4_high_knowledge_harder": 0.0217,
+        "T6_low_engagement_encourage": 0.0107
+      },
+      "no_action_freq": 0.1285
+    }
+  ],
+  "aggregate_action_frequencies": {
+    "hint": {
+      "mean": 0.2234,
+      "std": 0.0025,
+      "min": 0.2198,
+      "max": 0.2265
+    },
+    "scaffold": {
+      "mean": 0.2607,
+      "std": 0.0011,
+      "min": 0.2593,
+      "max": 0.2621
+    },
+    "encouragement": {
+      "mean": 0.1361,
+      "std": 0.0009,
+      "min": 0.1343,
+      "max": 0.137
+    },
+    "simplify_problem": {
+      "mean": 0.026,
+      "std": 0.0005,
+      "min": 0.0253,
+      "max": 0.0266
+    },
+    "harder_problem": {
+      "mean": 0.1069,
+      "std": 0.002,
+      "min": 0.1049,
+      "max": 0.1102
+    },
+    "break": {
+      "mean": 0.056,
+      "std": 0.0018,
+      "min": 0.0535,
+      "max": 0.0583
+    },
+    "explanation": {
+      "mean": 0.0644,
+      "std": 0.0025,
+      "min": 0.0602,
+      "max": 0.0675
+    },
+    "no_action": {
+      "mean": 0.1267,
+      "std": 0.0026,
+      "min": 0.1218,
+      "max": 0.1294
+    }
+  },
+  "target_action_checks": {
+    "explanation": {
+      "mean_freq": 0.0644,
+      "in_5_10_pct": true,
+      "in_5_20_pct": true
+    },
+    "simplify_problem": {
+      "mean_freq": 0.026,
+      "in_5_10_pct": false,
+      "in_5_20_pct": false
+    },
+    "break": {
+      "mean_freq": 0.056,
+      "in_5_10_pct": true,
+      "in_5_20_pct": true
+    },
+    "harder_problem": {
+      "mean_freq": 0.1069,
+      "in_5_10_pct": false,
+      "in_5_20_pct": true
+    }
+  },
+  "no_action_mean": 0.1267,
+  "no_action_below_20pct": true,
+  "all_actions_reachable": true,
+  "mean_shannon_entropy": 1.8901
+}

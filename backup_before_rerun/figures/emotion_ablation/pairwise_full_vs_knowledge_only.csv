@@ -1,0 +1,22 @@
+algorithm,comparison,metric,mean_full,mean_knowledge_only,delta_full_minus_kno,std_full,std_kno,t,p_raw,cohens_d,p_holm
+Random,full_emotion vs knowledge_only,learning_gain,0.3825,0.3825,0.0,0.0085,0.0085,0.0,1.0,0.0,1.0
+Random,full_emotion vs knowledge_only,final_knowledge,0.5748,0.5748,0.0,0.0055,0.0055,0.0,1.0,0.0,1.0
+Random,full_emotion vs knowledge_only,success_rate,0.0817,0.0817,0.0,0.0098,0.0098,0.0,1.0,0.0,1.0
+Random,full_emotion vs knowledge_only,adaptation_accuracy,0.288,0.288,0.0,0.003,0.003,0.0,1.0,0.0,1.0
+Random,full_emotion vs knowledge_only,emotional_wellbeing,0.3696,0.3696,0.0,0.0029,0.0029,0.0,1.0,0.0,1.0
+Random,full_emotion vs knowledge_only,mean_episode_reward,2.7049,2.7049,0.0,0.0403,0.0403,0.0,1.0,0.0,1.0
+Random,full_emotion vs knowledge_only,dropout_rate,0.0,0.0,0.0,0.0,0.0,,,0.0,1.0
+ERT,full_emotion vs knowledge_only,learning_gain,0.4108,0.444,-0.0332,0.0112,0.01,-5.4064,0.000313,-3.1214,0.000938
+ERT,full_emotion vs knowledge_only,final_knowledge,0.5943,0.6169,-0.0226,0.0073,0.0069,-5.5155,0.00026,-3.1844,0.00104
+ERT,full_emotion vs knowledge_only,success_rate,0.1157,0.1497,-0.034,0.0075,0.0097,-6.797,6.3e-05,-3.9242,0.000316
+ERT,full_emotion vs knowledge_only,adaptation_accuracy,0.3732,0.5234,-0.1501,0.004,0.0013,-87.5696,0.0,-50.5583,0.0
+ERT,full_emotion vs knowledge_only,emotional_wellbeing,0.4018,0.4082,-0.0064,0.0023,0.002,-5.1203,0.000483,-2.9562,0.000966
+ERT,full_emotion vs knowledge_only,mean_episode_reward,3.1242,3.2436,-0.1194,0.0206,0.0201,-10.1727,1e-06,-5.8732,8e-06
+ERT,full_emotion vs knowledge_only,dropout_rate,0.0,0.0,0.0,0.0,0.0,,,0.0,1.0
+DQN,full_emotion vs knowledge_only,learning_gain,0.4362,0.3908,0.0455,0.1994,0.1541,0.4419,0.668548,0.2551,1.0
+DQN,full_emotion vs knowledge_only,final_knowledge,0.6123,0.5812,0.0312,0.1367,0.1065,0.4405,0.66947,0.2543,1.0
+DQN,full_emotion vs knowledge_only,success_rate,0.1997,0.1233,0.0763,0.2285,0.2054,0.6086,0.556503,0.3514,1.0
+DQN,full_emotion vs knowledge_only,adaptation_accuracy,0.5455,0.3183,0.2272,0.3214,0.1826,1.5054,0.171002,0.8691,1.0
+DQN,full_emotion vs knowledge_only,emotional_wellbeing,0.3887,0.377,0.0117,0.0208,0.0469,0.5591,0.593736,0.3228,1.0
+DQN,full_emotion vs knowledge_only,mean_episode_reward,2.9853,2.8138,0.1715,0.1476,0.6018,0.6781,0.524724,0.3915,1.0
+DQN,full_emotion vs knowledge_only,dropout_rate,0.0,0.0,0.0,0.0,0.0,,,0.0,1.0

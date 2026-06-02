@@ -1,0 +1,60 @@
+=== Correctness Beta Ablation (run) ===
+
+--- Beta 2.0 - More Random (A) ---
+  A_beta_2 seed=42 beta=2.0: lg=0.445 succ=0.126 adapt=0.586 (26s)
+  A_beta_2 seed=7 beta=2.0: lg=0.572 succ=0.366 adapt=0.788 (25s)
+  A_beta_2 seed=13 beta=2.0: lg=0.427 succ=0.096 adapt=0.356 (25s)
+  A_beta_2 seed=21 beta=2.0: lg=0.635 succ=0.454 adapt=0.896 (25s)
+  A_beta_2 seed=99 beta=2.0: lg=0.438 succ=0.136 adapt=0.524 (26s)
+  A_beta_2 seed=314 beta=2.0: lg=0.599 succ=0.408 adapt=0.853 (26s)
+
+--- Beta 3.0 - Current Simulator (B) ---
+  B_beta_3 seed=42 beta=3.0: lg=0.427 succ=0.162 adapt=0.444 (26s)
+  B_beta_3 seed=7 beta=3.0: lg=0.673 succ=0.522 adapt=0.980 (25s)
+  B_beta_3 seed=13 beta=3.0: lg=0.545 succ=0.300 adapt=0.514 (25s)
+  B_beta_3 seed=21 beta=3.0: lg=0.618 succ=0.418 adapt=0.718 (26s)
+  B_beta_3 seed=99 beta=3.0: lg=0.491 succ=0.216 adapt=0.628 (25s)
+  B_beta_3 seed=314 beta=3.0: lg=0.626 succ=0.466 adapt=0.786 (25s)
+
+--- Beta 5.0 - More Deterministic (C) ---
+  C_beta_5 seed=42 beta=5.0: lg=0.553 succ=0.312 adapt=0.699 (25s)
+  C_beta_5 seed=7 beta=5.0: lg=0.677 succ=0.544 adapt=0.839 (25s)
+  C_beta_5 seed=13 beta=5.0: lg=0.563 succ=0.352 adapt=0.693 (25s)
+  C_beta_5 seed=21 beta=5.0: lg=0.642 succ=0.492 adapt=0.536 (25s)
+  C_beta_5 seed=99 beta=5.0: lg=0.604 succ=0.396 adapt=0.723 (25s)
+  C_beta_5 seed=314 beta=5.0: lg=0.363 succ=0.048 adapt=0.248 (25s)
+
+=== Correctness Beta Ablation (analyze) ===
+
+========================================================================
+WINNER BETA CONFIGURATION
+========================================================================
+
+Overall rank #1: Beta 3.0 - Current Simulator (B) (IRT_BETA=3.0)
+  learning_gain_mean=0.5634 (std=0.0929, CV=0.1649)
+  seed_range=0.2464 (best seed 7, worst seed 42)
+  success_rate_mean=0.3473
+  adaptation_accuracy_mean=0.6786
+  mean_episode_reward_mean=3.1265
+  dropout_rate_mean=0.0000
+
+Best mean learning gain: Beta 5.0 - More Deterministic (C) (mean=0.5670)
+Most stable (lowest LG std): Beta 2.0 - More Random (A) (std=0.0929, CV=0.1790)
+Lowest CV: Beta 3.0 - Current Simulator (B) (CV=0.1649)
+
+--- Per-condition summary ---
+  beta=2.0: LG=0.5193 (std=0.0929, CV=0.1790, range=0.2081), succ=0.2643, adapt=0.6671, reward=3.2398, dropout=0.0000
+  beta=3.0: LG=0.5634 (std=0.0929, CV=0.1649, range=0.2464), succ=0.3473, adapt=0.6786, reward=3.1265, dropout=0.0000
+  beta=5.0: LG=0.5670 (std=0.1105, CV=0.1948, range=0.3141), succ=0.3573, adapt=0.6232, reward=3.3299, dropout=0.0000
+
+--- Findings ---
+
+1. Does a sharper correctness function (beta=5) improve stability?
+   NO. Sharper beta=5 did not reduce learning-gain variance (std: 0.1105 vs baseline 0.0929; CV: 0.1948 vs 0.1649). Correctness stochasticity is unlikely the primary instability source.
+
+2. Does a flatter correctness function (beta=2) improve robustness?
+   NO. Flatter beta=2 does not improve stability or mean performance (std=0.0929, LG=0.5193 vs baseline std=0.0929, LG=0.5634).
+
+3. Best performance-stability tradeoff:
+   Beta 3.0 - Current Simulator (B) - LG=0.5634, std=0.0929, CV=0.1649, seed_range=0.2464.
+========================================================================

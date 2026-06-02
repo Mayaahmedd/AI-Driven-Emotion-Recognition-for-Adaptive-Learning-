@@ -1,0 +1,487 @@
+{
+  "PPO": {
+    "n_steps": 24965,
+    "n_episodes": 500,
+    "mean_episode_reward": 3.5433994,
+    "success_rate_metrics": 0.068,
+    "success_rate_env95": 0.01,
+    "mean_learning_gain_norm": 0.33305969176380495,
+    "component_means_episode": {
+      "comp_k": 0.21267166064511564,
+      "comp_e": 5.737657520000001,
+      "comp_f": -1.27065279,
+      "comp_b": -0.458171772,
+      "comp_c": -0.6883195499999999
+    },
+    "component_pct_abs": {
+      "comp_k": 2.5416473194130282,
+      "comp_e": 68.57096902888613,
+      "comp_f": 15.185621101616,
+      "comp_b": 5.4756287349339505,
+      "comp_c": 8.226133815150895
+    },
+    "step_level_component_means": {
+      "comp_k": 0.004259396367817258,
+      "comp_e": 0.1149140300420589,
+      "comp_f": -0.025448683957540554,
+      "comp_b": -0.009176282235129181,
+      "comp_c": -0.013785690967354295
+    },
+    "state_means": {
+      "knowledge": 0.45286441417985185,
+      "engagement": 0.5745701502102945,
+      "frustration": 0.16965789305027038,
+      "confusion": 0.1531743440817144,
+      "boredom": 0.15293803725215302
+    },
+    "action_freq": {
+      "hint": 0.0,
+      "scaffold": 0.4984,
+      "encouragement": 0.2534,
+      "simplify_problem": 0.0542,
+      "harder_problem": 0.0183,
+      "break": 0.1741,
+      "explanation": 0.0,
+      "no_action": 0.0015
+    },
+    "state_action": {
+      "high_confusion": {
+        "n": 104,
+        "probs": {
+          "hint": 0.0,
+          "scaffold": 0.0096,
+          "encouragement": 0.2788,
+          "simplify_problem": 0.0096,
+          "harder_problem": 0.0769,
+          "break": 0.625,
+          "explanation": 0.0,
+          "no_action": 0.0
+        }
+      },
+      "high_frustration": {
+        "n": 160,
+        "probs": {
+          "hint": 0.0,
+          "scaffold": 0.675,
+          "encouragement": 0.1312,
+          "simplify_problem": 0.1312,
+          "harder_problem": 0.05,
+          "break": 0.0125,
+          "explanation": 0.0,
+          "no_action": 0.0
+        }
+      },
+      "high_boredom": {
+        "n": 347,
+        "probs": {
+          "hint": 0.0,
+          "scaffold": 0.6916,
+          "encouragement": 0.0115,
+          "simplify_problem": 0.1499,
+          "harder_problem": 0.0317,
+          "break": 0.1153,
+          "explanation": 0.0,
+          "no_action": 0.0
+        }
+      },
+      "high_engagement": {
+        "n": 11223,
+        "probs": {
+          "hint": 0.0,
+          "scaffold": 0.4951,
+          "encouragement": 0.2824,
+          "simplify_problem": 0.0556,
+          "harder_problem": 0.0119,
+          "break": 0.1548,
+          "explanation": 0.0,
+          "no_action": 0.0004
+        }
+      },
+      "flow_state": {
+        "n": 9852,
+        "probs": {
+          "hint": 0.0,
+          "scaffold": 0.4921,
+          "encouragement": 0.2881,
+          "simplify_problem": 0.0353,
+          "harder_problem": 0.0112,
+          "break": 0.173,
+          "explanation": 0.0,
+          "no_action": 0.0004
+        }
+      }
+    },
+    "correlations": {
+      "final_k": {
+        "total_reward": {
+          "r": 0.2811,
+          "p": 1.560165874553063e-10
+        },
+        "comp_k": {
+          "r": 0.8459,
+          "p": 4.6639925163743743e-138
+        },
+        "comp_e": {
+          "r": -0.0803,
+          "p": 0.07273671409555635
+        },
+        "comp_f": {
+          "r": 0.3749,
+          "p": 3.960132964725902e-18
+        },
+        "comp_b": {
+          "r": 0.1494,
+          "p": 0.0008037522929707341
+        },
+        "comp_c": {
+          "r": 0.0053,
+          "p": 0.9050131356382917
+        }
+      },
+      "learning_gain": {
+        "total_reward": {
+          "r": 0.3033,
+          "p": 4.274001041104138e-12
+        },
+        "comp_k": {
+          "r": 0.8874,
+          "p": 1.2417320922493009e-169
+        },
+        "comp_e": {
+          "r": -0.0304,
+          "p": 0.49710210151690876
+        },
+        "comp_f": {
+          "r": 0.2059,
+          "p": 3.441686029056396e-06
+        },
+        "comp_b": {
+          "r": -0.0319,
+          "p": 0.4760430414723137
+        },
+        "comp_c": {
+          "r": 0.099,
+          "p": 0.026808085424858654
+        }
+      },
+      "success_metrics": {
+        "total_reward": {
+          "r": 0.2196,
+          "p": 7.085369423844767e-07
+        },
+        "comp_k": {
+          "r": 0.651,
+          "p": 1.309045911834672e-61
+        },
+        "comp_e": {
+          "r": -0.029,
+          "p": 0.5182787824558099
+        },
+        "comp_f": {
+          "r": 0.1515,
+          "p": 0.0006795370695419403
+        },
+        "comp_b": {
+          "r": 0.0957,
+          "p": 0.03239709051370259
+        },
+        "comp_c": {
+          "r": 0.0381,
+          "p": 0.395503245990699
+        }
+      },
+      "success_env95": {
+        "total_reward": {
+          "r": 0.0365,
+          "p": 0.4150565932606599
+        },
+        "comp_k": {
+          "r": 0.47,
+          "p": 7.658372360837272e-29
+        },
+        "comp_e": {
+          "r": -0.1842,
+          "p": 3.4061320967635545e-05
+        },
+        "comp_f": {
+          "r": 0.168,
+          "p": 0.0001609543245424623
+        },
+        "comp_b": {
+          "r": 0.1932,
+          "p": 1.3584510810394724e-05
+        },
+        "comp_c": {
+          "r": 0.1967,
+          "p": 9.42841789734959e-06
+        }
+      },
+      "lg_norm": {
+        "total_reward": {
+          "r": 0.314,
+          "p": 6.608173812526369e-13
+        },
+        "comp_k": {
+          "r": 0.9437,
+          "p": 2.007602694082651e-241
+        },
+        "comp_e": {
+          "r": -0.0547,
+          "p": 0.22243712146058217
+        },
+        "comp_f": {
+          "r": 0.258,
+          "p": 4.766664272662368e-09
+        },
+        "comp_b": {
+          "r": 0.0541,
+          "p": 0.2268362644235108
+        },
+        "comp_c": {
+          "r": 0.091,
+          "p": 0.04202315438357892
+        }
+      }
+    },
+    "episodes_high_reward_low_success": 225,
+    "episodes_low_reward_high_success": 9
+  },
+  "DQN": {
+    "n_steps": 24334,
+    "n_episodes": 500,
+    "mean_episode_reward": 1.9363337999999999,
+    "success_rate_metrics": 0.5,
+    "success_rate_env95": 0.166,
+    "mean_learning_gain_norm": 0.6630271308076211,
+    "component_means_episode": {
+      "comp_k": 0.5866015795078475,
+      "comp_e": 5.530102360000001,
+      "comp_f": -2.08375071,
+      "comp_b": -0.293640132,
+      "comp_c": -1.816728336
+    },
+    "component_pct_abs": {
+      "comp_k": 5.689182840425164,
+      "comp_e": 53.63395625136705,
+      "comp_f": 20.209353668978927,
+      "comp_b": 2.8478825468492133,
+      "comp_c": 17.619624692379627
+    },
+    "step_level_component_means": {
+      "comp_k": 0.012053126890520415,
+      "comp_e": 0.11362912714720146,
+      "comp_f": -0.04281562238020876,
+      "comp_b": -0.00603353604010849,
+      "comp_c": -0.03732901158872359
+    },
+    "state_means": {
+      "knowledge": 0.5949509287416783,
+      "engagement": 0.5681456357360072,
+      "frustration": 0.2854374825347251,
+      "confusion": 0.4147667954302622,
+      "boredom": 0.10055893400180817
+    },
+    "action_freq": {
+      "hint": 0.0974,
+      "scaffold": 0.0,
+      "encouragement": 0.0,
+      "simplify_problem": 0.0,
+      "harder_problem": 0.9026,
+      "break": 0.0,
+      "explanation": 0.0,
+      "no_action": 0.0
+    },
+    "state_action": {
+      "high_confusion": {
+        "n": 15863,
+        "probs": {
+          "hint": 0.096,
+          "scaffold": 0.0,
+          "encouragement": 0.0,
+          "simplify_problem": 0.0,
+          "harder_problem": 0.904,
+          "break": 0.0,
+          "explanation": 0.0,
+          "no_action": 0.0
+        }
+      },
+      "high_frustration": {
+        "n": 10745,
+        "probs": {
+          "hint": 0.1585,
+          "scaffold": 0.0,
+          "encouragement": 0.0,
+          "simplify_problem": 0.0,
+          "harder_problem": 0.8415,
+          "break": 0.0,
+          "explanation": 0.0,
+          "no_action": 0.0
+        }
+      },
+      "high_boredom": {
+        "n": 0,
+        "skipped": true
+      },
+      "high_engagement": {
+        "n": 2707,
+        "probs": {
+          "hint": 0.0066,
+          "scaffold": 0.0,
+          "encouragement": 0.0,
+          "simplify_problem": 0.0,
+          "harder_problem": 0.9934,
+          "break": 0.0,
+          "explanation": 0.0,
+          "no_action": 0.0
+        }
+      },
+      "flow_state": {
+        "n": 2682,
+        "probs": {
+          "hint": 0.0034,
+          "scaffold": 0.0,
+          "encouragement": 0.0,
+          "simplify_problem": 0.0,
+          "harder_problem": 0.9966,
+          "break": 0.0,
+          "explanation": 0.0,
+          "no_action": 0.0
+        }
+      }
+    },
+    "correlations": {
+      "final_k": {
+        "total_reward": {
+          "r": 0.7066,
+          "p": 7.855679043099142e-77
+        },
+        "comp_k": {
+          "r": 0.8745,
+          "p": 1.3247105480228643e-158
+        },
+        "comp_e": {
+          "r": -0.2156,
+          "p": 1.1388603093133356e-06
+        },
+        "comp_f": {
+          "r": 0.469,
+          "p": 1.0362362139427846e-28
+        },
+        "comp_b": {
+          "r": 0.315,
+          "p": 5.574009624071536e-13
+        },
+        "comp_c": {
+          "r": 0.7011,
+          "p": 3.6558561424166276e-75
+        }
+      },
+      "learning_gain": {
+        "total_reward": {
+          "r": 0.5717,
+          "p": 9.902865393213538e-45
+        },
+        "comp_k": {
+          "r": 0.8292,
+          "p": 6.900308256903126e-128
+        },
+        "comp_e": {
+          "r": -0.1327,
+          "p": 0.002958847167906751
+        },
+        "comp_f": {
+          "r": 0.319,
+          "p": 2.731672441481042e-13
+        },
+        "comp_b": {
+          "r": 0.1891,
+          "p": 2.0795181585871888e-05
+        },
+        "comp_c": {
+          "r": 0.4974,
+          "p": 1.30080882173071e-32
+        }
+      },
+      "success_metrics": {
+        "total_reward": {
+          "r": 0.6649,
+          "p": 4.193749908433868e-65
+        },
+        "comp_k": {
+          "r": 0.7529,
+          "p": 1.5337778911023954e-92
+        },
+        "comp_e": {
+          "r": -0.1719,
+          "p": 0.00011158343342356637
+        },
+        "comp_f": {
+          "r": 0.4391,
+          "p": 5.590847830091034e-25
+        },
+        "comp_b": {
+          "r": 0.2762,
+          "p": 3.296825269192652e-10
+        },
+        "comp_c": {
+          "r": 0.6711,
+          "p": 9.743070335988216e-67
+        }
+      },
+      "success_env95": {
+        "total_reward": {
+          "r": 0.3867,
+          "p": 2.7935294198932334e-19
+        },
+        "comp_k": {
+          "r": 0.7794,
+          "p": 3.4386812429280373e-103
+        },
+        "comp_e": {
+          "r": -0.4905,
+          "p": 1.2512272609458074e-31
+        },
+        "comp_f": {
+          "r": 0.3939,
+          "p": 5.2743137414603804e-20
+        },
+        "comp_b": {
+          "r": 0.5914,
+          "p": 1.7368649121210337e-48
+        },
+        "comp_c": {
+          "r": 0.5103,
+          "p": 1.6585211007039914e-34
+        }
+      },
+      "lg_norm": {
+        "total_reward": {
+          "r": 0.7079,
+          "p": 3.2872952692727033e-77
+        },
+        "comp_k": {
+          "r": 0.917,
+          "p": 6.705309461923791e-201
+        },
+        "comp_e": {
+          "r": -0.2226,
+          "p": 4.946837255900751e-07
+        },
+        "comp_f": {
+          "r": 0.4619,
+          "p": 8.618254364137598e-28
+        },
+        "comp_b": {
+          "r": 0.3069,
+          "p": 2.306960308259407e-12
+        },
+        "comp_c": {
+          "r": 0.6929,
+          "p": 9.131053826111972e-73
+        }
+      }
+    },
+    "episodes_high_reward_low_success": 45,
+    "episodes_low_reward_high_success": 45
+  }
+}

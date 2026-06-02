@@ -1,0 +1,12 @@
+=== Final DQN Baseline (default affect): RUN ===
+Seeds: 20 | default emotion params
+[Baseline 16/20] seed=8888
+  val_lg=0.548 final_lg=0.592 best_lg=0.592 @step=50000 (42.1s)
+[Baseline 17/20] seed=9999
+  val_lg=0.512 final_lg=0.254 best_lg=0.513 @step=10000 (42.0s)
+[Baseline 18/20] seed=10101
+  val_lg=0.700 final_lg=0.375 best_lg=0.684 @step=10000 (42.1s)
+[Baseline 19/20] seed=20202
+  val_lg=0.528 final_lg=0.427 best_lg=0.527 @step=30000 (42.3s)
+[Baseline 20/20] seed=30303
+  val_lg=0.656 final_lg=0.499 best_lg=0.670 @step=20000 (42.3s)

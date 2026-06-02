@@ -1,0 +1,38 @@
+{
+  "phase": "baseline",
+  "n_seeds": 5,
+  "mean_reward": 2.758009442628807,
+  "reward_std": 0.5973393524999643,
+  "reward_ci_95": [
+    2.2344184146811603,
+    3.2816004705764534
+  ],
+  "success_rate_mean": 0.23820000000000002,
+  "success_rate_ci_95": [
+    0.04381937775590905,
+    0.432580622244091
+  ],
+  "learning_gain_mean": 0.4462172215209835,
+  "learning_gain_ci_95": [
+    0.2561397391576057,
+    0.6362947038843613
+  ],
+  "final_knowledge_mean": 0.6149318049407753,
+  "final_knowledge_ci_95": [
+    0.4843187018419699,
+    0.7455449080395806
+  ],
+  "adaptation_accuracy_mean": 0.35357717851432213,
+  "adaptation_accuracy_ci_95": [
+    0.18022703184180472,
+    0.5269273251868396
+  ],
+  "hyperparameters": {
+    "learning_rate": 0.001,
+    "batch_size": 32,
+    "buffer_size": 100000,
+    "target_update_interval": 500,
+    "exploration_fraction": 0.1,
+    "exploration_final_eps": 0.05
+  }
+}

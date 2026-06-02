@@ -1,0 +1,134 @@
+{
+  "all_tests_pass": true,
+  "runtime_tests": [
+    {
+      "test": "frustration_mask",
+      "full_blocks_harder": true,
+      "strict_allows_harder": true,
+      "pass": true
+    },
+    {
+      "test": "affect_pinned",
+      "pass": true
+    },
+    {
+      "test": "reward_affect_invariant",
+      "pass": true,
+      "r1": 0.08333333194444445,
+      "r2": 0.08333333194444445
+    },
+    {
+      "test": "no_dropout",
+      "pass": true
+    }
+  ],
+  "checklist": [
+    {
+      "id": "L1",
+      "component": "student_model.apply_action",
+      "affect_role": "AR(1) emotion updates from action targets + mismatch",
+      "full_mode": "frustration/confusion/boredom/engagement evolve each step",
+      "strict_off": "_apply_action_strict: affect pinned to NEUTRAL_AFFECT",
+      "file": "environment/student_model.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L2",
+      "component": "student_model._knowledge_update",
+      "affect_role": "engagement < 0.3 adds forgetting decay",
+      "full_mode": "low engagement increases knowledge decay",
+      "strict_off": "engagement decay branch skipped (no engagement input used)",
+      "file": "environment/student_model.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L3",
+      "component": "student_model._mismatch_effects",
+      "affect_role": "challenge-skill mismatch drives affect targets",
+      "full_mode": "difficulty-knowledge gap shapes emotion targets",
+      "strict_off": "not called in strict path",
+      "file": "environment/student_model.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L4",
+      "component": "reward_function.compute_reward",
+      "affect_role": "we*e - wf*f - wb*b - wc*c + persistent + struggle penalties",
+      "full_mode": "multi-objective affect-weighted reward",
+      "strict_off": "strict_no_emotion=True -> r = wk * delta_k_norm only",
+      "file": "reward/reward_function.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L5",
+      "component": "student_env.get_action_mask",
+      "affect_role": "frustration blocks harder_problem; emergency mode",
+      "full_mode": "frustration/emotion_id mask harder_problem; persistent flag emergency",
+      "strict_off": "only cooldown masks; no affect-based blocking",
+      "file": "environment/student_env.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L6",
+      "component": "student_env.step termination",
+      "affect_role": "persistent frustration dropout",
+      "full_mode": "dropout after PERSISTENT_FLAG_DROPOUT_STEPS",
+      "strict_off": "dropout branch disabled",
+      "file": "environment/student_env.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L7",
+      "component": "student_env persistent flag tracking",
+      "affect_role": "frustration streak sets persistent_frustration_flag",
+      "full_mode": "FRUSTRATION_PERSISTENT_ON/OFF hysteresis",
+      "strict_off": "tracking skipped entirely",
+      "file": "environment/student_env.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L8",
+      "component": "fer_adapter / emotion_id derivation",
+      "affect_role": "discrete FER label from continuous affect",
+      "full_mode": "emotion_from_state updates emotion_id each step",
+      "strict_off": "emotion_id pinned to NEUTRAL_EMOTION_ID",
+      "file": "environment/student_env.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L9",
+      "component": "evaluation _is_success",
+      "affect_role": "success requires low frustration/confusion",
+      "full_mode": "k>0.8 AND f<0.3 AND c<0.4",
+      "strict_off": "unchanged (outcome metric; affect pinned so criterion still valid)",
+      "file": "evaluation/metrics.py",
+      "verified_strict_off": true
+    },
+    {
+      "id": "L10",
+      "component": "evaluation _adaptation_match",
+      "affect_role": "post-hoc emotion-action map scoring",
+      "full_mode": "uses true simulator emotion_id",
+      "strict_off": "unchanged (diagnostic metric; emotion_id fixed to engaged)",
+      "file": "evaluation/metrics.py",
+      "verified_strict_off": true
+    }
+  ],
+  "condition_specs": {
+    "A_full_emotion": {
+      "obs_ablation": "full_emotion",
+      "emotion_dynamics": "full",
+      "label": "A: Full Emotion"
+    },
+    "B_obs_ablation": {
+      "obs_ablation": "knowledge_only",
+      "emotion_dynamics": "full",
+      "label": "B: Obs Ablation"
+    },
+    "C_strict_no_emotion": {
+      "obs_ablation": "knowledge_only",
+      "emotion_dynamics": "strict_off",
+      "label": "C: Strict No-Emotion"
+    }
+  }
+}

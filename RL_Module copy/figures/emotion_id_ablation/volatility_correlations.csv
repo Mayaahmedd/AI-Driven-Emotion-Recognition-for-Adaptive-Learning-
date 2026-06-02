@@ -1,0 +1,13 @@
+condition,eval_type,volatility_metric,pearson_r,pearson_p,spearman_r,spearman_p,n_seeds
+A_full_emotion,final,confusion_variance,0.8284,0.000136,0.4536,0.089486,15
+A_full_emotion,final,boredom_variance,-0.6694,0.00634,-0.6714,0.006128,15
+A_full_emotion,final,emotion_id_switches,0.1535,0.584963,-0.1821,0.515882,15
+A_full_emotion,best,confusion_variance,0.8714,2.3e-05,0.9,5e-06,15
+A_full_emotion,best,boredom_variance,-0.7774,0.000647,-0.9214,1e-06,15
+A_full_emotion,best,emotion_id_switches,0.2669,0.336268,0.5286,0.042797,15
+D_no_emotion_id,final,confusion_variance,0.8067,0.000279,0.7393,0.001636,15
+D_no_emotion_id,final,boredom_variance,-0.2867,0.300193,-0.6036,0.0172,15
+D_no_emotion_id,final,emotion_id_switches,0.2724,0.32607,0.2043,0.465162,15
+D_no_emotion_id,best,confusion_variance,0.9348,0.0,0.8286,0.000135,15
+D_no_emotion_id,best,boredom_variance,-0.8402,8.8e-05,-0.925,1e-06,15
+D_no_emotion_id,best,emotion_id_switches,0.4821,0.068777,0.6893,0.004474,15

@@ -1,0 +1,4 @@
+rank,condition,condition_label,irt_beta,learning_gain_mean,learning_gain_std,coefficient_of_variation,seed_range,success_rate_mean,adaptation_accuracy_mean,mean_episode_reward_mean,dropout_rate_mean,best_seed,worst_seed
+1,B_beta_3,Beta 3.0 - Current Simulator (B),3.0,0.5634,0.0929,0.1649,0.2464,0.3473,0.6786,3.1265,0.0,7,42
+2,A_beta_2,Beta 2.0 - More Random (A),2.0,0.5193,0.0929,0.179,0.2081,0.2643,0.6671,3.2398,0.0,21,13
+3,C_beta_5,Beta 5.0 - More Deterministic (C),5.0,0.567,0.1105,0.1948,0.3141,0.3573,0.6232,3.3299,0.0,7,314

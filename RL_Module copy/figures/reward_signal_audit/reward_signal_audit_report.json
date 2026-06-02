@@ -1,0 +1,524 @@
+{
+  "analysis_type": "reward_signal_asymmetry_audit",
+  "no_modifications": true,
+  "PPO_best_config": {
+    "label": "F_wk070_we015",
+    "steps_file": "steps_PPO_F_wk070_we015_seed42.csv",
+    "wk": 0.7,
+    "we": 0.15,
+    "wf": 0.15,
+    "wb": 0.06,
+    "wc": 0.09
+  },
+  "DQN_baseline_config": {
+    "label": "DQN_baseline",
+    "steps_file": "steps_DQN_seed42.csv",
+    "wk": 0.5,
+    "we": 0.2,
+    "wf": 0.15,
+    "wb": 0.06,
+    "wc": 0.09
+  },
+  "PPO_results": {
+    "label": "F_wk070_we015",
+    "weights": {
+      "wk": 0.7,
+      "we": 0.15,
+      "wf": 0.15,
+      "wb": 0.06,
+      "wc": 0.09
+    },
+    "n_episodes": 300,
+    "n_steps": 14919,
+    "success_rate": 0.20666666666666667,
+    "mean_learning_gain_norm": 0.4209214912200325,
+    "mean_episode_reward": 2.25408,
+    "part1_episode_decomposition": {
+      "sum_k": {
+        "mean": 0.4400839827383002,
+        "std": 0.40098923133006875,
+        "min": -0.25722775789839075,
+        "max": 1.7002823292819356,
+        "p25": 0.15318314325402066,
+        "p50": 0.3553651029018863,
+        "p75": 0.6364157207871467,
+        "p95": 1.271623227103972
+      },
+      "sum_e": {
+        "mean": 4.30395845,
+        "std": 0.4480190663926615,
+        "min": 2.23206,
+        "max": 5.15781,
+        "p25": 3.97557,
+        "p50": 4.302825,
+        "p75": 4.663987499999999,
+        "p95": 4.9976407499999995
+      },
+      "sum_f": {
+        "mean": -1.3409564,
+        "std": 0.1304589336705419,
+        "min": -1.73658,
+        "max": -0.78042,
+        "p25": -1.425645,
+        "p50": -1.3401,
+        "p75": -1.25515125,
+        "p95": -1.15178925
+      },
+      "sum_b": {
+        "mean": -0.4290249399999999,
+        "std": 0.04253943022336841,
+        "min": -0.586116,
+        "max": -0.223626,
+        "p25": -0.45301499999999995,
+        "p50": -0.429717,
+        "p75": -0.4040445,
+        "p95": -0.36520829999999993
+      },
+      "sum_c": {
+        "mean": -0.72863433,
+        "std": 0.07944911786104,
+        "min": -1.0097909999999999,
+        "max": -0.352143,
+        "p25": -0.777195,
+        "p50": -0.716553,
+        "p75": -0.68316975,
+        "p95": -0.62263035
+      },
+      "total_reward": {
+        "mean": 2.25408,
+        "std": 0.5934327783961014,
+        "min": 0.8203,
+        "max": 4.231,
+        "p25": 1.884925,
+        "p50": 2.24085,
+        "p75": 2.656975,
+        "p95": 3.246325
+      }
+    },
+    "part2_effective_shares": [
+      {
+        "component": "knowledge",
+        "mean_abs_contribution": 0.4569071122475531,
+        "share_pct": 6.293936131660659
+      },
+      {
+        "component": "engagement",
+        "mean_abs_contribution": 4.30395845,
+        "share_pct": 59.28741066071307
+      },
+      {
+        "component": "frustration",
+        "mean_abs_contribution": 1.3409564,
+        "share_pct": 18.471793742551448
+      },
+      {
+        "component": "boredom",
+        "mean_abs_contribution": 0.4290249399999999,
+        "share_pct": 5.90985672769861
+      },
+      {
+        "component": "confusion",
+        "mean_abs_contribution": 0.72863433,
+        "share_pct": 10.037002737376223
+      }
+    ],
+    "part3_raw_signals": {
+      "delta_k_norm": {
+        "mean": 0.012642095393361303,
+        "std": 0.05649874751622008,
+        "min": -0.911304189338402,
+        "max": 0.5008680120774295,
+        "p25": -0.016342679428665095,
+        "p50": 0.008867924360982628,
+        "p75": 0.03925660619156974,
+        "p95": 0.09896441012307669
+      },
+      "engagement": {
+        "mean": 0.5769768013941954,
+        "std": 0.06956904310836425,
+        "min": 0.2402,
+        "max": 0.8057,
+        "p25": 0.5271,
+        "p50": 0.5775,
+        "p75": 0.6276,
+        "p95": 0.6887
+      },
+      "frustration": {
+        "mean": 0.1797649172196528,
+        "std": 0.04667888346775234,
+        "min": 0.0022,
+        "max": 0.4865,
+        "p25": 0.1494,
+        "p50": 0.1793,
+        "p75": 0.2101,
+        "p95": 0.2559
+      },
+      "boredom": {
+        "mean": 0.1437847509886722,
+        "std": 0.04205025324719499,
+        "min": 0.0,
+        "max": 0.5656,
+        "p25": 0.118,
+        "p50": 0.1425,
+        "p75": 0.1666,
+        "p95": 0.2044
+      },
+      "confusion": {
+        "mean": 0.1627978483812588,
+        "std": 0.05967499046719001,
+        "min": 0.0,
+        "max": 0.5161,
+        "p25": 0.1242,
+        "p50": 0.1575,
+        "p75": 0.1933,
+        "p95": 0.2549
+      }
+    },
+    "part4_expected_per_step": {
+      "E_wk_delta_k": 0.00884946677535291,
+      "E_we_engagement": 0.0865465202091293,
+      "E_wf_frustration": -0.026964737582947918,
+      "E_wb_boredom": -0.00862708505932033,
+      "E_wc_confusion": -0.01465180635431329,
+      "nominal_weight_ratio_wk_over_we": 4.666666666666667,
+      "empirical_reward_stream_ratio_e_over_k": 9.779857070052437,
+      "raw_signal_ratio_engagement_over_delta_k": 45.63933299357804,
+      "mean_raw_delta_k_norm": 0.012642095393361303,
+      "mean_raw_engagement": 0.5769768013941954
+    },
+    "part5_signal_density": {
+      "P_delta_k_positive": 0.5819424894429922,
+      "P_delta_k_zero": 0.02218647362423755,
+      "P_delta_k_negative": 0.3958710369327703,
+      "n_timesteps": 14919,
+      "mean_streak_length_positive_gains": 2.400331766657451,
+      "max_streak_length_positive_gains": 20,
+      "mean_timesteps_between_positive_gains": 1.7243572021011888,
+      "median_timesteps_between_positive_gains": 1.0
+    },
+    "part6_correlations": [
+      {
+        "component": "knowledge",
+        "Success r": 0.7886,
+        "Success p": 6.645154960281437e-65,
+        "Learning Gain r": 0.9384,
+        "Learning Gain p": 1.6073700784764108e-139,
+        "Final Knowledge r": 0.8871,
+        "Final Knowledge p": 4.419301417198805e-102
+      },
+      {
+        "component": "engagement",
+        "Success r": -0.1148,
+        "Success p": 0.04695357297118607,
+        "Learning Gain r": -0.1141,
+        "Learning Gain p": 0.04837531206890244,
+        "Final Knowledge r": -0.0911,
+        "Final Knowledge p": 0.11527041862616391
+      },
+      {
+        "component": "frustration",
+        "Success r": -0.0215,
+        "Success p": 0.7105509735705731,
+        "Learning Gain r": -0.0661,
+        "Learning Gain p": 0.25387423186707286,
+        "Final Knowledge r": -0.1188,
+        "Final Knowledge p": 0.039672937322151
+      },
+      {
+        "component": "boredom",
+        "Success r": 0.3652,
+        "Success p": 6.773925249667478e-11,
+        "Learning Gain r": 0.4073,
+        "Learning Gain p": 2.0288006715194929e-13,
+        "Final Knowledge r": 0.5268,
+        "Final Knowledge p": 8.019043229145229e-23
+      },
+      {
+        "component": "confusion",
+        "Success r": 0.2432,
+        "Success p": 2.0564547910436716e-05,
+        "Learning Gain r": 0.2461,
+        "Learning Gain p": 1.6227085269474504e-05,
+        "Final Knowledge r": 0.1892,
+        "Final Knowledge p": 0.0009883065683186634
+      }
+    ],
+    "mean_final_knowledge": 0.5970179999999999,
+    "mean_final_frustration": 0.190806
+  },
+  "DQN_results": {
+    "label": "DQN_baseline",
+    "weights": {
+      "wk": 0.5,
+      "we": 0.2,
+      "wf": 0.15,
+      "wb": 0.06,
+      "wc": 0.09
+    },
+    "n_episodes": 500,
+    "n_steps": 24334,
+    "success_rate": 0.5,
+    "mean_learning_gain_norm": 0.6630271308076211,
+    "mean_episode_reward": 1.9363337999999999,
+    "part1_episode_decomposition": {
+      "sum_k": {
+        "mean": 0.5866015795078475,
+        "std": 0.34672524523506343,
+        "min": -0.0585049930415391,
+        "max": 1.454429304232217,
+        "p25": 0.3219772562098258,
+        "p50": 0.5321406649844062,
+        "p75": 0.7592760536915832,
+        "p95": 1.26042723757027
+      },
+      "sum_e": {
+        "mean": 5.530102360000001,
+        "std": 0.6892673058576614,
+        "min": 2.00964,
+        "max": 6.83462,
+        "p25": 5.083385,
+        "p50": 5.54833,
+        "p75": 6.027795,
+        "p95": 6.516438
+      },
+      "sum_f": {
+        "mean": -2.08375071,
+        "std": 0.5664080211519753,
+        "min": -3.80682,
+        "max": -0.528075,
+        "p25": -2.38549875,
+        "p50": -1.9634025,
+        "p75": -1.68203625,
+        "p95": -1.3335345000000003
+      },
+      "sum_b": {
+        "mean": -0.293640132,
+        "std": 0.0301209074819077,
+        "min": -0.35028,
+        "max": -0.140898,
+        "p25": -0.3130695,
+        "p50": -0.297153,
+        "p75": -0.2811345,
+        "p95": -0.2353695
+      },
+      "sum_c": {
+        "mean": -1.816728336,
+        "std": 0.48427290669661033,
+        "min": -2.761713,
+        "max": -0.49869899999999995,
+        "p25": -2.21056875,
+        "p50": -1.764954,
+        "p75": -1.4373269999999998,
+        "p95": -1.0829551500000003
+      },
+      "total_reward": {
+        "mean": 1.9363337999999999,
+        "std": 1.095257722966149,
+        "min": -1.6208,
+        "max": 4.4308,
+        "p25": 1.12985,
+        "p50": 1.9926,
+        "p75": 2.7385,
+        "p95": 3.6645499999999998
+      }
+    },
+    "part2_effective_shares": [
+      {
+        "component": "knowledge",
+        "mean_abs_contribution": 0.5871696881250047,
+        "share_pct": 5.694378917922811
+      },
+      {
+        "component": "engagement",
+        "mean_abs_contribution": 5.530102360000001,
+        "share_pct": 53.63100127545252
+      },
+      {
+        "component": "frustration",
+        "mean_abs_contribution": 2.08375071,
+        "share_pct": 20.20824022970437
+      },
+      {
+        "component": "boredom",
+        "mean_abs_contribution": 0.293640132,
+        "share_pct": 2.847725642064977
+      },
+      {
+        "component": "confusion",
+        "mean_abs_contribution": 1.816728336,
+        "share_pct": 17.618653934855324
+      }
+    ],
+    "part3_raw_signals": {
+      "delta_k_norm": {
+        "mean": 0.02410625378104083,
+        "std": 0.08263629166549406,
+        "min": -0.8243397446223041,
+        "max": 0.8745316714360158,
+        "p25": -0.013124055687352473,
+        "p50": 0.021150728091020837,
+        "p75": 0.06072874362827591,
+        "p95": 0.1470249695891348
+      },
+      "engagement": {
+        "mean": 0.5681456357360072,
+        "std": 0.06637205172708584,
+        "min": 0.3608,
+        "max": 0.7873,
+        "p25": 0.519325,
+        "p50": 0.5673,
+        "p75": 0.6164,
+        "p95": 0.6772349999999999
+      },
+      "frustration": {
+        "mean": 0.2854374825347251,
+        "std": 0.09972324140637805,
+        "min": 0.0,
+        "max": 0.6503,
+        "p25": 0.2128,
+        "p50": 0.26555,
+        "p75": 0.3439,
+        "p95": 0.481
+      },
+      "boredom": {
+        "mean": 0.10055893400180817,
+        "std": 0.03262533540493194,
+        "min": 0.0,
+        "max": 0.2261,
+        "p25": 0.0785,
+        "p50": 0.1005,
+        "p75": 0.1226,
+        "p95": 0.1545
+      },
+      "confusion": {
+        "mean": 0.4147667954302622,
+        "std": 0.17613839926602468,
+        "min": 0.0453,
+        "max": 0.7317,
+        "p25": 0.2309,
+        "p50": 0.445,
+        "p75": 0.5875,
+        "p95": 0.6367
+      }
+    },
+    "part4_expected_per_step": {
+      "E_wk_delta_k": 0.012053126890520415,
+      "E_we_engagement": 0.11362912714720146,
+      "E_wf_frustration": -0.04281562238020876,
+      "E_wb_boredom": -0.00603353604010849,
+      "E_wc_confusion": -0.03732901158872359,
+      "nominal_weight_ratio_wk_over_we": 2.5,
+      "empirical_reward_stream_ratio_e_over_k": 9.42735674977162,
+      "raw_signal_ratio_engagement_over_delta_k": 23.568391874429047,
+      "mean_raw_delta_k_norm": 0.02410625378104083,
+      "mean_raw_engagement": 0.5681456357360072
+    },
+    "part5_signal_density": {
+      "P_delta_k_positive": 0.6492561847620613,
+      "P_delta_k_zero": 0.0221500780800526,
+      "P_delta_k_negative": 0.3285937371578861,
+      "n_timesteps": 24334,
+      "mean_streak_length_positive_gains": 2.8688941347376065,
+      "max_streak_length_positive_gains": 24,
+      "mean_timesteps_between_positive_gains": 1.5498456509896494,
+      "median_timesteps_between_positive_gains": 1.0
+    },
+    "part6_correlations": [
+      {
+        "component": "knowledge",
+        "Success r": 0.7529,
+        "Success p": 1.5337778911023954e-92,
+        "Learning Gain r": 0.917,
+        "Learning Gain p": 6.705309461923791e-201,
+        "Final Knowledge r": 0.8745,
+        "Final Knowledge p": 1.3247105480228643e-158
+      },
+      {
+        "component": "engagement",
+        "Success r": -0.1719,
+        "Success p": 0.00011158343342356637,
+        "Learning Gain r": -0.2226,
+        "Learning Gain p": 4.946837255900751e-07,
+        "Final Knowledge r": -0.2156,
+        "Final Knowledge p": 1.1388603093133356e-06
+      },
+      {
+        "component": "frustration",
+        "Success r": 0.4391,
+        "Success p": 5.590847830091034e-25,
+        "Learning Gain r": 0.4619,
+        "Learning Gain p": 8.618254364137598e-28,
+        "Final Knowledge r": 0.469,
+        "Final Knowledge p": 1.0362362139427846e-28
+      },
+      {
+        "component": "boredom",
+        "Success r": 0.2762,
+        "Success p": 3.296825269192652e-10,
+        "Learning Gain r": 0.3069,
+        "Learning Gain p": 2.306960308259407e-12,
+        "Final Knowledge r": 0.315,
+        "Final Knowledge p": 5.574009624071536e-13
+      },
+      {
+        "component": "confusion",
+        "Success r": 0.6711,
+        "Success p": 9.743070335988216e-67,
+        "Learning Gain r": 0.6929,
+        "Learning Gain p": 9.131053826111972e-73,
+        "Final Knowledge r": 0.7011,
+        "Final Knowledge p": 3.6558561424166276e-75
+      }
+    ],
+    "mean_final_knowledge": 0.7725208,
+    "mean_final_frustration": 0.2463858
+  },
+  "part7_comparison": {
+    "success_rate": {
+      "PPO_best": 0.20666666666666667,
+      "DQN": 0.5,
+      "gap": 0.29333333333333333
+    },
+    "mean_final_knowledge": {
+      "PPO_best": 0.5970179999999999,
+      "DQN": 0.7725208,
+      "delta": 0.17550280000000007
+    },
+    "mean_raw_delta_k_norm": {
+      "PPO_best": 0.012642095393361303,
+      "DQN": 0.02410625378104083,
+      "ratio_DQN_over_PPO": 1.9068242273903153
+    },
+    "mean_raw_engagement": {
+      "PPO_best": 0.5769768013941954,
+      "DQN": 0.5681456357360072
+    },
+    "mean_frustration": {
+      "PPO_best": 0.190806,
+      "DQN": 0.2463858
+    },
+    "component_share_knowledge_pct": {
+      "PPO_best": 6.293936131660659,
+      "DQN": 5.694378917922811
+    },
+    "component_share_engagement_pct": {
+      "PPO_best": 59.28741066071307,
+      "DQN": 53.63100127545252
+    },
+    "empirical_reward_stream_ratio_e_over_k": {
+      "PPO_best": 9.779857070052437,
+      "DQN": 9.42735674977162
+    },
+    "interpretation": "DQN succeeds primarily via higher knowledge delta per step (0.0241 vs 0.0126), not via a different reward component balance."
+  },
+  "conclusions": {
+    "Q1_misalignment_still_present": "YES. Even at best weights (wk=0.70, we=0.15), engagement contributes 59.3% vs knowledge 6.3% of effective reward. Success rate is 20.7% vs DQN 50.0%.",
+    "Q2_weights_vs_structural": "STRUCTURAL ASYMMETRY (H2) is the primary cause. Weight rebalancing improved success from ~7.7% to 20.7% (sensitivity study) but knowledge share remains only 6.3%. Nominal wk/we=4.67 but empirical reward stream ratio E[we*E]/E[wk*dK] = 9.8x in favor of engagement.",
+    "Q3_engagement_dominance_cause": "LARGER SIGNAL MAGNITUDE (and accumulation), not larger weight alone. Nominal weight ratio wk/we = 4.67. Raw signal ratio mean(E)/mean(dK) = 45.6x before weighting. Empirical per-step reward ratio = 9.8x after weighting.",
+    "Q4_engagement_to_knowledge_multiplier": "9.8x larger (empirical per-step reward stream: engagement over knowledge).",
+    "Q5_knowledge_sparse": "YES. P(delta_k>0) = 58.2%, P(delta_k=0) = 2.2%, mean gap between positive gains = 1.7 steps.",
+    "Q6_knowledge_predicts_mastery": "YES. Knowledge r(success)=0.7886, engagement r(success)=-0.1148. Knowledge r(learning gain)=0.9384.",
+    "Q7_gap_explained_by_structure_alone": "PARTIALLY. Signal structure explains why PPO accumulates high reward without mastery (engagement stream 10x knowledge stream). However DQN achieves 1.9x higher mean delta_k_norm via policy (harder_problem dominance), which is a policy/algorithm factor beyond reward structure alone. Remaining success gap (29.3%) cannot be fully explained by reward asymmetry without also accounting for policy differences.",
+    "hypothesis_verdict": "H2 (structural delta-vs-level asymmetry) CONFIRMED as primary driver. H1 (weight imbalance) CONFIRMED as secondary amplifier but insufficient alone."
+  }
+}

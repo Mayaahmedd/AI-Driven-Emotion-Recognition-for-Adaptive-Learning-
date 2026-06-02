@@ -1,0 +1,79 @@
+Traceback (most recent call last):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/dqn_hyperparameter_study.py", line 732, in <module>
+    main()
+  File "/Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/dqn_hyperparameter_study.py", line 724, in main
+    run_robust(top_n=args.top_n)
+  File "/Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/dqn_hyperparameter_study.py", line 456, in run_robust
+    summarize_robust(df)
+  File "/Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/dqn_hyperparameter_study.py", line 497, in summarize_robust
+    json.dump(summaries, f, indent=2)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 179, in dump
+    for chunk in iterable:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 429, in _iterencode
+    yield from _iterencode_list(o, _current_indent_level)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 325, in _iterencode_list
+    yield from chunks
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
+DQN study | train=50000 eval=1000 | grid=2304 configs
+
+=== Section 5: robustness (top 5 x 5 seeds) ===
+  robust config_id=467106ecc1c7 seed=42
+  [robust_467106ecc1c7_s42] seed=42 reward=3.017 succ=0.016 fk=0.486 adapt=0.402 (27s)
+  robust config_id=467106ecc1c7 seed=0
+  [robust_467106ecc1c7_s0] seed=0 reward=2.766 succ=0.241 fk=0.654 adapt=0.343 (26s)
+  robust config_id=467106ecc1c7 seed=1
+  [robust_467106ecc1c7_s1] seed=1 reward=3.286 succ=0.395 fk=0.695 adapt=0.773 (26s)
+  robust config_id=467106ecc1c7 seed=7
+  [robust_467106ecc1c7_s7] seed=7 reward=3.502 succ=0.078 fk=0.570 adapt=0.307 (26s)
+  robust config_id=467106ecc1c7 seed=13
+  [robust_467106ecc1c7_s13] seed=13 reward=3.276 succ=0.008 fk=0.508 adapt=0.360 (26s)
+  robust config_id=3d833752cc9e seed=42
+  [robust_3d833752cc9e_s42] seed=42 reward=3.017 succ=0.016 fk=0.486 adapt=0.402 (26s)
+  robust config_id=3d833752cc9e seed=0
+  [robust_3d833752cc9e_s0] seed=0 reward=2.766 succ=0.241 fk=0.654 adapt=0.343 (26s)
+  robust config_id=3d833752cc9e seed=1
+  [robust_3d833752cc9e_s1] seed=1 reward=3.286 succ=0.395 fk=0.695 adapt=0.773 (26s)
+  robust config_id=3d833752cc9e seed=7
+  [robust_3d833752cc9e_s7] seed=7 reward=3.502 succ=0.078 fk=0.570 adapt=0.307 (26s)
+  robust config_id=3d833752cc9e seed=13
+  [robust_3d833752cc9e_s13] seed=13 reward=3.276 succ=0.008 fk=0.508 adapt=0.360 (26s)
+  robust config_id=b1a2d48ae992 seed=42
+  [robust_b1a2d48ae992_s42] seed=42 reward=2.719 succ=0.035 fk=0.516 adapt=0.093 (26s)
+  robust config_id=b1a2d48ae992 seed=0
+  [robust_b1a2d48ae992_s0] seed=0 reward=3.220 succ=0.017 fk=0.472 adapt=0.097 (26s)
+  robust config_id=b1a2d48ae992 seed=1
+  [robust_b1a2d48ae992_s1] seed=1 reward=3.498 succ=0.077 fk=0.558 adapt=0.441 (26s)
+  robust config_id=b1a2d48ae992 seed=7
+  [robust_b1a2d48ae992_s7] seed=7 reward=3.581 succ=0.040 fk=0.553 adapt=0.501 (26s)
+  robust config_id=b1a2d48ae992 seed=13
+  [robust_b1a2d48ae992_s13] seed=13 reward=3.014 succ=0.499 fk=0.762 adapt=0.958 (27s)
+  robust config_id=4c0cc82b2166 seed=42
+  [robust_4c0cc82b2166_s42] seed=42 reward=2.719 succ=0.035 fk=0.516 adapt=0.093 (26s)
+  robust config_id=4c0cc82b2166 seed=0
+  [robust_4c0cc82b2166_s0] seed=0 reward=3.220 succ=0.017 fk=0.472 adapt=0.097 (26s)
+  robust config_id=4c0cc82b2166 seed=1
+  [robust_4c0cc82b2166_s1] seed=1 reward=3.498 succ=0.077 fk=0.558 adapt=0.441 (26s)
+  robust config_id=4c0cc82b2166 seed=7
+  [robust_4c0cc82b2166_s7] seed=7 reward=3.581 succ=0.040 fk=0.553 adapt=0.501 (26s)
+  robust config_id=4c0cc82b2166 seed=13
+  [robust_4c0cc82b2166_s13] seed=13 reward=3.014 succ=0.499 fk=0.762 adapt=0.958 (26s)
+  robust config_id=501d9476d887 seed=42
+  [robust_501d9476d887_s42] seed=42 reward=2.630 succ=0.011 fk=0.467 adapt=0.124 (26s)
+  robust config_id=501d9476d887 seed=0
+  [robust_501d9476d887_s0] seed=0 reward=2.810 succ=0.024 fk=0.503 adapt=0.081 (26s)
+  robust config_id=501d9476d887 seed=1
+  [robust_501d9476d887_s1] seed=1 reward=3.279 succ=0.293 fk=0.666 adapt=0.458 (26s)
+  robust config_id=501d9476d887 seed=7
+  [robust_501d9476d887_s7] seed=7 reward=3.670 succ=0.112 fk=0.614 adapt=0.501 (26s)
+  robust config_id=501d9476d887 seed=13
+  [robust_501d9476d887_s13] seed=13 reward=2.611 succ=0.011 fk=0.483 adapt=0.124 (26s)

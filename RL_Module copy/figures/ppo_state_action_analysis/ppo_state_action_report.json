@@ -1,0 +1,299 @@
+{
+  "analysis": "PPO State-Action Contingency & Training Depth",
+  "seed": 42,
+  "eval_episodes_per_budget": 300,
+  "performance": {
+    "50k_existing": {
+      "mean_reward": 3.543,
+      "success_rate": 0.068,
+      "learning_gain": 0.345
+    },
+    "100k": {
+      "mean_reward": 3.442841222130522,
+      "std_reward": 0.6204226365189177,
+      "success_rate": 0.0,
+      "mean_learning_gain": 0.20118314266999637
+    },
+    "200k": {
+      "mean_reward": 3.5034200087919674,
+      "std_reward": 0.5692702203771502,
+      "success_rate": 0.0033333333333333335,
+      "mean_learning_gain": 0.22089185273882161
+    },
+    "500k": {
+      "mean_reward": 3.3829847708398852,
+      "std_reward": 0.6368067771598818,
+      "success_rate": 0.0,
+      "mean_learning_gain": 0.17244016441602616
+    },
+    "DQN_baseline": {
+      "mean_reward": 1.936,
+      "success_rate": 0.5,
+      "learning_gain": 0.67
+    }
+  },
+  "context_sensitivity_500k": {
+    "n_significant_conditions": 5,
+    "context_sensitive": true,
+    "chi2_by_condition": {
+      "high_confusion": {
+        "chi2": 141.75413020323123,
+        "p_value": 2.1804175934819986e-27,
+        "dof": 7,
+        "significant": true,
+        "n_in": 273,
+        "n_out": 14727,
+        "skipped": false
+      },
+      "high_frustration": {
+        "chi2": 38.02358553036825,
+        "p_value": 2.999048788081312e-06,
+        "dof": 7,
+        "significant": true,
+        "n_in": 186,
+        "n_out": 14814,
+        "skipped": false
+      },
+      "high_boredom": {
+        "chi2": 6258.107888576981,
+        "p_value": 0.0,
+        "dof": 7,
+        "significant": true,
+        "n_in": 327,
+        "n_out": 14673,
+        "skipped": false
+      },
+      "high_engagement": {
+        "chi2": 911.9917168108279,
+        "p_value": 1.2351601678580002e-192,
+        "dof": 7,
+        "significant": true,
+        "n_in": 6672,
+        "n_out": 8328,
+        "skipped": false
+      },
+      "overload": {
+        "chi2": null,
+        "p_value": null,
+        "dof": null,
+        "significant": false,
+        "n_in": 6,
+        "n_out": 14994,
+        "skipped": true,
+        "skip_reason": "only 6 in-condition steps (need >= 30)"
+      },
+      "flow_state": {
+        "chi2": 1479.5847500710634,
+        "p_value": 0.0,
+        "dof": 7,
+        "significant": true,
+        "n_in": 5589,
+        "n_out": 9411,
+        "skipped": false
+      }
+    }
+  },
+  "training_dynamics": {
+    "still_improving_200k_to_500k": false,
+    "reward_200k": 3.5034200087919674,
+    "reward_500k": 3.3829847708398852
+  },
+  "recommendation": "PPO IS CONTEXT-SENSITIVE -- specialisation emerged; reward shaping not recommended at this time.",
+  "recommend_reward_shaping": false,
+  "pedagogical_niches_50k": {
+    "high_confusion": {
+      "break": {
+        "P(a|s)": 0.625,
+        "P(a)_marginal": 0.1801,
+        "lift": 2.4706
+      },
+      "harder_problem": {
+        "P(a|s)": 0.0769,
+        "P(a)_marginal": 0.0303,
+        "lift": 1.541
+      },
+      "encouragement": {
+        "P(a|s)": 0.2788,
+        "P(a)_marginal": 0.1653,
+        "lift": 0.6865
+      }
+    },
+    "high_frustration": {
+      "simplify_problem": {
+        "P(a|s)": 0.1313,
+        "P(a)_marginal": 0.0636,
+        "lift": 1.0634
+      },
+      "scaffold": {
+        "P(a|s)": 0.675,
+        "P(a)_marginal": 0.3939,
+        "lift": 0.7136
+      },
+      "harder_problem": {
+        "P(a|s)": 0.05,
+        "P(a)_marginal": 0.0303,
+        "lift": 0.6516
+      }
+    },
+    "high_boredom": {
+      "simplify_problem": {
+        "P(a|s)": 0.1499,
+        "P(a)_marginal": 0.0636,
+        "lift": 1.356
+      },
+      "scaffold": {
+        "P(a|s)": 0.6916,
+        "P(a)_marginal": 0.3939,
+        "lift": 0.7559
+      },
+      "harder_problem": {
+        "P(a|s)": 0.0317,
+        "P(a)_marginal": 0.0303,
+        "lift": 0.0471
+      }
+    },
+    "high_engagement": {
+      "no_action": {
+        "P(a|s)": 0.0004,
+        "P(a)_marginal": 0.0001,
+        "lift": 1.8047
+      },
+      "encouragement": {
+        "P(a|s)": 0.2824,
+        "P(a)_marginal": 0.1653,
+        "lift": 0.7078
+      },
+      "scaffold": {
+        "P(a|s)": 0.4951,
+        "P(a)_marginal": 0.3939,
+        "lift": 0.2568
+      }
+    },
+    "overload": {
+      "hint": {
+        "P(a|s)": 0.0,
+        "P(a)_marginal": 0.0,
+        "lift": 0.0
+      },
+      "explanation": {
+        "P(a|s)": 0.0,
+        "P(a)_marginal": 0.0,
+        "lift": 0.0
+      },
+      "no_action": {
+        "P(a|s)": 0.0,
+        "P(a)_marginal": 0.0001,
+        "lift": -0.9999
+      }
+    },
+    "flow_state": {
+      "no_action": {
+        "P(a|s)": 0.0004,
+        "P(a)_marginal": 0.0001,
+        "lift": 2.195
+      },
+      "encouragement": {
+        "P(a|s)": 0.2881,
+        "P(a)_marginal": 0.1653,
+        "lift": 0.7422
+      },
+      "scaffold": {
+        "P(a|s)": 0.4921,
+        "P(a)_marginal": 0.3939,
+        "lift": 0.2493
+      }
+    }
+  },
+  "rare_action_specialisation_50k": {
+    "harder_problem": {
+      "overall_freq": 0.0183,
+      "n_uses": 458,
+      "condition_distribution": {
+        "high_confusion": {
+          "uses_in_condition": 8,
+          "P(condition|action)": 0.0175
+        },
+        "high_frustration": {
+          "uses_in_condition": 8,
+          "P(condition|action)": 0.0175
+        },
+        "high_boredom": {
+          "uses_in_condition": 11,
+          "P(condition|action)": 0.024
+        },
+        "high_engagement": {
+          "uses_in_condition": 133,
+          "P(condition|action)": 0.2904
+        },
+        "overload": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "flow_state": {
+          "uses_in_condition": 110,
+          "P(condition|action)": 0.2402
+        }
+      }
+    },
+    "no_action": {
+      "overall_freq": 0.0015,
+      "n_uses": 38,
+      "condition_distribution": {
+        "high_confusion": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "high_frustration": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "high_boredom": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "high_engagement": {
+          "uses_in_condition": 4,
+          "P(condition|action)": 0.1053
+        },
+        "overload": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "flow_state": {
+          "uses_in_condition": 4,
+          "P(condition|action)": 0.1053
+        }
+      }
+    },
+    "explanation": {
+      "overall_freq": 0.0,
+      "n_uses": 1,
+      "condition_distribution": {
+        "high_confusion": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "high_frustration": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "high_boredom": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "high_engagement": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "overload": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        },
+        "flow_state": {
+          "uses_in_condition": 0,
+          "P(condition|action)": 0.0
+        }
+      }
+    }
+  }
+}

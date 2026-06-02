@@ -1,0 +1,4 @@
+rank,condition,condition_label,transition_noise_std,learning_gain_mean,learning_gain_std,coefficient_of_variation,seed_range,success_rate_mean,adaptation_accuracy_mean,mean_episode_reward_mean,shannon_entropy_mean,actions_used_above_1_percent_mean,best_seed,worst_seed
+1,A_baseline_noise,Baseline Noise (A),0.02,0.5634,0.0929,0.1649,0.2464,0.3473,0.6786,3.1265,1.2782,4.6667,7,42
+2,C_no_noise,No Noise (C),0.0,0.552,0.0871,0.1578,0.2432,0.315,0.6659,3.2431,1.2153,4.3333,99,7
+3,B_half_noise,Half Noise (B),0.01,0.5222,0.107,0.2049,0.3235,0.2597,0.608,3.3051,1.3616,5.1667,21,314

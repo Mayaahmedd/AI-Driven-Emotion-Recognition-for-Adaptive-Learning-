@@ -1,0 +1,5 @@
+configuration,configuration_label,n_seeds,top1_action_pct_mean,top1_action_pct_std,top2_actions_pct_mean,top2_actions_pct_std,harder_problem_pct_mean,harder_problem_pct_std,scaffold_pct_mean,scaffold_pct_std,explanation_pct_mean,explanation_pct_std
+A_current_gains,Current Gains (A),6,0.4249,0.1515,0.6983,0.1727,0.403,0.1714,0.2742,0.0857,0.0633,0.0968
+B_nearly_equal_gains,Nearly Equal Gains (B),6,0.4421,0.1475,0.7139,0.1595,0.3655,0.238,0.2416,0.1065,0.1209,0.128
+C_explanation_focused,Explanation-Focused (C),6,0.4279,0.0741,0.715,0.1117,0.2741,0.2124,0.2773,0.1763,0.1356,0.1061
+D_scaffold_penalized,Scaffold-Penalized (D),6,0.3741,0.0658,0.6351,0.1014,0.2589,0.1682,0.242,0.1384,0.115,0.128

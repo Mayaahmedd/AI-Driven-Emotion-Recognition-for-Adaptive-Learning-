@@ -1,0 +1,60 @@
+---
+pid: 44512
+cwd: "/Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-"
+command: "cd /Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning- && export PYTHONPATH=\"$(pwd)\" && python3 -m RL_Module.ppo_hyperparameter_study --phase baseline 2>&1 | tee RL_Module/figures/ppo_hyperparameter_study/baseline_run.log"
+started_at: 2026-05-29T15:47:56.533Z
+running_for_ms: 285118   
+---
+tee: RL_Module/figures/ppo_hyperparameter_study/baseline_run.log: No such file or directory
+PPO study | train=50000 eval=1000 | grid=2304 configs
+
+=== Section 1: PPO baseline (5 seeds) ===
+  [baseline_s42] seed=42 reward=3.570 succ=0.059 fk=0.544 adapt=0.516 (56s)
+  [baseline_s123] seed=123 reward=3.575 succ=0.107 fk=0.559 adapt=0.556 (56s)
+  [baseline_s999] seed=999 reward=3.498 succ=0.048 fk=0.558 adapt=0.289 (57s)
+  [baseline_s2024] seed=2024 reward=3.495 succ=0.110 fk=0.556 adapt=0.580 (58s)
+  [baseline_s777] seed=777 reward=3.486 succ=0.049 fk=0.546 adapt=0.460 (57s)
+{
+  "phase": "baseline",
+  "n_seeds": 5,
+  "mean_reward": 3.5247733005302018,
+  "reward_std": 0.043767583702468756,
+  "reward_ci_95": [
+    3.486409321921306,
+    3.5631372791390974
+  ],
+  "success_rate_mean": 0.07459999999999999,
+  "success_rate_ci_95": [
+    0.04719782607164168,
+    0.1020021739283583
+  ],
+  "learning_gain_mean": 0.36109027823720413,
+  "learning_gain_ci_95": [
+    0.35110456559978936,
+    0.3710759908746189
+  ],
+  "final_knowledge_mean": 0.5525901337358035,
+  "final_knowledge_ci_95": [
+    0.5463678520235666,
+    0.5588124154480403
+  ],
+  "adaptation_accuracy_mean": 0.4800586072226605,
+  "adaptation_accuracy_ci_95": [
+    0.3782142191010689,
+    0.5819029953442522
+  ],
+  "hyperparameters": {
+    "learning_rate": 0.0003,
+    "batch_size": 64,
+    "n_steps": 2048,
+    "clip_range": 0.2,
+    "ent_coef": 0.01,
+    "n_epochs": 10
+  }
+}
+
+---
+exit_code: 1
+elapsed_ms: 288708
+ended_at: 2026-05-29T15:52:45.241Z
+---

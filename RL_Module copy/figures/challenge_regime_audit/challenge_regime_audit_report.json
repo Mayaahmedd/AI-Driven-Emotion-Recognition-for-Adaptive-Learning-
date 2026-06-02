@@ -1,0 +1,1476 @@
+{
+  "study": "challenge_regime_audit",
+  "trace_source": "/Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/figures/dqn_vs_ppo_root_cause/trace_all_steps.csv",
+  "seeds_in_trace": [
+    42,
+    123,
+    456
+  ],
+  "gain_config": {
+    "GAIN_CORRECT_FACTOR": 1.0,
+    "GAIN_INCORRECT_FACTOR": 1.0
+  },
+  "section1_difficulty_evolution": {
+    "PPO": {
+      "mean": 0.40016103363525607,
+      "median": 0.4146090688743206,
+      "std": 0.20133714538017036,
+      "histogram_0_1": {
+        "0.00-0.05": 3463.0,
+        "0.05-0.10": 834.0,
+        "0.10-0.15": 1740.0,
+        "0.15-0.20": 1565.0,
+        "0.20-0.25": 2581.0,
+        "0.25-0.30": 2615.0,
+        "0.30-0.35": 4207.0,
+        "0.35-0.40": 4182.0,
+        "0.40-0.45": 4763.0,
+        "0.45-0.50": 4350.0,
+        "0.50-0.55": 3544.0,
+        "0.55-0.60": 3645.0,
+        "0.60-0.65": 2826.0,
+        "0.65-0.70": 2327.0,
+        "0.70-0.75": 1348.0,
+        "0.75-0.80": 796.0,
+        "0.80-0.85": 34.0,
+        "0.85-0.90": 68.0,
+        "0.90-0.95": 23.0,
+        "0.95-1.00": 89.0
+      },
+      "mean_by_timestep": {
+        "0": 0.543,
+        "1": 0.5316,
+        "2": 0.5102,
+        "3": 0.5001,
+        "4": 0.4942,
+        "5": 0.4874,
+        "6": 0.47,
+        "7": 0.4621,
+        "8": 0.4596,
+        "9": 0.4546,
+        "10": 0.4378,
+        "11": 0.4324,
+        "12": 0.4307,
+        "13": 0.4256,
+        "14": 0.4138,
+        "15": 0.4093,
+        "16": 0.4083,
+        "17": 0.4034,
+        "18": 0.3942,
+        "19": 0.3908,
+        "20": 0.3906,
+        "21": 0.3875,
+        "22": 0.3801,
+        "23": 0.3777,
+        "24": 0.3783,
+        "25": 0.3755,
+        "26": 0.3716,
+        "27": 0.3707,
+        "28": 0.3696,
+        "29": 0.3683,
+        "30": 0.3645,
+        "31": 0.3634,
+        "32": 0.365,
+        "33": 0.3638,
+        "34": 0.3603,
+        "35": 0.3598,
+        "36": 0.3602,
+        "37": 0.3588,
+        "38": 0.3565,
+        "39": 0.3555,
+        "40": 0.3579,
+        "41": 0.3566,
+        "42": 0.3556,
+        "43": 0.3577,
+        "44": 0.3591,
+        "45": 0.3575,
+        "46": 0.3554,
+        "47": 0.3561,
+        "48": 0.3581,
+        "49": 0.357
+      },
+      "mean_by_episode_index": {
+        "1": 0.5309,
+        "2": 0.4177,
+        "3": 0.5321,
+        "4": 0.372,
+        "5": 0.4637,
+        "6": 0.3886,
+        "7": 0.224,
+        "8": 0.4609,
+        "9": 0.4327,
+        "10": 0.4702,
+        "11": 0.5018,
+        "12": 0.3746,
+        "13": 0.5811,
+        "14": 0.2396,
+        "15": 0.4946,
+        "16": 0.444,
+        "17": 0.3325,
+        "18": 0.5227,
+        "19": 0.3851,
+        "20": 0.4729,
+        "21": 0.4055,
+        "22": 0.4987,
+        "23": 0.3999,
+        "24": 0.4136,
+        "25": 0.3857,
+        "26": 0.334,
+        "27": 0.491,
+        "28": 0.3789,
+        "29": 0.4387,
+        "30": 0.4796,
+        "31": 0.4706,
+        "32": 0.3055,
+        "33": 0.3673,
+        "34": 0.4045,
+        "35": 0.4281,
+        "36": 0.5521,
+        "37": 0.2478,
+        "38": 0.4994,
+        "39": 0.1712,
+        "40": 0.3419,
+        "41": 0.361,
+        "42": 0.4941,
+        "43": 0.3032,
+        "44": 0.416,
+        "45": 0.2717,
+        "46": 0.4768,
+        "47": 0.4812,
+        "48": 0.4626,
+        "49": 0.3713,
+        "50": 0.3445
+      },
+      "mean_delta_difficulty_per_step": -0.0037959700285602025,
+      "pct_difficulty_increase_steps": 0.010888888888888889,
+      "pct_difficulty_decrease_steps": 0.04964444444444444,
+      "after_harder_mean_delta_d": 0.09644494126954468,
+      "after_simplify_mean_delta_d": -0.08619733785289523
+    },
+    "DQN": {
+      "mean": 0.6569894526109623,
+      "median": 0.6394254219653164,
+      "std": 0.20768385421788832,
+      "histogram_0_1": {
+        "0.00-0.05": 0.0,
+        "0.05-0.10": 0.0,
+        "0.10-0.15": 0.0,
+        "0.15-0.20": 0.0,
+        "0.20-0.25": 57.0,
+        "0.25-0.30": 0.0,
+        "0.30-0.35": 2197.0,
+        "0.35-0.40": 2634.0,
+        "0.40-0.45": 3687.0,
+        "0.45-0.50": 3366.0,
+        "0.50-0.55": 3839.0,
+        "0.55-0.60": 3712.0,
+        "0.60-0.65": 3445.0,
+        "0.65-0.70": 3570.0,
+        "0.70-0.75": 4003.0,
+        "0.75-0.80": 3551.0,
+        "0.80-0.85": 1203.0,
+        "0.85-0.90": 1237.0,
+        "0.90-0.95": 935.0,
+        "0.95-1.00": 7016.0
+      },
+      "mean_by_timestep": {
+        "0": 0.5589,
+        "1": 0.5616,
+        "2": 0.5682,
+        "3": 0.5754,
+        "4": 0.5828,
+        "5": 0.5854,
+        "6": 0.5912,
+        "7": 0.597,
+        "8": 0.6029,
+        "9": 0.6056,
+        "10": 0.6104,
+        "11": 0.6178,
+        "12": 0.621,
+        "13": 0.6227,
+        "14": 0.6249,
+        "15": 0.6323,
+        "16": 0.634,
+        "17": 0.6355,
+        "18": 0.6371,
+        "19": 0.6467,
+        "20": 0.6478,
+        "21": 0.6499,
+        "22": 0.6513,
+        "23": 0.6602,
+        "24": 0.6613,
+        "25": 0.6635,
+        "26": 0.6643,
+        "27": 0.6734,
+        "28": 0.674,
+        "29": 0.6768,
+        "30": 0.6782,
+        "31": 0.6888,
+        "32": 0.6891,
+        "33": 0.6916,
+        "34": 0.6918,
+        "35": 0.6997,
+        "36": 0.6996,
+        "37": 0.7011,
+        "38": 0.7017,
+        "39": 0.7098,
+        "40": 0.7102,
+        "41": 0.7115,
+        "42": 0.7109,
+        "43": 0.7194,
+        "44": 0.7199,
+        "45": 0.7209,
+        "46": 0.7212,
+        "47": 0.7277,
+        "48": 0.7279,
+        "49": 0.7301
+      },
+      "mean_by_episode_index": {
+        "1": 0.6002,
+        "2": 0.7354,
+        "3": 0.7813,
+        "4": 0.6717,
+        "5": 0.7781,
+        "6": 0.7695,
+        "7": 0.7003,
+        "8": 0.7344,
+        "9": 0.7368,
+        "10": 0.6671,
+        "11": 0.8051,
+        "12": 0.6711,
+        "13": 0.8428,
+        "14": 0.7062,
+        "15": 0.717,
+        "16": 0.6489,
+        "17": 0.4834,
+        "18": 0.7117,
+        "19": 0.7725,
+        "20": 0.6416,
+        "21": 0.7685,
+        "22": 0.7961,
+        "23": 0.4775,
+        "24": 0.4676,
+        "25": 0.67,
+        "26": 0.6061,
+        "27": 0.7463,
+        "28": 0.5239,
+        "29": 0.7989,
+        "30": 0.7456,
+        "31": 0.6266,
+        "32": 0.5905,
+        "33": 0.7202,
+        "34": 0.5605,
+        "35": 0.6512,
+        "36": 0.7511,
+        "37": 0.4786,
+        "38": 0.6994,
+        "39": 0.5897,
+        "40": 0.7017,
+        "41": 0.7371,
+        "42": 0.5767,
+        "43": 0.5905,
+        "44": 0.6852,
+        "45": 0.5978,
+        "46": 0.6195,
+        "47": 0.6206,
+        "48": 0.7026,
+        "49": 0.4877,
+        "50": 0.6966
+      },
+      "mean_delta_difficulty_per_step": 0.0037764214736995794,
+      "pct_difficulty_increase_steps": 0.04035813911635022,
+      "pct_difficulty_decrease_steps": 0.0004499235130027895,
+      "after_harder_mean_delta_d": 0.0555643217698812,
+      "after_simplify_mean_delta_d": -0.1
+    }
+  },
+  "section2_knowledge_evolution": {
+    "PPO": {
+      "mean_knowledge": 0.42641610759279847,
+      "episode_end_mean": 0.4847224221324197,
+      "mastery_curve_by_step": {
+        "0": 0.3143,
+        "1": 0.3209,
+        "2": 0.3317,
+        "3": 0.3409,
+        "4": 0.3473,
+        "5": 0.3534,
+        "6": 0.3614,
+        "7": 0.3685,
+        "8": 0.3728,
+        "9": 0.3773,
+        "10": 0.3843,
+        "11": 0.3905,
+        "12": 0.3923,
+        "13": 0.3964,
+        "14": 0.4018,
+        "15": 0.4053,
+        "16": 0.4077,
+        "17": 0.4109,
+        "18": 0.4158,
+        "19": 0.4196,
+        "20": 0.4228,
+        "21": 0.4257,
+        "22": 0.4296,
+        "23": 0.4321,
+        "24": 0.4351,
+        "25": 0.4388,
+        "26": 0.4411,
+        "27": 0.4439,
+        "28": 0.4464,
+        "29": 0.4494,
+        "30": 0.4537,
+        "31": 0.4565,
+        "32": 0.4589,
+        "33": 0.4597,
+        "34": 0.4614,
+        "35": 0.4644,
+        "36": 0.4663,
+        "37": 0.468,
+        "38": 0.4698,
+        "39": 0.4735,
+        "40": 0.4745,
+        "41": 0.4765,
+        "42": 0.4783,
+        "43": 0.481,
+        "44": 0.4823,
+        "45": 0.4822,
+        "46": 0.4831,
+        "47": 0.4843,
+        "48": 0.4837,
+        "49": 0.4847
+      }
+    },
+    "DQN": {
+      "mean_knowledge": 0.5276424654761515,
+      "episode_end_mean": 0.6700571643496169,
+      "mastery_curve_by_step": {
+        "0": 0.3262,
+        "1": 0.3361,
+        "2": 0.3519,
+        "3": 0.3557,
+        "4": 0.3727,
+        "5": 0.3815,
+        "6": 0.3962,
+        "7": 0.3999,
+        "8": 0.4145,
+        "9": 0.4225,
+        "10": 0.4366,
+        "11": 0.4401,
+        "12": 0.4527,
+        "13": 0.4593,
+        "14": 0.4716,
+        "15": 0.4765,
+        "16": 0.4891,
+        "17": 0.4956,
+        "18": 0.5075,
+        "19": 0.5118,
+        "20": 0.5209,
+        "21": 0.5269,
+        "22": 0.5365,
+        "23": 0.5395,
+        "24": 0.5485,
+        "25": 0.5542,
+        "26": 0.561,
+        "27": 0.5638,
+        "28": 0.5729,
+        "29": 0.5783,
+        "30": 0.587,
+        "31": 0.5894,
+        "32": 0.5964,
+        "33": 0.5987,
+        "34": 0.6049,
+        "35": 0.6056,
+        "36": 0.613,
+        "37": 0.6154,
+        "38": 0.6214,
+        "39": 0.622,
+        "40": 0.6264,
+        "41": 0.6284,
+        "42": 0.6329,
+        "43": 0.6344,
+        "44": 0.6406,
+        "45": 0.6413,
+        "46": 0.6455,
+        "47": 0.6449,
+        "48": 0.6482,
+        "49": 0.649
+      }
+    },
+    "first_max_gap_timestep": 48,
+    "gap_at_step_0": 0.011896035610033773,
+    "gap_at_step_10": 0.05233390617226008,
+    "gap_at_step_20": 0.09807286537707882
+  },
+  "section3_mismatch_dynamics": {
+    "PPO": {
+      "mean": -0.02625507395754239,
+      "median": -0.0299320256697731,
+      "std": 0.19075574294866995,
+      "p10": -0.2715841852919121,
+      "p25": -0.18195418587539225,
+      "p75": 0.11639917980670858,
+      "p90": 0.22140055153527108,
+      "pct_positive_mismatch": 0.4497777777777778,
+      "pct_negative_mismatch": 0.5500666666666667,
+      "zone_occupancy": {
+        "flow": 0.4881,
+        "challenge": 0.4108,
+        "under_challenge": 0.0621,
+        "overload": 0.039
+      },
+      "mismatch_by_timestep": {
+        "0": 0.2288,
+        "1": 0.2107,
+        "2": 0.1785,
+        "3": 0.1592,
+        "4": 0.1469,
+        "5": 0.134,
+        "6": 0.1086,
+        "7": 0.0936,
+        "8": 0.0868,
+        "9": 0.0773,
+        "10": 0.0535,
+        "11": 0.0419,
+        "12": 0.0384,
+        "13": 0.0292,
+        "14": 0.012,
+        "15": 0.0041,
+        "16": 0.0007,
+        "17": -0.0075,
+        "18": -0.0216,
+        "19": -0.0289,
+        "20": -0.0322,
+        "21": -0.0382,
+        "22": -0.0495,
+        "23": -0.0545,
+        "24": -0.0568,
+        "25": -0.0632,
+        "26": -0.0695,
+        "27": -0.0733,
+        "28": -0.0768,
+        "29": -0.0811,
+        "30": -0.0891,
+        "31": -0.093,
+        "32": -0.0939,
+        "33": -0.0959,
+        "34": -0.1011,
+        "35": -0.1047,
+        "36": -0.1061,
+        "37": -0.1093,
+        "38": -0.1133,
+        "39": -0.1179,
+        "40": -0.1166,
+        "41": -0.1199,
+        "42": -0.1227,
+        "43": -0.1233,
+        "44": -0.1232,
+        "45": -0.1246,
+        "46": -0.1277,
+        "47": -0.1282,
+        "48": -0.1256,
+        "49": -0.1277
+      }
+    },
+    "DQN": {
+      "mean": 0.12934698713481085,
+      "median": 0.1253754492179167,
+      "std": 0.23441772901079322,
+      "p10": -0.17807514119620135,
+      "p25": -0.03676407616203265,
+      "p75": 0.28189025858172057,
+      "p90": 0.4416961741816298,
+      "pct_positive_mismatch": 0.6986412309907316,
+      "pct_negative_mismatch": 0.30135876900926845,
+      "zone_occupancy": {
+        "challenge": 0.476,
+        "flow": 0.2787,
+        "overload": 0.2227,
+        "under_challenge": 0.0227
+      },
+      "mismatch_by_timestep": {
+        "0": 0.2328,
+        "1": 0.2254,
+        "2": 0.2164,
+        "3": 0.2197,
+        "4": 0.2101,
+        "5": 0.2039,
+        "6": 0.195,
+        "7": 0.1971,
+        "8": 0.1883,
+        "9": 0.1832,
+        "10": 0.1738,
+        "11": 0.1777,
+        "12": 0.1683,
+        "13": 0.1634,
+        "14": 0.1533,
+        "15": 0.1558,
+        "16": 0.1449,
+        "17": 0.1399,
+        "18": 0.1296,
+        "19": 0.1349,
+        "20": 0.1269,
+        "21": 0.123,
+        "22": 0.1148,
+        "23": 0.1207,
+        "24": 0.1128,
+        "25": 0.1093,
+        "26": 0.1033,
+        "27": 0.1095,
+        "28": 0.1011,
+        "29": 0.0985,
+        "30": 0.0912,
+        "31": 0.0994,
+        "32": 0.0927,
+        "33": 0.0928,
+        "34": 0.0869,
+        "35": 0.0941,
+        "36": 0.0866,
+        "37": 0.0856,
+        "38": 0.0803,
+        "39": 0.0878,
+        "40": 0.0838,
+        "41": 0.0831,
+        "42": 0.078,
+        "43": 0.085,
+        "44": 0.0793,
+        "45": 0.0796,
+        "46": 0.0757,
+        "47": 0.0828,
+        "48": 0.0797,
+        "49": 0.0811
+      }
+    }
+  },
+  "section4_action_mismatch_transitions": {
+    "PPO": [
+      {
+        "action": "hint",
+        "n": 0
+      },
+      {
+        "action": "scaffold",
+        "n": 7393,
+        "freq": 0.16764172335600908,
+        "E_delta_mismatch": -0.016273987514358743,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.23454619234410928,
+        "pct_negative_dm": 0.765318544569187
+      },
+      {
+        "action": "encouragement",
+        "n": 10731,
+        "freq": 0.24333333333333335,
+        "E_delta_mismatch": 0.0004730931598012647,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.5061969993476843,
+        "pct_negative_dm": 0.49370981269220016
+      },
+      {
+        "action": "simplify_problem",
+        "n": 2506,
+        "freq": 0.05682539682539683,
+        "E_delta_mismatch": -0.09854440312064058,
+        "E_delta_difficulty": -0.08619733785289523,
+        "pct_positive_dm": 0.0355147645650439,
+        "pct_negative_dm": 0.9640861931364725
+      },
+      {
+        "action": "harder_problem",
+        "n": 504,
+        "freq": 0.011428571428571429,
+        "E_delta_mismatch": 0.07877618761858333,
+        "E_delta_difficulty": 0.09644494126954468,
+        "pct_positive_dm": 0.9742063492063492,
+        "pct_negative_dm": 0.025793650793650792
+      },
+      {
+        "action": "break",
+        "n": 7157,
+        "freq": 0.16229024943310658,
+        "E_delta_mismatch": 0.0006928577012603201,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.5158585999720553,
+        "pct_negative_dm": 0.48414140002794465
+      },
+      {
+        "action": "explanation",
+        "n": 642,
+        "freq": 0.0145578231292517,
+        "E_delta_mismatch": -0.015354398080569289,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.235202492211838,
+        "pct_negative_dm": 0.764797507788162
+      },
+      {
+        "action": "no_action",
+        "n": 15167,
+        "freq": 0.34392290249433105,
+        "E_delta_mismatch": 0.0004335139018826746,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.5074174193973758,
+        "pct_negative_dm": 0.4925825806026241
+      }
+    ],
+    "DQN": [
+      {
+        "action": "hint",
+        "n": 4457,
+        "freq": 0.10233743570903747,
+        "E_delta_mismatch": -0.0036292191807002746,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.43728965671976666,
+        "pct_negative_dm": 0.5627103432802334
+      },
+      {
+        "action": "scaffold",
+        "n": 17645,
+        "freq": 0.40514786921381335,
+        "E_delta_mismatch": -0.0129101637512237,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.27169169736469256,
+        "pct_negative_dm": 0.7283083026353074
+      },
+      {
+        "action": "encouragement",
+        "n": 3306,
+        "freq": 0.07590925789860396,
+        "E_delta_mismatch": 0.0007534368349478987,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.5211736237144585,
+        "pct_negative_dm": 0.4788263762855414
+      },
+      {
+        "action": "simplify_problem",
+        "n": 20,
+        "freq": 0.0004592211609110948,
+        "E_delta_mismatch": -0.10995478801947249,
+        "E_delta_difficulty": -0.1,
+        "pct_positive_dm": 0.0,
+        "pct_negative_dm": 1.0
+      },
+      {
+        "action": "harder_problem",
+        "n": 2996,
+        "freq": 0.068791329904482,
+        "E_delta_mismatch": 0.042242906730604435,
+        "E_delta_difficulty": 0.055564321769881214,
+        "pct_positive_dm": 0.7066088117489987,
+        "pct_negative_dm": 0.29339118825100136
+      },
+      {
+        "action": "break",
+        "n": 20,
+        "freq": 0.0004592211609110948,
+        "E_delta_mismatch": 0.004025437004110418,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.5,
+        "pct_negative_dm": 0.5
+      },
+      {
+        "action": "explanation",
+        "n": 3565,
+        "freq": 0.08185617193240265,
+        "E_delta_mismatch": -0.010225511428581592,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.3208976157082749,
+        "pct_negative_dm": 0.6791023842917251
+      },
+      {
+        "action": "no_action",
+        "n": 11543,
+        "freq": 0.26503949301983837,
+        "E_delta_mismatch": 0.0007334146954847331,
+        "E_delta_difficulty": 0.0,
+        "pct_positive_dm": 0.5172832019405701,
+        "pct_negative_dm": 0.48271679805942996
+      }
+    ]
+  },
+  "section5_action_sequences": {
+    "PPO": {
+      "top_bigrams": [
+        {
+          "seq": "no_action -> no_action",
+          "count": 6052
+        },
+        {
+          "seq": "no_action -> encouragement",
+          "count": 5739
+        },
+        {
+          "seq": "encouragement -> no_action",
+          "count": 4134
+        },
+        {
+          "seq": "encouragement -> scaffold",
+          "count": 3398
+        },
+        {
+          "seq": "scaffold -> encouragement",
+          "count": 3367
+        },
+        {
+          "seq": "break -> no_action",
+          "count": 3089
+        },
+        {
+          "seq": "encouragement -> break",
+          "count": 2967
+        },
+        {
+          "seq": "scaffold -> break",
+          "count": 2221
+        },
+        {
+          "seq": "break -> scaffold",
+          "count": 2080
+        },
+        {
+          "seq": "no_action -> break",
+          "count": 1766
+        },
+        {
+          "seq": "scaffold -> no_action",
+          "count": 1158
+        },
+        {
+          "seq": "break -> simplify_problem",
+          "count": 1096
+        },
+        {
+          "seq": "simplify_problem -> scaffold",
+          "count": 1049
+        },
+        {
+          "seq": "no_action -> scaffold",
+          "count": 651
+        },
+        {
+          "seq": "encouragement -> simplify_problem",
+          "count": 581
+        }
+      ],
+      "top_trigrams": [
+        {
+          "seq": "no_action -> no_action -> 3399",
+          "count": 3399
+        },
+        {
+          "seq": "no_action -> encouragement -> 2907",
+          "count": 2907
+        },
+        {
+          "seq": "scaffold -> encouragement -> 2392",
+          "count": 2392
+        },
+        {
+          "seq": "encouragement -> no_action -> 2247",
+          "count": 2247
+        },
+        {
+          "seq": "encouragement -> scaffold -> 2101",
+          "count": 2101
+        },
+        {
+          "seq": "no_action -> no_action -> 1976",
+          "count": 1976
+        },
+        {
+          "seq": "break -> scaffold -> 1838",
+          "count": 1838
+        },
+        {
+          "seq": "no_action -> encouragement -> 1808",
+          "count": 1808
+        },
+        {
+          "seq": "scaffold -> break -> 1684",
+          "count": 1684
+        },
+        {
+          "seq": "encouragement -> break -> 1633",
+          "count": 1633
+        },
+        {
+          "seq": "break -> no_action -> 1421",
+          "count": 1421
+        },
+        {
+          "seq": "break -> no_action -> 1374",
+          "count": 1374
+        },
+        {
+          "seq": "encouragement -> no_action -> 1317",
+          "count": 1317
+        },
+        {
+          "seq": "no_action -> break -> 1026",
+          "count": 1026
+        },
+        {
+          "seq": "encouragement -> break -> 962",
+          "count": 962
+        }
+      ]
+    },
+    "DQN": {
+      "top_bigrams": [
+        {
+          "seq": "no_action -> no_action",
+          "count": 7434
+        },
+        {
+          "seq": "scaffold -> hint",
+          "count": 4457
+        },
+        {
+          "seq": "hint -> scaffold",
+          "count": 4243
+        },
+        {
+          "seq": "scaffold -> no_action",
+          "count": 3988
+        },
+        {
+          "seq": "no_action -> scaffold",
+          "count": 3939
+        },
+        {
+          "seq": "scaffold -> explanation",
+          "count": 3565
+        },
+        {
+          "seq": "explanation -> scaffold",
+          "count": 3348
+        },
+        {
+          "seq": "scaffold -> encouragement",
+          "count": 3306
+        },
+        {
+          "seq": "encouragement -> scaffold",
+          "count": 3281
+        },
+        {
+          "seq": "scaffold -> harder_problem",
+          "count": 2810
+        },
+        {
+          "seq": "harder_problem -> scaffold",
+          "count": 2797
+        },
+        {
+          "seq": "harder_problem -> no_action",
+          "count": 120
+        },
+        {
+          "seq": "no_action -> harder_problem",
+          "count": 88
+        },
+        {
+          "seq": "harder_problem -> harder_problem",
+          "count": 64
+        },
+        {
+          "seq": "explanation -> harder_problem",
+          "count": 31
+        }
+      ],
+      "top_trigrams": [
+        {
+          "seq": "no_action -> no_action -> 6847",
+          "count": 6847
+        },
+        {
+          "seq": "scaffold -> hint -> 4243",
+          "count": 4243
+        },
+        {
+          "seq": "scaffold -> no_action -> 3532",
+          "count": 3532
+        },
+        {
+          "seq": "scaffold -> explanation -> 3348",
+          "count": 3348
+        },
+        {
+          "seq": "scaffold -> encouragement -> 3281",
+          "count": 3281
+        },
+        {
+          "seq": "hint -> scaffold -> 3235",
+          "count": 3235
+        },
+        {
+          "seq": "scaffold -> harder_problem -> 2666",
+          "count": 2666
+        },
+        {
+          "seq": "no_action -> scaffold -> 2568",
+          "count": 2568
+        },
+        {
+          "seq": "explanation -> scaffold -> 2519",
+          "count": 2519
+        },
+        {
+          "seq": "encouragement -> scaffold -> 2499",
+          "count": 2499
+        },
+        {
+          "seq": "harder_problem -> scaffold -> 1051",
+          "count": 1051
+        },
+        {
+          "seq": "explanation -> scaffold -> 819",
+          "count": 819
+        },
+        {
+          "seq": "harder_problem -> scaffold -> 766",
+          "count": 766
+        },
+        {
+          "seq": "no_action -> scaffold -> 757",
+          "count": 757
+        },
+        {
+          "seq": "harder_problem -> scaffold -> 752",
+          "count": 752
+        }
+      ]
+    }
+  },
+  "section6_state_drift_h10": {
+    "PPO": [
+      {
+        "k_bin": "high",
+        "n": 7.7826,
+        "delta_knowledge": -0.0079,
+        "delta_difficulty": 0.0459,
+        "delta_mismatch": 0.0538,
+        "delta_frustration": -0.0031
+      },
+      {
+        "k_bin": "low",
+        "n": 16.131,
+        "delta_knowledge": 0.0873,
+        "delta_difficulty": -0.0892,
+        "delta_mismatch": -0.1764,
+        "delta_frustration": 0.0021
+      },
+      {
+        "k_bin": "medium",
+        "n": 30.6116,
+        "delta_knowledge": 0.0226,
+        "delta_difficulty": -0.0141,
+        "delta_mismatch": -0.0367,
+        "delta_frustration": -0.0003
+      }
+    ],
+    "DQN": [
+      {
+        "k_bin": "high",
+        "n": 14.1853,
+        "delta_knowledge": 0.0517,
+        "delta_difficulty": 0.0585,
+        "delta_mismatch": 0.0068,
+        "delta_frustration": -0.0012
+      },
+      {
+        "k_bin": "low",
+        "n": 11.3604,
+        "delta_knowledge": 0.1298,
+        "delta_difficulty": 0.0588,
+        "delta_mismatch": -0.0711,
+        "delta_frustration": 0.02
+      },
+      {
+        "k_bin": "medium",
+        "n": 25.9943,
+        "delta_knowledge": 0.0848,
+        "delta_difficulty": 0.031,
+        "delta_mismatch": -0.0538,
+        "delta_frustration": 0.0017
+      }
+    ]
+  },
+  "section7_reward_vs_mismatch": {
+    "PPO": {
+      "curve": [
+        {
+          "mismatch_bin": "(-0.6, -0.5]",
+          "mean_reward": 0.0845785969865706,
+          "count": 13
+        },
+        {
+          "mismatch_bin": "(-0.5, -0.4]",
+          "mean_reward": 0.07789894404582318,
+          "count": 327
+        },
+        {
+          "mismatch_bin": "(-0.4, -0.3]",
+          "mean_reward": 0.07055423619401134,
+          "count": 2455
+        },
+        {
+          "mismatch_bin": "(-0.3, -0.2]",
+          "mean_reward": 0.0699592128549061,
+          "count": 7169
+        },
+        {
+          "mismatch_bin": "(-0.2, -0.1]",
+          "mean_reward": 0.06868798556382562,
+          "count": 7162
+        },
+        {
+          "mismatch_bin": "(-0.1, 0.0]",
+          "mean_reward": 0.06975414522968196,
+          "count": 7634
+        },
+        {
+          "mismatch_bin": "(0.0, 0.1]",
+          "mean_reward": 0.06950550973479916,
+          "count": 7797
+        },
+        {
+          "mismatch_bin": "(0.1, 0.2]",
+          "mean_reward": 0.06864765846305636,
+          "count": 6798
+        },
+        {
+          "mismatch_bin": "(0.2, 0.3]",
+          "mean_reward": 0.06556319561974627,
+          "count": 3890
+        },
+        {
+          "mismatch_bin": "(0.3, 0.4]",
+          "mean_reward": 0.05280819191882459,
+          "count": 1151
+        },
+        {
+          "mismatch_bin": "(0.4, 0.5]",
+          "mean_reward": 0.056424825984770346,
+          "count": 412
+        },
+        {
+          "mismatch_bin": "(0.5, 0.6]",
+          "mean_reward": 0.05538593434174305,
+          "count": 161
+        },
+        {
+          "mismatch_bin": "(0.6, 0.7]",
+          "mean_reward": 0.06267872075399447,
+          "count": 29
+        },
+        {
+          "mismatch_bin": "(0.7, 0.8]",
+          "mean_reward": 0.0456632452828538,
+          "count": 2
+        }
+      ],
+      "corr_reward_mismatch": -0.08158767794894428,
+      "mean_reward_near_zero_mismatch": 0.06962851429496604,
+      "mean_reward_positive_mismatch": 0.0656242879706192,
+      "mean_reward_negative_mismatch": 0.06967558541895646
+    },
+    "DQN": {
+      "curve": [
+        {
+          "mismatch_bin": "(-0.7, -0.6]",
+          "mean_reward": 0.11077837239840904,
+          "count": 3
+        },
+        {
+          "mismatch_bin": "(-0.6, -0.5]",
+          "mean_reward": 0.07636555207281355,
+          "count": 60
+        },
+        {
+          "mismatch_bin": "(-0.5, -0.4]",
+          "mean_reward": 0.0768472308671182,
+          "count": 186
+        },
+        {
+          "mismatch_bin": "(-0.4, -0.3]",
+          "mean_reward": 0.08245440124904763,
+          "count": 759
+        },
+        {
+          "mismatch_bin": "(-0.3, -0.2]",
+          "mean_reward": 0.0775852804727764,
+          "count": 2678
+        },
+        {
+          "mismatch_bin": "(-0.2, -0.1]",
+          "mean_reward": 0.07620394743241367,
+          "count": 4010
+        },
+        {
+          "mismatch_bin": "(-0.1, 0.0]",
+          "mean_reward": 0.07383852134365157,
+          "count": 5700
+        },
+        {
+          "mismatch_bin": "(0.0, 0.1]",
+          "mean_reward": 0.0774966772492432,
+          "count": 6891
+        },
+        {
+          "mismatch_bin": "(0.1, 0.2]",
+          "mean_reward": 0.07382659979842349,
+          "count": 7204
+        },
+        {
+          "mismatch_bin": "(0.2, 0.3]",
+          "mean_reward": 0.06835810046860233,
+          "count": 7063
+        },
+        {
+          "mismatch_bin": "(0.3, 0.4]",
+          "mean_reward": 0.04402369723256312,
+          "count": 4197
+        },
+        {
+          "mismatch_bin": "(0.4, 0.5]",
+          "mean_reward": 0.03927907922873217,
+          "count": 2678
+        },
+        {
+          "mismatch_bin": "(0.5, 0.6]",
+          "mean_reward": 0.03647035255626516,
+          "count": 1762
+        },
+        {
+          "mismatch_bin": "(0.6, 0.7]",
+          "mean_reward": 0.034912068614123555,
+          "count": 952
+        },
+        {
+          "mismatch_bin": "(0.7, 0.8]",
+          "mean_reward": 0.03186739736640919,
+          "count": 239
+        },
+        {
+          "mismatch_bin": "(0.8, 0.9]",
+          "mean_reward": 0.039108611697332527,
+          "count": 68
+        },
+        {
+          "mismatch_bin": "(0.9, 1.0]",
+          "mean_reward": 0.03453299267765505,
+          "count": 2
+        }
+      ],
+      "corr_reward_mismatch": -0.2930404758557218,
+      "mean_reward_near_zero_mismatch": 0.07584061429460319,
+      "mean_reward_positive_mismatch": 0.05845059921760082,
+      "mean_reward_negative_mismatch": 0.07733133498453082
+    }
+  },
+  "section8_mask_cooldown": {
+    "PPO": {
+      "avg_valid_actions": 6.514,
+      "pct_steps_any_blocked": 0.9154,
+      "challenge_action_availability": {
+        "harder_problem": {
+          "pct_masked": 0.0,
+          "pct_available": 1.0
+        },
+        "scaffold": {
+          "pct_masked": 0.16686666666666672,
+          "pct_available": 0.8331333333333333
+        },
+        "hint": {
+          "pct_masked": 0.0,
+          "pct_available": 1.0
+        },
+        "explanation": {
+          "pct_masked": 0.02833333333333332,
+          "pct_available": 0.9716666666666667
+        }
+      },
+      "harder_blocked_when_frustrated_proxy": 0.0
+    },
+    "DQN": {
+      "avg_valid_actions": 7.12420138576442,
+      "pct_steps_any_blocked": 0.6596328624133897,
+      "challenge_action_availability": {
+        "harder_problem": {
+          "pct_masked": 0.0,
+          "pct_available": 1.0
+        },
+        "scaffold": {
+          "pct_masked": 0.4086655268604338,
+          "pct_available": 0.5913344731395662
+        },
+        "hint": {
+          "pct_masked": 0.09545127328354175,
+          "pct_available": 0.9045487267164583
+        },
+        "explanation": {
+          "pct_masked": 0.15178169711149103,
+          "pct_available": 0.848218302888509
+        }
+      },
+      "harder_blocked_when_frustrated_proxy": 0.0
+    }
+  },
+  "section9_counterfactual": {
+    "summary": [
+      {
+        "first_action_source": "DQN",
+        "horizon": 5,
+        "mean_delta_k": 0.0274,
+        "mean_delta_mismatch": -0.0534,
+        "mean_delta_frustration": -0.0154,
+        "mean_total_reward": 0.2711,
+        "n": 400
+      },
+      {
+        "first_action_source": "DQN",
+        "horizon": 10,
+        "mean_delta_k": 0.0396,
+        "mean_delta_mismatch": -0.0891,
+        "mean_delta_frustration": -0.0214,
+        "mean_total_reward": 0.5063,
+        "n": 400
+      },
+      {
+        "first_action_source": "DQN",
+        "horizon": 20,
+        "mean_delta_k": 0.0536,
+        "mean_delta_mismatch": -0.1258,
+        "mean_delta_frustration": -0.0239,
+        "mean_total_reward": 0.9149,
+        "n": 400
+      },
+      {
+        "first_action_source": "PPO",
+        "horizon": 5,
+        "mean_delta_k": 0.0205,
+        "mean_delta_mismatch": -0.0544,
+        "mean_delta_frustration": -0.0217,
+        "mean_total_reward": 0.2573,
+        "n": 400
+      },
+      {
+        "first_action_source": "PPO",
+        "horizon": 10,
+        "mean_delta_k": 0.0269,
+        "mean_delta_mismatch": -0.0895,
+        "mean_delta_frustration": -0.0215,
+        "mean_total_reward": 0.4887,
+        "n": 400
+      },
+      {
+        "first_action_source": "PPO",
+        "horizon": 20,
+        "mean_delta_k": 0.0531,
+        "mean_delta_mismatch": -0.1389,
+        "mean_delta_frustration": -0.0259,
+        "mean_total_reward": 0.9272,
+        "n": 400
+      }
+    ],
+    "interpretation": "first_action_source=PPO vs DQN on identical states, continued with PPO policy"
+  },
+  "root_cause_ranking": [
+    {
+      "rank": 1,
+      "cause": "Challenge-seeking action mix (especially harder_problem frequency and chains)",
+      "evidence": {
+        "dqn_harder_freq_in_sequences": [
+          {
+            "seq": "no_action -> no_action",
+            "count": 7434
+          },
+          {
+            "seq": "scaffold -> hint",
+            "count": 4457
+          },
+          {
+            "seq": "hint -> scaffold",
+            "count": 4243
+          }
+        ],
+        "ppo_harder_E_delta_mismatch": 0.07877618761858333,
+        "dqn_harder_E_delta_mismatch": 0.042242906730604435,
+        "dqn_pct_difficulty_increase": 0.04035813911635022,
+        "ppo_pct_difficulty_increase": 0.010888888888888889
+      }
+    },
+    {
+      "rank": 2,
+      "cause": "Policy-induced state drift toward easier vs harder regimes",
+      "evidence": {
+        "ppo_drift": [
+          {
+            "k_bin": "high",
+            "n": 7.7826,
+            "delta_knowledge": -0.0079,
+            "delta_difficulty": 0.0459,
+            "delta_mismatch": 0.0538,
+            "delta_frustration": -0.0031
+          },
+          {
+            "k_bin": "low",
+            "n": 16.131,
+            "delta_knowledge": 0.0873,
+            "delta_difficulty": -0.0892,
+            "delta_mismatch": -0.1764,
+            "delta_frustration": 0.0021
+          },
+          {
+            "k_bin": "medium",
+            "n": 30.6116,
+            "delta_knowledge": 0.0226,
+            "delta_difficulty": -0.0141,
+            "delta_mismatch": -0.0367,
+            "delta_frustration": -0.0003
+          }
+        ],
+        "dqn_drift": [
+          {
+            "k_bin": "high",
+            "n": 14.1853,
+            "delta_knowledge": 0.0517,
+            "delta_difficulty": 0.0585,
+            "delta_mismatch": 0.0068,
+            "delta_frustration": -0.0012
+          },
+          {
+            "k_bin": "low",
+            "n": 11.3604,
+            "delta_knowledge": 0.1298,
+            "delta_difficulty": 0.0588,
+            "delta_mismatch": -0.0711,
+            "delta_frustration": 0.02
+          },
+          {
+            "k_bin": "medium",
+            "n": 25.9943,
+            "delta_knowledge": 0.0848,
+            "delta_difficulty": 0.031,
+            "delta_mismatch": -0.0538,
+            "delta_frustration": 0.0017
+          }
+        ],
+        "dqn_mean_mismatch": 0.12934698713481085,
+        "ppo_mean_mismatch": -0.02625507395754239
+      }
+    },
+    {
+      "rank": 3,
+      "cause": "Difficulty adaptation dynamics (simplify vs harder usage)",
+      "evidence": {
+        "ppo_after_simplify_delta_d": -0.08619733785289523,
+        "ppo_after_harder_delta_d": 0.09644494126954468,
+        "dqn_after_harder_delta_d": 0.0555643217698812
+      }
+    },
+    {
+      "rank": 4,
+      "cause": "Reward-mismatch interaction favors near-zero mismatch for PPO",
+      "evidence": {
+        "ppo_corr_reward_mismatch": -0.08158767794894428,
+        "dqn_corr_reward_mismatch": -0.2930404758557218,
+        "ppo_reward_near_zero": 0.06962851429496604,
+        "ppo_reward_positive_mismatch": 0.0656242879706192
+      }
+    },
+    {
+      "rank": 5,
+      "cause": "Mask/cooldown interaction secondary",
+      "evidence": {
+        "ppo_harder_pct_masked": {
+          "pct_masked": 0.0,
+          "pct_available": 1.0
+        },
+        "dqn_harder_pct_masked": {
+          "pct_masked": 0.0,
+          "pct_available": 1.0
+        }
+      }
+    },
+    {
+      "rank": 6,
+      "cause": "Counterfactual first-action effect on future challenge",
+      "evidence": [
+        {
+          "first_action_source": "DQN",
+          "horizon": 5,
+          "mean_delta_k": 0.0274,
+          "mean_delta_mismatch": -0.0534,
+          "mean_delta_frustration": -0.0154,
+          "mean_total_reward": 0.2711,
+          "n": 400
+        },
+        {
+          "first_action_source": "DQN",
+          "horizon": 10,
+          "mean_delta_k": 0.0396,
+          "mean_delta_mismatch": -0.0891,
+          "mean_delta_frustration": -0.0214,
+          "mean_total_reward": 0.5063,
+          "n": 400
+        },
+        {
+          "first_action_source": "DQN",
+          "horizon": 20,
+          "mean_delta_k": 0.0536,
+          "mean_delta_mismatch": -0.1258,
+          "mean_delta_frustration": -0.0239,
+          "mean_total_reward": 0.9149,
+          "n": 400
+        },
+        {
+          "first_action_source": "PPO",
+          "horizon": 5,
+          "mean_delta_k": 0.0205,
+          "mean_delta_mismatch": -0.0544,
+          "mean_delta_frustration": -0.0217,
+          "mean_total_reward": 0.2573,
+          "n": 400
+        },
+        {
+          "first_action_source": "PPO",
+          "horizon": 10,
+          "mean_delta_k": 0.0269,
+          "mean_delta_mismatch": -0.0895,
+          "mean_delta_frustration": -0.0215,
+          "mean_total_reward": 0.4887,
+          "n": 400
+        },
+        {
+          "first_action_source": "PPO",
+          "horizon": 20,
+          "mean_delta_k": 0.0531,
+          "mean_delta_mismatch": -0.1389,
+          "mean_delta_frustration": -0.0259,
+          "mean_total_reward": 0.9272,
+          "n": 400
+        }
+      ]
+    }
+  ],
+  "final_thesis_mechanism": {
+    "ppo_path": "comfort-biased actions -> near-zero/negative mismatch -> lower challenge exposure -> lower mastery",
+    "dqn_path": "harder/scaffold chains -> positive mismatch -> higher challenge exposure -> higher mastery",
+    "ppo_mean_difficulty": 0.40016103363525607,
+    "dqn_mean_difficulty": 0.6569894526109623,
+    "ppo_zone_occupancy": {
+      "flow": 0.4881,
+      "challenge": 0.4108,
+      "under_challenge": 0.0621,
+      "overload": 0.039
+    },
+    "dqn_zone_occupancy": {
+      "challenge": 0.476,
+      "flow": 0.2787,
+      "overload": 0.2227,
+      "under_challenge": 0.0227
+    },
+    "primary_mechanism": "Policy-induced difficulty/mismatch dynamics: DQN repeatedly applies mismatch-increasing actions (harder_problem, scaffold under high difficulty), while PPO applies mismatch-reducing actions (simplify, encouragement, no_action) and rarely sustains harder_problem chains."
+  }
+}

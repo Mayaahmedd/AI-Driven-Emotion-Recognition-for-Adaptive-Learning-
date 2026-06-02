@@ -1,0 +1,54 @@
+=== Transition Noise Ablation (run) ===
+
+--- Baseline Noise (A) ---
+  A_baseline_noise seed=42 noise=0.0200: lg=0.427 succ=0.162 entropy=1.634 (27s)
+  A_baseline_noise seed=7 noise=0.0200: lg=0.673 succ=0.522 entropy=0.735 (26s)
+  A_baseline_noise seed=13 noise=0.0200: lg=0.545 succ=0.300 entropy=1.601 (27s)
+  A_baseline_noise seed=21 noise=0.0200: lg=0.618 succ=0.418 entropy=1.328 (26s)
+  A_baseline_noise seed=99 noise=0.0200: lg=0.491 succ=0.216 entropy=1.250 (26s)
+  A_baseline_noise seed=314 noise=0.0200: lg=0.626 succ=0.466 entropy=1.120 (26s)
+
+--- Half Noise (B) ---
+  B_half_noise seed=42 noise=0.0100: lg=0.499 succ=0.236 entropy=1.585 (26s)
+  B_half_noise seed=7 noise=0.0100: lg=0.562 succ=0.348 entropy=1.404 (26s)
+  B_half_noise seed=13 noise=0.0100: lg=0.477 succ=0.174 entropy=1.598 (26s)
+  B_half_noise seed=21 noise=0.0100: lg=0.684 succ=0.560 entropy=0.813 (26s)
+  B_half_noise seed=99 noise=0.0100: lg=0.551 succ=0.238 entropy=1.391 (26s)
+  B_half_noise seed=314 noise=0.0100: lg=0.361 succ=0.002 entropy=1.380 (26s)
+
+--- No Noise (C) ---
+  C_no_noise seed=42 noise=0.0000: lg=0.518 succ=0.232 entropy=1.450 (26s)
+  C_no_noise seed=7 noise=0.0000: lg=0.402 succ=0.072 entropy=1.399 (26s)
+  C_no_noise seed=13 noise=0.0000: lg=0.624 succ=0.438 entropy=0.980 (26s)
+  C_no_noise seed=21 noise=0.0000: lg=0.553 succ=0.266 entropy=1.410 (26s)
+  C_no_noise seed=99 noise=0.0000: lg=0.645 succ=0.502 entropy=0.747 (26s)
+  C_no_noise seed=314 noise=0.0000: lg=0.571 succ=0.380 entropy=1.306 (26s)
+
+=== Transition Noise Ablation (analyze) ===
+
+========================================================================
+WINNER NOISE CONFIGURATION
+========================================================================
+
+Overall rank #1: Baseline Noise (A) (TRANSITION_NOISE_STD=0.0200)
+  learning_gain_mean=0.5634 (std=0.0929, CV=0.1649)
+  seed_range=0.2464 (best seed 7, worst seed 42)
+  success_rate_mean=0.3473
+  adaptation_accuracy_mean=0.6786
+  shannon_entropy=1.2782, actions_used_above_1%=4.7
+
+Best mean learning gain: Baseline Noise (A) (mean=0.5634)
+Most stable (lowest LG std): No Noise (C) (std=0.0871, CV=0.1578)
+Highest action diversity: Half Noise (B) (entropy=1.3616)
+
+--- Findings ---
+
+1. Does reducing noise improve stability?
+   YES (partially). Lower-noise conditions reduce learning-gain std (baseline=0.0929, half=0.1070, none=0.0871).
+
+2. Does reducing noise hurt generalization?
+   YES (tradeoff). Mean learning gain drops when noise is reduced (baseline=0.5634, half=0.5222, none=0.5520). Some transition stochasticity may help exploration of robust policies.
+
+3. Best performance-stability tradeoff:
+   Baseline Noise (A) - balances mean LG (0.5634), seed std (0.0929), and action diversity (entropy=1.2782).
+========================================================================

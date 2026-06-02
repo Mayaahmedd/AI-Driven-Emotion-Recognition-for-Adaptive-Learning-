@@ -1,0 +1,212 @@
+[
+  {
+    "config_id": "3d833752cc9e",
+    "learning_rate": 0.0003,
+    "batch_size": 64,
+    "buffer_size": 50000,
+    "target_update_interval": 1000,
+    "exploration_fraction": 0.2,
+    "exploration_final_eps": 0.05,
+    "mean_episode_reward_mean": 3.1745746588673347,
+    "mean_episode_reward_std": 0.2985480348207897,
+    "mean_episode_reward_ci_95": [
+      2.9128857683072966,
+      3.4362635494273728
+    ],
+    "reward_vs_baseline_p": 0.25903473007811684,
+    "reward_vs_baseline_delta": 0.4165652162385278,
+    "success_rate_mean": 0.16899999999999998,
+    "success_rate_std": 0.1914719300576458,
+    "success_rate_ci_95": [
+      0.0011674534543433535,
+      0.33683254654565664
+    ],
+    "learning_gain_mean": 0.4374195118198186,
+    "learning_gain_std": 0.15445230160704046,
+    "learning_gain_ci_95": [
+      0.30203610031535877,
+      0.5728029233242784
+    ],
+    "final_knowledge_mean": 0.6102664514892885,
+    "final_knowledge_std": 0.10711485449967789,
+    "final_knowledge_ci_95": [
+      0.5163761418332671,
+      0.7041567611453099
+    ],
+    "adaptation_accuracy_mean": 0.5497412949916578,
+    "adaptation_accuracy_std": 0.27325675973286684,
+    "adaptation_accuracy_ci_95": [
+      0.31022118448264296,
+      0.7892614055006726
+    ],
+    "stable_improvement": false
+  },
+  {
+    "config_id": "467106ecc1c7",
+    "learning_rate": 0.0003,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 1000,
+    "exploration_fraction": 0.2,
+    "exploration_final_eps": 0.05,
+    "mean_episode_reward_mean": 3.1745746588673347,
+    "mean_episode_reward_std": 0.2985480348207897,
+    "mean_episode_reward_ci_95": [
+      2.9128857683072966,
+      3.4362635494273728
+    ],
+    "reward_vs_baseline_p": 0.25903473007811684,
+    "reward_vs_baseline_delta": 0.4165652162385278,
+    "success_rate_mean": 0.16899999999999998,
+    "success_rate_std": 0.1914719300576458,
+    "success_rate_ci_95": [
+      0.0011674534543433535,
+      0.33683254654565664
+    ],
+    "learning_gain_mean": 0.4374195118198186,
+    "learning_gain_std": 0.15445230160704046,
+    "learning_gain_ci_95": [
+      0.30203610031535877,
+      0.5728029233242784
+    ],
+    "final_knowledge_mean": 0.6102664514892885,
+    "final_knowledge_std": 0.10711485449967789,
+    "final_knowledge_ci_95": [
+      0.5163761418332671,
+      0.7041567611453099
+    ],
+    "adaptation_accuracy_mean": 0.5497412949916578,
+    "adaptation_accuracy_std": 0.27325675973286684,
+    "adaptation_accuracy_ci_95": [
+      0.31022118448264296,
+      0.7892614055006726
+    ],
+    "stable_improvement": false
+  },
+  {
+    "config_id": "4c0cc82b2166",
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 500,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05,
+    "mean_episode_reward_mean": 2.929507234447669,
+    "mean_episode_reward_std": 0.2993931099821395,
+    "mean_episode_reward_ci_95": [
+      2.667077602848936,
+      3.191936866046402
+    ],
+    "reward_vs_baseline_p": 0.6428720941563899,
+    "reward_vs_baseline_delta": 0.17149779181886204,
+    "success_rate_mean": 0.36160000000000003,
+    "success_rate_std": 0.23331373727236893,
+    "success_rate_ci_95": [
+      0.15709149236278708,
+      0.566108507637213
+    ],
+    "learning_gain_mean": 0.567327718205134,
+    "learning_gain_std": 0.15090171309057174,
+    "learning_gain_ci_95": [
+      0.43505653475559214,
+      0.6995989016546758
+    ],
+    "final_knowledge_mean": 0.6982089451594823,
+    "final_knowledge_std": 0.10600613915125168,
+    "final_knowledge_ci_95": [
+      0.6052904673550781,
+      0.7911274229638865
+    ],
+    "adaptation_accuracy_mean": 0.7344358388093172,
+    "adaptation_accuracy_std": 0.3006544310783196,
+    "adaptation_accuracy_ci_95": [
+      0.4709006105232792,
+      0.9979710670953552
+    ],
+    "stable_improvement": false
+  },
+  {
+    "config_id": "501d9476d887",
+    "learning_rate": 0.0005,
+    "batch_size": 32,
+    "buffer_size": 50000,
+    "target_update_interval": 500,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.01,
+    "mean_episode_reward_mean": 3.1282946610444613,
+    "mean_episode_reward_std": 0.22647822380157628,
+    "mean_episode_reward_ci_95": [
+      2.929777745137717,
+      3.3268115769512057
+    ],
+    "reward_vs_baseline_p": 0.2599715308692402,
+    "reward_vs_baseline_delta": 0.3702852184156544,
+    "success_rate_mean": 0.3146,
+    "success_rate_std": 0.16738070378630865,
+    "success_rate_ci_95": [
+      0.16788434433912652,
+      0.46131565566087346
+    ],
+    "learning_gain_mean": 0.5495590684290907,
+    "learning_gain_std": 0.10387520779848408,
+    "learning_gain_ci_95": [
+      0.4585084343098747,
+      0.6406097025483068
+    ],
+    "final_knowledge_mean": 0.6860981908504307,
+    "final_knowledge_std": 0.07311581270789096,
+    "final_knowledge_ci_95": [
+      0.6220093552919957,
+      0.7501870264088656
+    ],
+    "adaptation_accuracy_mean": 0.6541229217893941,
+    "adaptation_accuracy_std": 0.28493431845014366,
+    "adaptation_accuracy_ci_95": [
+      0.4043669797599734,
+      0.9038788638188149
+    ],
+    "stable_improvement": false
+  },
+  {
+    "config_id": "b1a2d48ae992",
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "buffer_size": 50000,
+    "target_update_interval": 500,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05,
+    "mean_episode_reward_mean": 2.929507234447669,
+    "mean_episode_reward_std": 0.2993931099821395,
+    "mean_episode_reward_ci_95": [
+      2.667077602848936,
+      3.191936866046402
+    ],
+    "reward_vs_baseline_p": 0.6428720941563899,
+    "reward_vs_baseline_delta": 0.17149779181886204,
+    "success_rate_mean": 0.36160000000000003,
+    "success_rate_std": 0.23331373727236893,
+    "success_rate_ci_95": [
+      0.15709149236278708,
+      0.566108507637213
+    ],
+    "learning_gain_mean": 0.567327718205134,
+    "learning_gain_std": 0.15090171309057174,
+    "learning_gain_ci_95": [
+      0.43505653475559214,
+      0.6995989016546758
+    ],
+    "final_knowledge_mean": 0.6982089451594823,
+    "final_knowledge_std": 0.10600613915125168,
+    "final_knowledge_ci_95": [
+      0.6052904673550781,
+      0.7911274229638865
+    ],
+    "adaptation_accuracy_mean": 0.7344358388093172,
+    "adaptation_accuracy_std": 0.3006544310783196,
+    "adaptation_accuracy_ci_95": [
+      0.4709006105232792,
+      0.9979710670953552
+    ],
+    "stable_improvement": false
+  }
+]

@@ -1,0 +1,3 @@
+configuration,configuration_label,use_zone_bonus,shannon_entropy_mean,shannon_entropy_std,actions_used_above_1_percent_mean,actions_used_above_1_percent_std,dominant_action_pct_mean,dominant_action_pct_std,dominance_any_seed,hint_mean_freq,scaffold_mean_freq,encouragement_mean_freq,simplify_problem_mean_freq,harder_problem_mean_freq,break_mean_freq,explanation_mean_freq,no_action_mean_freq
+A_zone_bonus_on,Zone Bonus ON (A),True,1.5882,0.1504,6.0,0.0,0.3501,0.0989,False,0.0013,0.3501,0.2025,0.1586,0.1308,0.0273,0.1295,0.0
+B_zone_bonus_off,Zone Bonus OFF (B),False,1.482,0.125,6.0,0.0,0.3889,0.0905,False,0.1516,0.3889,0.0019,0.0763,0.152,0.0285,0.1424,0.0584

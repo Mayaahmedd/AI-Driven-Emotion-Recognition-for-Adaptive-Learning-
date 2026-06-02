@@ -1,0 +1,367 @@
+{
+  "study": "state_space_ablation",
+  "gain_ratio": "10:1",
+  "n_seeds": 10,
+  "conditions": {
+    "A_original_v6": {
+      "include_persistent_obs": false,
+      "obs_ablation": "full_emotion",
+      "label": "A: Original 6-dim"
+    },
+    "B_v7_with_persistent": {
+      "include_persistent_obs": true,
+      "obs_ablation": "full_emotion",
+      "label": "B: + Persistent Steps"
+    },
+    "C_v7_persistent_no_eid": {
+      "include_persistent_obs": true,
+      "obs_ablation": "no_emotion_id",
+      "label": "C: Persistent, No Emotion ID"
+    }
+  },
+  "summary_best_checkpoint": [
+    {
+      "condition": "A_original_v6",
+      "condition_label": "A: Original 6-dim",
+      "n_seeds": 10,
+      "learning_gain_mean": 0.5781,
+      "learning_gain_std": 0.1269,
+      "learning_gain_ci": "[0.499, 0.657]",
+      "final_knowledge_mean": 0.7095,
+      "final_knowledge_std": 0.088,
+      "final_knowledge_ci": "[0.655, 0.764]",
+      "success_rate_mean": 0.3576,
+      "success_rate_std": 0.2008,
+      "success_rate_ci": "[0.233, 0.482]",
+      "adaptation_accuracy_mean": 0.7505,
+      "adaptation_accuracy_std": 0.2117,
+      "adaptation_accuracy_ci": "[0.619, 0.882]",
+      "mean_episode_reward_mean": 3.0196,
+      "mean_episode_reward_std": 0.3151,
+      "mean_episode_reward_ci": "[2.824, 3.215]",
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci": "[0.000, 0.000]",
+      "action_diversity_mean": 0.4617,
+      "action_diversity_std": 0.1123,
+      "action_diversity_ci": "[0.392, 0.531]"
+    },
+    {
+      "condition": "B_v7_with_persistent",
+      "condition_label": "B: + Persistent Steps",
+      "n_seeds": 10,
+      "learning_gain_mean": 0.5503,
+      "learning_gain_std": 0.1445,
+      "learning_gain_ci": "[0.461, 0.640]",
+      "final_knowledge_mean": 0.6902,
+      "final_knowledge_std": 0.0999,
+      "final_knowledge_ci": "[0.628, 0.752]",
+      "success_rate_mean": 0.3326,
+      "success_rate_std": 0.2104,
+      "success_rate_ci": "[0.202, 0.463]",
+      "adaptation_accuracy_mean": 0.6218,
+      "adaptation_accuracy_std": 0.2508,
+      "adaptation_accuracy_ci": "[0.466, 0.777]",
+      "mean_episode_reward_mean": 2.7505,
+      "mean_episode_reward_std": 0.4791,
+      "mean_episode_reward_ci": "[2.454, 3.047]",
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci": "[0.000, 0.000]",
+      "action_diversity_mean": 0.4875,
+      "action_diversity_std": 0.1978,
+      "action_diversity_ci": "[0.365, 0.610]"
+    },
+    {
+      "condition": "C_v7_persistent_no_eid",
+      "condition_label": "C: Persistent, No Emotion ID",
+      "n_seeds": 10,
+      "learning_gain_mean": 0.5571,
+      "learning_gain_std": 0.1013,
+      "learning_gain_ci": "[0.494, 0.620]",
+      "final_knowledge_mean": 0.6952,
+      "final_knowledge_std": 0.0704,
+      "final_knowledge_ci": "[0.652, 0.739]",
+      "success_rate_mean": 0.3226,
+      "success_rate_std": 0.1659,
+      "success_rate_ci": "[0.220, 0.425]",
+      "adaptation_accuracy_mean": 0.6404,
+      "adaptation_accuracy_std": 0.1658,
+      "adaptation_accuracy_ci": "[0.538, 0.743]",
+      "mean_episode_reward_mean": 2.9708,
+      "mean_episode_reward_std": 0.4841,
+      "mean_episode_reward_ci": "[2.671, 3.271]",
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci": "[0.000, 0.000]",
+      "action_diversity_mean": 0.5199,
+      "action_diversity_std": 0.2184,
+      "action_diversity_ci": "[0.385, 0.655]"
+    }
+  ],
+  "pairwise_A_vs_B": [
+    {
+      "comparison": "A_original_v6_vs_B_v7_with_persistent",
+      "eval_type": "best",
+      "metric": "learning_gain",
+      "mean_A_original_v6": 0.5781,
+      "mean_B_v7_with_persistent": 0.5503,
+      "delta": 0.0278,
+      "cohens_d": 0.2044,
+      "p_raw": 0.653243,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_B_v7_with_persistent",
+      "eval_type": "best",
+      "metric": "final_knowledge",
+      "mean_A_original_v6": 0.7095,
+      "mean_B_v7_with_persistent": 0.6902,
+      "delta": 0.0193,
+      "cohens_d": 0.2049,
+      "p_raw": 0.652327,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_B_v7_with_persistent",
+      "eval_type": "best",
+      "metric": "success_rate",
+      "mean_A_original_v6": 0.3576,
+      "mean_B_v7_with_persistent": 0.3326,
+      "delta": 0.025,
+      "cohens_d": 0.1216,
+      "p_raw": 0.788868,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_B_v7_with_persistent",
+      "eval_type": "best",
+      "metric": "adaptation_accuracy",
+      "mean_A_original_v6": 0.7505,
+      "mean_B_v7_with_persistent": 0.6218,
+      "delta": 0.1287,
+      "cohens_d": 0.5545,
+      "p_raw": 0.231355,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_B_v7_with_persistent",
+      "eval_type": "best",
+      "metric": "mean_episode_reward",
+      "mean_A_original_v6": 3.0196,
+      "mean_B_v7_with_persistent": 2.7505,
+      "delta": 0.2691,
+      "cohens_d": 0.6635,
+      "p_raw": 0.157863,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_B_v7_with_persistent",
+      "eval_type": "best",
+      "metric": "dropout_rate",
+      "mean_A_original_v6": 0.0,
+      "mean_B_v7_with_persistent": 0.0,
+      "delta": 0.0,
+      "cohens_d": 0.0,
+      "p_raw": NaN,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_B_v7_with_persistent",
+      "eval_type": "best",
+      "metric": "action_diversity",
+      "mean_A_original_v6": 0.4617,
+      "mean_B_v7_with_persistent": 0.4875,
+      "delta": -0.0259,
+      "cohens_d": -0.1608,
+      "p_raw": 0.724528,
+      "p_holm": 1.0
+    }
+  ],
+  "pairwise_A_vs_C": [
+    {
+      "comparison": "A_original_v6_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "learning_gain",
+      "mean_A_original_v6": 0.5781,
+      "mean_C_v7_persistent_no_eid": 0.5571,
+      "delta": 0.021,
+      "cohens_d": 0.1831,
+      "p_raw": 0.687345,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "final_knowledge",
+      "mean_A_original_v6": 0.7095,
+      "mean_C_v7_persistent_no_eid": 0.6952,
+      "delta": 0.0144,
+      "cohens_d": 0.1801,
+      "p_raw": 0.692055,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "success_rate",
+      "mean_A_original_v6": 0.3576,
+      "mean_C_v7_persistent_no_eid": 0.3226,
+      "delta": 0.035,
+      "cohens_d": 0.19,
+      "p_raw": 0.676092,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "adaptation_accuracy",
+      "mean_A_original_v6": 0.7505,
+      "mean_C_v7_persistent_no_eid": 0.6404,
+      "delta": 0.1101,
+      "cohens_d": 0.5792,
+      "p_raw": 0.212533,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "mean_episode_reward",
+      "mean_A_original_v6": 3.0196,
+      "mean_C_v7_persistent_no_eid": 2.9708,
+      "delta": 0.0488,
+      "cohens_d": 0.1194,
+      "p_raw": 0.793009,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "dropout_rate",
+      "mean_A_original_v6": 0.0,
+      "mean_C_v7_persistent_no_eid": 0.0,
+      "delta": 0.0,
+      "cohens_d": 0.0,
+      "p_raw": NaN,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_original_v6_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "action_diversity",
+      "mean_A_original_v6": 0.4617,
+      "mean_C_v7_persistent_no_eid": 0.5199,
+      "delta": -0.0582,
+      "cohens_d": -0.3352,
+      "p_raw": 0.466387,
+      "p_holm": 1.0
+    }
+  ],
+  "pairwise_B_vs_C": [
+    {
+      "comparison": "B_v7_with_persistent_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "learning_gain",
+      "mean_B_v7_with_persistent": 0.5503,
+      "mean_C_v7_persistent_no_eid": 0.5571,
+      "delta": -0.0068,
+      "cohens_d": -0.0542,
+      "p_raw": 0.904955,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "B_v7_with_persistent_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "final_knowledge",
+      "mean_B_v7_with_persistent": 0.6902,
+      "mean_C_v7_persistent_no_eid": 0.6952,
+      "delta": -0.0049,
+      "cohens_d": -0.0572,
+      "p_raw": 0.899783,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "B_v7_with_persistent_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "success_rate",
+      "mean_B_v7_with_persistent": 0.3326,
+      "mean_C_v7_persistent_no_eid": 0.3226,
+      "delta": 0.01,
+      "cohens_d": 0.0528,
+      "p_raw": 0.907437,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "B_v7_with_persistent_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "adaptation_accuracy",
+      "mean_B_v7_with_persistent": 0.6218,
+      "mean_C_v7_persistent_no_eid": 0.6404,
+      "delta": -0.0186,
+      "cohens_d": -0.0873,
+      "p_raw": 0.847702,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "B_v7_with_persistent_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "mean_episode_reward",
+      "mean_B_v7_with_persistent": 2.7505,
+      "mean_C_v7_persistent_no_eid": 2.9708,
+      "delta": -0.2203,
+      "cohens_d": -0.4574,
+      "p_raw": 0.31997,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "B_v7_with_persistent_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "dropout_rate",
+      "mean_B_v7_with_persistent": 0.0,
+      "mean_C_v7_persistent_no_eid": 0.0,
+      "delta": 0.0,
+      "cohens_d": 0.0,
+      "p_raw": NaN,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "B_v7_with_persistent_vs_C_v7_persistent_no_eid",
+      "eval_type": "best",
+      "metric": "action_diversity",
+      "mean_B_v7_with_persistent": 0.4875,
+      "mean_C_v7_persistent_no_eid": 0.5199,
+      "delta": -0.0324,
+      "cohens_d": -0.1553,
+      "p_raw": 0.732398,
+      "p_holm": 1.0
+    }
+  ],
+  "final_recommendation": {
+    "recommended_condition": "A_original_v6",
+    "recommended_label": "A: Original 6-dim",
+    "recommended_stats": {
+      "learning_gain_mean": 0.5781,
+      "learning_gain_std": 0.1269,
+      "learning_gain_ci": "[0.499, 0.657]",
+      "adaptation_mean": 0.7505,
+      "adaptation_ci": "[0.619, 0.882]"
+    },
+    "persistent_obs_improves_lg": false,
+    "emotion_id_proven_redundant": true,
+    "pairwise_B_vs_C_lg_delta": -0.0068,
+    "justification": "persistent channel delta vs original=+0.0278 (not significant); emotion_id is redundant when persistent steps are present (B?C); Recommended: A: Original 6-dim"
+  },
+  "emotion_id_audit": {
+    "derivation": "threshold rules on frustration/confusion/boredom (sim mode)",
+    "priority": "frustration>0.6 -> frustrated; confusion>0.5 -> confused; boredom>0.5 -> bored; else engaged",
+    "contains_info_beyond_continuous": "discretization collapses overlapping thresholds; priority ordering not recoverable from continuous vars alone",
+    "prior_ablation_evidence": "emotion_id_ablation: no_emotion_id outperforms full_emotion (LG 0.613 vs 0.580, lower variance)"
+  },
+  "persistent_frustration_audit": {
+    "drives_masking": true,
+    "drives_dropout": true,
+    "drives_reward_penalty": true,
+    "was_observable_to_agent": "no (pre-fix); consecutive_flag_steps encodes urgency to dropout",
+    "normalization": "consecutive_flag_steps / PERSISTENT_FLAG_DROPOUT_STEPS clipped to [0,1]"
+  }
+}

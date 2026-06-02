@@ -1,0 +1,505 @@
+{
+  "study": "emotion_id_ablation_stability",
+  "gain_ratio": "10:1",
+  "seeds_15": [
+    42,
+    0,
+    1,
+    7,
+    13,
+    21,
+    99,
+    100,
+    200,
+    314,
+    500,
+    777,
+    1234,
+    2024,
+    5555
+  ],
+  "n_seeds": 15,
+  "dqn_hyperparameters": {
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 500,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05,
+    "net_arch": [
+      64,
+      64
+    ]
+  },
+  "conditions": {
+    "A_full_emotion": {
+      "obs_ablation": "full_emotion",
+      "emotion_dynamics": "full",
+      "label": "A: Full Emotion"
+    },
+    "D_no_emotion_id": {
+      "obs_ablation": "no_emotion_id",
+      "emotion_dynamics": "full",
+      "label": "D: No Emotion ID"
+    }
+  },
+  "checkpoint_steps": [
+    10000,
+    20000,
+    30000,
+    40000,
+    50000
+  ],
+  "summary_final_checkpoint": [
+    {
+      "condition": "A_full_emotion",
+      "condition_label": "A: Full Emotion",
+      "n_seeds": 15,
+      "learning_gain_mean": 0.4115,
+      "learning_gain_std": 0.1849,
+      "learning_gain_ci": "[0.318, 0.505]",
+      "final_knowledge_mean": 0.5934,
+      "final_knowledge_std": 0.1292,
+      "final_knowledge_ci": "[0.528, 0.659]",
+      "success_rate_mean": 0.1779,
+      "success_rate_std": 0.2068,
+      "success_rate_ci": "[0.073, 0.283]",
+      "adaptation_accuracy_mean": 0.4546,
+      "adaptation_accuracy_std": 0.2988,
+      "adaptation_accuracy_ci": "[0.303, 0.606]",
+      "mean_episode_reward_mean": 3.0606,
+      "mean_episode_reward_std": 0.2055,
+      "mean_episode_reward_ci": "[2.957, 3.165]"
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "condition_label": "D: No Emotion ID",
+      "n_seeds": 15,
+      "learning_gain_mean": 0.4261,
+      "learning_gain_std": 0.1589,
+      "learning_gain_ci": "[0.346, 0.507]",
+      "final_knowledge_mean": 0.6034,
+      "final_knowledge_std": 0.1102,
+      "final_knowledge_ci": "[0.548, 0.659]",
+      "success_rate_mean": 0.1827,
+      "success_rate_std": 0.187,
+      "success_rate_ci": "[0.088, 0.277]",
+      "adaptation_accuracy_mean": 0.4857,
+      "adaptation_accuracy_std": 0.2901,
+      "adaptation_accuracy_ci": "[0.339, 0.632]",
+      "mean_episode_reward_mean": 3.183,
+      "mean_episode_reward_std": 0.2611,
+      "mean_episode_reward_ci": "[3.051, 3.315]"
+    }
+  ],
+  "summary_best_checkpoint": [
+    {
+      "condition": "A_full_emotion",
+      "condition_label": "A: Full Emotion",
+      "n_seeds": 15,
+      "learning_gain_mean": 0.5801,
+      "learning_gain_std": 0.1088,
+      "learning_gain_ci": "[0.525, 0.635]",
+      "final_knowledge_mean": 0.7098,
+      "final_knowledge_std": 0.0754,
+      "final_knowledge_ci": "[0.672, 0.748]",
+      "success_rate_mean": 0.3489,
+      "success_rate_std": 0.1751,
+      "success_rate_ci": "[0.260, 0.438]",
+      "adaptation_accuracy_mean": 0.7464,
+      "adaptation_accuracy_std": 0.1918,
+      "adaptation_accuracy_ci": "[0.649, 0.844]",
+      "mean_episode_reward_mean": 3.0417,
+      "mean_episode_reward_std": 0.3036,
+      "mean_episode_reward_ci": "[2.888, 3.195]"
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "condition_label": "D: No Emotion ID",
+      "n_seeds": 15,
+      "learning_gain_mean": 0.6128,
+      "learning_gain_std": 0.0939,
+      "learning_gain_ci": "[0.565, 0.660]",
+      "final_knowledge_mean": 0.7329,
+      "final_knowledge_std": 0.0647,
+      "final_knowledge_ci": "[0.700, 0.766]",
+      "success_rate_mean": 0.4096,
+      "success_rate_std": 0.1569,
+      "success_rate_ci": "[0.330, 0.489]",
+      "adaptation_accuracy_mean": 0.8193,
+      "adaptation_accuracy_std": 0.2244,
+      "adaptation_accuracy_ci": "[0.706, 0.933]",
+      "mean_episode_reward_mean": 2.941,
+      "mean_episode_reward_std": 0.2419,
+      "mean_episode_reward_ci": "[2.819, 3.063]"
+    }
+  ],
+  "pairwise_final": [
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "final",
+      "metric": "learning_gain",
+      "mean_A": 0.4115,
+      "mean_D": 0.4261,
+      "delta_A_minus_D": -0.0146,
+      "std_A": 0.1849,
+      "std_D": 0.1589,
+      "cohens_d": -0.0848,
+      "t": -0.2323,
+      "p_raw": 0.818028,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "final",
+      "metric": "final_knowledge",
+      "mean_A": 0.5934,
+      "mean_D": 0.6034,
+      "delta_A_minus_D": -0.01,
+      "std_A": 0.1292,
+      "std_D": 0.1102,
+      "cohens_d": -0.0833,
+      "t": -0.228,
+      "p_raw": 0.821336,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "final",
+      "metric": "success_rate",
+      "mean_A": 0.1779,
+      "mean_D": 0.1827,
+      "delta_A_minus_D": -0.0048,
+      "std_A": 0.2068,
+      "std_D": 0.187,
+      "cohens_d": -0.0243,
+      "t": -0.0667,
+      "p_raw": 0.947317,
+      "p_holm": 0.947317
+    },
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "final",
+      "metric": "adaptation_accuracy",
+      "mean_A": 0.4546,
+      "mean_D": 0.4857,
+      "delta_A_minus_D": -0.0311,
+      "std_A": 0.2988,
+      "std_D": 0.2901,
+      "cohens_d": -0.1055,
+      "t": -0.2888,
+      "p_raw": 0.774848,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "final",
+      "metric": "mean_episode_reward",
+      "mean_A": 3.0606,
+      "mean_D": 3.183,
+      "delta_A_minus_D": -0.1224,
+      "std_A": 0.2055,
+      "std_D": 0.2611,
+      "cohens_d": -0.5211,
+      "t": -1.4271,
+      "p_raw": 0.165229,
+      "p_holm": 0.826143
+    }
+  ],
+  "pairwise_best": [
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "best",
+      "metric": "learning_gain",
+      "mean_A": 0.5801,
+      "mean_D": 0.6128,
+      "delta_A_minus_D": -0.0326,
+      "std_A": 0.1088,
+      "std_D": 0.0939,
+      "cohens_d": -0.3211,
+      "t": -0.8795,
+      "p_raw": 0.38679,
+      "p_holm": 0.38679
+    },
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "best",
+      "metric": "final_knowledge",
+      "mean_A": 0.7098,
+      "mean_D": 0.7329,
+      "delta_A_minus_D": -0.0231,
+      "std_A": 0.0754,
+      "std_D": 0.0647,
+      "cohens_d": -0.3286,
+      "t": -0.9,
+      "p_raw": 0.375955,
+      "p_holm": 0.751909
+    },
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "best",
+      "metric": "success_rate",
+      "mean_A": 0.3489,
+      "mean_D": 0.4096,
+      "delta_A_minus_D": -0.0607,
+      "std_A": 0.1751,
+      "std_D": 0.1569,
+      "cohens_d": -0.3649,
+      "t": -0.9994,
+      "p_raw": 0.326248,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "best",
+      "metric": "adaptation_accuracy",
+      "mean_A": 0.7464,
+      "mean_D": 0.8193,
+      "delta_A_minus_D": -0.0728,
+      "std_A": 0.1918,
+      "std_D": 0.2244,
+      "cohens_d": -0.3489,
+      "t": -0.9556,
+      "p_raw": 0.347661,
+      "p_holm": 1.0
+    },
+    {
+      "comparison": "A_full_emotion_vs_D_no_emotion_id",
+      "eval_type": "best",
+      "metric": "mean_episode_reward",
+      "mean_A": 3.0417,
+      "mean_D": 2.941,
+      "delta_A_minus_D": 0.1007,
+      "std_A": 0.3036,
+      "std_D": 0.2419,
+      "cohens_d": 0.3668,
+      "t": 1.0046,
+      "p_raw": 0.324094,
+      "p_holm": 1.0
+    }
+  ],
+  "volatility_correlations": [
+    {
+      "condition": "A_full_emotion",
+      "eval_type": "final",
+      "volatility_metric": "confusion_variance",
+      "pearson_r": 0.8284,
+      "pearson_p": 0.000136,
+      "spearman_r": 0.4536,
+      "spearman_p": 0.089486,
+      "n_seeds": 15
+    },
+    {
+      "condition": "A_full_emotion",
+      "eval_type": "final",
+      "volatility_metric": "boredom_variance",
+      "pearson_r": -0.6694,
+      "pearson_p": 0.00634,
+      "spearman_r": -0.6714,
+      "spearman_p": 0.006128,
+      "n_seeds": 15
+    },
+    {
+      "condition": "A_full_emotion",
+      "eval_type": "final",
+      "volatility_metric": "emotion_id_switches",
+      "pearson_r": 0.1535,
+      "pearson_p": 0.584963,
+      "spearman_r": -0.1821,
+      "spearman_p": 0.515882,
+      "n_seeds": 15
+    },
+    {
+      "condition": "A_full_emotion",
+      "eval_type": "best",
+      "volatility_metric": "confusion_variance",
+      "pearson_r": 0.8714,
+      "pearson_p": 2.3e-05,
+      "spearman_r": 0.9,
+      "spearman_p": 5e-06,
+      "n_seeds": 15
+    },
+    {
+      "condition": "A_full_emotion",
+      "eval_type": "best",
+      "volatility_metric": "boredom_variance",
+      "pearson_r": -0.7774,
+      "pearson_p": 0.000647,
+      "spearman_r": -0.9214,
+      "spearman_p": 1e-06,
+      "n_seeds": 15
+    },
+    {
+      "condition": "A_full_emotion",
+      "eval_type": "best",
+      "volatility_metric": "emotion_id_switches",
+      "pearson_r": 0.2669,
+      "pearson_p": 0.336268,
+      "spearman_r": 0.5286,
+      "spearman_p": 0.042797,
+      "n_seeds": 15
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "eval_type": "final",
+      "volatility_metric": "confusion_variance",
+      "pearson_r": 0.8067,
+      "pearson_p": 0.000279,
+      "spearman_r": 0.7393,
+      "spearman_p": 0.001636,
+      "n_seeds": 15
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "eval_type": "final",
+      "volatility_metric": "boredom_variance",
+      "pearson_r": -0.2867,
+      "pearson_p": 0.300193,
+      "spearman_r": -0.6036,
+      "spearman_p": 0.0172,
+      "n_seeds": 15
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "eval_type": "final",
+      "volatility_metric": "emotion_id_switches",
+      "pearson_r": 0.2724,
+      "pearson_p": 0.32607,
+      "spearman_r": 0.2043,
+      "spearman_p": 0.465162,
+      "n_seeds": 15
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "eval_type": "best",
+      "volatility_metric": "confusion_variance",
+      "pearson_r": 0.9348,
+      "pearson_p": 0.0,
+      "spearman_r": 0.8286,
+      "spearman_p": 0.000135,
+      "n_seeds": 15
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "eval_type": "best",
+      "volatility_metric": "boredom_variance",
+      "pearson_r": -0.8402,
+      "pearson_p": 8.8e-05,
+      "spearman_r": -0.925,
+      "spearman_p": 1e-06,
+      "n_seeds": 15
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "eval_type": "best",
+      "volatility_metric": "emotion_id_switches",
+      "pearson_r": 0.4821,
+      "pearson_p": 0.068777,
+      "spearman_r": 0.6893,
+      "spearman_p": 0.004474,
+      "n_seeds": 15
+    }
+  ],
+  "seed_robustness_10_vs_15": [
+    {
+      "condition": "A_full_emotion",
+      "seed_set": "10_seeds",
+      "eval_type": "final",
+      "n": 10,
+      "learning_gain_mean": 0.4529,
+      "learning_gain_std": 0.1809,
+      "learning_gain_ci": "[0.341, 0.565]"
+    },
+    {
+      "condition": "A_full_emotion",
+      "seed_set": "10_seeds",
+      "eval_type": "best",
+      "n": 10,
+      "learning_gain_mean": 0.5781,
+      "learning_gain_std": 0.1269,
+      "learning_gain_ci": "[0.499, 0.657]"
+    },
+    {
+      "condition": "A_full_emotion",
+      "seed_set": "15_seeds",
+      "eval_type": "final",
+      "n": 15,
+      "learning_gain_mean": 0.4115,
+      "learning_gain_std": 0.1849,
+      "learning_gain_ci": "[0.318, 0.505]"
+    },
+    {
+      "condition": "A_full_emotion",
+      "seed_set": "15_seeds",
+      "eval_type": "best",
+      "n": 15,
+      "learning_gain_mean": 0.5801,
+      "learning_gain_std": 0.1088,
+      "learning_gain_ci": "[0.525, 0.635]"
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "seed_set": "10_seeds",
+      "eval_type": "final",
+      "n": 10,
+      "learning_gain_mean": 0.4632,
+      "learning_gain_std": 0.1583,
+      "learning_gain_ci": "[0.365, 0.561]"
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "seed_set": "10_seeds",
+      "eval_type": "best",
+      "n": 10,
+      "learning_gain_mean": 0.6113,
+      "learning_gain_std": 0.1037,
+      "learning_gain_ci": "[0.547, 0.676]"
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "seed_set": "15_seeds",
+      "eval_type": "final",
+      "n": 15,
+      "learning_gain_mean": 0.4261,
+      "learning_gain_std": 0.1589,
+      "learning_gain_ci": "[0.346, 0.507]"
+    },
+    {
+      "condition": "D_no_emotion_id",
+      "seed_set": "15_seeds",
+      "eval_type": "best",
+      "n": 15,
+      "learning_gain_mean": 0.6128,
+      "learning_gain_std": 0.0939,
+      "learning_gain_ci": "[0.565, 0.660]"
+    }
+  ],
+  "final_recommendation": {
+    "Q1_emotion_id_improves_learning_gain": false,
+    "Q1_delta_lg_best_checkpoint": -0.0327,
+    "Q1_p_holm": 0.38679,
+    "Q2_emotion_id_improves_adaptation": false,
+    "Q2_adapt_p_holm": 1.0,
+    "Q3_removing_emotion_id_reduces_variance": true,
+    "Q3_std_A_best": 0.1088,
+    "Q3_std_D_best": 0.0939,
+    "Q4_checkpoint_improves_stability": true,
+    "Q4_std_reduction_A": 41.2,
+    "Q4_std_reduction_D": 40.9,
+    "Q5_confusion_volatility": "significant positive (rho=0.900, p=0.0000)",
+    "Q5_boredom_volatility": "significant negative (rho=-0.921, p=0.0000)",
+    "Q5_emotion_id_switches": "significant positive (rho=0.529, p=0.0428)",
+    "Q5_volatility_explains_poor_seeds": true,
+    "recommended_model": {
+      "condition": "D_no_emotion_id",
+      "condition_label": "D: No Emotion ID",
+      "checkpoint_strategy": "best",
+      "learning_gain_mean": 0.6128,
+      "learning_gain_ci": "[0.565, 0.660]",
+      "learning_gain_std": 0.0939,
+      "adaptation_mean": 0.8193,
+      "adaptation_ci": "[0.706, 0.933]"
+    },
+    "justification": "emotion_id does not significantly improve learning gain (delta=-0.0327, p_holm=0.387); no_emotion_id reduces seed variance (std 0.094 vs 0.109); checkpoint selection reduces variance vs final-50k model; Final thesis model: D: No Emotion ID with best checkpoint selection"
+  }
+}

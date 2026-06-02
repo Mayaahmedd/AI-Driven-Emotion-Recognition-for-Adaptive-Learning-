@@ -1,0 +1,433 @@
+{
+  "equations": {
+    "update": "e_{t+1} = clip01(lambda * e_t + (1-lambda) * target + N(0, EMOTION_NOISE_STD))",
+    "engagement_target": "clip01(target * (0.6 + 0.4 * engagement_recovery))",
+    "mismatch": "m = d - k; high/low/flow bands set base targets"
+  },
+  "current_coefficients": {
+    "LAMBDA_FRUSTRATION": 0.69,
+    "LAMBDA_ENGAGEMENT": 0.6,
+    "LAMBDA_CONFUSION": 0.47,
+    "LAMBDA_BOREDOM": 0.36,
+    "EMOTION_NOISE_STD": 0.03,
+    "MISMATCH_HIGH": 0.3,
+    "MISMATCH_LOW": -0.3
+  },
+  "monte_carlo": {
+    "n_students": 500,
+    "n_steps_per_student": 200,
+    "n_seeds": 5,
+    "total_transitions": 500000,
+    "per_emotion": {
+      "engagement": {
+        "mean_abs_delta_per_step": 0.03323414921527708,
+        "std_abs_delta_per_step": 0.02776002184410554,
+        "max_abs_delta_per_step": 0.30960994408639486,
+        "mean_trajectory_std": 0.04418088035716057,
+        "median_trajectory_std": 0.042846319635816685,
+        "pct_steps_exceeding_0.2": 0.0552,
+        "count_steps_exceeding_0.2": 276
+      },
+      "frustration": {
+        "mean_abs_delta_per_step": 0.03038986643233504,
+        "std_abs_delta_per_step": 0.023580018902972087,
+        "max_abs_delta_per_step": 0.23935326332477924,
+        "mean_trajectory_std": 0.04825521102672514,
+        "median_trajectory_std": 0.047628917866861284,
+        "pct_steps_exceeding_0.2": 0.006,
+        "count_steps_exceeding_0.2": 30
+      },
+      "confusion": {
+        "mean_abs_delta_per_step": 0.05223458887350653,
+        "std_abs_delta_per_step": 0.048306189807235764,
+        "max_abs_delta_per_step": 0.39342229604421475,
+        "mean_trajectory_std": 0.05806949590391413,
+        "median_trajectory_std": 0.053920684104061464,
+        "pct_steps_exceeding_0.2": 2.4472,
+        "count_steps_exceeding_0.2": 12236
+      },
+      "boredom": {
+        "mean_abs_delta_per_step": 0.04758080034103501,
+        "std_abs_delta_per_step": 0.05767459409463944,
+        "max_abs_delta_per_step": 0.4911169840229624,
+        "mean_trajectory_std": 0.08285967237224379,
+        "median_trajectory_std": 0.05459105753707168,
+        "pct_steps_exceeding_0.2": 3.964,
+        "count_steps_exceeding_0.2": 19820
+      }
+    }
+  },
+  "analytical_bounds": {
+    "engagement": {
+      "lambda": 0.6,
+      "max_deterministic_delta": 0.4,
+      "worst_pair_current_target": [
+        0.0,
+        1.0
+      ],
+      "theoretical_max_pre_clip_3sigma": 0.4927,
+      "can_exceed_0.2_deterministic": "True",
+      "can_exceed_0.2_with_3sigma_noise": "True"
+    },
+    "frustration": {
+      "lambda": 0.69,
+      "max_deterministic_delta": 0.31000000000000005,
+      "worst_pair_current_target": [
+        0.0,
+        1.0
+      ],
+      "theoretical_max_pre_clip_3sigma": 0.40270000000000006,
+      "can_exceed_0.2_deterministic": "True",
+      "can_exceed_0.2_with_3sigma_noise": "True"
+    },
+    "confusion": {
+      "lambda": 0.47,
+      "max_deterministic_delta": 0.53,
+      "worst_pair_current_target": [
+        0.0,
+        1.0
+      ],
+      "theoretical_max_pre_clip_3sigma": 0.6227,
+      "can_exceed_0.2_deterministic": "True",
+      "can_exceed_0.2_with_3sigma_noise": "True"
+    },
+    "boredom": {
+      "lambda": 0.36,
+      "max_deterministic_delta": 0.64,
+      "worst_pair_current_target": [
+        0.0,
+        1.0
+      ],
+      "theoretical_max_pre_clip_3sigma": 0.7327,
+      "can_exceed_0.2_deterministic": "True",
+      "can_exceed_0.2_with_3sigma_noise": "True"
+    }
+  },
+  "extreme_scenario_mc": {
+    "engagement": {
+      "max_delta": 0.401062451042856,
+      "worst_case": {
+        "action": 3,
+        "k": 0.5,
+        "d": 0.5,
+        "prev": {
+          "engagement": 0.0,
+          "frustration": 0.0,
+          "confusion": 0.5,
+          "boredom": 1.0
+        },
+        "target": {
+          "frustration": 0.2,
+          "confusion": 0.2,
+          "boredom": 0.15,
+          "engagement": 0.7536
+        },
+        "new": 0.401062451042856,
+        "delta": 0.401062451042856
+      }
+    },
+    "frustration": {
+      "max_delta": 0.39065227503172484,
+      "worst_case": {
+        "action": 5,
+        "k": 0.05,
+        "d": 0.5,
+        "prev": {
+          "engagement": 0.5,
+          "frustration": 1.0,
+          "confusion": 0.0,
+          "boredom": 0.0
+        },
+        "target": {
+          "frustration": 0.1,
+          "confusion": 0.6,
+          "boredom": 0.1,
+          "engagement": 0.624
+        },
+        "new": 0.6093477249682752,
+        "delta": 0.39065227503172484
+      }
+    },
+    "confusion": {
+      "max_delta": 0.6136800983572757,
+      "worst_case": {
+        "action": 6,
+        "k": 0.5,
+        "d": 0.95,
+        "prev": {
+          "engagement": 1.0,
+          "frustration": 0.0,
+          "confusion": 1.0,
+          "boredom": 1.0
+        },
+        "target": {
+          "frustration": 0.714,
+          "confusion": 0.05,
+          "boredom": 0.1,
+          "engagement": 0.624
+        },
+        "new": 0.3863199016427243,
+        "delta": 0.6136800983572757
+      }
+    },
+    "boredom": {
+      "max_delta": 0.6906632282801286,
+      "worst_case": {
+        "action": 5,
+        "k": 0.05,
+        "d": 0.5,
+        "prev": {
+          "engagement": 0.0,
+          "frustration": 0.0,
+          "confusion": 1.0,
+          "boredom": 1.0
+        },
+        "target": {
+          "frustration": 0.1,
+          "confusion": 0.6,
+          "boredom": 0.1,
+          "engagement": 0.624
+        },
+        "new": 0.3093367717198714,
+        "delta": 0.6906632282801286
+      }
+    }
+  },
+  "by_action": {
+    "hint": {
+      "engagement": {
+        "mean_delta": 0.030168367032218663,
+        "max_delta": 0.20706777063841628,
+        "pct_exceed_0.2": 0.001589168229348759
+      },
+      "frustration": {
+        "mean_delta": 0.03258416161266372,
+        "max_delta": 0.15796293041831175,
+        "pct_exceed_0.2": 0.0
+      },
+      "confusion": {
+        "mean_delta": 0.04075914636399748,
+        "max_delta": 0.31315709033598593,
+        "pct_exceed_0.2": 1.0774560594984586
+      },
+      "boredom": {
+        "mean_delta": 0.041152497116017206,
+        "max_delta": 0.4414186825516523,
+        "pct_exceed_0.2": 2.3551473158948606
+      }
+    },
+    "scaffold": {
+      "engagement": {
+        "mean_delta": 0.02985264516018433,
+        "max_delta": 0.18139275382556652,
+        "pct_exceed_0.2": 0.0
+      },
+      "frustration": {
+        "mean_delta": 0.028111995985377978,
+        "max_delta": 0.19690924168964208,
+        "pct_exceed_0.2": 0.0
+      },
+      "confusion": {
+        "mean_delta": 0.05646591740109734,
+        "max_delta": 0.3605729874569997,
+        "pct_exceed_0.2": 2.3977614460543877
+      },
+      "boredom": {
+        "mean_delta": 0.04144794306599131,
+        "max_delta": 0.4406179237555933,
+        "pct_exceed_0.2": 2.3543412186610486
+      }
+    },
+    "encouragement": {
+      "engagement": {
+        "mean_delta": 0.03515941187488598,
+        "max_delta": 0.2104192770340198,
+        "pct_exceed_0.2": 0.006424361177585404
+      },
+      "frustration": {
+        "mean_delta": 0.028896309095748755,
+        "max_delta": 0.19682934981871092,
+        "pct_exceed_0.2": 0.0
+      },
+      "confusion": {
+        "mean_delta": 0.05692832328707219,
+        "max_delta": 0.2899979135467282,
+        "pct_exceed_0.2": 0.20718564797712927
+      },
+      "boredom": {
+        "mean_delta": 0.060481190418686465,
+        "max_delta": 0.48218534021883885,
+        "pct_exceed_0.2": 7.685142058686539
+      }
+    },
+    "simplify_problem": {
+      "engagement": {
+        "mean_delta": 0.03989349219701606,
+        "max_delta": 0.2934428588384396,
+        "pct_exceed_0.2": 0.200288415318058
+      },
+      "frustration": {
+        "mean_delta": 0.028004944118072143,
+        "max_delta": 0.16447093721071965,
+        "pct_exceed_0.2": 0.0
+      },
+      "confusion": {
+        "mean_delta": 0.0433558452694901,
+        "max_delta": 0.31343857833703365,
+        "pct_exceed_0.2": 0.4646691235378946
+      },
+      "boredom": {
+        "mean_delta": 0.04169481340968011,
+        "max_delta": 0.43713684267604996,
+        "pct_exceed_0.2": 2.4194840570421405
+      }
+    },
+    "harder_problem": {
+      "engagement": {
+        "mean_delta": 0.02983749075420527,
+        "max_delta": 0.19643879318353435,
+        "pct_exceed_0.2": 0.0
+      },
+      "frustration": {
+        "mean_delta": 0.030064856223874902,
+        "max_delta": 0.2276963588412287,
+        "pct_exceed_0.2": 0.014411067699993596
+      },
+      "confusion": {
+        "mean_delta": 0.04966901810459872,
+        "max_delta": 0.3642765207575979,
+        "pct_exceed_0.2": 3.8381476974316273
+      },
+      "boredom": {
+        "mean_delta": 0.07188357180956542,
+        "max_delta": 0.4911169840229624,
+        "pct_exceed_0.2": 9.801127265740089
+      }
+    },
+    "break": {
+      "engagement": {
+        "mean_delta": 0.030355212718504568,
+        "max_delta": 0.20355701991648162,
+        "pct_exceed_0.2": 0.0015972144579852736
+      },
+      "frustration": {
+        "mean_delta": 0.03505459834716641,
+        "max_delta": 0.23131486281835245,
+        "pct_exceed_0.2": 0.0063888578319410945
+      },
+      "confusion": {
+        "mean_delta": 0.05076739454657156,
+        "max_delta": 0.3632506061148607,
+        "pct_exceed_0.2": 4.194285166669329
+      },
+      "boredom": {
+        "mean_delta": 0.041454613995100115,
+        "max_delta": 0.4562592056621752,
+        "pct_exceed_0.2": 2.387835614687984
+      }
+    },
+    "explanation": {
+      "engagement": {
+        "mean_delta": 0.03047863999395181,
+        "max_delta": 0.1955338909209335,
+        "pct_exceed_0.2": 0.0
+      },
+      "frustration": {
+        "mean_delta": 0.02995508980484992,
+        "max_delta": 0.23935326332477924,
+        "pct_exceed_0.2": 0.014386879166200425
+      },
+      "confusion": {
+        "mean_delta": 0.06885198305293735,
+        "max_delta": 0.39342229604421475,
+        "pct_exceed_0.2": 3.014850456383778
+      },
+      "boredom": {
+        "mean_delta": 0.04132407384676989,
+        "max_delta": 0.4464590174894235,
+        "pct_exceed_0.2": 2.391419025848426
+      }
+    },
+    "no_action": {
+      "engagement": {
+        "mean_delta": 0.040142441412388,
+        "max_delta": 0.30960994408639486,
+        "pct_exceed_0.2": 0.23162939297124602
+      },
+      "frustration": {
+        "mean_delta": 0.030403358766767224,
+        "max_delta": 0.23234226515551695,
+        "pct_exceed_0.2": 0.012779552715654952
+      },
+      "confusion": {
+        "mean_delta": 0.0511709093790858,
+        "max_delta": 0.3854530975474477,
+        "pct_exceed_0.2": 4.375399361022364
+      },
+      "boredom": {
+        "mean_delta": 0.041305945486950074,
+        "max_delta": 0.4558367972297051,
+        "pct_exceed_0.2": 2.3434504792332267
+      }
+    }
+  },
+  "recommendations": {
+    "target_max_step_0.15": {
+      "engagement": {
+        "current_lambda": 0.6,
+        "recommended_lambda_for_max_0.15": 0.94
+      },
+      "frustration": {
+        "current_lambda": 0.69,
+        "recommended_lambda_for_max_0.15": 0.94
+      },
+      "confusion": {
+        "current_lambda": 0.47,
+        "recommended_lambda_for_max_0.15": 0.94
+      },
+      "boredom": {
+        "current_lambda": 0.36,
+        "recommended_lambda_for_max_0.15": 0.94
+      },
+      "EMOTION_NOISE_STD": {
+        "current": 0.03,
+        "recommended_conservative": 0.01,
+        "recommended_moderate": 0.02
+      }
+    },
+    "target_max_step_0.1": {
+      "engagement": {
+        "current_lambda": 0.6,
+        "recommended_lambda_for_max_0.10": 0.95
+      },
+      "frustration": {
+        "current_lambda": 0.69,
+        "recommended_lambda_for_max_0.10": 0.95
+      },
+      "confusion": {
+        "current_lambda": 0.47,
+        "recommended_lambda_for_max_0.10": 0.95
+      },
+      "boredom": {
+        "current_lambda": 0.36,
+        "recommended_lambda_for_max_0.10": 0.95
+      },
+      "EMOTION_NOISE_STD": {
+        "current": 0.03,
+        "recommended_conservative": 0.01,
+        "recommended_moderate": 0.02
+      }
+    },
+    "uniform_scale_approach": {
+      "rationale": "Scale (1-lambda) uniformly so max deterministic swing ~0.15",
+      "scale_factor": 0.2344,
+      "scaled_lambdas": {
+        "engagement": 0.906,
+        "frustration": 0.927,
+        "confusion": 0.876,
+        "boredom": 0.85
+      },
+      "scaled_noise_std": 0.01
+    }
+  }
+}

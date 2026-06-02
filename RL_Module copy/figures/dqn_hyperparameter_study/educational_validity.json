@@ -1,0 +1,82 @@
+{
+  "baseline": {
+    "adaptation_accuracy": 0.35357717851432213,
+    "challenge_action_fraction": 0.5216293027198261,
+    "comfort_action_fraction": 0.24063935394610456,
+    "mean_delta_k_per_step": 0.00634917527598138,
+    "p_correct": 0.43430829735885723,
+    "mean_episode_reward": 2.758009442628807,
+    "final_knowledge": 0.6149318049407753
+  },
+  "comparisons": {
+    "best_reward": {
+      "config_id": "e6f464edf368",
+      "metrics": {
+        "adaptation_accuracy": 0.5512449125961015,
+        "challenge_action_fraction": 0.5509139428961255,
+        "comfort_action_fraction": 0.2831316840225526,
+        "mean_delta_k_per_step": 0.0064488293652273,
+        "p_correct": 0.4151367403037782,
+        "mean_episode_reward": 3.6545029560459112,
+        "final_knowledge": 0.6229380402738104
+      },
+      "delta_vs_baseline": {
+        "adaptation_accuracy": 0.1976677340817794,
+        "challenge_action_fraction": 0.029284640176299392,
+        "comfort_action_fraction": 0.042492330076448065,
+        "mean_delta_k_per_step": 9.965408924591992e-05,
+        "p_correct": -0.019171557055079058,
+        "mean_episode_reward": 0.8964935134171044,
+        "final_knowledge": 0.008006235333035128
+      },
+      "interpretation": "better_personalization_and_challenge",
+      "educationally_meaningful": true
+    },
+    "best_mastery": {
+      "config_id": "dbda7f1166a6",
+      "metrics": {
+        "adaptation_accuracy": 0.4564789438412969,
+        "challenge_action_fraction": 1.0,
+        "comfort_action_fraction": 0.0,
+        "mean_delta_k_per_step": 0.0100310287020984,
+        "p_correct": 0.2555539422099608,
+        "mean_episode_reward": 1.8755387156074277,
+        "final_knowledge": 0.7851206962397084
+      },
+      "delta_vs_baseline": {
+        "adaptation_accuracy": 0.10290176532697476,
+        "challenge_action_fraction": 0.4783706972801739,
+        "comfort_action_fraction": -0.24063935394610456,
+        "mean_delta_k_per_step": 0.003681853426117019,
+        "p_correct": -0.17875435514889643,
+        "mean_episode_reward": -0.8824707270213792,
+        "final_knowledge": 0.1701888912989331
+      },
+      "interpretation": "better_personalization_and_challenge",
+      "educationally_meaningful": true
+    },
+    "best_balanced": {
+      "config_id": "3d833752cc9e",
+      "metrics": {
+        "adaptation_accuracy": 0.9964195104471396,
+        "challenge_action_fraction": 0.996665568911576,
+        "comfort_action_fraction": 0.0024082002305285,
+        "mean_delta_k_per_step": 0.0096487498874582,
+        "p_correct": 0.2592417256710028,
+        "mean_episode_reward": 2.904102670404723,
+        "final_knowledge": 0.7703096980725149
+      },
+      "delta_vs_baseline": {
+        "adaptation_accuracy": 0.6428423319328175,
+        "challenge_action_fraction": 0.4750362661917499,
+        "comfort_action_fraction": -0.23823115371557604,
+        "mean_delta_k_per_step": 0.00329957461147682,
+        "p_correct": -0.17506657168785444,
+        "mean_episode_reward": 0.14609322777591593,
+        "final_knowledge": 0.15537789313173966
+      },
+      "interpretation": "better_personalization_and_challenge",
+      "educationally_meaningful": false
+    }
+  }
+}

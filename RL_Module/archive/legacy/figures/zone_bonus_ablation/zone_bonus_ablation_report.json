@@ -1,0 +1,178 @@
+{
+  "study": "zone_bonus_ablation",
+  "gain_ratio": "10:1",
+  "baseline_hp": {
+    "learning_rate": 0.0005,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 2000,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05,
+    "net_arch": [
+      64,
+      64
+    ]
+  },
+  "zone_conditions": {
+    "A_zone_bonus_on": {
+      "label": "Zone Bonus ON (A)",
+      "use_zone_bonus": true
+    },
+    "B_zone_bonus_off": {
+      "label": "Zone Bonus OFF (B)",
+      "use_zone_bonus": false
+    }
+  },
+  "seeds": [
+    42,
+    7,
+    13,
+    21,
+    99,
+    314
+  ],
+  "summary": [
+    {
+      "configuration": "A_zone_bonus_on",
+      "configuration_label": "Zone Bonus ON (A)",
+      "use_zone_bonus": true,
+      "n_seeds": 2,
+      "learning_gain_mean": 0.4156,
+      "learning_gain_std": 0.0247,
+      "coefficient_of_variation": 0.0595,
+      "seed_range": 0.0349,
+      "learning_gain_ci": "[0.381, 0.450]",
+      "best_seed": 42,
+      "worst_seed": 7,
+      "best_seed_lg": 0.433,
+      "worst_seed_lg": 0.3981,
+      "final_knowledge_mean": 0.5963,
+      "final_knowledge_std": 0.0151,
+      "success_rate_mean": 0.11,
+      "success_rate_std": 0.0453,
+      "adaptation_accuracy_mean": 0.482,
+      "adaptation_accuracy_std": 0.0415,
+      "mean_episode_reward_mean": 7.2474,
+      "mean_episode_reward_std": 0.3745,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0
+    },
+    {
+      "configuration": "B_zone_bonus_off",
+      "configuration_label": "Zone Bonus OFF (B)",
+      "use_zone_bonus": false,
+      "n_seeds": 2,
+      "learning_gain_mean": 0.5208,
+      "learning_gain_std": 0.0389,
+      "coefficient_of_variation": 0.0747,
+      "seed_range": 0.055,
+      "learning_gain_ci": "[0.467, 0.575]",
+      "best_seed": 7,
+      "worst_seed": 42,
+      "best_seed_lg": 0.5483,
+      "worst_seed_lg": 0.4933,
+      "final_knowledge_mean": 0.6701,
+      "final_knowledge_std": 0.0298,
+      "success_rate_mean": 0.218,
+      "success_rate_std": 0.0141,
+      "adaptation_accuracy_mean": 0.5406,
+      "adaptation_accuracy_std": 0.0339,
+      "mean_episode_reward_mean": 3.2684,
+      "mean_episode_reward_std": 0.0063,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0
+    }
+  ],
+  "action_diversity": [
+    {
+      "configuration": "A_zone_bonus_on",
+      "configuration_label": "Zone Bonus ON (A)",
+      "use_zone_bonus": true,
+      "shannon_entropy_mean": 1.5882,
+      "shannon_entropy_std": 0.1504,
+      "actions_used_above_1_percent_mean": 6.0,
+      "actions_used_above_1_percent_std": 0.0,
+      "dominant_action_pct_mean": 0.3501,
+      "dominant_action_pct_std": 0.0989,
+      "dominance_any_seed": false,
+      "hint_mean_freq": 0.0013,
+      "scaffold_mean_freq": 0.3501,
+      "encouragement_mean_freq": 0.2025,
+      "simplify_problem_mean_freq": 0.1586,
+      "harder_problem_mean_freq": 0.1308,
+      "break_mean_freq": 0.0273,
+      "explanation_mean_freq": 0.1295,
+      "no_action_mean_freq": 0.0
+    },
+    {
+      "configuration": "B_zone_bonus_off",
+      "configuration_label": "Zone Bonus OFF (B)",
+      "use_zone_bonus": false,
+      "shannon_entropy_mean": 1.482,
+      "shannon_entropy_std": 0.125,
+      "actions_used_above_1_percent_mean": 6.0,
+      "actions_used_above_1_percent_std": 0.0,
+      "dominant_action_pct_mean": 0.3889,
+      "dominant_action_pct_std": 0.0905,
+      "dominance_any_seed": false,
+      "hint_mean_freq": 0.1516,
+      "scaffold_mean_freq": 0.3889,
+      "encouragement_mean_freq": 0.0019,
+      "simplify_problem_mean_freq": 0.0763,
+      "harder_problem_mean_freq": 0.152,
+      "break_mean_freq": 0.0285,
+      "explanation_mean_freq": 0.1424,
+      "no_action_mean_freq": 0.0584
+    }
+  ],
+  "zone_statistics": [
+    {
+      "configuration": "A_zone_bonus_on",
+      "configuration_label": "Zone Bonus ON (A)",
+      "use_zone_bonus": true,
+      "n_seeds": 2,
+      "pct_time_in_zone_mean": 0.1539,
+      "pct_time_in_zone_std": 0.019,
+      "avg_consecutive_zone_duration_mean": 2.123,
+      "avg_consecutive_zone_duration_std": 0.8223,
+      "zone_entries_per_episode_mean": 2.332,
+      "zone_entries_per_episode_std": 0.4356
+    },
+    {
+      "configuration": "B_zone_bonus_off",
+      "configuration_label": "Zone Bonus OFF (B)",
+      "use_zone_bonus": false,
+      "n_seeds": 2,
+      "pct_time_in_zone_mean": 0.1625,
+      "pct_time_in_zone_std": 0.0427,
+      "avg_consecutive_zone_duration_mean": 2.1372,
+      "avg_consecutive_zone_duration_std": 0.7484,
+      "zone_entries_per_episode_mean": 2.242,
+      "zone_entries_per_episode_std": 0.2546
+    }
+  ],
+  "ranking": [
+    {
+      "configuration": "A_zone_bonus_on",
+      "learning_gain_mean": 0.4156,
+      "learning_gain_std": 0.0247,
+      "success_rate_mean": 0.11,
+      "adaptation_accuracy_mean": 0.482,
+      "reward_mean": 7.2474,
+      "action_entropy": 1.5882,
+      "dominant_action_pct": 0.3501,
+      "rank": 1
+    },
+    {
+      "configuration": "B_zone_bonus_off",
+      "learning_gain_mean": 0.5208,
+      "learning_gain_std": 0.0389,
+      "success_rate_mean": 0.218,
+      "adaptation_accuracy_mean": 0.5406,
+      "reward_mean": 3.2684,
+      "action_entropy": 1.482,
+      "dominant_action_pct": 0.3889,
+      "rank": 2
+    }
+  ]
+}

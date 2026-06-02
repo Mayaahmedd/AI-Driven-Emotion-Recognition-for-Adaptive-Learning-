@@ -1,0 +1,5 @@
+configuration,configuration_label,learning_gain_mean,learning_gain_std,coefficient_of_variation,seed_range,success_rate_mean,adaptation_accuracy_mean,reward_mean,action_entropy,dominant_action_pct,actions_used_above_1pct,rank
+C_balanced_2,C: Balanced-2,0.5666,0.0326,0.0575,0.0762,0.351,0.6483,2.1708,1.3543,0.4168,4.6667,1
+A_original_thesis,A: Original Thesis,0.6106,0.0929,0.1522,0.2548,0.4247,0.7255,3.2172,1.0948,0.5185,4.6667,2
+D_equal,D: Equal,0.487,0.0768,0.1578,0.2141,0.213,0.5601,0.9581,1.4855,0.4224,5.6667,3
+B_balanced_1,B: Balanced-1,0.5752,0.1059,0.1841,0.258,0.368,0.7288,2.2802,1.1416,0.5276,4.6667,4

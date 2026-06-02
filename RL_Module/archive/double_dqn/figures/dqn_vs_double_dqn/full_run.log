@@ -1,0 +1,104 @@
+=== DQN vs Double DQN (run) ===
+Seeds: 20, train=50000, reward=BALANCED_2
+
+--- Standard DQN (A) ---
+  A_standard_dqn seed=13: lg=0.645 succ=0.458 adapt=0.968 entropy=0.734 mean_q=1.19 (32s)
+  A_standard_dqn seed=21: lg=0.623 succ=0.408 adapt=0.841 entropy=1.130 mean_q=0.62 (32s)
+  A_standard_dqn seed=99: lg=0.553 succ=0.302 adapt=0.658 entropy=1.181 mean_q=0.46 (31s)
+  A_standard_dqn seed=314: lg=0.480 succ=0.200 adapt=0.339 entropy=1.743 mean_q=1.34 (31s)
+  A_standard_dqn seed=555: lg=0.463 succ=0.158 adapt=0.537 entropy=1.328 mean_q=0.38 (31s)
+  A_standard_dqn seed=777: lg=0.525 succ=0.224 adapt=0.731 entropy=1.296 mean_q=1.20 (31s)
+  A_standard_dqn seed=888: lg=0.610 succ=0.390 adapt=0.751 entropy=1.385 mean_q=0.36 (31s)
+  A_standard_dqn seed=999: lg=0.559 succ=0.312 adapt=0.657 entropy=1.482 mean_q=0.75 (31s)
+  A_standard_dqn seed=500: lg=0.657 succ=0.480 adapt=0.974 entropy=0.734 mean_q=1.39 (31s)
+  A_standard_dqn seed=1234: lg=0.485 succ=0.264 adapt=0.419 entropy=1.417 mean_q=0.29 (32s)
+  A_standard_dqn seed=2024: lg=0.516 succ=0.244 adapt=0.597 entropy=1.355 mean_q=0.37 (33s)
+  A_standard_dqn seed=5555: lg=0.579 succ=0.370 adapt=0.498 entropy=1.564 mean_q=1.08 (31s)
+  A_standard_dqn seed=8888: lg=0.439 succ=0.112 adapt=0.501 entropy=1.249 mean_q=0.71 (32s)
+  A_standard_dqn seed=9999: lg=0.589 succ=0.334 adapt=0.708 entropy=1.427 mean_q=0.31 (32s)
+  A_standard_dqn seed=10101: lg=0.583 succ=0.358 adapt=0.599 entropy=1.549 mean_q=0.47 (31s)
+  A_standard_dqn seed=20202: lg=0.510 succ=0.238 adapt=0.468 entropy=1.481 mean_q=1.39 (31s)
+  A_standard_dqn seed=30303: lg=0.459 succ=0.126 adapt=0.378 entropy=1.513 mean_q=0.91 (32s)
+  A_standard_dqn seed=4242: lg=0.486 succ=0.204 adapt=0.245 entropy=1.699 mean_q=1.40 (32s)
+
+--- Double DQN (B) ---
+  B_double_dqn seed=13: lg=0.519 succ=0.282 adapt=0.615 entropy=1.522 mean_q=0.88 (31s)
+  B_double_dqn seed=21: lg=0.619 succ=0.390 adapt=0.551 entropy=1.569 mean_q=0.27 (31s)
+  B_double_dqn seed=99: lg=0.473 succ=0.178 adapt=0.440 entropy=1.620 mean_q=0.03 (30s)
+  B_double_dqn seed=314: lg=0.548 succ=0.348 adapt=0.743 entropy=1.326 mean_q=1.03 (30s)
+  B_double_dqn seed=555: lg=0.632 succ=0.424 adapt=0.974 entropy=0.779 mean_q=0.70 (30s)
+  B_double_dqn seed=777: lg=0.595 succ=0.328 adapt=0.815 entropy=1.284 mean_q=0.87 (32s)
+  B_double_dqn seed=888: lg=0.599 succ=0.392 adapt=0.652 entropy=1.370 mean_q=0.62 (30s)
+  B_double_dqn seed=999: lg=0.584 succ=0.340 adapt=0.756 entropy=1.345 mean_q=0.60 (30s)
+  B_double_dqn seed=500: lg=0.605 succ=0.386 adapt=0.554 entropy=1.403 mean_q=0.31 (30s)
+  B_double_dqn seed=1234: lg=0.479 succ=0.188 adapt=0.569 entropy=1.621 mean_q=0.42 (30s)
+  B_double_dqn seed=2024: lg=0.571 succ=0.342 adapt=0.707 entropy=1.329 mean_q=0.24 (31s)
+  B_double_dqn seed=5555: lg=0.490 succ=0.202 adapt=0.551 entropy=1.522 mean_q=0.17 (30s)
+  B_double_dqn seed=8888: lg=0.627 succ=0.408 adapt=0.699 entropy=1.387 mean_q=0.58 (31s)
+  B_double_dqn seed=9999: lg=0.513 succ=0.228 adapt=0.594 entropy=1.355 mean_q=0.37 (30s)
+  B_double_dqn seed=10101: lg=0.634 succ=0.450 adapt=0.687 entropy=1.303 mean_q=0.04 (31s)
+  B_double_dqn seed=20202: lg=0.581 succ=0.348 adapt=0.632 entropy=1.517 mean_q=1.04 (30s)
+  B_double_dqn seed=30303: lg=0.525 succ=0.278 adapt=0.592 entropy=1.618 mean_q=0.38 (30s)
+  B_double_dqn seed=4242: lg=0.522 succ=0.298 adapt=0.618 entropy=1.402 mean_q=0.23 (30s)
+
+=== DQN vs Double DQN (analyze) ===
+
+========================================================================
+DQN vs DOUBLE DQN - FINAL ALGORITHM COMPARISON
+========================================================================
+
+--- Performance Comparison ---
+
+Standard DQN: LG=0.5267 (std=0.0860, CV=0.1633, range=0.3715) [0.489, 0.564]
+  success=0.2681, adapt=0.5856, reward=2.08, dropout=0.0000
+
+Double DQN: LG=0.5556 (std=0.0618, CV=0.1112, range=0.2222) [0.529, 0.583]
+  success=0.3165, adapt=0.6373, reward=2.20, dropout=0.0000
+
+--- Stability Comparison ---
+  LG std:  DQN=0.0860  DDQN=0.0618  (+28.1% DDQN reduction)
+  CV:      DQN=0.1633  DDQN=0.1112  (+31.9% DDQN reduction)
+  DQN best/worst seed: 500 (0.6574) / 42 (0.2859)
+  DDQN best/worst seed: 10101 (0.6340) / 42 (0.4119)
+
+--- Action Diversity Comparison ---
+  Standard DQN: entropy=1.3766, dominant=0.4218, top2=0.6938, actions>1%=5.2, actions>5%=4.4
+  Double DQN: entropy=1.3988, dominant=0.4361, top2=0.7004, actions>1%=5.7, actions>5%=4.2
+
+--- Generalization Comparison ---
+  DQN:  same_pop_LG=0.5267, cross_pop_LG=0.5794, gap=-0.0527
+  DDQN: same_pop_LG=0.5556, cross_pop_LG=0.6083, gap=-0.0526
+
+--- Q-Value Comparison ---
+  DQN:  mean_q=0.7673, max_q=0.7881, var=0.0067, overestimation=-0.1052
+  DDQN: mean_q=0.4665, max_q=0.4836, var=0.0046, overestimation=-0.4603
+  Double DQN reduces Q overestimation: YES
+
+--- Statistical Significance (Welch t-test, Double DQN vs Standard DQN) ---
+  learning_gain: delta=+0.0289 (+5.5%), d=0.386, p=0.2304 (sig=no)
+  success_rate: delta=+0.0484 (+18.1%), d=0.457, p=0.1570 (sig=no)
+  adaptation_accuracy: delta=+0.0517 (+8.8%), d=0.302, p=0.3458 (sig=no)
+  mean_q_value: delta=-0.3008 (-39.2%), d=-0.810, p=0.0149 (sig=yes)
+  max_q_value: delta=-0.3045 (-38.6%), d=-0.814, p=0.0145 (sig=yes)
+  q_value_variance: delta=-0.0022 (-32.4%), d=-0.461, p=0.1538 (sig=no)
+  overestimation_bias: delta=-0.3551 (+337.4%), d=-0.839, p=0.0117 (sig=yes)
+
+--- Research Questions ---
+  1. LG improvement? YES (+5.5%)
+  2. Stability improvement? YES (std +28.1%)
+  3. Reduced seed sensitivity? YES (CV +31.9%)
+  4. Reduced action dominance? NO
+  5. Improved generalization (smaller gap)? NO
+  6. Reduced Q overestimation? YES
+  7. Statistically significant LG? NO
+  8. Meets 5% improvement threshold? YES
+
+========================================================================
+WINNER ALGORITHM
+========================================================================
+
+  DoubleDQN (B_double_dqn)
+
+  Final thesis recommendation:
+  Replace standard DQN with Double DQN in the final thesis system.
+========================================================================

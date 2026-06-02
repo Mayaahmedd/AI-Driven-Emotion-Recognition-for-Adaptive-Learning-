@@ -1,0 +1,60 @@
+=== Condition C: Knowledge-Only Strict (20-seed training) ===
+[C 1/20] seed=42
+  val_lg=0.668 best_lg=0.701 @step=30000 (37.0s)
+[C 2/20] seed=0
+  val_lg=0.679 best_lg=0.693 @step=10000 (36.4s)
+[C 3/20] seed=1
+  val_lg=0.679 best_lg=0.681 @step=50000 (36.4s)
+[C 4/20] seed=7
+  val_lg=0.686 best_lg=0.684 @step=20000 (36.5s)
+[C 5/20] seed=13
+  val_lg=0.711 best_lg=0.690 @step=10000 (36.2s)
+[C 6/20] seed=21
+  val_lg=0.682 best_lg=0.715 @step=10000 (36.3s)
+[C 7/20] seed=99
+  val_lg=0.703 best_lg=0.698 @step=20000 (36.2s)
+[C 8/20] seed=100
+  val_lg=0.694 best_lg=0.711 @step=40000 (35.8s)
+[C 9/20] seed=200
+  val_lg=0.683 best_lg=0.680 @step=10000 (36.3s)
+[C 10/20] seed=314
+  val_lg=0.668 best_lg=0.676 @step=30000 (36.5s)
+[C 11/20] seed=500
+  val_lg=0.679 best_lg=0.690 @step=30000 (35.5s)
+[C 12/20] seed=777
+  val_lg=0.723 best_lg=0.696 @step=30000 (34.7s)
+[C 13/20] seed=1234
+  val_lg=0.657 best_lg=0.654 @step=20000 (35.4s)
+[C 14/20] seed=2024
+  val_lg=0.701 best_lg=0.697 @step=10000 (34.4s)
+[C 15/20] seed=5555
+  val_lg=0.669 best_lg=0.680 @step=30000 (34.4s)
+[C 16/20] seed=8888
+  val_lg=0.692 best_lg=0.688 @step=40000 (34.5s)
+[C 17/20] seed=9999
+  val_lg=0.678 best_lg=0.691 @step=10000 (34.3s)
+[C 18/20] seed=10101
+  val_lg=0.727 best_lg=0.699 @step=30000 (34.2s)
+[C 19/20] seed=20202
+  val_lg=0.684 best_lg=0.688 @step=50000 (35.8s)
+[C 20/20] seed=30303
+  val_lg=0.690 best_lg=0.689 @step=20000 (35.5s)
+
+=== ANALYZE ===
+{
+  "Q1_emotion_aware_outperforms_knowledge_only": false,
+  "Q1_delta_learning_gain_A_minus_C": -0.0811,
+  "Q2_effect_size_cohens_d": -1.2791,
+  "Q3_statistically_significant": true,
+  "Q3_p_holm_learning_gain": 0.001285,
+  "Q4_pct_performance_from_emotion": -11.75,
+  "Q5_emotional_component_justified": false,
+  "condition_a_learning_gain_mean": 0.6089,
+  "condition_a_learning_gain_ci": "[0.570, 0.648]",
+  "condition_c_learning_gain_mean": 0.69,
+  "condition_c_learning_gain_ci": "[0.684, 0.696]",
+  "final_thesis_verdict": "Knowledge Only matches or exceeds Emotion + Knowledge",
+  "thesis_narrative": "Emotion-aware tutoring (A) mean LG=0.6089 vs knowledge-only (C) LG=0.6900; delta=-0.0811; Cohen's d=-1.279; Holm p=0.0013 (significant); relative improvement=-11.8%"
+}
+
+Report: /Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/figures/final_ac_ablation/FINAL_AC_ABLATION_REPORT.md

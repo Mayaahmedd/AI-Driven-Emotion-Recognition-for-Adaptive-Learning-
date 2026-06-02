@@ -1,0 +1,3 @@
+configuration,configuration_label,use_zone_bonus,n_seeds,pct_time_in_zone_mean,pct_time_in_zone_std,avg_consecutive_zone_duration_mean,avg_consecutive_zone_duration_std,zone_entries_per_episode_mean,zone_entries_per_episode_std
+A_zone_bonus_on,Zone Bonus ON (A),True,2,0.1539,0.019,2.123,0.8223,2.332,0.4356
+B_zone_bonus_off,Zone Bonus OFF (B),False,2,0.1625,0.0427,2.1372,0.7484,2.242,0.2546

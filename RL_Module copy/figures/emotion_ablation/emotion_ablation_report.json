@@ -1,0 +1,318 @@
+{
+  "study": "emotion_ablation",
+  "gain_ratio": "10:1",
+  "seeds": [
+    7,
+    13,
+    21,
+    42,
+    99,
+    314
+  ],
+  "conditions": [
+    "full_emotion",
+    "knowledge_only"
+  ],
+  "algorithms": [
+    "Random",
+    "ERT",
+    "DQN"
+  ],
+  "dqn_hyperparameters": {
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 500,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05
+  },
+  "obs_ablation_dims": {
+    "full_emotion": [],
+    "knowledge_only": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "no_engagement": [
+      1
+    ],
+    "no_frustration": [
+      2
+    ],
+    "no_confusion": [
+      3
+    ],
+    "no_boredom": [
+      4
+    ],
+    "no_emotion_id": [
+      5
+    ],
+    "emotion_id_only": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "aggregated": {
+    "full_emotion|Random": {
+      "n_seeds": 6,
+      "learning_gain_mean": 0.3825,
+      "learning_gain_std": 0.0085,
+      "learning_gain_ci_lo": 0.3757,
+      "learning_gain_ci_hi": 0.3893,
+      "final_knowledge_mean": 0.5748,
+      "final_knowledge_std": 0.0055,
+      "final_knowledge_ci_lo": 0.5704,
+      "final_knowledge_ci_hi": 0.5792,
+      "success_rate_mean": 0.0817,
+      "success_rate_std": 0.0098,
+      "success_rate_ci_lo": 0.0738,
+      "success_rate_ci_hi": 0.0895,
+      "adaptation_accuracy_mean": 0.288,
+      "adaptation_accuracy_std": 0.003,
+      "adaptation_accuracy_ci_lo": 0.2856,
+      "adaptation_accuracy_ci_hi": 0.2904,
+      "emotional_wellbeing_mean": 0.3696,
+      "emotional_wellbeing_std": 0.0029,
+      "emotional_wellbeing_ci_lo": 0.3672,
+      "emotional_wellbeing_ci_hi": 0.372,
+      "mean_episode_reward_mean": 2.7049,
+      "mean_episode_reward_std": 0.0403,
+      "mean_episode_reward_ci_lo": 2.6727,
+      "mean_episode_reward_ci_hi": 2.7372,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci_lo": 0.0,
+      "dropout_rate_ci_hi": 0.0
+    },
+    "full_emotion|ERT": {
+      "n_seeds": 6,
+      "learning_gain_mean": 0.4108,
+      "learning_gain_std": 0.0112,
+      "learning_gain_ci_lo": 0.4018,
+      "learning_gain_ci_hi": 0.4198,
+      "final_knowledge_mean": 0.5943,
+      "final_knowledge_std": 0.0073,
+      "final_knowledge_ci_lo": 0.5884,
+      "final_knowledge_ci_hi": 0.6002,
+      "success_rate_mean": 0.1157,
+      "success_rate_std": 0.0075,
+      "success_rate_ci_lo": 0.1096,
+      "success_rate_ci_hi": 0.1217,
+      "adaptation_accuracy_mean": 0.3732,
+      "adaptation_accuracy_std": 0.004,
+      "adaptation_accuracy_ci_lo": 0.37,
+      "adaptation_accuracy_ci_hi": 0.3764,
+      "emotional_wellbeing_mean": 0.4018,
+      "emotional_wellbeing_std": 0.0023,
+      "emotional_wellbeing_ci_lo": 0.4,
+      "emotional_wellbeing_ci_hi": 0.4037,
+      "mean_episode_reward_mean": 3.1242,
+      "mean_episode_reward_std": 0.0206,
+      "mean_episode_reward_ci_lo": 3.1077,
+      "mean_episode_reward_ci_hi": 3.1406,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci_lo": 0.0,
+      "dropout_rate_ci_hi": 0.0
+    },
+    "full_emotion|DQN": {
+      "n_seeds": 6,
+      "learning_gain_mean": 0.4362,
+      "learning_gain_std": 0.1994,
+      "learning_gain_ci_lo": 0.2767,
+      "learning_gain_ci_hi": 0.5958,
+      "final_knowledge_mean": 0.6123,
+      "final_knowledge_std": 0.1367,
+      "final_knowledge_ci_lo": 0.503,
+      "final_knowledge_ci_hi": 0.7217,
+      "success_rate_mean": 0.1997,
+      "success_rate_std": 0.2285,
+      "success_rate_ci_lo": 0.0169,
+      "success_rate_ci_hi": 0.3825,
+      "adaptation_accuracy_mean": 0.5455,
+      "adaptation_accuracy_std": 0.3214,
+      "adaptation_accuracy_ci_lo": 0.2883,
+      "adaptation_accuracy_ci_hi": 0.8027,
+      "emotional_wellbeing_mean": 0.3887,
+      "emotional_wellbeing_std": 0.0208,
+      "emotional_wellbeing_ci_lo": 0.372,
+      "emotional_wellbeing_ci_hi": 0.4054,
+      "mean_episode_reward_mean": 2.9853,
+      "mean_episode_reward_std": 0.1476,
+      "mean_episode_reward_ci_lo": 2.8672,
+      "mean_episode_reward_ci_hi": 3.1034,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci_lo": 0.0,
+      "dropout_rate_ci_hi": 0.0
+    },
+    "knowledge_only|Random": {
+      "n_seeds": 6,
+      "learning_gain_mean": 0.3825,
+      "learning_gain_std": 0.0085,
+      "learning_gain_ci_lo": 0.3757,
+      "learning_gain_ci_hi": 0.3893,
+      "final_knowledge_mean": 0.5748,
+      "final_knowledge_std": 0.0055,
+      "final_knowledge_ci_lo": 0.5704,
+      "final_knowledge_ci_hi": 0.5792,
+      "success_rate_mean": 0.0817,
+      "success_rate_std": 0.0098,
+      "success_rate_ci_lo": 0.0738,
+      "success_rate_ci_hi": 0.0895,
+      "adaptation_accuracy_mean": 0.288,
+      "adaptation_accuracy_std": 0.003,
+      "adaptation_accuracy_ci_lo": 0.2856,
+      "adaptation_accuracy_ci_hi": 0.2904,
+      "emotional_wellbeing_mean": 0.3696,
+      "emotional_wellbeing_std": 0.0029,
+      "emotional_wellbeing_ci_lo": 0.3672,
+      "emotional_wellbeing_ci_hi": 0.372,
+      "mean_episode_reward_mean": 2.7049,
+      "mean_episode_reward_std": 0.0403,
+      "mean_episode_reward_ci_lo": 2.6727,
+      "mean_episode_reward_ci_hi": 2.7372,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci_lo": 0.0,
+      "dropout_rate_ci_hi": 0.0
+    },
+    "knowledge_only|ERT": {
+      "n_seeds": 6,
+      "learning_gain_mean": 0.444,
+      "learning_gain_std": 0.01,
+      "learning_gain_ci_lo": 0.436,
+      "learning_gain_ci_hi": 0.452,
+      "final_knowledge_mean": 0.6169,
+      "final_knowledge_std": 0.0069,
+      "final_knowledge_ci_lo": 0.6114,
+      "final_knowledge_ci_hi": 0.6224,
+      "success_rate_mean": 0.1497,
+      "success_rate_std": 0.0097,
+      "success_rate_ci_lo": 0.1419,
+      "success_rate_ci_hi": 0.1574,
+      "adaptation_accuracy_mean": 0.5234,
+      "adaptation_accuracy_std": 0.0013,
+      "adaptation_accuracy_ci_lo": 0.5223,
+      "adaptation_accuracy_ci_hi": 0.5244,
+      "emotional_wellbeing_mean": 0.4082,
+      "emotional_wellbeing_std": 0.002,
+      "emotional_wellbeing_ci_lo": 0.4066,
+      "emotional_wellbeing_ci_hi": 0.4097,
+      "mean_episode_reward_mean": 3.2436,
+      "mean_episode_reward_std": 0.0201,
+      "mean_episode_reward_ci_lo": 3.2275,
+      "mean_episode_reward_ci_hi": 3.2597,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci_lo": 0.0,
+      "dropout_rate_ci_hi": 0.0
+    },
+    "knowledge_only|DQN": {
+      "n_seeds": 6,
+      "learning_gain_mean": 0.3908,
+      "learning_gain_std": 0.1541,
+      "learning_gain_ci_lo": 0.2675,
+      "learning_gain_ci_hi": 0.5141,
+      "final_knowledge_mean": 0.5812,
+      "final_knowledge_std": 0.1065,
+      "final_knowledge_ci_lo": 0.4959,
+      "final_knowledge_ci_hi": 0.6664,
+      "success_rate_mean": 0.1233,
+      "success_rate_std": 0.2054,
+      "success_rate_ci_lo": -0.041,
+      "success_rate_ci_hi": 0.2877,
+      "adaptation_accuracy_mean": 0.3183,
+      "adaptation_accuracy_std": 0.1826,
+      "adaptation_accuracy_ci_lo": 0.1722,
+      "adaptation_accuracy_ci_hi": 0.4644,
+      "emotional_wellbeing_mean": 0.377,
+      "emotional_wellbeing_std": 0.0469,
+      "emotional_wellbeing_ci_lo": 0.3395,
+      "emotional_wellbeing_ci_hi": 0.4145,
+      "mean_episode_reward_mean": 2.8138,
+      "mean_episode_reward_std": 0.6018,
+      "mean_episode_reward_ci_lo": 2.3322,
+      "mean_episode_reward_ci_hi": 3.2953,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0,
+      "dropout_rate_ci_lo": 0.0,
+      "dropout_rate_ci_hi": 0.0
+    }
+  },
+  "research_answers": {
+    "Q1_learning_gain": {
+      "Random": {
+        "delta": 0.0,
+        "d": 0.0,
+        "p_holm": 1.0,
+        "significant": false
+      },
+      "ERT": {
+        "delta": -0.0332,
+        "d": -3.1214,
+        "p_holm": 0.000938,
+        "significant": true
+      },
+      "DQN": {
+        "delta": 0.0455,
+        "d": 0.2551,
+        "p_holm": 1.0,
+        "significant": false
+      }
+    },
+    "Q2_adaptation_accuracy": {
+      "Random": {
+        "delta": 0.0,
+        "d": 0.0,
+        "p_holm": 1.0,
+        "significant": false
+      },
+      "ERT": {
+        "delta": -0.1501,
+        "d": -50.5583,
+        "p_holm": 0.0,
+        "significant": true
+      },
+      "DQN": {
+        "delta": 0.2272,
+        "d": 0.8691,
+        "p_holm": 1.0,
+        "significant": false
+      }
+    },
+    "Q3_success_rate": {
+      "Random": {
+        "delta": 0.0,
+        "d": 0.0,
+        "p_holm": 1.0,
+        "significant": false
+      },
+      "ERT": {
+        "delta": -0.034,
+        "d": -3.9242,
+        "p_holm": 0.000316,
+        "significant": true
+      },
+      "DQN": {
+        "delta": 0.0763,
+        "d": 0.3514,
+        "p_holm": 1.0,
+        "significant": false
+      }
+    },
+    "Q4_emotion_contributions": [],
+    "Q5_affect_aware_justified": {
+      "justified": false,
+      "narrative": "DQN learning gain +0.0455 with emotions"
+    }
+  },
+  "methodology_template": "We conducted a controlled ablation on **agent-facing observations** only. The simulator\ncontinued to evolve full internal affect (engagement, frustration, confusion, boredom,\nemotion_id); rewards, actions, and transition dynamics were unchanged.\n\n**Condition A (full_emotion):** observation vector\n`[knowledge, engagement, frustration, confusion, boredom, emotion_id]`.\n\n**Condition B (knowledge_only):** indices 1-5 zeroed; agents see `[knowledge, 0, 0, 0, 0, 0]`.\n\n**Optional single-channel ablations:** one affect dimension zeroed at a time to rank\ncontributions (DQN retrained per condition; ERT rules tied to that channel disabled).\n\nThree tutors were compared: **Random** (observation-agnostic), **ERT** (rule tiers\nmasked to match each condition), **DQN** (retrained per condition with identical\nhyperparameters). Evaluation used 500 episodes per seed across seeds\n[42, 7, 13, 21, 99, 314] with gain ratio **10:1** (G4).\n\n**Adaptation accuracy** is computed post hoc against `BEST_ACTION_MAP` using the\n*true* simulator emotion_id (not the ablated observation), isolating pedagogical\nmatching from observation availability.\n",
+  "discussion_template": "Interpret full-vs-knowledge-only deltas jointly across tutors. A positive DQN delta on\nlearning gain supports that learned policies exploit affect channels; ERT deltas isolate\nthe value of hand-crafted affect rules. Random should show negligible deltas, validating\nthe ablation plumbing.\n\nIf adaptation accuracy drops sharply under knowledge_only while learning gain is stable,\nagents may still learn via reward shaping without explicit emotion features - report both\nmetrics. Per-channel ablations rank which continuous signals DQN uses most; emotion_id-only\nvs affect-only conditions separate discrete FER labels from dimensional affect.\n\nReport effect sizes (Cohen's d) alongside p-values; Holm correction controls family-wise\nerror within each tutor's metric battery.\n",
+  "limitations_template": "- Ablation masks observations at the environment interface; it does not remove affect from\n  latent simulator state or rewards (multi-objective reward still penalizes frustration).\n- ERT knowledge_only retains only knowledge-tier rules (T4 + fallback); this is a strong\n  baseline, not a naive random policy.\n- DQN requires retraining per condition; sample efficiency differs from ERT/Random.\n- Adaptation accuracy uses a fixed expert map - high accuracy does not guarantee learning\n  gain if the map is misaligned with reward optima.\n- Results are simulator-specific; human tutoring studies needed for external validity.\n- Single-channel ablations are not fully orthogonal (affect dimensions co-evolve in transitions).\n"
+}

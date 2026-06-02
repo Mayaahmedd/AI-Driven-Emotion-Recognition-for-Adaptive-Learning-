@@ -1,0 +1,111 @@
+=== Combined Improvement Validation (run) ===
+
+--- A: Thesis Baseline ---
+  A_thesis_baseline seed=42: lg=0.628 succ=0.446 adapt=0.869 entropy=1.140 dom=0.45 (26s)
+  A_thesis_baseline seed=7: lg=0.651 succ=0.488 adapt=0.746 entropy=1.118 dom=0.58 (25s)
+  A_thesis_baseline seed=13: lg=0.680 succ=0.528 adapt=0.788 entropy=0.582 dom=0.80 (25s)
+  A_thesis_baseline seed=21: lg=0.654 succ=0.486 adapt=0.903 entropy=0.947 dom=0.48 (25s)
+  A_thesis_baseline seed=99: lg=0.626 succ=0.438 adapt=0.834 entropy=1.172 dom=0.50 (25s)
+  A_thesis_baseline seed=314: lg=0.425 succ=0.162 adapt=0.213 entropy=1.610 dom=0.30 (25s)
+
+--- B: Reward Only ---
+  B_reward_only seed=42: lg=0.589 succ=0.394 adapt=0.700 entropy=1.292 dom=0.50 (25s)
+  B_reward_only seed=7: lg=0.523 succ=0.238 adapt=0.508 entropy=1.513 dom=0.38 (25s)
+  B_reward_only seed=13: lg=0.590 succ=0.410 adapt=0.688 entropy=1.406 dom=0.49 (25s)
+  B_reward_only seed=21: lg=0.599 succ=0.400 adapt=0.589 entropy=1.421 dom=0.36 (25s)
+  B_reward_only seed=99: lg=0.530 succ=0.264 adapt=0.666 entropy=1.141 dom=0.37 (25s)
+  B_reward_only seed=314: lg=0.568 succ=0.400 adapt=0.739 entropy=1.353 dom=0.40 (25s)
+
+--- C: Gains Only ---
+  C_gains_only seed=42: lg=0.630 succ=0.430 adapt=0.949 entropy=0.868 dom=0.58 (25s)
+  C_gains_only seed=7: lg=0.626 succ=0.460 adapt=0.839 entropy=0.872 dom=0.58 (25s)
+  C_gains_only seed=13: lg=0.605 succ=0.396 adapt=0.551 entropy=1.152 dom=0.64 (26s)
+  C_gains_only seed=21: lg=0.626 succ=0.424 adapt=0.527 entropy=1.463 dom=0.26 (25s)
+  C_gains_only seed=99: lg=0.490 succ=0.198 adapt=0.639 entropy=1.416 dom=0.40 (25s)
+  C_gains_only seed=314: lg=0.604 succ=0.436 adapt=0.819 entropy=1.106 dom=0.52 (25s)
+
+--- D: Reward + Gains ---
+  D_reward_and_gains seed=42: lg=0.504 succ=0.228 adapt=0.514 entropy=1.778 dom=0.28 (25s)
+  D_reward_and_gains seed=7: lg=0.522 succ=0.270 adapt=0.449 entropy=1.605 dom=0.27 (25s)
+  D_reward_and_gains seed=13: lg=0.645 succ=0.458 adapt=0.968 entropy=0.734 dom=0.67 (25s)
+  D_reward_and_gains seed=21: lg=0.623 succ=0.408 adapt=0.841 entropy=1.130 dom=0.42 (25s)
+  D_reward_and_gains seed=99: lg=0.553 succ=0.302 adapt=0.658 entropy=1.181 dom=0.45 (25s)
+  D_reward_and_gains seed=314: lg=0.480 succ=0.200 adapt=0.339 entropy=1.743 dom=0.29 (25s)
+
+--- E: Full Stability Configuration ---
+  E_full_stability seed=42: lg=0.577 succ=0.162 adapt=0.481 entropy=1.555 dom=0.32 (29s)
+  E_full_stability seed=7: lg=0.601 succ=0.200 adapt=0.396 entropy=1.529 dom=0.34 (29s)
+  E_full_stability seed=13: lg=0.673 succ=0.378 adapt=0.700 entropy=1.261 dom=0.43 (29s)
+  E_full_stability seed=21: lg=0.661 succ=0.366 adapt=0.724 entropy=1.305 dom=0.48 (30s)
+  E_full_stability seed=99: lg=0.554 succ=0.176 adapt=0.658 entropy=1.312 dom=0.50 (30s)
+  E_full_stability seed=314: lg=0.545 succ=0.142 adapt=0.499 entropy=0.915 dom=0.50 (30s)
+
+=== Combined Improvement Validation (analyze) ===
+
+========================================================================
+COMBINED IMPROVEMENT VALIDATION STUDY - RESULTS
+========================================================================
+
+--- Per-Configuration Summary ---
+
+A: Thesis Baseline (A_thesis_baseline)
+  learning_gain=0.6106 (std=0.0929, CV=0.1522, range=0.2548)
+  success=0.4247, adapt=0.7255, entropy=1.0948, dominant=0.5185
+
+B: Reward Only (B_reward_only)
+  learning_gain=0.5666 (std=0.0326, CV=0.0575, range=0.0762)
+  success=0.3510, adapt=0.6483, entropy=1.3543, dominant=0.4168
+
+C: Gains Only (C_gains_only)
+  learning_gain=0.5968 (std=0.0536, CV=0.0897, range=0.1402)
+  success=0.3907, adapt=0.7207, entropy=1.1461, dominant=0.4977
+
+D: Reward + Gains (D_reward_and_gains)
+  learning_gain=0.5544 (std=0.0664, CV=0.1197, range=0.1654)
+  success=0.3110, adapt=0.6282, entropy=1.3617, dominant=0.3962
+
+E: Full Stability Configuration (E_full_stability)
+  learning_gain=0.6018 (std=0.0545, CV=0.0905, range=0.1288)
+  success=0.2373, adapt=0.5763, entropy=1.3129, dominant=0.4281
+
+--- Research Questions ---
+
+1. Combining Balanced-2 + Nearly Equal Gains (D vs A): LG 0.5544 vs 0.6106 (does not improve)
+
+2. Stability (D vs A): std 0.0664 vs 0.0929, CV 0.1197 vs 0.1522
+
+3. Additivity: expected D~0.5528, actual=0.5544, residual=+0.0016
+
+4. Canonical overfit (E): train-eval canonical LG=0.6018, mixed LG=0.5566, drop=0.0452 (7.5% relative)
+
+--- Interaction Effects ---
+Reward design (Balanced-2 vs thesis weights):
+  B vs A: LG 0.5666 vs 0.6106 (delta=-0.0440), CV 0.0575 vs 0.1522.
+  Raising wb/wc relative to wk shifts credit from knowledge deltas alone toward affect regulation; this can stabilize training when frustration/confusion penalties were under-weighted (thesis wc=0.05).
+
+Action gains (Nearly Equal vs current hierarchy):
+  C vs A: LG 0.5968 vs 0.6106 (delta=-0.0138), dominant action 49.77% vs 51.85%.
+  Flattening base_gain reduces simulator bias toward harder_problem/scaffold, encouraging broader pedagogical exploration in the policy.
+
+Combination (D = Reward + Gains):
+  Expected additive LG ~ 0.5528 (baseline + reward delta + gains delta); actual D = 0.5544; residual = +0.0016.
+  Effects are approximately additive (little interaction).
+
+Student population (E = full stack on canonical student):
+  E vs D (same reward/gains): LG 0.6018 vs 0.5544, CV 0.0905 vs 0.1197.
+  Training on a single canonical profile removes cross-student variance during optimization, often improving seed stability at the cost of heterogeneous generalization.
+
+========================================================================
+WINNER COMBINED CONFIGURATION
+========================================================================
+
+  B_reward_only (B: Reward Only)
+  Composite rank = 1 (lower is better)
+  learning_gain_mean       = 0.5666
+  learning_gain_std        = 0.0326
+  coefficient_of_variation = 0.0575
+  success_rate_mean        = 0.3510
+  adaptation_accuracy_mean = 0.6483
+  shannon_entropy          = 1.3543
+  dominant_action_pct      = 0.4168
+========================================================================

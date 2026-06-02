@@ -1,0 +1,4 @@
+condition,condition_label,population_mode,shannon_entropy_mean,shannon_entropy_std,actions_used_above_1_percent_mean,actions_used_above_1_percent_std,dominance_any_seed,hint_mean_freq,scaffold_mean_freq,encouragement_mean_freq,simplify_problem_mean_freq,harder_problem_mean_freq,break_mean_freq,explanation_mean_freq,no_action_mean_freq
+A_mixed,Mixed Population (A),mixed,1.2782,0.333,4.6667,1.5055,False,0.0606,0.2742,0.0549,0.0916,0.403,0.0099,0.0633,0.0426
+B_single_canonical,Single Canonical Student (B),single_canonical,1.1523,0.211,4.1667,1.169,False,0.0087,0.3745,0.1026,0.0486,0.4125,0.0182,0.0198,0.015
+C_low_variance,Low Variance Population (C),low_variance,1.2436,0.2487,4.5,0.8367,False,0.0127,0.2899,0.0529,0.1247,0.3765,0.0004,0.0909,0.0522

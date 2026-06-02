@@ -1,0 +1,6 @@
+comparison,eval_type,metric,label_A,label_B,n_A,n_B,mean_A,mean_B,delta_A_minus_B,std_A,std_B,cohens_d,t,p_raw,p_holm
+tier_a_no_emotion_id_vs_baseline_thesis,best,learning_gain,Tier A (15 seeds),Baseline (15 seeds),15,15,0.5751,0.6128,-0.0377,0.0979,0.0939,-0.3926,-1.0751,0.291541,0.583082
+tier_a_no_emotion_id_vs_baseline_thesis,best,final_knowledge,Tier A (15 seeds),Baseline (15 seeds),15,15,0.7068,0.7329,-0.0261,0.0672,0.0647,-0.3952,-1.0824,0.288316,0.864948
+tier_a_no_emotion_id_vs_baseline_thesis,best,success_rate,Tier A (15 seeds),Baseline (15 seeds),15,15,0.3517,0.4096,-0.0579,0.1588,0.1569,-0.3666,-1.0039,0.324018,0.324018
+tier_a_no_emotion_id_vs_baseline_thesis,best,adaptation_accuracy,Tier A (15 seeds),Baseline (15 seeds),15,15,0.6983,0.8193,-0.121,0.159,0.2244,-0.6219,-1.7033,0.100812,0.50406
+tier_a_no_emotion_id_vs_baseline_thesis,best,mean_episode_reward,Tier A (15 seeds),Baseline (15 seeds),15,15,3.0793,2.941,0.1383,0.3277,0.2419,0.4801,1.3148,0.200166,0.800666

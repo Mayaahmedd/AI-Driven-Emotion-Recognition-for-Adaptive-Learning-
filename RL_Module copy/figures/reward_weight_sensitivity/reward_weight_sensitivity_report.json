@@ -1,0 +1,805 @@
+{
+  "seed": 42,
+  "train_timesteps": 50000,
+  "eval_episodes": 300,
+  "fixed_weights": {
+    "wf": 0.15,
+    "wb": 0.06,
+    "wc": 0.09
+  },
+  "configurations": {
+    "A_baseline": {
+      "wk": 0.5,
+      "we": 0.2
+    },
+    "B_wk060_we020": {
+      "wk": 0.6,
+      "we": 0.2
+    },
+    "C_wk070_we020": {
+      "wk": 0.7,
+      "we": 0.2
+    },
+    "D_wk050_we015": {
+      "wk": 0.5,
+      "we": 0.15
+    },
+    "E_wk060_we015": {
+      "wk": 0.6,
+      "we": 0.15
+    },
+    "F_wk070_we015": {
+      "wk": 0.7,
+      "we": 0.15
+    }
+  },
+  "results": [
+    {
+      "label": "A_baseline",
+      "wk": 0.5,
+      "we": 0.2,
+      "wf": 0.15,
+      "wb": 0.06,
+      "wc": 0.09,
+      "mean_reward": 3.5641392119602133,
+      "success_rate": 0.07666666666666666,
+      "learning_gain": 0.3484366666666667,
+      "adaptation_accuracy": 0.5171216874707963,
+      "dropout_rate": 0.0,
+      "action_diversity_shannon": 1.2418702829628696,
+      "dominance_detected": false,
+      "dominant_actions": [],
+      "action_frequencies": {
+        "hint": 0.0,
+        "scaffold": 0.4988,
+        "encouragement": 0.2535,
+        "simplify_problem": 0.0556,
+        "harder_problem": 0.0183,
+        "break": 0.1723,
+        "explanation": 0.0001,
+        "no_action": 0.0015
+      },
+      "component_pct": {
+        "k": 2.64435440365343,
+        "e": 68.5617736737935,
+        "f": -15.098051763540047,
+        "b": -5.464563458008813,
+        "c": -8.231256701004195
+      },
+      "correlations": {
+        "total_reward_vs_success": 0.2615807856040209,
+        "total_reward_vs_lg_norm": 0.3953534420474996,
+        "comp_k_vs_success": 0.6730964780731968,
+        "comp_k_vs_lg_norm": 0.9386013613491515,
+        "comp_e_vs_success": -0.0011959514894161263
+      },
+      "state_action": {
+        "high_confusion": {
+          "n": 78,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.0128,
+            "encouragement": 0.2692,
+            "simplify_problem": 0.0128,
+            "harder_problem": 0.1026,
+            "break": 0.6026,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "break",
+          "top_p": 0.6026
+        },
+        "high_frustration": {
+          "n": 96,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.6771,
+            "encouragement": 0.1354,
+            "simplify_problem": 0.1458,
+            "harder_problem": 0.0312,
+            "break": 0.0104,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "scaffold",
+          "top_p": 0.6771
+        },
+        "high_boredom": {
+          "n": 200,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.72,
+            "encouragement": 0.015,
+            "simplify_problem": 0.145,
+            "harder_problem": 0.005,
+            "break": 0.115,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "scaffold",
+          "top_p": 0.72
+        },
+        "flow_state": {
+          "n": 6073,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.492,
+            "encouragement": 0.2862,
+            "simplify_problem": 0.0334,
+            "harder_problem": 0.0117,
+            "break": 0.176,
+            "explanation": 0.0,
+            "no_action": 0.0007
+          },
+          "top_action": "scaffold",
+          "top_p": 0.492
+        }
+      },
+      "context_sensitive": true,
+      "chi2_engagement": {
+        "chi2": 109.58208175994253,
+        "p": 2.4933986736691972e-21,
+        "significant": true
+      },
+      "train_seconds": 45.969499826431274,
+      "balance_score": 0.3559204243895671
+    },
+    {
+      "label": "B_wk060_we020",
+      "wk": 0.6,
+      "we": 0.2,
+      "wf": 0.15,
+      "wb": 0.06,
+      "wc": 0.09,
+      "mean_reward": 3.5034160992607424,
+      "success_rate": 0.06333333333333334,
+      "learning_gain": 0.32604533333333335,
+      "adaptation_accuracy": 0.5073372465314835,
+      "dropout_rate": 0.0,
+      "action_diversity_shannon": 1.3720269596249333,
+      "dominance_detected": false,
+      "dominant_actions": [],
+      "action_frequencies": {
+        "hint": 0.0,
+        "scaffold": 0.4578,
+        "encouragement": 0.2487,
+        "simplify_problem": 0.1259,
+        "harder_problem": 0.0495,
+        "break": 0.1171,
+        "explanation": 0.0001,
+        "no_action": 0.001
+      },
+      "component_pct": {
+        "k": 2.8215633451527418,
+        "e": 67.67984293559195,
+        "f": -15.298083387323796,
+        "b": -5.975002509712709,
+        "c": -8.225507822218798
+      },
+      "correlations": {
+        "total_reward_vs_success": 0.21443199248376904,
+        "total_reward_vs_lg_norm": 0.43259749472291353,
+        "comp_k_vs_success": 0.582022036774965,
+        "comp_k_vs_lg_norm": 0.9578526263370859,
+        "comp_e_vs_success": -0.04116296024035161
+      },
+      "state_action": {
+        "high_confusion": {
+          "n": 73,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.0,
+            "encouragement": 0.6164,
+            "simplify_problem": 0.2192,
+            "harder_problem": 0.0411,
+            "break": 0.1233,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "encouragement",
+          "top_p": 0.6164
+        },
+        "high_frustration": {
+          "n": 141,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.4752,
+            "encouragement": 0.078,
+            "simplify_problem": 0.3333,
+            "harder_problem": 0.0922,
+            "break": 0.0213,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "scaffold",
+          "top_p": 0.4752
+        },
+        "high_boredom": {
+          "n": 843,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.5136,
+            "encouragement": 0.0012,
+            "simplify_problem": 0.4081,
+            "harder_problem": 0.0285,
+            "break": 0.0486,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "scaffold",
+          "top_p": 0.5136
+        },
+        "flow_state": {
+          "n": 5389,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.4372,
+            "encouragement": 0.3008,
+            "simplify_problem": 0.1099,
+            "harder_problem": 0.0564,
+            "break": 0.0937,
+            "explanation": 0.0002,
+            "no_action": 0.0019
+          },
+          "top_action": "scaffold",
+          "top_p": 0.4372
+        }
+      },
+      "context_sensitive": true,
+      "chi2_engagement": {
+        "chi2": 240.64653743793667,
+        "p": 4.084661429741996e-49,
+        "significant": true
+      },
+      "train_seconds": 43.78734612464905,
+      "balance_score": 0.341266333457723
+    },
+    {
+      "label": "C_wk070_we020",
+      "wk": 0.7,
+      "we": 0.2,
+      "wf": 0.15,
+      "wb": 0.06,
+      "wc": 0.09,
+      "mean_reward": 3.6822162548944806,
+      "success_rate": 0.10666666666666667,
+      "learning_gain": 0.362799,
+      "adaptation_accuracy": 0.5201281794512317,
+      "dropout_rate": 0.0,
+      "action_diversity_shannon": 1.1886190172250122,
+      "dominance_detected": false,
+      "dominant_actions": [],
+      "action_frequencies": {
+        "hint": 0.0,
+        "scaffold": 0.4976,
+        "encouragement": 0.2598,
+        "simplify_problem": 0.0186,
+        "harder_problem": 0.0224,
+        "break": 0.2002,
+        "explanation": 0.0005,
+        "no_action": 0.0008
+      },
+      "component_pct": {
+        "k": 3.909110456610777,
+        "e": 67.78187992242569,
+        "f": -14.685327106463077,
+        "b": -5.2165758874769725,
+        "c": -8.407106627023468
+      },
+      "correlations": {
+        "total_reward_vs_success": 0.3307837730805115,
+        "total_reward_vs_lg_norm": 0.5038760812946761,
+        "comp_k_vs_success": 0.709876934056276,
+        "comp_k_vs_lg_norm": 0.9482756532281749,
+        "comp_e_vs_success": -0.028301181320888942
+      },
+      "state_action": {
+        "high_confusion": {
+          "n": 250,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.032,
+            "encouragement": 0.14,
+            "simplify_problem": 0.004,
+            "harder_problem": 0.044,
+            "break": 0.78,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "break",
+          "top_p": 0.78
+        },
+        "high_frustration": {
+          "n": 87,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.5977,
+            "encouragement": 0.1954,
+            "simplify_problem": 0.092,
+            "harder_problem": 0.069,
+            "break": 0.0345,
+            "explanation": 0.0115,
+            "no_action": 0.0
+          },
+          "top_action": "scaffold",
+          "top_p": 0.5977
+        },
+        "high_boredom": {
+          "n": 58,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.7241,
+            "encouragement": 0.0517,
+            "simplify_problem": 0.0,
+            "harder_problem": 0.0,
+            "break": 0.2241,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "scaffold",
+          "top_p": 0.7241
+        },
+        "flow_state": {
+          "n": 5996,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.5022,
+            "encouragement": 0.2914,
+            "simplify_problem": 0.0128,
+            "harder_problem": 0.0103,
+            "break": 0.182,
+            "explanation": 0.0,
+            "no_action": 0.0013
+          },
+          "top_action": "scaffold",
+          "top_p": 0.5022
+        }
+      },
+      "context_sensitive": true,
+      "chi2_engagement": {
+        "chi2": 188.32433623923515,
+        "p": 5.778785801825834e-38,
+        "significant": true
+      },
+      "train_seconds": 44.37140607833862,
+      "balance_score": 0.381640015728371
+    },
+    {
+      "label": "D_wk050_we015",
+      "wk": 0.5,
+      "we": 0.15,
+      "wf": 0.15,
+      "wb": 0.06,
+      "wc": 0.09,
+      "mean_reward": 2.087761644243447,
+      "success_rate": 0.11666666666666667,
+      "learning_gain": 0.37397166666666665,
+      "adaptation_accuracy": 0.5517748512601109,
+      "dropout_rate": 0.0,
+      "action_diversity_shannon": 1.319554489181428,
+      "dominance_detected": false,
+      "dominant_actions": [],
+      "action_frequencies": {
+        "hint": 0.0,
+        "scaffold": 0.494,
+        "encouragement": 0.2568,
+        "simplify_problem": 0.0862,
+        "harder_problem": 0.0578,
+        "break": 0.0017,
+        "explanation": 0.0001,
+        "no_action": 0.1035
+      },
+      "component_pct": {
+        "k": 3.4997855572922356,
+        "e": 61.03823957684782,
+        "f": -19.328015671216185,
+        "b": -6.438562137576046,
+        "c": -9.695397057067707
+      },
+      "correlations": {
+        "total_reward_vs_success": 0.3420822463626159,
+        "total_reward_vs_lg_norm": 0.4696690376168906,
+        "comp_k_vs_success": 0.7281842628068039,
+        "comp_k_vs_lg_norm": 0.9370198442534737,
+        "comp_e_vs_success": -0.04145112182773501
+      },
+      "state_action": {
+        "high_confusion": {
+          "n": 109,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.0183,
+            "encouragement": 0.3303,
+            "simplify_problem": 0.0,
+            "harder_problem": 0.2477,
+            "break": 0.0275,
+            "explanation": 0.0,
+            "no_action": 0.3761
+          },
+          "top_action": "no_action",
+          "top_p": 0.3761
+        },
+        "high_frustration": {
+          "n": 221,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.5747,
+            "encouragement": 0.1131,
+            "simplify_problem": 0.1086,
+            "harder_problem": 0.095,
+            "break": 0.0,
+            "explanation": 0.0,
+            "no_action": 0.1086
+          },
+          "top_action": "scaffold",
+          "top_p": 0.5747
+        },
+        "high_boredom": {
+          "n": 297,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.5791,
+            "encouragement": 0.0,
+            "simplify_problem": 0.3401,
+            "harder_problem": 0.0168,
+            "break": 0.0034,
+            "explanation": 0.0,
+            "no_action": 0.0606
+          },
+          "top_action": "scaffold",
+          "top_p": 0.5791
+        },
+        "flow_state": {
+          "n": 6352,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.4776,
+            "encouragement": 0.2837,
+            "simplify_problem": 0.0584,
+            "harder_problem": 0.0513,
+            "break": 0.0008,
+            "explanation": 0.0,
+            "no_action": 0.1281
+          },
+          "top_action": "scaffold",
+          "top_p": 0.4776
+        }
+      },
+      "context_sensitive": true,
+      "chi2_engagement": {
+        "chi2": 110.69955770563902,
+        "p": 1.454747626392076e-21,
+        "significant": true
+      },
+      "train_seconds": 43.19500708580017,
+      "balance_score": 0.4014866514206112
+    },
+    {
+      "label": "E_wk060_we015",
+      "wk": 0.6,
+      "we": 0.15,
+      "wf": 0.15,
+      "wb": 0.06,
+      "wc": 0.09,
+      "mean_reward": 2.11646800808717,
+      "success_rate": 0.18333333333333332,
+      "learning_gain": 0.4075586666666667,
+      "adaptation_accuracy": 0.5618466898954704,
+      "dropout_rate": 0.0,
+      "action_diversity_shannon": 1.5145470044634504,
+      "dominance_detected": false,
+      "dominant_actions": [],
+      "action_frequencies": {
+        "hint": 0.0,
+        "scaffold": 0.4052,
+        "encouragement": 0.2184,
+        "simplify_problem": 0.1471,
+        "harder_problem": 0.1567,
+        "break": 0.0542,
+        "explanation": 0.0118,
+        "no_action": 0.0067
+      },
+      "component_pct": {
+        "k": 4.857325176024864,
+        "e": 59.69073718309369,
+        "f": -18.853182096994214,
+        "b": -6.35859063103819,
+        "c": -10.24016491284904
+      },
+      "correlations": {
+        "total_reward_vs_success": 0.41674126259745364,
+        "total_reward_vs_lg_norm": 0.5468911464766542,
+        "comp_k_vs_success": 0.7760649487350136,
+        "comp_k_vs_lg_norm": 0.9384193564736707,
+        "comp_e_vs_success": -0.17294795174156985
+      },
+      "state_action": {
+        "high_confusion": {
+          "n": 443,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.0023,
+            "encouragement": 0.2009,
+            "simplify_problem": 0.3047,
+            "harder_problem": 0.4199,
+            "break": 0.0632,
+            "explanation": 0.0,
+            "no_action": 0.009
+          },
+          "top_action": "harder_problem",
+          "top_p": 0.4199
+        },
+        "high_frustration": {
+          "n": 240,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.3083,
+            "encouragement": 0.0917,
+            "simplify_problem": 0.2625,
+            "harder_problem": 0.3042,
+            "break": 0.0125,
+            "explanation": 0.0125,
+            "no_action": 0.0083
+          },
+          "top_action": "scaffold",
+          "top_p": 0.3083
+        },
+        "high_boredom": {
+          "n": 463,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.4644,
+            "encouragement": 0.0,
+            "simplify_problem": 0.4795,
+            "harder_problem": 0.0302,
+            "break": 0.0173,
+            "explanation": 0.0086,
+            "no_action": 0.0
+          },
+          "top_action": "simplify_problem",
+          "top_p": 0.4795
+        },
+        "flow_state": {
+          "n": 5574,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.4085,
+            "encouragement": 0.2625,
+            "simplify_problem": 0.1134,
+            "harder_problem": 0.1527,
+            "break": 0.0504,
+            "explanation": 0.0007,
+            "no_action": 0.0118
+          },
+          "top_action": "scaffold",
+          "top_p": 0.4085
+        }
+      },
+      "context_sensitive": true,
+      "chi2_engagement": {
+        "chi2": 359.3276904547835,
+        "p": 1.5335898626887068e-74,
+        "significant": true
+      },
+      "train_seconds": 44.838391065597534,
+      "balance_score": 0.45940893956031714
+    },
+    {
+      "label": "F_wk070_we015",
+      "wk": 0.7,
+      "we": 0.15,
+      "wf": 0.15,
+      "wb": 0.06,
+      "wc": 0.09,
+      "mean_reward": 2.25406583174964,
+      "success_rate": 0.20666666666666667,
+      "learning_gain": 0.425901,
+      "adaptation_accuracy": 0.5910583819290837,
+      "dropout_rate": 0.0,
+      "action_diversity_shannon": 1.4034681224047705,
+      "dominance_detected": false,
+      "dominant_actions": [],
+      "action_frequencies": {
+        "hint": 0.0,
+        "scaffold": 0.4744,
+        "encouragement": 0.2322,
+        "simplify_problem": 0.0658,
+        "harder_problem": 0.1167,
+        "break": 0.0997,
+        "explanation": 0.0113,
+        "no_action": 0.0001
+      },
+      "component_pct": {
+        "k": 6.0762771967920655,
+        "e": 59.42512250264529,
+        "f": -18.51469972734198,
+        "b": -5.923584047655024,
+        "c": -10.06031652556564
+      },
+      "correlations": {
+        "total_reward_vs_success": 0.5078113155179621,
+        "total_reward_vs_lg_norm": 0.6043939701459466,
+        "comp_k_vs_success": 0.7886345410776949,
+        "comp_k_vs_lg_norm": 0.93836299862272,
+        "comp_e_vs_success": -0.11480301735538609
+      },
+      "state_action": {
+        "high_confusion": {
+          "n": 488,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.0287,
+            "encouragement": 0.1742,
+            "simplify_problem": 0.0328,
+            "harder_problem": 0.543,
+            "break": 0.2213,
+            "explanation": 0.0,
+            "no_action": 0.0
+          },
+          "top_action": "harder_problem",
+          "top_p": 0.543
+        },
+        "high_frustration": {
+          "n": 288,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.4583,
+            "encouragement": 0.1076,
+            "simplify_problem": 0.0521,
+            "harder_problem": 0.3194,
+            "break": 0.0069,
+            "explanation": 0.0556,
+            "no_action": 0.0
+          },
+          "top_action": "scaffold",
+          "top_p": 0.4583
+        },
+        "high_boredom": {
+          "n": 113,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.6018,
+            "encouragement": 0.0,
+            "simplify_problem": 0.2743,
+            "harder_problem": 0.0265,
+            "break": 0.0885,
+            "explanation": 0.0088,
+            "no_action": 0.0
+          },
+          "top_action": "scaffold",
+          "top_p": 0.6018
+        },
+        "flow_state": {
+          "n": 5725,
+          "probs": {
+            "hint": 0.0,
+            "scaffold": 0.5039,
+            "encouragement": 0.2571,
+            "simplify_problem": 0.0386,
+            "harder_problem": 0.1015,
+            "break": 0.0954,
+            "explanation": 0.0033,
+            "no_action": 0.0002
+          },
+          "top_action": "scaffold",
+          "top_p": 0.5039
+        }
+      },
+      "context_sensitive": true,
+      "chi2_engagement": {
+        "chi2": 209.49329016003142,
+        "p": 1.8057269491481157e-42,
+        "significant": true
+      },
+      "train_seconds": 44.09338903427124,
+      "balance_score": 0.48920300984652687
+    }
+  ],
+  "comparison_vs_baseline": [
+    {
+      "label": "A_baseline",
+      "wk": 0.5,
+      "we": 0.2,
+      "mean_reward_delta": 0.0,
+      "mean_reward_pct_change": 0.0,
+      "success_rate_delta": 0.0,
+      "success_rate_pct_change": 0.0,
+      "learning_gain_delta": 0.0,
+      "learning_gain_pct_change": 0.0,
+      "adaptation_accuracy_delta": 0.0,
+      "adaptation_accuracy_pct_change": 0.0,
+      "reward_success_corr": 0.2615807856040209,
+      "k_success_corr": 0.6730964780731968,
+      "k_pct": 2.64435440365343,
+      "e_pct": 68.5617736737935
+    },
+    {
+      "label": "B_wk060_we020",
+      "wk": 0.6,
+      "we": 0.2,
+      "mean_reward_delta": -0.0607,
+      "mean_reward_pct_change": -1.7,
+      "success_rate_delta": -0.0133,
+      "success_rate_pct_change": -17.39,
+      "learning_gain_delta": -0.0224,
+      "learning_gain_pct_change": -6.43,
+      "adaptation_accuracy_delta": -0.0098,
+      "adaptation_accuracy_pct_change": -1.89,
+      "reward_success_corr": 0.21443199248376904,
+      "k_success_corr": 0.582022036774965,
+      "k_pct": 2.8215633451527418,
+      "e_pct": 67.67984293559195
+    },
+    {
+      "label": "C_wk070_we020",
+      "wk": 0.7,
+      "we": 0.2,
+      "mean_reward_delta": 0.1181,
+      "mean_reward_pct_change": 3.31,
+      "success_rate_delta": 0.03,
+      "success_rate_pct_change": 39.13,
+      "learning_gain_delta": 0.0144,
+      "learning_gain_pct_change": 4.12,
+      "adaptation_accuracy_delta": 0.003,
+      "adaptation_accuracy_pct_change": 0.58,
+      "reward_success_corr": 0.3307837730805115,
+      "k_success_corr": 0.709876934056276,
+      "k_pct": 3.909110456610777,
+      "e_pct": 67.78187992242569
+    },
+    {
+      "label": "D_wk050_we015",
+      "wk": 0.5,
+      "we": 0.15,
+      "mean_reward_delta": -1.4764,
+      "mean_reward_pct_change": -41.42,
+      "success_rate_delta": 0.04,
+      "success_rate_pct_change": 52.17,
+      "learning_gain_delta": 0.0255,
+      "learning_gain_pct_change": 7.33,
+      "adaptation_accuracy_delta": 0.0347,
+      "adaptation_accuracy_pct_change": 6.7,
+      "reward_success_corr": 0.3420822463626159,
+      "k_success_corr": 0.7281842628068039,
+      "k_pct": 3.4997855572922356,
+      "e_pct": 61.03823957684782
+    },
+    {
+      "label": "E_wk060_we015",
+      "wk": 0.6,
+      "we": 0.15,
+      "mean_reward_delta": -1.4477,
+      "mean_reward_pct_change": -40.62,
+      "success_rate_delta": 0.1067,
+      "success_rate_pct_change": 139.13,
+      "learning_gain_delta": 0.0591,
+      "learning_gain_pct_change": 16.97,
+      "adaptation_accuracy_delta": 0.0447,
+      "adaptation_accuracy_pct_change": 8.65,
+      "reward_success_corr": 0.41674126259745364,
+      "k_success_corr": 0.7760649487350136,
+      "k_pct": 4.857325176024864,
+      "e_pct": 59.69073718309369
+    },
+    {
+      "label": "F_wk070_we015",
+      "wk": 0.7,
+      "we": 0.15,
+      "mean_reward_delta": -1.3101,
+      "mean_reward_pct_change": -36.76,
+      "success_rate_delta": 0.13,
+      "success_rate_pct_change": 169.57,
+      "learning_gain_delta": 0.0775,
+      "learning_gain_pct_change": 22.23,
+      "adaptation_accuracy_delta": 0.0739,
+      "adaptation_accuracy_pct_change": 14.3,
+      "reward_success_corr": 0.5078113155179621,
+      "k_success_corr": 0.7886345410776949,
+      "k_pct": 6.0762771967920655,
+      "e_pct": 59.42512250264529
+    }
+  ],
+  "best_mastery": "F_wk070_we015",
+  "best_alignment": "F_wk070_we015",
+  "best_balance": "F_wk070_we015"
+}

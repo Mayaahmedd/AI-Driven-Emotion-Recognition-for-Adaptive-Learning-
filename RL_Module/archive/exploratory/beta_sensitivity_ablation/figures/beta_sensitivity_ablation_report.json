@@ -1,0 +1,166 @@
+{
+  "study": "beta_sensitivity_ablation",
+  "default_irt_beta": 3.0,
+  "gain_ratio": "10:1",
+  "baseline_hp": {
+    "learning_rate": 0.0005,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 2000,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05,
+    "net_arch": [
+      64,
+      64
+    ]
+  },
+  "beta_conditions": {
+    "A_beta_2": {
+      "label": "Beta 2.0 - More Random (A)",
+      "irt_beta": 2.0
+    },
+    "B_beta_3": {
+      "label": "Beta 3.0 - Current Simulator (B)",
+      "irt_beta": 3.0
+    },
+    "C_beta_5": {
+      "label": "Beta 5.0 - More Deterministic (C)",
+      "irt_beta": 5.0
+    }
+  },
+  "seeds": [
+    42,
+    7,
+    13,
+    21,
+    99,
+    314
+  ],
+  "summary": [
+    {
+      "condition": "A_beta_2",
+      "condition_label": "Beta 2.0 - More Random (A)",
+      "irt_beta": 2.0,
+      "n_seeds": 6,
+      "learning_gain_mean": 0.5193,
+      "learning_gain_std": 0.0929,
+      "coefficient_of_variation": 0.179,
+      "seed_range": 0.2081,
+      "learning_gain_ci": "[0.445, 0.594]",
+      "best_seed": 21,
+      "worst_seed": 13,
+      "best_seed_lg": 0.6348,
+      "worst_seed_lg": 0.4266,
+      "final_knowledge_mean": 0.6684,
+      "final_knowledge_std": 0.0616,
+      "success_rate_mean": 0.2643,
+      "success_rate_std": 0.1618,
+      "adaptation_accuracy_mean": 0.6671,
+      "adaptation_accuracy_std": 0.2124,
+      "mean_episode_reward_mean": 3.2398,
+      "mean_episode_reward_std": 0.2602,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0
+    },
+    {
+      "condition": "B_beta_3",
+      "condition_label": "Beta 3.0 - Current Simulator (B)",
+      "irt_beta": 3.0,
+      "n_seeds": 6,
+      "learning_gain_mean": 0.5634,
+      "learning_gain_std": 0.0929,
+      "coefficient_of_variation": 0.1649,
+      "seed_range": 0.2464,
+      "learning_gain_ci": "[0.489, 0.638]",
+      "best_seed": 7,
+      "worst_seed": 42,
+      "best_seed_lg": 0.6732,
+      "worst_seed_lg": 0.4269,
+      "final_knowledge_mean": 0.6982,
+      "final_knowledge_std": 0.0637,
+      "success_rate_mean": 0.3473,
+      "success_rate_std": 0.1438,
+      "adaptation_accuracy_mean": 0.6786,
+      "adaptation_accuracy_std": 0.1944,
+      "mean_episode_reward_mean": 3.1265,
+      "mean_episode_reward_std": 0.2732,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0
+    },
+    {
+      "condition": "C_beta_5",
+      "condition_label": "Beta 5.0 - More Deterministic (C)",
+      "irt_beta": 5.0,
+      "n_seeds": 6,
+      "learning_gain_mean": 0.567,
+      "learning_gain_std": 0.1105,
+      "coefficient_of_variation": 0.1948,
+      "seed_range": 0.3141,
+      "learning_gain_ci": "[0.479, 0.655]",
+      "best_seed": 7,
+      "worst_seed": 314,
+      "best_seed_lg": 0.677,
+      "worst_seed_lg": 0.3629,
+      "final_knowledge_mean": 0.7018,
+      "final_knowledge_std": 0.0754,
+      "success_rate_mean": 0.3573,
+      "success_rate_std": 0.1745,
+      "adaptation_accuracy_mean": 0.6232,
+      "adaptation_accuracy_std": 0.2075,
+      "mean_episode_reward_mean": 3.3299,
+      "mean_episode_reward_std": 0.1936,
+      "dropout_rate_mean": 0.0,
+      "dropout_rate_std": 0.0
+    }
+  ],
+  "ranking": [
+    {
+      "rank": 1,
+      "condition": "B_beta_3",
+      "condition_label": "Beta 3.0 - Current Simulator (B)",
+      "irt_beta": 3.0,
+      "learning_gain_mean": 0.5634,
+      "learning_gain_std": 0.0929,
+      "coefficient_of_variation": 0.1649,
+      "seed_range": 0.2464,
+      "success_rate_mean": 0.3473,
+      "adaptation_accuracy_mean": 0.6786,
+      "mean_episode_reward_mean": 3.1265,
+      "dropout_rate_mean": 0.0,
+      "best_seed": 7,
+      "worst_seed": 42
+    },
+    {
+      "rank": 2,
+      "condition": "A_beta_2",
+      "condition_label": "Beta 2.0 - More Random (A)",
+      "irt_beta": 2.0,
+      "learning_gain_mean": 0.5193,
+      "learning_gain_std": 0.0929,
+      "coefficient_of_variation": 0.179,
+      "seed_range": 0.2081,
+      "success_rate_mean": 0.2643,
+      "adaptation_accuracy_mean": 0.6671,
+      "mean_episode_reward_mean": 3.2398,
+      "dropout_rate_mean": 0.0,
+      "best_seed": 21,
+      "worst_seed": 13
+    },
+    {
+      "rank": 3,
+      "condition": "C_beta_5",
+      "condition_label": "Beta 5.0 - More Deterministic (C)",
+      "irt_beta": 5.0,
+      "learning_gain_mean": 0.567,
+      "learning_gain_std": 0.1105,
+      "coefficient_of_variation": 0.1948,
+      "seed_range": 0.3141,
+      "success_rate_mean": 0.3573,
+      "adaptation_accuracy_mean": 0.6232,
+      "mean_episode_reward_mean": 3.3299,
+      "dropout_rate_mean": 0.0,
+      "best_seed": 7,
+      "worst_seed": 314
+    }
+  ]
+}

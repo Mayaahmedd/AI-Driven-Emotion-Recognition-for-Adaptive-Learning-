@@ -1,0 +1,68 @@
+/Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/final_dqn_model_study.py:783: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  bp = ax.boxplot(data, labels=["Tier A\n(20 seeds)", "Baseline\n(15 seeds)"], patch_artist=True)
+=== Final DQN Tier A: RUN ===
+Seeds: 20 | Tier A params: {'LAMBDA_ENGAGEMENT': 0.8, 'LAMBDA_FRUSTRATION': 0.845, 'LAMBDA_CONFUSION': 0.735, 'LAMBDA_BOREDOM': 0.68, 'EMOTION_NOISE_STD': 0.015}
+[1/20] seed=42
+  val_lg=0.658 final_lg=0.411 best_lg=0.683 @step=40000 (41.1s)
+[2/20] seed=0
+  val_lg=0.428 final_lg=0.297 best_lg=0.450 @step=40000 (40.2s)
+[3/20] seed=1
+  val_lg=0.425 final_lg=0.254 best_lg=0.421 @step=30000 (40.4s)
+[4/20] seed=7
+  val_lg=0.614 final_lg=0.621 best_lg=0.621 @step=50000 (40.5s)
+[5/20] seed=13
+  val_lg=0.665 final_lg=0.261 best_lg=0.657 @step=40000 (41.3s)
+[6/20] seed=21
+  val_lg=0.641 final_lg=0.222 best_lg=0.680 @step=30000 (42.3s)
+[7/20] seed=99
+  val_lg=0.649 final_lg=0.660 best_lg=0.660 @step=50000 (42.3s)
+[8/20] seed=100
+  val_lg=0.439 final_lg=0.320 best_lg=0.435 @step=30000 (42.5s)
+[9/20] seed=200
+  val_lg=0.459 final_lg=0.367 best_lg=0.460 @step=40000 (42.3s)
+[10/20] seed=314
+  val_lg=0.670 final_lg=0.200 best_lg=0.647 @step=40000 (42.4s)
+[11/20] seed=500
+  val_lg=0.615 final_lg=0.620 best_lg=0.620 @step=50000 (42.5s)
+[12/20] seed=777
+  val_lg=0.667 final_lg=0.152 best_lg=0.648 @step=30000 (42.3s)
+[13/20] seed=1234
+  val_lg=0.503 final_lg=0.356 best_lg=0.525 @step=40000 (42.2s)
+[14/20] seed=2024
+  val_lg=0.630 final_lg=0.602 best_lg=0.620 @step=40000 (42.3s)
+[15/20] seed=5555
+  val_lg=0.502 final_lg=0.320 best_lg=0.498 @step=20000 (42.4s)
+[16/20] seed=8888
+  val_lg=0.496 final_lg=0.539 best_lg=0.539 @step=50000 (42.6s)
+[17/20] seed=9999
+  val_lg=0.612 final_lg=0.611 best_lg=0.611 @step=50000 (42.4s)
+[18/20] seed=10101
+  val_lg=0.714 final_lg=0.423 best_lg=0.706 @step=30000 (42.4s)
+[19/20] seed=20202
+  val_lg=0.624 final_lg=0.458 best_lg=0.618 @step=40000 (42.2s)
+[20/20] seed=30303
+  val_lg=0.661 final_lg=0.452 best_lg=0.675 @step=20000 (42.4s)
+
+=== ANALYZE ===
+{
+  "Q1_tier_a_improves_learning_gain": false,
+  "Q1_tier_a_sig_improves_lg": false,
+  "Q1_lg_delta_tier_minus_baseline": -0.024,
+  "Q1_p_holm": 1.0,
+  "Q2_tier_a_reduces_variance": true,
+  "Q2_std_tier_a": 0.0923,
+  "Q2_std_baseline": 0.0939,
+  "Q3_success_rate_improved": false,
+  "Q4_reduced_seed_sensitivity": true,
+  "Q5_gap_to_strict_no_emotion": 0.0535,
+  "Q5_closes_gap_with_strict_no_emotion": true,
+  "Q5_strict_no_emotion_lg_mean_10seed": 0.5352501016648912,
+  "recommended_model": "baseline_thesis",
+  "recommended_observation": "knowledge, engagement, frustration, confusion, boredom",
+  "recommended_emotion_params": "default (mdp_definition literature defaults)",
+  "recommended_checkpoint_strategy": "best (validation learning gain)",
+  "recommended_learning_gain_mean": 0.6128,
+  "recommended_learning_gain_std": 0.0939,
+  "recommended_learning_gain_ci": "[0.565, 0.660]",
+  "justification": "Baseline thesis model retains higher mean LG (0.613 vs 0.589); difference is not significant at Holm-corrected alpha (p=1.000); Tier A meets or exceeds strict no-emotion LG (0.589 vs 0.535)"
+}

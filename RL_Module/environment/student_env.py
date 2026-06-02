@@ -16,32 +16,75 @@ from RL_Module.environment.population import generate_population
 from RL_Module.environment.student_model import SyntheticStudent
 from RL_Module.fer_interface.fer_adapter import FERAdapter, emotion_from_state
 from RL_Module.mdp_definition import (
+    ACTION_TO_ID,
     ACTIONS,
     COOLDOWNS,
+    DIFFICULTY_INIT_HIGH,
+    DIFFICULTY_INIT_LOW,
+    DIFFICULTY_STEP,
     EMERGENCY_ALLOWED,
-    ENGAGEMENT_MIN_REFLECTION,
     FRUSTRATION_BLOCK_HARDER,
-    FRUSTRATION_BLOCK_STRATEGY,
     FRUSTRATION_PERSISTENT_OFF,
     FRUSTRATION_PERSISTENT_ON,
     FRUSTRATION_PERSISTENT_STEPS,
     ID_TO_ACTION,
     ID_TO_EMOTION,
-    KNOWLEDGE_MAX_SCAFFOLD,
-    KNOWLEDGE_MIN_AUTONOMY,
     EMOTION_TO_ID,
+    OBS_DIM_V6,
+    OBS_DIM_V7,
     StudentState,
+    build_observation,
+    clip01,
 )
 from RL_Module.explainability.explainer import reason_for
 from RL_Module.reward.reward_function import compute_reward
 
-OBS_HIGH = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 3.0], dtype=np.float32)
+OBS_HIGH_V6 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 3.0], dtype=np.float32)
+OBS_HIGH_V7 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 1.0], dtype=np.float32)
+OBS_HIGH = OBS_HIGH_V6  # backward-compatible alias
+
+# Agent-facing observation indices: 0=knowledge, 1=engagement, 2=frustration,
+# 3=confusion, 4=boredom, 5=emotion_id, [6=normalized consecutive_flag_steps if v7].
+OBS_ABLATION_DIMS: Dict[str, Tuple[int, ...]] = {
+    "full_emotion": (),
+    "knowledge_only": (1, 2, 3, 4, 5),
+    "no_engagement": (1,),
+    "no_frustration": (2,),
+    "no_confusion": (3,),
+    "no_boredom": (4,),
+    "no_emotion_id": (5,),
+    "emotion_id_only": (1, 2, 3, 4),
+}
+
+OBS_SPACE_VARIANTS: Dict[str, Dict[str, Any]] = {
+    "A_original_v6": {
+        "include_persistent_obs": False,
+        "obs_ablation": "full_emotion",
+        "label": "A: Original 6-dim",
+    },
+    "B_v7_with_persistent": {
+        "include_persistent_obs": True,
+        "obs_ablation": "full_emotion",
+        "label": "B: + Persistent Steps",
+    },
+    "C_v7_persistent_no_eid": {
+        "include_persistent_obs": True,
+        "obs_ablation": "no_emotion_id",
+        "label": "C: Persistent, No Emotion ID",
+    },
+}
+
+# full: affect drives transitions, reward, masks, termination
+# strict_off: knowledge-only MDP; affect pinned and inert (Condition C)
+EMOTION_DYNAMICS_MODES = ("full", "strict_off")
 
 
 class StudentEnv(gym.Env):
     """
-    observation_space: Box(6,) - knowledge, engagement, frustration, confusion, boredom, emotion_id
-    action_space: Discrete(10)
+    observation_space: Box(6,) or Box(7,) depending on include_persistent_obs
+      v6: knowledge, engagement, frustration, confusion, boredom, emotion_id
+      v7: above + normalized consecutive_flag_steps
+    action_space: Discrete(8)
     """
 
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 4}
@@ -53,6 +96,10 @@ class StudentEnv(gym.Env):
         population_seed: Optional[int] = None,
         use_emotion: bool = True,
         ablation_no_emotion: bool = False,
+        obs_ablation: str = "full_emotion",
+        emotion_dynamics: str = "full",
+        include_persistent_obs: bool = False,
+        obs_space_variant: Optional[str] = None,
     ):
         super().__init__()
         self.render_mode = render_mode
@@ -60,10 +107,41 @@ class StudentEnv(gym.Env):
         self.use_emotion = use_emotion
         self.ablation_no_emotion = ablation_no_emotion
 
+        if obs_space_variant is not None:
+            if obs_space_variant not in OBS_SPACE_VARIANTS:
+                raise ValueError(
+                    f"Unknown obs_space_variant={obs_space_variant!r}. "
+                    f"Choose from {list(OBS_SPACE_VARIANTS)}"
+                )
+            variant = OBS_SPACE_VARIANTS[obs_space_variant]
+            include_persistent_obs = variant["include_persistent_obs"]
+            obs_ablation = variant["obs_ablation"]
+
+        if ablation_no_emotion and obs_ablation == "full_emotion":
+            obs_ablation = "no_emotion_id"
+        if not use_emotion and obs_ablation == "full_emotion":
+            obs_ablation = "knowledge_only"
+        if obs_ablation not in OBS_ABLATION_DIMS:
+            raise ValueError(
+                f"Unknown obs_ablation={obs_ablation!r}. "
+                f"Choose from {list(OBS_ABLATION_DIMS)}"
+            )
+        if emotion_dynamics not in EMOTION_DYNAMICS_MODES:
+            raise ValueError(
+                f"Unknown emotion_dynamics={emotion_dynamics!r}. "
+                f"Choose from {EMOTION_DYNAMICS_MODES}"
+            )
+        self.obs_ablation = obs_ablation
+        self.emotion_dynamics = emotion_dynamics
+        self.strict_no_emotion = emotion_dynamics == "strict_off"
+        self.include_persistent_obs = include_persistent_obs
+        self.obs_dim = OBS_DIM_V7 if include_persistent_obs else OBS_DIM_V6
+        obs_high = OBS_HIGH_V7 if include_persistent_obs else OBS_HIGH_V6
+
         self.observation_space = spaces.Box(
-            low=0.0, high=OBS_HIGH, shape=(6,), dtype=np.float32
+            low=0.0, high=obs_high, shape=(self.obs_dim,), dtype=np.float32
         )
-        self.action_space = spaces.Discrete(10)
+        self.action_space = spaces.Discrete(8)
 
         self._population: List[SyntheticStudent] = generate_population(
             seed=population_seed or config.DEFAULT_SEED
@@ -76,12 +154,14 @@ class StudentEnv(gym.Env):
 
         self._step_count = 0
         self._episode_count = 0
-        self._cooldowns: Dict[int, int] = {i: 0 for i in range(10)}
+        self._cooldowns: Dict[int, int] = {i: 0 for i in range(8)}
         self._persistent_frustration_flag = False
         self._frustration_high_streak = 0
         self._consecutive_flag_steps = 0
         self._frustration_history: deque = deque(maxlen=3)
         self._last_answer_wrong = False
+        self._last_answer_correct = True
+        self._current_difficulty = 0.5
         self._cumulative_reward = 0.0
         self._reward_history: List[float] = []
         self._last_action: int = 0
@@ -150,8 +230,14 @@ class StudentEnv(gym.Env):
 
     def get_action_mask(self) -> np.ndarray:
         """Return int8 mask: 1 = available, 0 = blocked."""
-        mask = np.ones(10, dtype=np.int8)
+        mask = np.ones(8, dtype=np.int8)
         s = self._state
+
+        if self.strict_no_emotion:
+            for action_id, remaining in self._cooldowns.items():
+                if remaining > 0:
+                    mask[action_id] = 0
+            return mask
 
         if self._persistent_frustration_flag:
             mask[:] = 0
@@ -160,15 +246,7 @@ class StudentEnv(gym.Env):
             return mask
 
         if s.frustration > FRUSTRATION_BLOCK_HARDER or s.emotion_id == EMOTION_TO_ID["frustrated"]:
-            mask[1] = 0
-        if s.engagement < ENGAGEMENT_MIN_REFLECTION:
-            mask[6] = 0
-        if s.frustration > FRUSTRATION_BLOCK_STRATEGY:
-            mask[7] = 0
-        if s.knowledge < KNOWLEDGE_MIN_AUTONOMY:
-            mask[8] = 0
-        if s.knowledge >= KNOWLEDGE_MAX_SCAFFOLD:
-            mask[4] = 0
+            mask[ACTION_TO_ID["harder_problem"]] = 0
 
         for action_id, remaining in self._cooldowns.items():
             if remaining > 0:
@@ -185,10 +263,13 @@ class StudentEnv(gym.Env):
         return eid
 
     def _obs(self) -> np.ndarray:
-        vec = self._state.as_vec().astype(np.float32)
-        if self.ablation_no_emotion or not self.use_emotion:
-            vec[5] = 0.0
-        return vec
+        return build_observation(
+            self._state,
+            consecutive_flag_steps=self._consecutive_flag_steps,
+            include_persistent=self.include_persistent_obs,
+            mask_indices=OBS_ABLATION_DIMS[self.obs_ablation],
+            dropout_steps=config.PERSISTENT_FLAG_DROPOUT_STEPS,
+        )
 
     def reset(
         self,
@@ -200,20 +281,38 @@ class StudentEnv(gym.Env):
         if seed is not None:
             self._rng = np.random.default_rng(seed)
 
+        self._episode_count += 1
         self._student = self._sample_student()
         self._fer.reset()
         self._state = self._student.state.copy()
-        eid, _ = self._fer.get_emotion(self._state)
-        self._state.emotion_id = eid
+        if self.strict_no_emotion:
+            from RL_Module.environment.student_model import (
+                NEUTRAL_AFFECT,
+                NEUTRAL_EMOTION_ID,
+            )
+
+            self._state.engagement = NEUTRAL_AFFECT["engagement"]
+            self._state.frustration = NEUTRAL_AFFECT["frustration"]
+            self._state.confusion = NEUTRAL_AFFECT["confusion"]
+            self._state.boredom = NEUTRAL_AFFECT["boredom"]
+            self._state.emotion_id = NEUTRAL_EMOTION_ID
+            self._student.state = self._state.copy()
+        else:
+            eid, _ = self._fer.get_emotion(self._state)
+            self._state.emotion_id = eid
         self._prev_state = self._state.copy()
 
         self._step_count = 0
-        self._cooldowns = {i: 0 for i in range(10)}
+        self._cooldowns = {i: 0 for i in range(8)}
         self._persistent_frustration_flag = False
         self._frustration_high_streak = 0
         self._consecutive_flag_steps = 0
         self._frustration_history.clear()
-        self._last_answer_wrong = bool(self._rng.random() < 0.3)
+        self._current_difficulty = float(
+            self._rng.uniform(DIFFICULTY_INIT_LOW, DIFFICULTY_INIT_HIGH)
+        )
+        self._last_answer_wrong = False
+        self._last_answer_correct = True
         self._cumulative_reward = 0.0
         self._reward_history = []
         self._should_quit = False
@@ -221,6 +320,7 @@ class StudentEnv(gym.Env):
         info = {
             "action_masks": self.get_action_mask(),
             "persistent_frustration_flag": self._persistent_frustration_flag,
+            "consecutive_flag_steps": self._consecutive_flag_steps,
         }
         return self._obs(), info
 
@@ -229,52 +329,73 @@ class StudentEnv(gym.Env):
         if mask[action] == 0:
             raise ValueError(
                 f"Action {action} ({ID_TO_ACTION[action]}) is masked. "
-                f"Allowed: {[ID_TO_ACTION[i] for i in range(10) if mask[i]]}"
+                f"Allowed: {[ID_TO_ACTION[i] for i in range(8) if mask[i]]}"
             )
 
         self._prev_state = self._state.copy()
         self._last_action = action
 
-        self._state = self._student.apply_action(action, self._prev_state)
+        if action == ACTION_TO_ID["harder_problem"]:
+            self._current_difficulty = clip01(
+                self._current_difficulty + DIFFICULTY_STEP
+            )
+        elif action == ACTION_TO_ID["simplify_problem"]:
+            self._current_difficulty = clip01(
+                self._current_difficulty - DIFFICULTY_STEP
+            )
 
-        if config.USE_REAL_FER:
+        self._state, correct = self._student.apply_action(
+            action,
+            self._prev_state,
+            self._current_difficulty,
+            strict_no_emotion=self.strict_no_emotion,
+        )
+        self._last_answer_correct = correct
+        self._last_answer_wrong = not correct
+
+        if self.strict_no_emotion:
+            from RL_Module.environment.student_model import NEUTRAL_EMOTION_ID
+
+            self._state.emotion_id = NEUTRAL_EMOTION_ID
+            conf = 0.85
+            self._fer._current_emotion_id = NEUTRAL_EMOTION_ID
+            self._fer._confidence = conf
+        elif config.USE_REAL_FER:
             eid, conf = self._fer.get_emotion(self._state)
+            self._state.emotion_id = eid
         else:
             eid = self._derive_emotion_id()
             conf = 0.85
             self._fer._current_emotion_id = eid
             self._fer._confidence = conf
-        self._state.emotion_id = eid
+            self._state.emotion_id = eid
 
         self._explainer_reason = reason_for(
             self._state.as_vec(),
             action,
-            persistent_flag=self._persistent_frustration_flag,
+            persistent_flag=False if self.strict_no_emotion else self._persistent_frustration_flag,
             confidence=conf,
         )
 
-        self._frustration_history.append(self._state.frustration)
+        if not self.strict_no_emotion:
+            self._frustration_history.append(self._state.frustration)
 
-        if self._state.frustration > FRUSTRATION_PERSISTENT_ON:
-            self._frustration_high_streak += 1
-        else:
-            self._frustration_high_streak = 0
+            if self._state.frustration > FRUSTRATION_PERSISTENT_ON:
+                self._frustration_high_streak += 1
+            else:
+                self._frustration_high_streak = 0
 
-        if self._frustration_high_streak >= FRUSTRATION_PERSISTENT_STEPS:
-            self._persistent_frustration_flag = True
-        if self._state.frustration < FRUSTRATION_PERSISTENT_OFF:
-            self._persistent_frustration_flag = False
-            self._frustration_high_streak = 0
-            self._consecutive_flag_steps = 0
+            if self._frustration_high_streak >= FRUSTRATION_PERSISTENT_STEPS:
+                self._persistent_frustration_flag = True
+            if self._state.frustration < FRUSTRATION_PERSISTENT_OFF:
+                self._persistent_frustration_flag = False
+                self._frustration_high_streak = 0
+                self._consecutive_flag_steps = 0
 
-        if self._persistent_frustration_flag:
-            self._consecutive_flag_steps += 1
-        else:
-            self._consecutive_flag_steps = 0
-
-        self._last_answer_wrong = bool(
-            self._rng.random() < max(0.2, 1.0 - self._state.knowledge)
-        )
+            if self._persistent_frustration_flag:
+                self._consecutive_flag_steps += 1
+            else:
+                self._consecutive_flag_steps = 0
 
         reward = compute_reward(
             self._prev_state,
@@ -282,6 +403,7 @@ class StudentEnv(gym.Env):
             self._state,
             persistent_flag=self._persistent_frustration_flag,
             last_answer_wrong=self._last_answer_wrong,
+            strict_no_emotion=self.strict_no_emotion,
         )
         self._last_reward = reward
         self._cumulative_reward += reward
@@ -304,7 +426,8 @@ class StudentEnv(gym.Env):
         if self._state.knowledge >= 0.95:
             terminated = True
         elif (
-            self._persistent_frustration_flag
+            not self.strict_no_emotion
+            and self._persistent_frustration_flag
             and self._consecutive_flag_steps >= config.PERSISTENT_FLAG_DROPOUT_STEPS
         ):
             terminated = True
@@ -316,6 +439,9 @@ class StudentEnv(gym.Env):
             "action_masks": self.get_action_mask(),
             "persistent_frustration_flag": self._persistent_frustration_flag,
             "persistent_flag": self._persistent_frustration_flag,
+            "consecutive_flag_steps": self._consecutive_flag_steps,
+            "obs_dim": self.obs_dim,
+            "include_persistent_obs": self.include_persistent_obs,
             "emotion": ID_TO_EMOTION[self._state.emotion_id],
             "emotion_name": ID_TO_EMOTION[self._state.emotion_id],
             "emotion_id": self._state.emotion_id,
@@ -327,7 +453,8 @@ class StudentEnv(gym.Env):
             "boredom": self._state.boredom,
             "fer_confidence": conf,
             "last_answer_wrong": self._last_answer_wrong,
-            "last_answer_correct": not self._last_answer_wrong,
+            "last_answer_correct": self._last_answer_correct,
+            "difficulty": self._current_difficulty,
             "explainer_reason": self._explainer_reason,
             "terminated": terminated,
             "truncated": truncated,

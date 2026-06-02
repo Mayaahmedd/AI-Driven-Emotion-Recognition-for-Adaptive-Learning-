@@ -1,0 +1,7 @@
+Condition,condition,Tutor,Learning Gain,LG_std,LG_ci,Final Knowledge,Success Rate,Adaptation,Wellbeing,Reward,Dropout,n_seeds
+Full Emotion (A),full_emotion,Random,0.3825,0.0085,"[0.3757, 0.3893]",0.5748,0.0817,0.288,0.3696,2.7049,0.0,6
+Full Emotion (A),full_emotion,ERT,0.4108,0.0112,"[0.4018, 0.4198]",0.5943,0.1157,0.3732,0.4018,3.1242,0.0,6
+Full Emotion (A),full_emotion,DQN,0.4362,0.1994,"[0.2767, 0.5958]",0.6123,0.1997,0.5455,0.3887,2.9853,0.0,6
+Knowledge Only (B),knowledge_only,Random,0.3825,0.0085,"[0.3757, 0.3893]",0.5748,0.0817,0.288,0.3696,2.7049,0.0,6
+Knowledge Only (B),knowledge_only,ERT,0.444,0.01,"[0.436, 0.452]",0.6169,0.1497,0.5234,0.4082,3.2436,0.0,6
+Knowledge Only (B),knowledge_only,DQN,0.3908,0.1541,"[0.2675, 0.5141]",0.5812,0.1233,0.3183,0.377,2.8138,0.0,6

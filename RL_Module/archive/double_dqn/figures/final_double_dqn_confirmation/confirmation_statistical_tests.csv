@@ -1,0 +1,4 @@
+comparison,metric,mean_standard_dqn,mean_double_dqn,delta_double_dqn_minus_dqn,pct_change,cv_standard_dqn,cv_double_dqn,ci_95_standard_dqn,ci_95_double_dqn,cohens_d,welch_t,p_value,significant_005
+DoubleDQN_vs_StandardDQN,learning_gain,0.6089,0.5539,-0.055,-9.03,0.1456,0.1178,"[0.570, 0.648]","[0.525, 0.583]",-0.7065,-2.2342,0.031974,True
+DoubleDQN_vs_StandardDQN,success_rate,0.4003,0.3021,-0.0982,-24.53,0.3752,0.344,"[0.334, 0.466]","[0.257, 0.348]",-0.7604,-2.4047,0.021814,True
+DoubleDQN_vs_StandardDQN,adaptation_accuracy,0.7751,0.7141,-0.061,-7.87,0.2758,0.2265,"[0.681, 0.869]","[0.643, 0.785]",-0.3219,-1.0179,0.315627,False

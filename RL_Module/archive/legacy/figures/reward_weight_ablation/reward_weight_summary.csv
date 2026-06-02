@@ -1,0 +1,3 @@
+configuration,learning_gain_mean,learning_gain_std,learning_gain_cv,success_rate_mean,success_rate_std,success_rate_cv,adaptation_accuracy_mean,adaptation_accuracy_std,adaptation_accuracy_cv,mean_episode_reward_mean,mean_episode_reward_std,mean_episode_reward_cv,n_seeds
+baseline_weights,0.3846,0.172,0.4473,0.1483,0.1804,1.2159,0.4569,0.3136,0.6864,3.3788,0.1061,0.0314,6
+equal_weights,0.3614,0.0609,0.1685,0.06,0.0299,0.4989,0.3887,0.1593,0.4097,0.9313,0.2967,0.3186,6

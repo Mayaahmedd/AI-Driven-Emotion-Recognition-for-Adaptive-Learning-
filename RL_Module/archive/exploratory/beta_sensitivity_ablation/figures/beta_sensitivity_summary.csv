@@ -1,0 +1,4 @@
+condition,condition_label,irt_beta,n_seeds,learning_gain_mean,learning_gain_std,coefficient_of_variation,seed_range,learning_gain_ci,best_seed,worst_seed,best_seed_lg,worst_seed_lg,final_knowledge_mean,final_knowledge_std,success_rate_mean,success_rate_std,adaptation_accuracy_mean,adaptation_accuracy_std,mean_episode_reward_mean,mean_episode_reward_std,dropout_rate_mean,dropout_rate_std
+A_beta_2,Beta 2.0 - More Random (A),2.0,6,0.5193,0.0929,0.179,0.2081,"[0.445, 0.594]",21,13,0.6348,0.4266,0.6684,0.0616,0.2643,0.1618,0.6671,0.2124,3.2398,0.2602,0.0,0.0
+B_beta_3,Beta 3.0 - Current Simulator (B),3.0,6,0.5634,0.0929,0.1649,0.2464,"[0.489, 0.638]",7,42,0.6732,0.4269,0.6982,0.0637,0.3473,0.1438,0.6786,0.1944,3.1265,0.2732,0.0,0.0
+C_beta_5,Beta 5.0 - More Deterministic (C),5.0,6,0.567,0.1105,0.1948,0.3141,"[0.479, 0.655]",7,314,0.677,0.3629,0.7018,0.0754,0.3573,0.1745,0.6232,0.2075,3.3299,0.1936,0.0,0.0

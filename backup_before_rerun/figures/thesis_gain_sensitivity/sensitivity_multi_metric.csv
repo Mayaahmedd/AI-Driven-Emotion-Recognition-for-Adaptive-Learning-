@@ -1,0 +1,7 @@
+Ratio,gain_id,Random_learning_gain,ERT_learning_gain,DQN_learning_gain,Winner_learning_gain,Random_final_knowledge,ERT_final_knowledge,DQN_final_knowledge,Winner_final_knowledge,Random_success_rate,ERT_success_rate,DQN_success_rate,Winner_success_rate,Random_dropout_rate,ERT_dropout_rate,DQN_dropout_rate,Winner_dropout_rate
+1:1,G0,0.5238,0.5293,0.4311,ERT,0.6706,0.6747,0.6093,ERT,0.2597,0.2803,0.1913,ERT,0.0,0.0,0.0,Random
+2:1,G1,0.4465,0.4648,0.543,DQN,0.6185,0.6308,0.6852,DQN,0.1383,0.1787,0.314,DQN,0.0,0.0,0.0,Random
+3.3:1,G2,0.4159,0.4382,0.3716,ERT,0.5974,0.6131,0.5681,ERT,0.1123,0.1417,0.1173,ERT,0.0,0.0,0.0,Random
+5:1,G3,0.3987,0.4241,0.4923,DQN,0.5858,0.6035,0.6511,DQN,0.096,0.1247,0.251,DQN,0.0,0.0,0.0,Random
+10:1,G4,0.3825,0.4108,0.4362,DQN,0.5748,0.5943,0.6123,DQN,0.0817,0.1157,0.1997,DQN,0.0,0.0,0.0,Random
+20:1,G5,0.3741,0.4034,0.4955,DQN,0.569,0.5892,0.6524,DQN,0.075,0.1043,0.29,DQN,0.0,0.0,0.0,Random

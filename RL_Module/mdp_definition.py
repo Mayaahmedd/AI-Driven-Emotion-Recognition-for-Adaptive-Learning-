@@ -35,18 +35,16 @@ EMOTIONS: Tuple[str, ...] = ("confused", "bored", "frustrated", "engaged")
 EMOTION_TO_ID: Dict[str, int] = {e: i for i, e in enumerate(EMOTIONS)}
 ID_TO_EMOTION: Dict[int, str] = {i: e for i, e in enumerate(EMOTIONS)}
 
-# ?? Actions ???????????????????????????????????????????????????????????????????
+# Actions (8) — simplified space; removed redundant pedagogical actions
 ACTIONS: Tuple[str, ...] = (
-    "easier_question",       # 0
-    "harder_question",       # 1
-    "give_hint",             # 2
-    "motivational_message",  # 3
-    "scaffold",              # 4
-    "change_pacing",         # 5
-    "reflection_prompt",     # 6
-    "strategy_guidance",     # 7
-    "autonomy_support",      # 8
-    "explanation",           # 9
+    "hint",              # 0
+    "scaffold",          # 1
+    "encouragement",     # 2
+    "simplify_problem",  # 3
+    "harder_problem",    # 4
+    "break",             # 5
+    "explanation",       # 6
+    "no_action",         # 7
 )
 
 ACTION_TO_ID: Dict[str, int] = {a: i for i, a in enumerate(ACTIONS)}
@@ -54,9 +52,43 @@ ID_TO_ACTION: Dict[int, str] = {i: a for i, a in enumerate(ACTIONS)}
 
 # ?? MDP components ????????????????????????????????????????????????????????????
 GAMMA: float = 0.99
-STATE_DIM: int = 6
-ACTION_DIM: int = 10
+STATE_DIM: int = 6  # cognitive student state (StudentState fields)
+OBS_DIM_V6: int = 6  # legacy agent observation (no persistent-frustration channel)
+OBS_DIM_V7: int = 7  # extended observation (+ normalized consecutive_flag_steps)
+# Observation indices (v6 layout; v7 appends index 6)
+OBS_IDX_KNOWLEDGE: int = 0
+OBS_IDX_ENGAGEMENT: int = 1
+OBS_IDX_FRUSTRATION: int = 2
+OBS_IDX_CONFUSION: int = 3
+OBS_IDX_BOREDOM: int = 4
+OBS_IDX_EMOTION_ID: int = 5
+OBS_IDX_PERSISTENT_STEPS: int = 6
+ACTION_DIM: int = 8
 TRANSITION_NOISE_STD: float = 0.02
+
+# IRT correctness model (van der Linden & Hambleton, 1997) — tunable defaults
+IRT_BETA: float = 3.0
+IRT_ALPHA: float = 1.0
+
+# Emotion persistence AR(1) — literature-inspired simulator hyperparameters (Pekrun CVT)
+LAMBDA_FRUSTRATION: float = 0.69
+LAMBDA_ENGAGEMENT: float = 0.60
+LAMBDA_CONFUSION: float = 0.47
+LAMBDA_BOREDOM: float = 0.36
+EMOTION_NOISE_STD: float = 0.03
+
+# Challenge-skill mismatch (Flow Theory) — tunable band on [0,1] scale
+MISMATCH_HIGH: float = 0.3
+MISMATCH_LOW: float = -0.3
+
+# Asymmetric learning (productive failure; Guzmán & Cruz-Mercado, 2025)
+GAIN_INCORRECT_FACTOR: float = 1.0
+GAIN_CORRECT_FACTOR: float = 0.1
+
+# Episode difficulty sampling (internal latent; not in observation)
+DIFFICULTY_INIT_LOW: float = 0.3
+DIFFICULTY_INIT_HIGH: float = 0.8
+DIFFICULTY_STEP: float = 0.1
 
 # Persistent frustration thresholds
 FRUSTRATION_PERSISTENT_ON: float = 0.7
@@ -65,31 +97,27 @@ FRUSTRATION_PERSISTENT_STEPS: int = 3
 
 # Action masking thresholds
 FRUSTRATION_BLOCK_HARDER: float = 0.6
-FRUSTRATION_BLOCK_STRATEGY: float = 0.8
-ENGAGEMENT_MIN_REFLECTION: float = 0.5
-KNOWLEDGE_MIN_AUTONOMY: float = 0.4
-KNOWLEDGE_MAX_SCAFFOLD: float = 0.5
 
 # Cooldown steps after using an action (action_id -> steps)
 COOLDOWNS: Dict[int, int] = {
-    2: 3,   # give_hint
-    3: 4,   # motivational_message
-    5: 5,   # change_pacing
-    6: 5,   # reflection_prompt
-    7: 4,   # strategy_guidance
-    8: 6,   # autonomy_support
-    9: 3,   # explanation
+    0: 1,   # hint — lightweight, rapidly reusable
+    1: 1,   # scaffold
+    2: 3,   # encouragement
+    3: 2,   # simplify_problem — overload tool, not universal filler
+    5: 3,   # break
+    6: 2,   # explanation
 }
+# harder_problem(4), no_action(7): no cooldown
 
-# Emergency mode: only these actions allowed when persistent_frustration_flag
-EMERGENCY_ALLOWED: FrozenSet[int] = frozenset({5, 8, 9})
+# Emergency: hint, scaffold, encouragement, break (cooldowns still apply)
+EMERGENCY_ALLOWED: FrozenSet[int] = frozenset({0, 1, 2, 5})
 
-# Pedagogically optimal actions per emotion_id (for adaptation_accuracy metric)
+# Pedagogically optimal actions per emotion_id (adaptation_accuracy metric only)
 BEST_ACTION_MAP: Dict[int, Set[int]] = {
-    0: {2, 9, 7},   # confused -> hint, explanation, strategy_guidance
-    3: {1, 4, 6},   # engaged -> harder_question, scaffold, reflection_prompt
-    2: {5, 0, 8},   # frustrated -> change_pacing, easier_question, autonomy_support
-    1: {3, 8, 4},   # bored -> motivational_message, autonomy_support, scaffold
+    0: {0, 6, 1},   # confused -> hint, explanation, scaffold
+    3: {4, 1},      # engaged -> harder_problem, scaffold
+    2: {5, 3, 2},   # frustrated -> break, simplify_problem, encouragement
+    1: {2, 4},      # bored -> encouragement, harder_problem
 }
 
 # String-key view for human-readable lookups (backward compatibility)
@@ -106,9 +134,54 @@ STUDENT_TYPES: Tuple[str, ...] = (
 )
 
 
+def normalize_persistent_steps(
+    consecutive_flag_steps: int,
+    dropout_steps: int = 5,
+) -> float:
+    """Normalize consecutive persistent-flag steps to [0, 1] for the observation channel."""
+    if consecutive_flag_steps <= 0:
+        return 0.0
+    return float(min(consecutive_flag_steps / max(dropout_steps, 1), 1.0))
+
+
+def build_observation(
+    state: "StudentState",
+    *,
+    consecutive_flag_steps: int = 0,
+    include_persistent: bool = False,
+    mask_indices: Tuple[int, ...] = (),
+    dropout_steps: int = 5,
+) -> np.ndarray:
+    """
+    Build the agent-facing observation vector.
+
+    v6: [knowledge, engagement, frustration, confusion, boredom, emotion_id]
+    v7: above + normalized consecutive_flag_steps at index 6
+
+    mask_indices zero out ablated channels (shape unchanged).
+    """
+    vec = state.as_vec().astype(np.float32)
+    if include_persistent:
+        vec = np.append(
+            vec,
+            np.array(
+                [normalize_persistent_steps(consecutive_flag_steps, dropout_steps)],
+                dtype=np.float32,
+            ),
+        )
+    for idx in mask_indices:
+        if 0 <= idx < len(vec):
+            vec[idx] = 0.0
+    return vec
+
+
 @dataclass
 class StudentState:
-    """S = [knowledge, engagement, frustration, confusion, boredom, emotion_id]"""
+    """Cognitive state S = [knowledge, engagement, frustration, confusion, boredom, emotion_id]
+
+    Persistent-frustration counters (consecutive_flag_steps) live in StudentEnv, not here.
+    They are appended to the observation vector when include_persistent_obs=True.
+    """
 
     knowledge: float
     engagement: float
@@ -132,16 +205,26 @@ class StudentState:
 
     @classmethod
     def from_vec(cls, vec: np.ndarray) -> "StudentState":
-        eid = int(round(float(vec[5])))
+        """Parse cognitive state from a 6- or 7-dimensional observation vector."""
+        if len(vec) < STATE_DIM:
+            raise ValueError(f"Observation vector must have at least {STATE_DIM} elements, got {len(vec)}")
+        eid = int(round(float(vec[OBS_IDX_EMOTION_ID])))
         eid = max(0, min(3, eid))
         return cls(
-            knowledge=float(vec[0]),
-            engagement=float(vec[1]),
-            frustration=float(vec[2]),
-            confusion=float(vec[3]),
-            boredom=float(vec[4]),
+            knowledge=float(vec[OBS_IDX_KNOWLEDGE]),
+            engagement=float(vec[OBS_IDX_ENGAGEMENT]),
+            frustration=float(vec[OBS_IDX_FRUSTRATION]),
+            confusion=float(vec[OBS_IDX_CONFUSION]),
+            boredom=float(vec[OBS_IDX_BOREDOM]),
             emotion_id=eid,
         )
+
+    def persistent_steps_from_vec(self, vec: np.ndarray) -> int:
+        """Recover raw consecutive_flag_steps from a v7 observation (approximate inverse)."""
+        if len(vec) <= OBS_IDX_PERSISTENT_STEPS:
+            return 0
+        norm = float(vec[OBS_IDX_PERSISTENT_STEPS])
+        return int(round(norm * 5))  # default dropout horizon; env uses config
 
     @property
     def emotion(self) -> str:

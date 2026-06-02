@@ -1,0 +1,13 @@
+configuration,comparison,metric,mean_DQN,mean_baseline,delta_DQN_minus_baseline,ci_95_DQN,ci_95_baseline,cohens_d,t,p_raw,p_holm
+B_realistic_mixed,DQN_vs_Rule,learning_gain,0.5484,0.4598,0.0886,"[0.510, 0.586]","[0.453, 0.467]",2.0089,4.4921,0.00128,0.00512
+B_realistic_mixed,DQN_vs_Rule,success_rate,0.295,0.156,0.139,"[0.234, 0.356]","[0.147, 0.165]",1.98,4.4275,0.001476,0.004429
+B_realistic_mixed,DQN_vs_Rule,adaptation_accuracy,0.6436,0.3786,0.265,"[0.526, 0.761]","[0.377, 0.380]",1.9776,4.422,0.001665,0.003329
+B_realistic_mixed,DQN_vs_Random,learning_gain,0.5484,0.4144,0.134,"[0.510, 0.586]","[0.409, 0.420]",3.0542,6.8293,6.2e-05,0.000619
+B_realistic_mixed,DQN_vs_Random,success_rate,0.295,0.101,0.194,"[0.234, 0.356]","[0.092, 0.110]",2.7626,6.1774,0.000134,0.001202
+B_realistic_mixed,DQN_vs_Random,adaptation_accuracy,0.6436,0.2876,0.3559,"[0.526, 0.761]","[0.286, 0.289]",2.656,5.9391,0.000218,0.001743
+A_stable_canonical,DQN_vs_Rule,learning_gain,0.6023,0.4914,0.1109,"[0.560, 0.644]","[0.488, 0.494]",2.3046,5.1532,0.000582,0.003494
+A_stable_canonical,DQN_vs_Rule,success_rate,0.2476,0.0956,0.152,"[0.174, 0.321]","[0.089, 0.102]",1.8125,4.0528,0.002784,0.002784
+A_stable_canonical,DQN_vs_Rule,adaptation_accuracy,0.6096,0.3679,0.2417,"[0.523, 0.697]","[0.366, 0.370]",2.4356,5.4461,0.000407,0.002847
+A_stable_canonical,DQN_vs_Random,learning_gain,0.6023,0.4434,0.1589,"[0.560, 0.644]","[0.440, 0.446]",3.3021,7.3836,4e-05,0.000474
+A_stable_canonical,DQN_vs_Random,success_rate,0.2476,0.0618,0.1858,"[0.174, 0.321]","[0.055, 0.068]",2.2149,4.9526,0.000751,0.003757
+A_stable_canonical,DQN_vs_Random,adaptation_accuracy,0.6096,0.2878,0.3218,"[0.523, 0.697]","[0.286, 0.289]",3.2433,7.2522,4.8e-05,0.000527

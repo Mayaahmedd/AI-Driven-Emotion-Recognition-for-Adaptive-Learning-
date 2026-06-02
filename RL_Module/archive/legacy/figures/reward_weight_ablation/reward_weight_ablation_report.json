@@ -1,0 +1,132 @@
+{
+  "study": "reward_weight_ablation",
+  "gain_ratio": "10:1",
+  "baseline_hp": {
+    "learning_rate": 0.0005,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 2000,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05,
+    "net_arch": [
+      64,
+      64
+    ]
+  },
+  "reward_configs": {
+    "baseline_weights": {
+      "wk": 0.5,
+      "we": 0.2,
+      "wf": 0.15,
+      "wb": 0.1,
+      "wc": 0.05
+    },
+    "equal_weights": {
+      "wk": 0.2,
+      "we": 0.2,
+      "wf": 0.2,
+      "wb": 0.2,
+      "wc": 0.2
+    }
+  },
+  "seeds": [
+    42,
+    7,
+    13,
+    21,
+    99,
+    314
+  ],
+  "summary": [
+    {
+      "configuration": "baseline_weights",
+      "learning_gain_mean": 0.3846,
+      "learning_gain_std": 0.172,
+      "learning_gain_cv": 0.4473,
+      "success_rate_mean": 0.1483,
+      "success_rate_std": 0.1804,
+      "success_rate_cv": 1.2159,
+      "adaptation_accuracy_mean": 0.4569,
+      "adaptation_accuracy_std": 0.3136,
+      "adaptation_accuracy_cv": 0.6864,
+      "mean_episode_reward_mean": 3.3788,
+      "mean_episode_reward_std": 0.1061,
+      "mean_episode_reward_cv": 0.0314,
+      "n_seeds": 6
+    },
+    {
+      "configuration": "equal_weights",
+      "learning_gain_mean": 0.3614,
+      "learning_gain_std": 0.0609,
+      "learning_gain_cv": 0.1685,
+      "success_rate_mean": 0.06,
+      "success_rate_std": 0.0299,
+      "success_rate_cv": 0.4989,
+      "adaptation_accuracy_mean": 0.3887,
+      "adaptation_accuracy_std": 0.1593,
+      "adaptation_accuracy_cv": 0.4097,
+      "mean_episode_reward_mean": 0.9313,
+      "mean_episode_reward_std": 0.2967,
+      "mean_episode_reward_cv": 0.3186,
+      "n_seeds": 6
+    }
+  ],
+  "action_diversity": [
+    {
+      "configuration": "baseline_weights",
+      "action_entropy_mean": 1.4125,
+      "action_entropy_std": 0.197,
+      "actions_used_mean": 5.3333,
+      "actions_used_std": 0.5164,
+      "dominance_any_seed": false,
+      "hint_mean_freq": 0.0287,
+      "scaffold_mean_freq": 0.3193,
+      "encouragement_mean_freq": 0.1309,
+      "simplify_problem_mean_freq": 0.066,
+      "harder_problem_mean_freq": 0.1374,
+      "break_mean_freq": 0.093,
+      "explanation_mean_freq": 0.0726,
+      "no_action_mean_freq": 0.152
+    },
+    {
+      "configuration": "equal_weights",
+      "action_entropy_mean": 1.4597,
+      "action_entropy_std": 0.254,
+      "actions_used_mean": 5.1667,
+      "actions_used_std": 1.472,
+      "dominance_any_seed": false,
+      "hint_mean_freq": 0.0134,
+      "scaffold_mean_freq": 0.3517,
+      "encouragement_mean_freq": 0.166,
+      "simplify_problem_mean_freq": 0.0647,
+      "harder_problem_mean_freq": 0.037,
+      "break_mean_freq": 0.1091,
+      "explanation_mean_freq": 0.1767,
+      "no_action_mean_freq": 0.0814
+    }
+  ],
+  "ranking": [
+    {
+      "configuration": "baseline_weights",
+      "learning_gain_mean": 0.3846,
+      "learning_gain_std": 0.172,
+      "success_rate_mean": 0.1483,
+      "adaptation_accuracy_mean": 0.4569,
+      "reward_mean": 3.3788,
+      "action_entropy": 1.4125,
+      "actions_used": 5.3333,
+      "rank": 1
+    },
+    {
+      "configuration": "equal_weights",
+      "learning_gain_mean": 0.3614,
+      "learning_gain_std": 0.0609,
+      "success_rate_mean": 0.06,
+      "adaptation_accuracy_mean": 0.3887,
+      "reward_mean": 0.9313,
+      "action_entropy": 1.4597,
+      "actions_used": 5.1667,
+      "rank": 2
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+Removed prior results: /Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/figures/thesis_gain_sensitivity/thesis_gain_per_run.csv
+=== Thesis Gain Sensitivity: RUN (redesigned ERT) ===
+Seeds=[42, 7, 13, 21, 99, 314] train=50000 eval=500
+
+--- G0 (ratio 1:1) ---
+[1/108] Random seed=42
+  G0_Random_s42: lg=0.521 fk=0.667 succ=0.270 drop=0.000 adapt=0.288 reward=2.929 (2s)
+[2/108] Random seed=7
+  G0_Random_s7: lg=0.516 fk=0.665 succ=0.236 drop=0.000 adapt=0.281 reward=2.926 (2s)
+[3/108] Random seed=13
+  G0_Random_s13: lg=0.524 fk=0.673 succ=0.268 drop=0.000 adapt=0.290 reward=2.906 (2s)
+[4/108] Random seed=21
+  G0_Random_s21: lg=0.538 fk=0.680 succ=0.288 drop=0.000 adapt=0.283 reward=2.981 (2s)
+[5/108] Random seed=99
+  G0_Random_s99: lg=0.515 fk=0.665 succ=0.236 drop=0.000 adapt=0.288 reward=2.916 (2s)
+[6/108] Random seed=314
+  G0_Random_s314: lg=0.529 fk=0.673 succ=0.260 drop=0.000 adapt=0.290 reward=2.957 (2s)
+[7/108] ERT seed=42
+  G0_ERT_s42: lg=0.525 fk=0.671 succ=0.278 drop=0.000 adapt=0.398 reward=3.246 (1s)
+[8/108] ERT seed=7
+  G0_ERT_s7: lg=0.526 fk=0.673 succ=0.290 drop=0.000 adapt=0.398 reward=3.296 (1s)
+[9/108] ERT seed=13
+  G0_ERT_s13: lg=0.530 fk=0.678 succ=0.288 drop=0.000 adapt=0.398 reward=3.299 (1s)
+[10/108] ERT seed=21
+  G0_ERT_s21: lg=0.546 fk=0.686 succ=0.296 drop=0.000 adapt=0.399 reward=3.312 (1s)
+[11/108] ERT seed=99
+  G0_ERT_s99: lg=0.515 fk=0.664 succ=0.260 drop=0.000 adapt=0.391 reward=3.292 (2s)
+[12/108] ERT seed=314
+  G0_ERT_s314: lg=0.533 fk=0.675 succ=0.270 drop=0.000 adapt=0.394 reward=3.308 (1s)
+[13/108] DQN seed=42
+  G0_DQN_s42: lg=0.563 fk=0.699 succ=0.278 drop=0.000 adapt=0.467 reward=3.673 (23s)
+[14/108] DQN seed=7
+  G0_DQN_s7: lg=0.609 fk=0.733 succ=0.416 drop=0.000 adapt=0.459 reward=2.882 (22s)
+[15/108] DQN seed=13
+  G0_DQN_s13: lg=0.595 fk=0.722 succ=0.378 drop=0.000 adapt=0.188 reward=3.214 (22s)
+[16/108] DQN seed=21
+  G0_DQN_s21: lg=0.222 fk=0.469 succ=0.016 drop=0.000 adapt=0.183 reward=3.011 (22s)
+[17/108] DQN seed=99
+  G0_DQN_s99: lg=0.350 fk=0.551 succ=0.050 drop=0.000 adapt=0.138 reward=3.044 (21s)
+[18/108] DQN seed=314
+  G0_DQN_s314: lg=0.247 fk=0.481 succ=0.010 drop=0.000 adapt=0.148 reward=3.229 (22s)
+
+--- G1 (ratio 2:1) ---
+[19/108] Random seed=42
+  G1_Random_s42: lg=0.442 fk=0.615 succ=0.136 drop=0.000 adapt=0.289 reward=2.779 (2s)
+[20/108] Random seed=7
+  G1_Random_s7: lg=0.440 fk=0.616 succ=0.128 drop=0.000 adapt=0.281 reward=2.849 (2s)
+[21/108] Random seed=13
+  G1_Random_s13: lg=0.449 fk=0.621 succ=0.134 drop=0.000 adapt=0.288 reward=2.796 (2s)
+[22/108] Random seed=21
+  G1_Random_s21: lg=0.462 fk=0.628 succ=0.158 drop=0.000 adapt=0.283 reward=2.905 (2s)
+[23/108] Random seed=99
+  G1_Random_s99: lg=0.438 fk=0.612 succ=0.130 drop=0.000 adapt=0.286 reward=2.825 (2s)
+[24/108] Random seed=314
+  G1_Random_s314: lg=0.449 fk=0.619 succ=0.144 drop=0.000 adapt=0.291 reward=2.797 (2s)
+[25/108] ERT seed=42
+  G1_ERT_s42: lg=0.464 fk=0.629 succ=0.184 drop=0.000 adapt=0.391 reward=3.164 (1s)
+[26/108] ERT seed=7
+  G1_ERT_s7: lg=0.462 fk=0.629 succ=0.192 drop=0.000 adapt=0.384 reward=3.199 (1s)
+[27/108] ERT seed=13
+  G1_ERT_s13: lg=0.464 fk=0.633 succ=0.170 drop=0.000 adapt=0.381 reward=3.194 (2s)
+[28/108] ERT seed=21
+  G1_ERT_s21: lg=0.482 fk=0.642 succ=0.178 drop=0.000 adapt=0.380 reward=3.219 (1s)
+[29/108] ERT seed=99
+  G1_ERT_s99: lg=0.450 fk=0.622 succ=0.178 drop=0.000 adapt=0.381 reward=3.210 (1s)
+[30/108] ERT seed=314
+  G1_ERT_s314: lg=0.466 fk=0.630 succ=0.170 drop=0.000 adapt=0.383 reward=3.209 (2s)
+[31/108] DQN seed=42
+  G1_DQN_s42: lg=0.650 fk=0.758 succ=0.448 drop=0.000 adapt=0.662 reward=3.261 (22s)
+[32/108] DQN seed=7
+  G1_DQN_s7: lg=0.677 fk=0.779 succ=0.544 drop=0.000 adapt=0.924 reward=3.023 (22s)
+[33/108] DQN seed=13
+  G1_DQN_s13: lg=0.463 fk=0.632 succ=0.224 drop=0.000 adapt=0.510 reward=3.378 (23s)
+[34/108] DQN seed=21
+  G1_DQN_s21: lg=0.586 fk=0.713 succ=0.406 drop=0.000 adapt=0.711 reward=3.431 (22s)
+[35/108] DQN seed=99
+  G1_DQN_s99: lg=0.458 fk=0.626 succ=0.164 drop=0.000 adapt=0.123 reward=3.004 (22s)
+[36/108] DQN seed=314
+  G1_DQN_s314: lg=0.424 fk=0.603 succ=0.098 drop=0.000 adapt=0.489 reward=3.627 (22s)
+
+--- G2 (ratio 3.3:1) ---
+[37/108] Random seed=42
+  G2_Random_s42: lg=0.412 fk=0.594 succ=0.104 drop=0.000 adapt=0.288 reward=2.730 (2s)
+[38/108] Random seed=7
+  G2_Random_s7: lg=0.408 fk=0.594 succ=0.108 drop=0.000 adapt=0.282 reward=2.754 (2s)
+[39/108] Random seed=13
+  G2_Random_s13: lg=0.417 fk=0.600 succ=0.110 drop=0.000 adapt=0.290 reward=2.737 (2s)
+[40/108] Random seed=21
+  G2_Random_s21: lg=0.430 fk=0.607 succ=0.122 drop=0.000 adapt=0.285 reward=2.820 (2s)
+[41/108] Random seed=99
+  G2_Random_s99: lg=0.410 fk=0.592 succ=0.114 drop=0.000 adapt=0.287 reward=2.772 (2s)
+[42/108] Random seed=314
+  G2_Random_s314: lg=0.418 fk=0.598 succ=0.116 drop=0.000 adapt=0.291 reward=2.729 (2s)
+[43/108] ERT seed=42
+  G2_ERT_s42: lg=0.436 fk=0.612 succ=0.144 drop=0.000 adapt=0.383 reward=3.118 (1s)
+[44/108] ERT seed=7
+  G2_ERT_s7: lg=0.436 fk=0.612 succ=0.134 drop=0.000 adapt=0.379 reward=3.163 (2s)
+[45/108] ERT seed=13
+  G2_ERT_s13: lg=0.436 fk=0.612 succ=0.132 drop=0.000 adapt=0.378 reward=3.160 (2s)
+[46/108] ERT seed=21
+  G2_ERT_s21: lg=0.461 fk=0.628 succ=0.142 drop=0.000 adapt=0.374 reward=3.185 (2s)
+[47/108] ERT seed=99
+  G2_ERT_s99: lg=0.423 fk=0.603 succ=0.142 drop=0.000 adapt=0.376 reward=3.178 (2s)
+[48/108] ERT seed=314
+  G2_ERT_s314: lg=0.437 fk=0.611 succ=0.156 drop=0.000 adapt=0.375 reward=3.160 (2s)
+[49/108] DQN seed=42
+  G2_DQN_s42: lg=0.612 fk=0.731 succ=0.422 drop=0.000 adapt=0.688 reward=2.358 (22s)
+[50/108] DQN seed=7
+  G2_DQN_s7: lg=0.403 fk=0.592 succ=0.084 drop=0.000 adapt=0.284 reward=3.187 (22s)
+[51/108] DQN seed=13
+  G2_DQN_s13: lg=0.307 fk=0.525 succ=0.028 drop=0.000 adapt=0.066 reward=3.056 (22s)
+[52/108] DQN seed=21
+  G2_DQN_s21: lg=0.394 fk=0.582 succ=0.086 drop=0.000 adapt=0.479 reward=3.495 (22s)
+[53/108] DQN seed=99
+  G2_DQN_s99: lg=0.383 fk=0.574 succ=0.084 drop=0.000 adapt=0.146 reward=2.828 (22s)
+[54/108] DQN seed=314
+  G2_DQN_s314: lg=0.131 fk=0.405 succ=0.000 drop=0.000 adapt=0.153 reward=2.899 (22s)
+
+--- G3 (ratio 5:1) ---
+[55/108] Random seed=42
+  G3_Random_s42: lg=0.392 fk=0.582 succ=0.088 drop=0.000 adapt=0.289 reward=2.705 (2s)
+[56/108] Random seed=7
+  G3_Random_s7: lg=0.391 fk=0.582 succ=0.094 drop=0.000 adapt=0.283 reward=2.722 (2s)
+[57/108] Random seed=13
+  G3_Random_s13: lg=0.401 fk=0.589 succ=0.094 drop=0.000 adapt=0.290 reward=2.710 (2s)
+[58/108] Random seed=21
+  G3_Random_s21: lg=0.410 fk=0.593 succ=0.116 drop=0.000 adapt=0.284 reward=2.813 (2s)
+[59/108] Random seed=99
+  G3_Random_s99: lg=0.396 fk=0.583 succ=0.090 drop=0.000 adapt=0.289 reward=2.755 (2s)
+[60/108] Random seed=314
+  G3_Random_s314: lg=0.402 fk=0.587 succ=0.094 drop=0.000 adapt=0.291 reward=2.707 (2s)
+[61/108] ERT seed=42
+  G3_ERT_s42: lg=0.422 fk=0.601 succ=0.120 drop=0.000 adapt=0.379 reward=3.093 (2s)
+[62/108] ERT seed=7
+  G3_ERT_s7: lg=0.424 fk=0.604 succ=0.122 drop=0.000 adapt=0.378 reward=3.149 (1s)
+[63/108] ERT seed=13
+  G3_ERT_s13: lg=0.423 fk=0.604 succ=0.124 drop=0.000 adapt=0.376 reward=3.144 (1s)
+[64/108] ERT seed=21
+  G3_ERT_s21: lg=0.444 fk=0.617 succ=0.120 drop=0.000 adapt=0.371 reward=3.171 (2s)
+[65/108] ERT seed=99
+  G3_ERT_s99: lg=0.410 fk=0.594 succ=0.122 drop=0.000 adapt=0.375 reward=3.148 (1s)
+[66/108] ERT seed=314
+  G3_ERT_s314: lg=0.421 fk=0.601 succ=0.140 drop=0.000 adapt=0.373 reward=3.136 (1s)
+[67/108] DQN seed=42
+  G3_DQN_s42: lg=0.664 fk=0.768 succ=0.504 drop=0.000 adapt=0.673 reward=2.897 (22s)
+[68/108] DQN seed=7
+  G3_DQN_s7: lg=0.361 fk=0.561 succ=0.064 drop=0.000 adapt=0.467 reward=3.056 (22s)
+[69/108] DQN seed=13
+  G3_DQN_s13: lg=0.376 fk=0.573 succ=0.062 drop=0.000 adapt=0.500 reward=3.581 (22s)
+[70/108] DQN seed=21
+  G3_DQN_s21: lg=0.571 fk=0.704 succ=0.320 drop=0.000 adapt=0.684 reward=3.478 (22s)
+[71/108] DQN seed=99
+  G3_DQN_s99: lg=0.681 fk=0.779 succ=0.540 drop=0.000 adapt=0.984 reward=2.902 (22s)
+[72/108] DQN seed=314
+  G3_DQN_s314: lg=0.302 fk=0.522 succ=0.016 drop=0.000 adapt=0.103 reward=3.231 (22s)
+
+--- G4 (ratio 10:1) ---
+[73/108] Random seed=42
+  G4_Random_s42: lg=0.375 fk=0.570 succ=0.076 drop=0.000 adapt=0.289 reward=2.674 (2s)
+[74/108] Random seed=7
+  G4_Random_s7: lg=0.374 fk=0.571 succ=0.078 drop=0.000 adapt=0.283 reward=2.697 (2s)
+[75/108] Random seed=13
+  G4_Random_s13: lg=0.383 fk=0.577 succ=0.084 drop=0.000 adapt=0.290 reward=2.680 (2s)
+[76/108] Random seed=21
+  G4_Random_s21: lg=0.397 fk=0.584 succ=0.100 drop=0.000 adapt=0.285 reward=2.777 (2s)
+[77/108] Random seed=99
+  G4_Random_s99: lg=0.379 fk=0.571 succ=0.080 drop=0.000 adapt=0.289 reward=2.725 (2s)
+[78/108] Random seed=314
+  G4_Random_s314: lg=0.386 fk=0.576 succ=0.072 drop=0.000 adapt=0.292 reward=2.676 (2s)
+[79/108] ERT seed=42
+  G4_ERT_s42: lg=0.416 fk=0.597 succ=0.124 drop=0.000 adapt=0.381 reward=3.087 (1s)
+[80/108] ERT seed=7
+  G4_ERT_s7: lg=0.405 fk=0.592 succ=0.112 drop=0.000 adapt=0.373 reward=3.137 (2s)
+[81/108] ERT seed=13
+  G4_ERT_s13: lg=0.410 fk=0.595 succ=0.110 drop=0.000 adapt=0.373 reward=3.121 (2s)
+[82/108] ERT seed=21
+  G4_ERT_s21: lg=0.430 fk=0.607 succ=0.124 drop=0.000 adapt=0.372 reward=3.147 (2s)
+[83/108] ERT seed=99
+  G4_ERT_s99: lg=0.397 fk=0.584 succ=0.106 drop=0.000 adapt=0.369 reward=3.133 (1s)
+[84/108] ERT seed=314
+  G4_ERT_s314: lg=0.408 fk=0.592 succ=0.118 drop=0.000 adapt=0.372 reward=3.122 (2s)
+[85/108] DQN seed=42
+  G4_DQN_s42: lg=0.678 fk=0.779 succ=0.506 drop=0.000 adapt=1.000 reward=2.801 (23s)
+[86/108] DQN seed=7
+  G4_DQN_s7: lg=0.649 fk=0.759 succ=0.478 drop=0.000 adapt=0.857 reward=2.795 (22s)
+[87/108] DQN seed=13
+  G4_DQN_s13: lg=0.372 fk=0.570 succ=0.058 drop=0.000 adapt=0.380 reward=3.092 (22s)
+[88/108] DQN seed=21
+  G4_DQN_s21: lg=0.398 fk=0.585 succ=0.070 drop=0.000 adapt=0.530 reward=3.046 (23s)
+[89/108] DQN seed=99
+  G4_DQN_s99: lg=0.379 fk=0.570 succ=0.086 drop=0.000 adapt=0.336 reward=3.122 (23s)
+[90/108] DQN seed=314
+  G4_DQN_s314: lg=0.143 fk=0.412 succ=0.000 drop=0.000 adapt=0.169 reward=3.055 (23s)
+
+--- G5 (ratio 20:1) ---
+[91/108] Random seed=42
+  G5_Random_s42: lg=0.367 fk=0.564 succ=0.066 drop=0.000 adapt=0.289 reward=2.656 (2s)
+[92/108] Random seed=7
+  G5_Random_s7: lg=0.366 fk=0.565 succ=0.064 drop=0.000 adapt=0.283 reward=2.662 (2s)
+[93/108] Random seed=13
+  G5_Random_s13: lg=0.375 fk=0.571 succ=0.082 drop=0.000 adapt=0.290 reward=2.672 (2s)
+[94/108] Random seed=21
+  G5_Random_s21: lg=0.389 fk=0.579 succ=0.096 drop=0.000 adapt=0.286 reward=2.758 (2s)
+[95/108] Random seed=99
+  G5_Random_s99: lg=0.371 fk=0.565 succ=0.076 drop=0.000 adapt=0.289 reward=2.713 (2s)
+[96/108] Random seed=314
+  G5_Random_s314: lg=0.377 fk=0.570 succ=0.066 drop=0.000 adapt=0.292 reward=2.659 (2s)
+[97/108] ERT seed=42
+  G5_ERT_s42: lg=0.406 fk=0.590 succ=0.104 drop=0.000 adapt=0.377 reward=3.079 (2s)
+[98/108] ERT seed=7
+  G5_ERT_s7: lg=0.401 fk=0.588 succ=0.102 drop=0.000 adapt=0.373 reward=3.119 (2s)
+[99/108] ERT seed=13
+  G5_ERT_s13: lg=0.403 fk=0.590 succ=0.102 drop=0.000 adapt=0.373 reward=3.106 (2s)
+[100/108] ERT seed=21
+  G5_ERT_s21: lg=0.420 fk=0.600 succ=0.110 drop=0.000 adapt=0.370 reward=3.135 (2s)
+[101/108] ERT seed=99
+  G5_ERT_s99: lg=0.390 fk=0.580 succ=0.098 drop=0.000 adapt=0.367 reward=3.112 (2s)
+[102/108] ERT seed=314
+  G5_ERT_s314: lg=0.400 fk=0.587 succ=0.110 drop=0.000 adapt=0.371 reward=3.109 (2s)
+[103/108] DQN seed=42
+  G5_DQN_s42: lg=0.506 fk=0.656 succ=0.240 drop=0.000 adapt=0.642 reward=3.094 (23s)
+[104/108] DQN seed=7
+  G5_DQN_s7: lg=0.636 fk=0.750 succ=0.464 drop=0.000 adapt=0.908 reward=2.937 (22s)
+[105/108] DQN seed=13
+  G5_DQN_s13: lg=0.686 fk=0.785 succ=0.544 drop=0.000 adapt=0.682 reward=2.307 (23s)
+[106/108] DQN seed=21
+  G5_DQN_s21: lg=0.641 fk=0.753 succ=0.448 drop=0.000 adapt=0.707 reward=2.670 (22s)
+[107/108] DQN seed=99
+  G5_DQN_s99: lg=0.309 fk=0.523 succ=0.042 drop=0.000 adapt=0.402 reward=3.458 (22s)
+[108/108] DQN seed=314
+  G5_DQN_s314: lg=0.196 fk=0.447 succ=0.002 drop=0.000 adapt=0.252 reward=3.297 (22s)
+
+=== Thesis Gain Sensitivity: ANALYZE ===
+
+Report: /Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/figures/thesis_gain_sensitivity/THESIS_GAIN_SENSITIVITY_REPORT.md
+JSON:  /Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/RL_Module/figures/thesis_gain_sensitivity/thesis_gain_sensitivity_report.json
+
+--- Thesis Conclusion ---
+  best_educational_tutor_g4: DQN
+  safest_emotional_tutor_g4: Random
+  best_wellbeing_tutor_g4: ERT
+  dqn_significantly_outperforms_ert_primary: False
+  dqn_significant_primary_metrics: []
+  dqn_higher_learning_gain_than_ert_g4: True
+  ert_competitive: True
+  ratio_10_1_winner_learning_gain: DQN
+  ranking_stable_strict: False
+  ranking_stable_ert_vs_random: 0.9722
+  ranking_stable_dqn_vs_ert: 0.4722
+  ratio_10_1_justified: True
+  conclusions_robust_across_ratios: True

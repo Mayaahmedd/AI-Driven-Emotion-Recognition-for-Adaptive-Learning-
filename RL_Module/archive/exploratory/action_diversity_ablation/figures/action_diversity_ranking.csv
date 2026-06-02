@@ -1,0 +1,6 @@
+configuration,configuration_label,learning_gain_mean,learning_gain_std,coefficient_of_variation,seed_range,success_rate_mean,adaptation_accuracy_mean,reward_mean,action_entropy,dominant_action_pct_mean,top2_actions_pct_mean,actions_used_above_1_percent_mean,actions_used_above_5_percent_mean,rank
+A_baseline,Baseline Reward (A),0.5634,0.0929,0.1649,0.2464,0.3473,0.6786,3.1265,1.2782,0.4249,0.6983,4.6667,3.5,1
+C_strong_diversity_bonus,Strong Diversity Bonus +0.05 (C),0.5445,0.1088,0.1999,0.2944,0.3107,0.5957,3.3092,1.3467,0.4218,0.6998,4.8333,4.1667,2
+B_diversity_bonus,Diversity Bonus +0.02 (B),0.537,0.0856,0.1594,0.2473,0.2883,0.6715,3.3182,1.2192,0.4514,0.7231,4.3333,3.6667,3
+E_strong_repetition_penalty,Strong Repetition Penalty -0.05 (E),0.5796,0.1017,0.1755,0.2411,0.3457,0.7402,3.2175,1.108,0.5115,0.8095,4.1667,3.3333,4
+D_repetition_penalty,Repetition Penalty -0.02 (D),0.5362,0.1073,0.2,0.312,0.2863,0.6317,3.1861,1.2596,0.4432,0.7469,5.0,3.6667,5

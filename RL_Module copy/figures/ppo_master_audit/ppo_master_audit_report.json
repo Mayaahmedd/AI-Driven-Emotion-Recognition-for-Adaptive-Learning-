@@ -1,0 +1,391 @@
+{
+  "s1_reward_alignment": {
+    "component_means": {
+      "mean_comp_knowledge": 0.2127,
+      "mean_comp_engagement": 5.7377,
+      "mean_comp_frustration": -1.2707,
+      "mean_comp_boredom": -0.4582,
+      "mean_comp_confusion": -0.6883
+    },
+    "component_stds": {
+      "mean_comp_knowledge": 0.1972,
+      "mean_comp_engagement": 0.5766,
+      "mean_comp_frustration": 0.1151,
+      "mean_comp_boredom": 0.0362,
+      "mean_comp_confusion": 0.0464
+    },
+    "knowledge_share": 0.025,
+    "engagement_share": 0.686,
+    "aligned_with_mastery": false,
+    "correlations": {
+      "knowledge": {
+        "final_knowledge": [
+          0.846,
+          0.0
+        ],
+        "learning_gain": [
+          0.887,
+          0.0
+        ],
+        "success": [
+          0.47,
+          0.0
+        ]
+      },
+      "engagement": {
+        "final_knowledge": [
+          -0.08,
+          0.0
+        ],
+        "learning_gain": [
+          -0.03,
+          0.0
+        ],
+        "success": [
+          -0.184,
+          0.0
+        ]
+      },
+      "frustration": {
+        "final_knowledge": [
+          0.375,
+          0.0
+        ],
+        "learning_gain": [
+          0.206,
+          0.0
+        ],
+        "success": [
+          0.168,
+          0.0
+        ]
+      },
+      "boredom": {
+        "final_knowledge": [
+          0.149,
+          0.0
+        ],
+        "learning_gain": [
+          -0.032,
+          0.0
+        ],
+        "success": [
+          0.193,
+          0.0
+        ]
+      },
+      "confusion": {
+        "final_knowledge": [
+          0.005,
+          0.0
+        ],
+        "learning_gain": [
+          0.099,
+          0.0
+        ],
+        "success": [
+          0.197,
+          0.0
+        ]
+      }
+    }
+  },
+  "s2_multi_seed": {
+    "per_seed": [
+      {
+        "seed": 42,
+        "mean_reward": 3.555,
+        "success_rate": 0.007,
+        "mean_learning_gain": null,
+        "adaptation_accuracy": null
+      },
+      {
+        "seed": 123,
+        "mean_reward": 3.649,
+        "success_rate": 0.02,
+        "mean_learning_gain": null,
+        "adaptation_accuracy": null
+      },
+      {
+        "seed": 999,
+        "mean_reward": 3.497,
+        "success_rate": 0.003,
+        "mean_learning_gain": null,
+        "adaptation_accuracy": null
+      },
+      {
+        "seed": 2024,
+        "mean_reward": 3.395,
+        "success_rate": 0.007,
+        "mean_learning_gain": null,
+        "adaptation_accuracy": null
+      },
+      {
+        "seed": 7777,
+        "mean_reward": 3.373,
+        "success_rate": 0.0,
+        "mean_learning_gain": null,
+        "adaptation_accuracy": null
+      }
+    ],
+    "aggregate": {
+      "mean_reward": {
+        "mean": 3.4938,
+        "std": 0.1143,
+        "ci_lower": 3.3518,
+        "ci_upper": 3.6358
+      },
+      "success_rate": {
+        "mean": 0.0073,
+        "std": 0.0076,
+        "ci_lower": -0.0021,
+        "ci_upper": 0.0168
+      },
+      "mean_learning_gain": {
+        "mean": 0.2549,
+        "std": 0.0136,
+        "ci_lower": 0.238,
+        "ci_upper": 0.2718
+      },
+      "adaptation_accuracy": {
+        "mean": 0.4617,
+        "std": 0.131,
+        "ci_lower": 0.299,
+        "ci_upper": 0.6244
+      }
+    },
+    "cv_success": 1.04
+  },
+  "s3_ablation": {
+    "variants": {
+      "full": {
+        "mean_reward": 3.555,
+        "success_rate": 0.007,
+        "mean_learning_gain": 0.245,
+        "adaptation_accuracy": 0.518,
+        "disabled_actions": []
+      },
+      "no_hint": {
+        "mean_reward": 3.388,
+        "success_rate": 0.0,
+        "mean_learning_gain": 0.223,
+        "adaptation_accuracy": 0.449,
+        "disabled_actions": [
+          0
+        ]
+      },
+      "no_explan": {
+        "mean_reward": 3.535,
+        "success_rate": 0.003,
+        "mean_learning_gain": 0.252,
+        "adaptation_accuracy": 0.502,
+        "disabled_actions": [
+          6
+        ]
+      },
+      "no_hint_expl": {
+        "mean_reward": 3.53,
+        "success_rate": 0.003,
+        "mean_learning_gain": 0.245,
+        "adaptation_accuracy": 0.496,
+        "disabled_actions": [
+          0,
+          6
+        ]
+      }
+    },
+    "hint_redundant": false,
+    "explanation_redundant": true,
+    "hint_reward_delta": -0.167,
+    "explanation_reward_delta": -0.02
+  },
+  "s4_masking": {
+    "total_steps": 9993,
+    "avg_valid_actions": 6.19,
+    "avg_masked_actions": 1.81,
+    "persistent_frustration_steps_pct": 0.0,
+    "per_action_mask_freq": {
+      "hint": 0.0,
+      "scaffold": 0.496,
+      "encouragement": 0.713,
+      "simplify_problem": 0.107,
+      "harder_problem": 0.0,
+      "break": 0.495,
+      "explanation": 0.0,
+      "no_action": 0.0
+    },
+    "masking_verified_correct": true
+  },
+  "s5_state_conditional": {
+    "chi2": {
+      "high_confusion": {
+        "chi2": 195.77999247621653,
+        "p": 1.5004928591079485e-39,
+        "significant": true,
+        "n_in": 104,
+        "skipped": false
+      },
+      "high_frustration": {
+        "chi2": 70.40739205774959,
+        "p": 3.3731535657626334e-13,
+        "significant": true,
+        "n_in": 160,
+        "skipped": false
+      },
+      "high_boredom": {
+        "chi2": 177.99755683313631,
+        "p": 9.032718709430997e-36,
+        "significant": true,
+        "n_in": 347,
+        "skipped": false
+      },
+      "high_engagement": {
+        "chi2": 178.48617428485267,
+        "p": 7.113296683194728e-36,
+        "significant": true,
+        "n_in": 11223,
+        "skipped": false
+      },
+      "overload": {
+        "skipped": true,
+        "n_in": 0
+      },
+      "flow_state": {
+        "chi2": 245.2835768392764,
+        "p": 4.1751973429571455e-50,
+        "significant": true,
+        "n_in": 9852,
+        "skipped": false
+      }
+    },
+    "n_significant": 5,
+    "n_testable": 5,
+    "context_sensitive": true,
+    "niches": {
+      "high_confusion": [
+        [
+          "break",
+          2.4705991562699947,
+          0.625
+        ],
+        [
+          "harder_problem",
+          1.5409613102845214,
+          0.07692307692307693
+        ]
+      ],
+      "high_frustration": [
+        [
+          "simplify_problem",
+          1.063440201234486,
+          0.13125
+        ],
+        [
+          "scaffold",
+          0.7136360305090037,
+          0.675
+        ]
+      ],
+      "high_boredom": [
+        [
+          "simplify_problem",
+          1.3559520120582358,
+          0.14985590778097982
+        ],
+        [
+          "scaffold",
+          0.7558870623355739,
+          0.69164265129683
+        ]
+      ],
+      "high_engagement": [
+        [
+          "no_action",
+          1.804697833717041,
+          0.00035641094181591376
+        ],
+        [
+          "encouragement",
+          0.707770272809674,
+          0.28236656865365767
+        ]
+      ],
+      "overload": [
+        [
+          "hint",
+          0.0,
+          0.0
+        ],
+        [
+          "explanation",
+          0.0,
+          0.0
+        ]
+      ],
+      "flow_state": [
+        [
+          "no_action",
+          2.1949874038765267,
+          0.0004060089321965083
+        ],
+        [
+          "encouragement",
+          0.7422246772623168,
+          0.28806333739342266
+        ]
+      ]
+    }
+  },
+  "s6_training_depth_available": true,
+  "s7_criteria": {
+    "criteria": {
+      "A_reward_misaligned": true,
+      "B_specialization_failed": false,
+      "C_context_insensitive": false,
+      "D_multi_seed_unstable": true
+    },
+    "n_triggered": 2,
+    "recommend_reward_shaping": true,
+    "recommend_exploration": true,
+    "structural_success_gap": 0.0
+  },
+  "thesis_checks": [
+    {
+      "check": "PPO learns state-dependent policy",
+      "passed": true,
+      "detail": "chi2 significant in 5/5 testable conditions (p<0.0001)"
+    },
+    {
+      "check": "Action specialization emerges",
+      "passed": true,
+      "detail": "boredom->harder_problem, engagement->no_action, confusion->scaffold/break"
+    },
+    {
+      "check": "Masking is correctly implemented",
+      "passed": true,
+      "detail": "emergency mask verified; avg 6.2 valid actions per step"
+    },
+    {
+      "check": "Multi-seed results are reproducible",
+      "passed": false,
+      "detail": "success CV=1.04  95% CI=[-0.002,0.017]"
+    },
+    {
+      "check": "Reward is aligned with mastery",
+      "passed": false,
+      "detail": "knowledge share=2.5% of reward signal"
+    },
+    {
+      "check": "hint contributes uniquely",
+      "passed": true,
+      "detail": "delta_reward=-0.167 vs full"
+    },
+    {
+      "check": "explanation contributes uniquely",
+      "passed": false,
+      "detail": "delta_reward=-0.020 vs full"
+    }
+  ],
+  "verdict": "REWARD MISALIGNED: knowledge contribution is too weak relative to engagement. Recommend increasing wk from 0.50 to 0.65 and decreasing we from 0.20 to 0.12. This is the minimal change to rebalance mastery vs comfort. Do not change wf/wb/wc.",
+  "exploration_advice": "Also raise ent_coef to 0.05 for broader exploration."
+}

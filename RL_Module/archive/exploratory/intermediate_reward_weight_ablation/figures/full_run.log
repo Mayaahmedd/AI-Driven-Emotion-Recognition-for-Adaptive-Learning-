@@ -1,0 +1,66 @@
+=== Intermediate Reward Weight Ablation (run) ===
+
+--- A: Original Thesis ---
+  A_original_thesis seed=42: lg=0.628 succ=0.446 adapt=0.869 entropy=1.140 dom=0.45 (27s)
+  A_original_thesis seed=7: lg=0.651 succ=0.488 adapt=0.746 entropy=1.118 dom=0.58 (27s)
+  A_original_thesis seed=13: lg=0.680 succ=0.528 adapt=0.788 entropy=0.582 dom=0.80 (26s)
+  A_original_thesis seed=21: lg=0.654 succ=0.486 adapt=0.903 entropy=0.947 dom=0.48 (26s)
+  A_original_thesis seed=99: lg=0.626 succ=0.438 adapt=0.834 entropy=1.172 dom=0.50 (26s)
+  A_original_thesis seed=314: lg=0.425 succ=0.162 adapt=0.213 entropy=1.610 dom=0.30 (25s)
+
+--- B: Balanced-1 ---
+  B_balanced_1 seed=42: lg=0.604 succ=0.424 adapt=0.759 entropy=1.388 dom=0.44 (26s)
+  B_balanced_1 seed=7: lg=0.613 succ=0.408 adapt=0.735 entropy=1.278 dom=0.40 (26s)
+  B_balanced_1 seed=13: lg=0.456 succ=0.184 adapt=0.558 entropy=1.293 dom=0.50 (25s)
+  B_balanced_1 seed=21: lg=0.653 succ=0.496 adapt=0.893 entropy=1.034 dom=0.51 (26s)
+  B_balanced_1 seed=99: lg=0.433 succ=0.138 adapt=0.540 entropy=1.419 dom=0.47 (26s)
+  B_balanced_1 seed=314: lg=0.691 succ=0.558 adapt=0.888 entropy=0.437 dom=0.84 (26s)
+
+--- C: Balanced-2 ---
+  C_balanced_2 seed=42: lg=0.589 succ=0.394 adapt=0.700 entropy=1.292 dom=0.50 (26s)
+  C_balanced_2 seed=7: lg=0.523 succ=0.238 adapt=0.508 entropy=1.513 dom=0.38 (26s)
+  C_balanced_2 seed=13: lg=0.590 succ=0.410 adapt=0.688 entropy=1.406 dom=0.49 (25s)
+  C_balanced_2 seed=21: lg=0.599 succ=0.400 adapt=0.589 entropy=1.421 dom=0.36 (25s)
+  C_balanced_2 seed=99: lg=0.530 succ=0.264 adapt=0.666 entropy=1.141 dom=0.37 (26s)
+  C_balanced_2 seed=314: lg=0.568 succ=0.400 adapt=0.739 entropy=1.353 dom=0.40 (26s)
+
+--- D: Equal ---
+  D_equal seed=42: lg=0.590 succ=0.344 adapt=0.650 entropy=1.403 dom=0.47 (25s)
+  D_equal seed=7: lg=0.516 succ=0.240 adapt=0.560 entropy=1.525 dom=0.45 (24s)
+  D_equal seed=13: lg=0.419 succ=0.084 adapt=0.440 entropy=1.334 dom=0.44 (24s)
+  D_equal seed=21: lg=0.510 succ=0.280 adapt=0.565 entropy=1.515 dom=0.33 (24s)
+  D_equal seed=99: lg=0.512 succ=0.262 adapt=0.668 entropy=1.498 dom=0.48 (25s)
+  D_equal seed=314: lg=0.376 succ=0.068 adapt=0.478 entropy=1.638 dom=0.37 (25s)
+
+=== Intermediate Reward Weight Ablation (analyze) ===
+
+========================================================================
+WINNER REWARD CONFIGURATION
+========================================================================
+
+Best overall tradeoff (rank #1): C: Balanced-2
+  weights: wk=0.35, we=0.2, wf=0.15, wb=0.15, wc=0.15
+  learning_gain_mean=0.5666 (std=0.0326, CV=0.0575)
+  success_rate_mean=0.3510
+  adaptation_accuracy_mean=0.6483
+  reward_mean=2.1708
+  action_entropy=1.3543, dominant_action_pct=0.4168, actions_used_above_1%=4.7
+
+Best performance (highest learning gain): A: Original Thesis
+  learning_gain_mean=0.6106 (seed_range=0.2548)
+
+Best stability (lowest learning_gain_std): C: Balanced-2
+  learning_gain_std=0.0326, CV=0.0575, seed_range=0.0762
+
+Lowest coefficient of variation: C: Balanced-2
+  CV=0.0575
+
+Highest action diversity (Shannon entropy): D: Equal
+  entropy=1.4855, dominant_action_pct=0.4224
+
+--- Configuration Summary ---
+  C: Balanced-2: LG=0.5666+/-0.0326, rank=1
+  A: Original Thesis: LG=0.6106+/-0.0929, rank=2
+  D: Equal: LG=0.4870+/-0.0768, rank=3
+  B: Balanced-1: LG=0.5752+/-0.1059, rank=4
+========================================================================

@@ -1,0 +1,59 @@
+========================================================================
+RL_Module Repository Cleanup Report (updated)
+Generated: 2026-06-02 03:25:53
+========================================================================
+
+## ACTIVE THESIS FILES
+
+Drivers:
+  - action_gain_ablation.py
+  - combined_improvement_validation.py
+  - final_thesis_comparison.py
+  - final_thesis_algorithm_comparison.py
+  - final_dqn_model_study.py
+
+Figures:
+  - figures/action_gain_ablation/
+  - figures/combined_improvement_validation/
+  - figures/final_thesis_algorithm_comparison/
+  - figures/final_dqn_model/
+
+Results bundle:
+  - final_thesis_comparison/
+
+Core: agents/, environment/, evaluation/, reward/, fer_interface/,
+      explainability/, logging_utils/, config.py, mdp_definition.py, tests/
+
+## ARCHIVED FILES (137 total under archive/)
+
+### archive/double_dqn/ — Double DQN experiment (rejected)
+### archive/exploratory/ — beta, action diversity, intermediate reward ablations
+### archive/legacy/scripts/ — superseded study drivers (17 scripts)
+### archive/legacy/figures/ — superseded figure outputs (12 folders)
+### archive/legacy/docs/ — historical verification & inventory markdown
+
+## REMOVED FROM ACTIVE WORKSPACE (phase 2)
+
+Moved to archive/legacy/ (not permanently deleted):
+  - All superseded study .py drivers listed in phase-1 report
+  - figures/_archive, dqn_stability_study, emotion_*, ert_validation, etc.
+  - Historical .md verification reports
+
+Permanently deleted:
+  - dqn_stability_study.py.bak
+  - figures/action_gain_ablation/action_gain_results_quick_2seed.csv.bak
+  - archive/temp/ (editor swap files)
+
+## VERIFICATION
+
+Active Double DQN imports: NONE
+Active references to archived module paths: NONE (only comments mentioning dqn_stability_study HP)
+Thesis driver import smoke test: PASS
+Tests: 49 passed, 1 failed (test_step1_full_integration — pre-existing)
+
+========================================================================
+SUMMARY
+========================================================================
+Total active files (excl. archive/, .venv/, models/, logs/, __pycache__): 83
+Total archived files: 137
+========================================================================

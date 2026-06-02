@@ -1,11 +1,22 @@
 """
-Live viewer: reads step CSV log every 0.5 seconds and renders the latest
-student state in a pygame window.
+Replay and live viewer for RL student-learning trajectories.
 
-Run in a SEPARATE terminal while training runs in another:
+Replay mode (thesis demonstration):
+  python -m RL_Module.evaluation.live_viewer --replay --algo DQN --seed 42
 
-  Terminal 1: python -m RL_Module.main_experiment --algo PPO --seed 42
-  Terminal 2: python -m RL_Module.evaluation.live_viewer --algo PPO --seed 42
+Live monitor (during training):
+  python -m RL_Module.evaluation.live_viewer --live --algo PPO --seed 42
+
+Presentation mode:
+  python -m RL_Module.evaluation.live_viewer --replay --presentation --algo DQN --seed 42
+
+Video export:
+  python -m RL_Module.evaluation.live_viewer --replay --export-video thesis_demo.mp4 \\
+      --algo DQN --seed 42 --export-fps 30
+
+Snapshots:
+  python -m RL_Module.evaluation.live_viewer --replay --snapshot-dir screenshots/ \\
+      --algo DQN --seed 42
 """
 
 from __future__ import annotations
@@ -14,194 +25,369 @@ import argparse
 import os
 import sys
 import time
+from collections import deque
+from pathlib import Path
+from typing import Deque, List, Optional
 
 import pandas as pd
 import pygame
 
 from RL_Module import config
-
-COLORS = {
-    "bg": (15, 15, 26),
-    "panel": (22, 22, 46),
-    "confused": (254, 188, 46),
-    "frustrated": (255, 95, 87),
-    "bored": (136, 136, 187),
-    "engaged": (40, 200, 128),
-    "bar_k": (58, 123, 213),
-    "bar_e": (17, 153, 142),
-    "bar_f": (255, 75, 43),
-    "bar_c": (254, 188, 46),
-    "bar_b": (136, 136, 187),
-    "active_chip": (42, 31, 90),
-    "text": (180, 180, 220),
-    "dim": (80, 80, 140),
-    "purple": (124, 106, 247),
-}
-
-ACTION_NAMES = [
-    "easier_q", "harder_q", "hint", "motivation", "scaffold",
-    "pacing", "reflection", "strategy", "autonomy", "explanation",
-]
-
-EMOTION_NAMES = ["confused", "bored", "frustrated", "engaged"]
+from RL_Module.evaluation.viewer.engine import (
+    CSVReplayEngine,
+    PlaybackController,
+    PlaybackStatus,
+    ReplayRow,
+    ReplayState,
+)
+from RL_Module.evaluation.viewer.export import SnapshotManager
+from RL_Module.evaluation.viewer.renderers import (
+    DashboardRenderer,
+    LiveDashboardRenderer,
+    ensure_pygame_initialized,
+)
+from RL_Module.evaluation.viewer.theme import PLAYBACK_SPEEDS
 
 
-def get_latest_row(algo: str, seed: int = 42):
-    path = config.LOGS_DIR / f"steps_{algo}_seed{seed}.csv"
-    if not os.path.exists(path):
+def resolve_csv_path(algo: str, seed: int, csv_path: Optional[str]) -> Path:
+    """Resolve CSV path from explicit path or default logs location."""
+    if csv_path:
+        return Path(csv_path)
+    return config.LOGS_DIR / f"steps_{algo}_seed{seed}.csv"
+
+
+def get_latest_row(csv_path: Path) -> Optional[ReplayRow]:
+    """Read the latest row from a growing CSV (live mode)."""
+    if not csv_path.exists():
         return None
     try:
-        df = pd.read_csv(path)
+        df = pd.read_csv(csv_path)
         if len(df) == 0:
             return None
-        return df.iloc[-1]
+        return ReplayRow.from_series(len(df) - 1, df.iloc[-1])
     except Exception:
         return None
 
 
-def draw_bar(surf, font, name, value, color, x, y, w=280, h=16):
-    pygame.draw.rect(surf, (30, 30, 60), (x, y, w, h), border_radius=4)
-    fill_w = max(0, min(w, int(w * float(value))))
-    pygame.draw.rect(surf, color, (x, y, fill_w, h), border_radius=4)
-    label = font.render(f"{name}  {float(value):.2f}", True, COLORS["text"])
-    surf.blit(label, (x + w + 8, y))
+class ReplayApplication:
+    """Interactive replay player with video-player controls."""
+
+    def __init__(
+        self,
+        engine: CSVReplayEngine,
+        presentation: bool = False,
+        start_episode: Optional[int] = None,
+        start_step: Optional[int] = None,
+        snapshot_dir: Optional[Path] = None,
+        initial_speed: float = 1.0,
+    ) -> None:
+        self.engine = engine
+        start_index = 0
+        if start_episode is not None and start_step is not None:
+            start_index = engine.index_for_episode_step(start_episode, start_step)
+        elif start_episode is not None:
+            start_index = engine.jump_to_episode(start_episode)
+        elif start_step is not None:
+            start_index = engine.jump_to_step(start_step)
+
+        self.controller = PlaybackController(engine, start_index=start_index, speed=initial_speed)
+        self.presentation = presentation
+        self.renderer: Optional[DashboardRenderer] = None
+        self.state = ReplayState()
+        self.snapshot_manager = SnapshotManager(snapshot_dir) if snapshot_dir else None
+
+        row = self.controller.current_row()
+        self.state.display_knowledge = row.knowledge
+        self.state.display_engagement = row.engagement
+        self.state.display_frustration = row.frustration
+        self.state.display_confusion = row.confusion
+        self.state.display_boredom = row.boredom
+
+        self.emotion_history: Deque[str] = deque(maxlen=20)
+        self.action_history: Deque[str] = deque(maxlen=40)
+        self.prev_emotion: Optional[str] = None
+        self.prev_action: Optional[str] = None
+        self.input_mode: Optional[str] = None
+        self.input_text: str = ""
+
+    def _update_histories(self) -> None:
+        """Track emotion and action histories."""
+        row = self.controller.current_row()
+        if self.prev_emotion is not None and row.emotion_name != self.prev_emotion:
+            self.emotion_history.append(row.emotion_name)
+        self.prev_emotion = row.emotion_name
+        self.action_history.append(row.action_name)
+        self.prev_action = row.action_name
+
+    def _update_caption(self) -> None:
+        """Set caption from nearest annotation."""
+        near = self.engine.annotations_near(self.controller.index, window=0)
+        if near:
+            self.state.caption = near[0].caption
+        else:
+            self.state.caption = ""
+
+    def _handle_keydown(self, event: pygame.event.Event) -> bool:
+        """Handle keyboard shortcuts. Returns False to quit."""
+        if self.input_mode:
+            if event.key == pygame.K_RETURN:
+                try:
+                    value = int(self.input_text)
+                    if self.input_mode == "episode":
+                        self.controller.jump_to_episode(value)
+                    else:
+                        self.controller.jump_to_step(value)
+                except ValueError:
+                    pass
+                self.input_mode = None
+                self.input_text = ""
+            elif event.key == pygame.K_ESCAPE:
+                self.input_mode = None
+                self.input_text = ""
+            elif event.key == pygame.K_BACKSPACE:
+                self.input_text = self.input_text[:-1]
+            elif event.unicode.isdigit():
+                self.input_text += event.unicode
+            return True
+
+        if event.key == pygame.K_ESCAPE:
+            return False
+        if event.key == pygame.K_SPACE:
+            self.controller.toggle_play_pause()
+            self.state.show_analytics = False
+        elif event.key == pygame.K_r:
+            self.controller.restart()
+            self.state.show_analytics = False
+        elif event.key == pygame.K_s:
+            self.controller.stop()
+            self.state.show_analytics = False
+        elif event.key == pygame.K_LEFT:
+            self.controller.pause()
+            self.controller.previous_frame()
+        elif event.key == pygame.K_RIGHT:
+            self.controller.pause()
+            self.controller.next_frame()
+        elif event.key in (pygame.K_PLUS, pygame.K_EQUALS):
+            self.controller.cycle_speed(1)
+        elif event.key == pygame.K_MINUS:
+            self.controller.cycle_speed(-1)
+        elif event.key == pygame.K_e:
+            self.input_mode = "episode"
+            self.input_text = ""
+        elif event.key == pygame.K_t:
+            self.input_mode = "step"
+            self.input_text = ""
+        elif event.key == pygame.K_a:
+            self.state.show_analytics = not self.state.show_analytics
+        elif event.key == pygame.K_HOME:
+            self.controller.stop()
+        elif event.key == pygame.K_PAGEUP:
+            row = self.controller.current_row()
+            self.controller.jump_to_episode(max(1, row.episode - 1))
+        elif event.key == pygame.K_PAGEDOWN:
+            row = self.controller.current_row()
+            self.controller.jump_to_episode(row.episode + 1)
+        elif pygame.K_1 <= event.key <= pygame.K_6:
+            speed_idx = event.key - pygame.K_1
+            if speed_idx < len(PLAYBACK_SPEEDS):
+                self.controller.set_speed(PLAYBACK_SPEEDS[speed_idx])
+        return True
+
+    def run(self) -> None:
+        """Main replay loop."""
+        ensure_pygame_initialized()
+        self.renderer = DashboardRenderer(presentation=self.presentation)
+        size = self.renderer.window_size
+        flags = pygame.FULLSCREEN if self.presentation else 0
+        screen = pygame.display.set_mode(size, flags)
+        pygame.display.set_caption(
+            f"Replay Viewer - {self.engine.csv_path.name}"
+        )
+        clock = pygame.time.Clock()
+        target_fps = 60
+
+        running = True
+        while running:
+            dt_ms = clock.tick(target_fps)
+            dt = dt_ms / 1000.0
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_f and self.presentation:
+                        pygame.display.toggle_fullscreen()
+                    elif not self._handle_keydown(event):
+                        running = False
+
+            self.controller.update(dt)
+            self._update_histories()
+            self._update_caption()
+
+            row = self.controller.current_row()
+            self.renderer.update_display_state(self.state, row, dt)
+            self.renderer.draw(
+                screen,
+                self.engine,
+                self.controller,
+                self.state,
+                prev_action=self.prev_action,
+                emotion_history=self.emotion_history,
+                action_history=self.action_history,
+                input_text=self.input_text,
+                input_mode=self.input_mode,
+                show_debug=not self.presentation,
+            )
+
+            if self.snapshot_manager is not None:
+                self.snapshot_manager.maybe_capture(screen, self.engine, self.controller)
+
+            pygame.display.flip()
+
+        pygame.quit()
 
 
-def run_viewer(algo: str, seed: int) -> None:
-    pygame.init()
-    win = pygame.display.set_mode((660, 520))
+def run_live_monitor(algo: str, seed: int, csv_path: Optional[str] = None) -> None:
+    """Original live monitor: poll CSV and show latest row."""
+    path = resolve_csv_path(algo, seed, csv_path)
+    ensure_pygame_initialized()
+    screen = pygame.display.set_mode((660, 520))
     pygame.display.set_caption(f"Live Viewer - {algo} seed={seed}")
     clock = pygame.time.Clock()
-    font_sm = pygame.font.SysFont("monospace", 11)
-    font_md = pygame.font.SysFont("monospace", 14)
-    font_lg = pygame.font.SysFont("monospace", 20, bold=True)
-
-    reward_history: list = []
+    renderer = LiveDashboardRenderer()
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                pygame.quit()
+                sys.exit()
 
-        row = get_latest_row(algo, seed)
-        win.fill(COLORS["bg"])
-
+        row = get_latest_row(path)
         if row is None:
-            msg = font_md.render(
-                f"Waiting for {config.LOGS_DIR}/steps_{algo}_seed{seed}.csv ...",
-                True,
-                COLORS["dim"],
+            renderer.draw_waiting(
+                screen,
+                f"Waiting for {path} ...",
             )
-            win.blit(msg, (20, 240))
-            pygame.display.flip()
-            clock.tick(1)
-            continue
-
-        step = int(row.get("step", 0))
-        episode = int(row.get("episode", 0))
-        action_id = int(row.get("action_id", 0))
-        reward = float(row.get("reward", 0))
-        cum_reward = float(row.get("cumulative_reward", 0))
-        knowledge = float(row.get("knowledge", 0))
-        engagement = float(row.get("engagement", 0))
-        frustration = float(row.get("frustration", 0))
-        confusion = float(row.get("confusion", 0))
-        boredom = float(row.get("boredom", 0))
-        emotion_id = int(float(row.get("emotion_id", 3)))
-        emotion = EMOTION_NAMES[min(emotion_id, 3)]
-        p_flag = bool(row.get("persistent_flag", False))
-        reason = str(row.get("explainer_reason", ""))[:80]
-
-        reward_history.append(cum_reward)
-        if len(reward_history) > 60:
-            reward_history.pop(0)
-
-        pygame.draw.rect(win, COLORS["panel"], (0, 0, 660, 32))
-        header = font_md.render(
-            f"{algo}  |  Episode {episode}  |  Step {step}  "
-            f"|  {'PERSISTENT' if p_flag else ''}",
-            True,
-            COLORS["dim"],
-        )
-        win.blit(header, (10, 8))
-
-        pygame.draw.rect(win, COLORS["panel"], (10, 40, 140, 90), border_radius=8)
-        emo_color = COLORS.get(emotion, COLORS["text"])
-        emo_label = font_lg.render(emotion.upper(), True, emo_color)
-        win.blit(emo_label, (18, 58))
-        win.blit(font_sm.render("FER OUTPUT", True, COLORS["dim"]), (18, 44))
-
-        pygame.draw.rect(win, COLORS["panel"], (160, 40, 490, 90), border_radius=8)
-        win.blit(font_sm.render("STUDENT STATE", True, COLORS["dim"]), (168, 44))
-        bars = [
-            ("knowledge", knowledge, COLORS["bar_k"]),
-            ("engagement", engagement, COLORS["bar_e"]),
-            ("frustration", frustration, COLORS["bar_f"]),
-            ("confusion", confusion, COLORS["bar_c"]),
-            ("boredom", boredom, COLORS["bar_b"]),
-        ]
-        for i, (name, val, col) in enumerate(bars):
-            draw_bar(win, font_sm, name, val, col, x=168, y=56 + i * 17, w=240)
-
-        pygame.draw.rect(win, COLORS["panel"], (10, 138, 640, 40), border_radius=8)
-        win.blit(font_sm.render("ACTIONS", True, COLORS["dim"]), (18, 142))
-        for i, name in enumerate(ACTION_NAMES):
-            x = 10 + i * 63
-            active = i == action_id
-            bg = COLORS["active_chip"] if active else (15, 15, 26)
-            bd = COLORS["purple"] if active else (50, 50, 90)
-            pygame.draw.rect(win, bg, (x, 154, 60, 18), border_radius=4)
-            pygame.draw.rect(win, bd, (x, 154, 60, 18), 1, border_radius=4)
-            c = (200, 190, 255) if active else (100, 100, 140)
-            win.blit(font_sm.render(name[:8], True, c), (x + 2, 157))
-
-        for i, (label, val) in enumerate([
-            ("Step reward", f"{reward:.3f}"),
-            ("Cumulative", f"{cum_reward:.2f}"),
-            ("Episode", str(episode)),
-        ]):
-            x = 10 + i * 216
-            pygame.draw.rect(win, COLORS["panel"], (x, 182, 210, 48), border_radius=8)
-            win.blit(font_lg.render(val, True, (200, 190, 255)), (x + 8, 192))
-            win.blit(font_sm.render(label, True, COLORS["dim"]), (x + 8, 218))
-
-        pygame.draw.rect(win, COLORS["panel"], (10, 238, 640, 32), border_radius=8)
-        win.blit(font_sm.render("WHY: " + reason, True, COLORS["text"]), (18, 248))
-
-        pygame.draw.rect(win, COLORS["panel"], (10, 278, 640, 90), border_radius=8)
-        win.blit(
-            font_sm.render("CUMULATIVE REWARD (last 60 steps)", True, COLORS["dim"]),
-            (18, 284),
-        )
-        if len(reward_history) > 1:
-            mn = min(reward_history)
-            mx = max(reward_history)
-            rng = max(mx - mn, 0.1)
-            pts = [
-                (
-                    18 + int(i / (len(reward_history) - 1) * 624),
-                    358 - int((v - mn) / rng * 60),
-                )
-                for i, v in enumerate(reward_history)
-            ]
-            pygame.draw.lines(win, COLORS["purple"], False, pts, 2)
-
-        if "hybrid_agent_used" in row:
-            h_agent = str(row["hybrid_agent_used"])
-            pygame.draw.rect(win, COLORS["panel"], (10, 376, 640, 28), border_radius=8)
-            win.blit(
-                font_sm.render(f"Hybrid decision: {h_agent}", True, COLORS["text"]),
-                (18, 384),
-            )
+        else:
+            renderer.draw_row(screen, row)
 
         pygame.display.flip()
         clock.tick(2)
 
 
+def build_parser() -> argparse.ArgumentParser:
+    """Build command-line argument parser."""
+    parser = argparse.ArgumentParser(
+        description="Live monitor and replay viewer for RL step logs.",
+    )
+    mode = parser.add_mutually_exclusive_group(required=False)
+    mode.add_argument(
+        "--live",
+        action="store_true",
+        help="Monitor a growing CSV in real time (original behavior).",
+    )
+    mode.add_argument(
+        "--replay",
+        action="store_true",
+        help="Replay an existing CSV like a video player.",
+    )
+
+    parser.add_argument("--algo", default="DQN", help="Algorithm name for default CSV path.")
+    parser.add_argument("--seed", type=int, default=42, help="Seed for default CSV path.")
+    parser.add_argument("--csv", dest="csv_path", default=None, help="Explicit CSV file path.")
+    parser.add_argument(
+        "--presentation",
+        action="store_true",
+        help="Full-screen friendly thesis presentation layout.",
+    )
+    parser.add_argument(
+        "--export-video",
+        dest="export_video",
+        default=None,
+        metavar="OUTPUT.mp4",
+        help="Export replay to MP4 (implies --replay, no window).",
+    )
+    parser.add_argument(
+        "--export-fps",
+        type=int,
+        default=30,
+        choices=(30, 60),
+        help="FPS for video export (30 or 60).",
+    )
+    parser.add_argument(
+        "--export-speed",
+        type=float,
+        default=4.0,
+        help="Playback speed multiplier used during export.",
+    )
+    parser.add_argument(
+        "--snapshot-dir",
+        default=None,
+        help="Directory to auto-save milestone screenshots during replay.",
+    )
+    parser.add_argument("--start-episode", type=int, default=None, help="Start replay at episode.")
+    parser.add_argument("--start-step", type=int, default=None, help="Start replay at step.")
+    parser.add_argument(
+        "--speed",
+        type=float,
+        default=1.0,
+        choices=PLAYBACK_SPEEDS,
+        help="Initial replay speed.",
+    )
+    return parser
+
+
+def main(argv: Optional[List[str]] = None) -> None:
+    """Entry point."""
+    args = build_parser().parse_args(argv)
+    csv_file = resolve_csv_path(args.algo, args.seed, args.csv_path)
+
+    if args.export_video:
+        if not csv_file.exists():
+            print(f"CSV not found: {csv_file}", file=sys.stderr)
+            sys.exit(1)
+        engine = CSVReplayEngine(csv_file)
+        from RL_Module.evaluation.viewer.export import VideoExporter
+
+        exporter = VideoExporter(
+            engine,
+            Path(args.export_video),
+            fps=args.export_fps,
+            presentation=True,
+            speed=args.export_speed,
+        )
+        output = exporter.export()
+        print(f"Exported video: {output}")
+        return
+
+    if args.live:
+        run_live_monitor(args.algo, args.seed, args.csv_path)
+        return
+
+    if args.replay:
+        if not csv_file.exists():
+            print(f"CSV not found: {csv_file}", file=sys.stderr)
+            sys.exit(1)
+        print(f"Loading {csv_file} ({csv_file.stat().st_size // 1024} KB) ...")
+        t0 = time.time()
+        engine = CSVReplayEngine(csv_file)
+        print(f"Loaded {engine.length} rows in {time.time() - t0:.2f}s")
+        app = ReplayApplication(
+            engine,
+            presentation=args.presentation,
+            start_episode=args.start_episode,
+            start_step=args.start_step,
+            snapshot_dir=Path(args.snapshot_dir) if args.snapshot_dir else None,
+            initial_speed=args.speed,
+        )
+        app.run()
+        return
+
+    parser.error("One of --live or --replay is required (unless using --export-video).")
+
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--algo", default="PPO")
-    parser.add_argument("--seed", type=int, default=42)
-    args = parser.parse_args()
-    run_viewer(args.algo, args.seed)
+    main()

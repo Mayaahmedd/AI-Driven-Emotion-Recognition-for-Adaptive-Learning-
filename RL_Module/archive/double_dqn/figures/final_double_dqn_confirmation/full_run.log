@@ -1,0 +1,35 @@
+=== Final Double DQN confirmation (run) ===
+Seeds: 20, train=50000, obs=no_emotion_id
+  double_dqn seed=42: lg=0.520 succ=0.238 adapt=0.649 (27s)
+  double_dqn seed=0: lg=0.568 succ=0.310 adapt=0.506 (24s)
+  double_dqn seed=1: lg=0.483 succ=0.156 adapt=0.540 (25s)
+  double_dqn seed=7: lg=0.574 succ=0.318 adapt=0.698 (25s)
+  double_dqn seed=13: lg=0.528 succ=0.250 adapt=0.556 (24s)
+  double_dqn seed=21: lg=0.652 succ=0.446 adapt=0.942 (24s)
+  double_dqn seed=99: lg=0.495 succ=0.222 adapt=0.648 (26s)
+  double_dqn seed=100: lg=0.463 succ=0.184 adapt=0.654 (26s)
+  double_dqn seed=200: lg=0.561 succ=0.284 adapt=0.710 (26s)
+  double_dqn seed=314: lg=0.447 succ=0.142 adapt=0.566 (26s)
+  double_dqn seed=500: lg=0.646 succ=0.466 adapt=0.954 (26s)
+  double_dqn seed=777: lg=0.589 succ=0.352 adapt=0.836 (26s)
+  double_dqn seed=1234: lg=0.478 succ=0.188 adapt=0.525 (26s)
+  double_dqn seed=2024: lg=0.642 succ=0.422 adapt=0.991 (26s)
+  double_dqn seed=5555: lg=0.483 succ=0.186 adapt=0.485 (26s)
+  double_dqn seed=8888: lg=0.581 succ=0.344 adapt=0.733 (26s)
+  double_dqn seed=9999: lg=0.625 succ=0.416 adapt=0.920 (26s)
+  double_dqn seed=10101: lg=0.614 succ=0.414 adapt=0.776 (26s)
+  double_dqn seed=20202: lg=0.528 succ=0.292 adapt=0.712 (26s)
+  double_dqn seed=30303: lg=0.602 succ=0.412 adapt=0.880 (26s)
+
+=== Final Double DQN confirmation (analyze) ===
+
+========================================================================
+FINAL DOUBLE DQN CONFIRMATION
+========================================================================
+
+Standard DQN (thesis baseline): LG=0.6089 (CV=0.1456), success=0.4003, adapt=0.7751
+
+Double DQN (confirmation): LG=0.5539 (CV=0.1178), success=0.3021, adapt=0.7141
+
+Retain standard DQN as the final thesis system.
+========================================================================

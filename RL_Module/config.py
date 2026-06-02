@@ -39,46 +39,30 @@ FER_PERSISTENT_EMOTION_STEPS = 3  # SOURCE: MaTHiSiS Paper 9 - 3-step persistenc
 # Rendering
 RENDER_MODE = None  # DEFAULT: None | "human" | "rgb_array"
 
-# PPO (MaskablePPO)
-PPO_LEARNING_RATE = 3e-4  # DEFAULT: SB3 default for continuous control
-PPO_GAMMA = 0.99  # DEFAULT: standard discounted MDP
-PPO_CLIP_RANGE = 0.2  # SOURCE: Schulman et al. (2017) PPO paper default
-PPO_N_STEPS = 2048  # DEFAULT: rollout length per PPO update
-PPO_BATCH_SIZE = 64  # DEFAULT: minibatch size
-PPO_ENT_COEF = 0.01  # DEFAULT: entropy bonus for exploration
-PPO_NET_ARCH = [256, 256, 256]  # DEFAULT: MLP depth for tutoring state-action mapping
-
 # DQN
-DQN_LEARNING_RATE = 1e-3  # DEFAULT: SB3 DQN default
-DQN_BATCH_SIZE = 32  # DEFAULT: replay minibatch
+DQN_LEARNING_RATE = 5e-4  #  1e-4 DEFAULT: SB3 DQN default
+DQN_BATCH_SIZE = 64  # DEFAULT: thesis final DQN (hyperparameter study)
+DQN_BUFFER_SIZE = 100_000  # DEFAULT: replay capacity (SB3 default is 1e6)
 DQN_GAMMA = 0.99  # DEFAULT: discounted return
 DQN_TRAIN_FREQ = 4  # DEFAULT: gradient steps per env step
-DQN_TARGET_UPDATE_INTERVAL = 500  # DEFAULT: target network sync period
-DQN_EXPLORATION_FRACTION = 0.1  # DEFAULT: epsilon decay over first 10% of training
+DQN_TARGET_UPDATE_INTERVAL = 2000  # DEFAULT: target network sync period
+DQN_EXPLORATION_FRACTION = 0.3  # DEFAULT: epsilon decay over first 10% of training
 DQN_EXPLORATION_FINAL_EPS = 0.05  # DEFAULT: residual exploration
 DQN_NET_ARCH = [64, 64]  # DEFAULT: smaller net for reactive Q-learning
 
-# Bandit
-# SOURCE: Li et al. (2010) LinUCB - alpha=1.0 is the standard default
-BANDIT_ALPHA = 1.0
-# DEFAULT: any emotion category change (|delta emotion_id| >= 1) triggers bandit
-BANDIT_EMOTION_DELTA_THRESHOLD = 1
-
-# Algorithms
-ALGORITHMS = ("PPO", "DQN", "Bandit_DQN", "Rule", "Random")
+# Algorithms (thesis tutors: DQN, Rule/ERT, Random)
+ALGORITHMS = ("DQN", "Rule", "Random")
 
 # Action and emotion names
 ACTION_NAMES = [
-    "easier_question",
-    "harder_question",
-    "give_hint",
-    "motivational_message",
+    "hint",
     "scaffold",
-    "change_pacing",
-    "reflection_prompt",
-    "strategy_guidance",
-    "autonomy_support",
+    "encouragement",
+    "simplify_problem",
+    "harder_problem",
+    "break",
     "explanation",
+    "no_action",
 ]
 
 EMOTION_NAMES = ["confused", "bored", "frustrated", "engaged"]
@@ -87,10 +71,10 @@ EMOTION_NAMES = ["confused", "bored", "frustrated", "engaged"]
 # as a post-training measurement tool. NOT imported by reward_function.py.
 # NOT used during training in any way.
 BEST_ACTION_MAP = {
-    0: [2, 9, 7],   # confused -> hint, explanation, strategy
-    3: [1, 4, 6],   # engaged -> harder, scaffold, reflection
-    2: [5, 0, 8],   # frustrated -> pacing, easier, autonomy
-    1: [3, 8, 4],   # bored -> motivation, autonomy, scaffold
+    0: [0, 6, 1],   # confused -> hint, explanation, scaffold
+    3: [4, 1],      # engaged -> harder_problem, scaffold
+    2: [5, 3, 2],   # frustrated -> break, simplify_problem, encouragement
+    1: [2, 4],      # bored -> encouragement, harder_problem
 }
 
 # Dropout: consecutive steps with persistent_flag before terminated
@@ -100,15 +84,48 @@ PERSISTENT_FLAG_DROPOUT_STEPS = 5  # SOURCE: MaTHiSiS Paper 9 - persistent affec
 # of truth). Re-exported here for ergonomic config.X access. sensitivity_analysis.py
 # patches mdp_definition, config, and student_env module attributes together.
 from RL_Module.mdp_definition import (
+    DIFFICULTY_INIT_HIGH,
+    DIFFICULTY_INIT_LOW,
+    DIFFICULTY_STEP,
+    EMOTION_NOISE_STD,
     FRUSTRATION_PERSISTENT_ON,
     FRUSTRATION_PERSISTENT_OFF,
     FRUSTRATION_PERSISTENT_STEPS,
     FRUSTRATION_BLOCK_HARDER,
-    FRUSTRATION_BLOCK_STRATEGY,
-    ENGAGEMENT_MIN_REFLECTION,
-    KNOWLEDGE_MIN_AUTONOMY,
-    KNOWLEDGE_MAX_SCAFFOLD,
+    GAIN_CORRECT_FACTOR,
+    GAIN_INCORRECT_FACTOR,
+    IRT_ALPHA,
+    IRT_BETA,
+    LAMBDA_BOREDOM,
+    LAMBDA_CONFUSION,
+    LAMBDA_ENGAGEMENT,
+    LAMBDA_FRUSTRATION,
+    MISMATCH_HIGH,
+    MISMATCH_LOW,
 )
+
+# Simulator transition hyperparameters (literature-inspired defaults; tunable via SIMULATOR_PARAMS)
+# Structure is theory-backed; magnitudes are calibrated via sensitivity analysis.
+
+# Reward presets: r_t = wk·Δk + we·e - wf·f - wb·b - wc·c
+REWARD_PRESETS: dict = {
+    "EQUAL": {"wk": 0.20, "we": 0.20, "wf": 0.20, "wb": 0.20, "wc": 0.20},
+    "LEARNING_FOCUSED": {"wk": 0.70, "we": 0.15, "wf": 0.05, "wb": 0.05, "wc": 0.05},
+    "AFFECT_FOCUSED": {"wk": 0.30, "we": 0.25, "wf": 0.20, "wb": 0.15, "wc": 0.10},
+    "BALANCED": {"wk": 0.50, "we": 0.20, "wf": 0.15, "wb": 0.06, "wc": 0.09},
+    "BALANCED_2": {"wk": 0.35, "we": 0.20, "wf": 0.15, "wb": 0.15, "wc": 0.15},
+}
+REWARD_PRESET = "BALANCED_2"  # thesis final: reward weight ablation winner
+REWARD_WEIGHTS: dict = dict(REWARD_PRESETS[REWARD_PRESET])
+
+# no_action opportunity cost during struggle (flow states unpenalized)
+NO_ACTION_STRUGGLE_PENALTY: float = 0.02
+NO_ACTION_CONFUSION_THRESH: float = 0.40
+NO_ACTION_FRUSTRATION_THRESH: float = 0.40
+
+# Optional legacy reward terms (off by default for clean multi-objective formula)
+USE_ZONE_BONUS = False
+USE_WRONG_ANSWER_PENALTY = False
 
 # Reward internal thresholds
 # SOURCE: D'Mello & Graesser (2012) - frustration above moderate disrupts learning
@@ -128,6 +145,33 @@ ZONE_MAX_BOREDOM = 0.3
 # Sensitivity analysis switch - True only during sensitivity_analysis.py runs
 USE_SENSITIVITY_WEIGHTS = False
 SENSITIVITY_WEIGHTS: dict = {}
+
+# Patched at runtime by sensitivity_analysis.py (transition params, not reward weights)
+SIMULATOR_PARAMS: dict = {}
+
+
+def get_simulator_param(name: str, default: float | None = None) -> float:
+    """Read tunable simulator coefficient (patch dict overrides module defaults)."""
+    if name in SIMULATOR_PARAMS:
+        return float(SIMULATOR_PARAMS[name])
+    if default is not None:
+        return float(default)
+    return float(globals().get(name, 0.0))
+
+
+def get_reward_weights() -> dict:
+    """Active reward weights: sensitivity override > preset > BALANCED."""
+    if USE_SENSITIVITY_WEIGHTS and SENSITIVITY_WEIGHTS:
+        base = dict(REWARD_PRESETS[REWARD_PRESET])
+        base.update(
+            {
+                k: float(v)
+                for k, v in SENSITIVITY_WEIGHTS.items()
+                if k in ("wk", "we", "wf", "wb", "wc")
+            }
+        )
+        return base
+    return dict(REWARD_WEIGHTS)
 
 
 def set_all_seeds(seed: int) -> None:

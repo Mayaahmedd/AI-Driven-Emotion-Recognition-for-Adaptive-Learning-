@@ -1,0 +1,5 @@
+configuration,configuration_label,shannon_entropy_mean,shannon_entropy_std,actions_used_above_1_percent_mean,actions_used_above_1_percent_std,actions_used_above_5_percent_mean,actions_used_above_5_percent_std,dominant_action_pct_mean,dominant_action_pct_std,top2_actions_pct_mean,top2_actions_pct_std,dominance_any_seed,hint_mean_freq,scaffold_mean_freq,encouragement_mean_freq,simplify_problem_mean_freq,harder_problem_mean_freq,break_mean_freq,explanation_mean_freq,no_action_mean_freq
+A_current_gains,Current Gains (A),1.2782,0.333,4.6667,1.5055,3.5,1.0488,0.4249,0.1515,0.6983,0.1727,False,0.0606,0.2742,0.0549,0.0916,0.403,0.0099,0.0633,0.0426
+B_nearly_equal_gains,Nearly Equal Gains (B),1.3098,0.3399,5.0,1.0954,4.1667,1.472,0.4421,0.1475,0.7139,0.1595,False,0.126,0.2416,0.0594,0.0082,0.3655,0.024,0.1209,0.0544
+C_explanation_focused,Explanation-Focused (C),1.3361,0.232,5.1667,1.6021,3.8333,0.7528,0.4279,0.0741,0.715,0.1117,False,0.1277,0.2773,0.1099,0.0204,0.2741,0.009,0.1356,0.046
+D_scaffold_penalized,Scaffold-Penalized (D),1.434,0.1463,5.0,0.6325,4.3333,0.8165,0.3741,0.0658,0.6351,0.1014,False,0.1748,0.242,0.1002,0.0546,0.2589,0.0001,0.115,0.0543

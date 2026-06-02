@@ -1,0 +1,3 @@
+rank,configuration,configuration_label,population_mode,learning_gain_mean,learning_gain_std,coefficient_of_variation,seed_range,learning_gain_ci_95,success_rate_mean,adaptation_accuracy_mean,shannon_entropy_mean,dominant_action_pct_mean,actions_used_above_1_percent_mean,best_seed,worst_seed
+1,B_realistic_mixed,B: Best Realistic Thesis System,mixed,0.5484,0.0614,0.1119,0.1819,"[0.510, 0.586]",0.295,0.6445,1.3661,0.4193,5.3,13,555
+2,A_stable_canonical,A: Most Stable Thesis System,single_canonical,0.6023,0.0679,0.1127,0.2143,"[0.560, 0.644]",0.2476,0.6098,1.2906,0.4514,4.8,888,555

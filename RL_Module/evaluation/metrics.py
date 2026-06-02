@@ -11,15 +11,23 @@ import pandas as pd
 
 from RL_Module import config
 from RL_Module.agents.base_agent import BaseAgent
-from RL_Module.agents.bandit_dqn import BanditDQNAgent
+from RL_Module.agents.rule_based import ExpertRuleBasedAgent
 from RL_Module.agents.dqn_agent import DQNAgent, make_env
-from RL_Module.agents.ppo_agent import PPOAgent, make_masked_env
 from RL_Module.environment.student_env import StudentEnv
 from RL_Module.explainability.explainer import Explainer
 from RL_Module.logging_utils.csv_logger import EpisodeLogger, StepLogger
-from RL_Module.mdp_definition import BEST_ACTION_MAP, ID_TO_EMOTION, normalized_knowledge_gain
+from RL_Module.mdp_definition import (
+    ACTION_DIM,
+    BEST_ACTION_MAP,
+    ID_TO_ACTION,
+    ID_TO_EMOTION,
+    normalized_knowledge_gain,
+)
 
-RL_ALGORITHMS = ("PPO", "DQN", "Bandit_DQN")
+RL_ALGORITHMS = ("DQN",)
+
+# Flag dominant-policy collapse if any single action exceeds this share of total steps.
+DOMINANCE_THRESHOLD = 0.70
 
 
 def confidence_interval(values: List[float], z: float = 1.96) -> Tuple[float, float, float]:
@@ -64,6 +72,61 @@ def compute_adaptation_accuracy(episode_log: List[Dict[str, Any]]) -> float:
     return hits / len(episode_log)
 
 
+def action_frequency_report(
+    episode_results: List[Dict[str, Any]],
+    dominance_threshold: float = DOMINANCE_THRESHOLD,
+    print_table: bool = True,
+) -> Dict[str, Any]:
+    """
+    Aggregate action usage across evaluate() episode_results and flag dominance.
+
+    Expects each episode row to include action_counts: {action_id: step_count}.
+    """
+    totals = {i: 0 for i in range(ACTION_DIM)}
+    for row in episode_results:
+        counts = row.get("action_counts", {})
+        for aid, n in counts.items():
+            totals[int(aid)] += int(n)
+
+    total_steps = sum(totals.values())
+    if total_steps == 0:
+        frequencies = {ID_TO_ACTION[i]: 0.0 for i in range(ACTION_DIM)}
+        dominant_actions: List[str] = []
+    else:
+        frequencies = {
+            ID_TO_ACTION[i]: totals[i] / total_steps for i in range(ACTION_DIM)
+        }
+        dominant_actions = [
+            name for name, freq in frequencies.items() if freq > dominance_threshold
+        ]
+
+    report = {
+        "frequencies": frequencies,
+        "dominant_actions": dominant_actions,
+        "dominance_detected": len(dominant_actions) > 0,
+        "total_steps": total_steps,
+        "dominance_threshold": dominance_threshold,
+    }
+
+    if print_table:
+        print("\n| Action           | Usage Frequency |")
+        print("| ---------------- | --------------- |")
+        for i in range(ACTION_DIM):
+            name = ID_TO_ACTION[i]
+            pct = frequencies.get(name, 0.0) * 100.0
+            flag = "  ** DOMINANT **" if name in dominant_actions else ""
+            print(f"| {name:16s} | {pct:6.1f}%         |{flag}")
+        if report["dominance_detected"]:
+            print(
+                f"\nWARNING: dominant action(s) exceed {dominance_threshold * 100:.0f}%: "
+                f"{', '.join(dominant_actions)}"
+            )
+        else:
+            print("\nNo dominant action detected (policy diversity OK).")
+
+    return report
+
+
 def evaluate(
     agent: BaseAgent,
     env: StudentEnv,
@@ -89,7 +152,7 @@ def evaluate(
         mask = info["action_masks"]
         total_reward = 0.0
         start_k = env._state.knowledge
-        action_counts = {i: 0 for i in range(10)}
+        action_counts = {i: 0 for i in range(8)}
         ep_adapt_hits = 0
         ep_adapt_total = 0
         step = 0
@@ -99,7 +162,7 @@ def evaluate(
         while not done:
             emotion_id = env._state.emotion_id
 
-            if isinstance(agent, BanditDQNAgent):
+            if isinstance(agent, ExpertRuleBasedAgent):
                 action = agent.predict(
                     obs,
                     mask,
@@ -120,8 +183,6 @@ def evaluate(
                 env.set_explainer_reason(record["reason"])
 
             obs, reward, terminated, truncated, info = env.step(action)
-            if hasattr(agent, "set_last_reward"):
-                agent.set_last_reward(reward)
 
             ep_adapt_total += 1
             if _adaptation_match(emotion_id, action):
@@ -152,6 +213,7 @@ def evaluate(
                     "emotion_id": env._state.emotion_id,
                     "emotion_name": ID_TO_EMOTION[env._state.emotion_id],
                     "persistent_flag": info.get("persistent_frustration_flag", False),
+                    "consecutive_flag_steps": info.get("consecutive_flag_steps", 0),
                     "terminated": terminated,
                     "truncated": truncated,
                     "explainer_reason": env._explainer_reason,
@@ -245,39 +307,31 @@ def run_ablation(
     eval_episodes: int = 100,
     seed: int = config.DEFAULT_SEED,
 ) -> Dict[str, Any]:
-    """Version A: no emotion. Version B: full. All 3 RL algorithms."""
+    """Version A: no emotion. Version B: full. DQN only."""
     results: Dict[str, Any] = {"A": {}, "B": {}, "delta": {}}
 
     for label, ablation in [("A", True), ("B", False)]:
-        for algo_name, agent_cls in [
-            ("PPO", PPOAgent),
-            ("DQN", DQNAgent),
-            ("Bandit_DQN", BanditDQNAgent),
-        ]:
-            if algo_name == "PPO":
-                train_env = make_masked_env(seed, ablation_no_emotion=ablation)
-            else:
-                train_env = make_env(seed, ablation_no_emotion=ablation)
+        train_env = make_env(seed, ablation_no_emotion=ablation)
 
-            agent = agent_cls()
-            agent.train(train_env, train_timesteps, seed)
-            train_env.close()
+        agent = DQNAgent()
+        agent.train(train_env, train_timesteps, seed)
+        train_env.close()
 
-            eval_env = StudentEnv(
-                population_seed=seed,
-                use_emotion=not ablation,
-                ablation_no_emotion=ablation,
-            )
-            key = f"{algo_name}_{label}"
-            results[label][algo_name] = evaluate(
-                agent,
-                eval_env,
-                n_episodes=eval_episodes,
-                seed=seed,
-                algorithm=key,
-                log_steps=False,
-            )
-            eval_env.close()
+        eval_env = StudentEnv(
+            population_seed=seed,
+            use_emotion=not ablation,
+            ablation_no_emotion=ablation,
+        )
+        key = f"DQN_{label}"
+        results[label]["DQN"] = evaluate(
+            agent,
+            eval_env,
+            n_episodes=eval_episodes,
+            seed=seed,
+            algorithm=key,
+            log_steps=False,
+        )
+        eval_env.close()
 
     for algo in RL_ALGORITHMS:
         for metric in ["mean_episode_reward", "success_rate", "learning_gain"]:

@@ -1,0 +1,42 @@
+{
+  "recommended_hyperparameters": {
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 500,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05
+  },
+  "config_id": "4c0cc82b2166",
+  "source": "robust_top5_aggregate",
+  "final_knowledge_mean": 0.6982089451594823,
+  "success_rate_mean": 0.3616,
+  "mean_episode_reward_mean": 2.929507234447669,
+  "adaptation_accuracy_mean": 0.7344358388093172,
+  "stable_improvement": false,
+  "educational_validity": {
+    "config_id": "3d833752cc9e",
+    "metrics": {
+      "adaptation_accuracy": 0.9964195104471396,
+      "challenge_action_fraction": 0.996665568911576,
+      "comfort_action_fraction": 0.0024082002305285,
+      "mean_delta_k_per_step": 0.0096487498874582,
+      "p_correct": 0.2592417256710028,
+      "mean_episode_reward": 2.904102670404723,
+      "final_knowledge": 0.7703096980725149
+    },
+    "delta_vs_baseline": {
+      "adaptation_accuracy": 0.6428423319328175,
+      "challenge_action_fraction": 0.4750362661917499,
+      "comfort_action_fraction": -0.23823115371557604,
+      "mean_delta_k_per_step": 0.00329957461147682,
+      "p_correct": -0.17506657168785444,
+      "mean_episode_reward": 0.14609322777591593,
+      "final_knowledge": 0.15537789313173966
+    },
+    "interpretation": "better_personalization_and_challenge",
+    "educationally_meaningful": false
+  },
+  "expected_educational_impact": "Higher mastery and emotion-aligned action selection without increasing comfort-seeking or reward-only exploitation, provided robust multi-seed confirmation holds.",
+  "note": "Environment, reward weights, and simulator dynamics were not modified; only DQN algorithm hyperparameters were tuned."
+}

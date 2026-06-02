@@ -1,0 +1,3 @@
+configuration,configuration_label,n_seeds,same_population_learning_gain_mean,cross_population_learning_gain_mean,generalization_gap_mean,generalization_gap_std
+A_standard_dqn,Standard DQN (A),20,0.5394,0.5968,-0.0574,0.0179
+B_double_dqn,Double DQN (B),20,0.5634,0.6144,-0.051,0.0163

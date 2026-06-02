@@ -1,0 +1,5 @@
+configuration,configuration_label,shannon_entropy_mean,shannon_entropy_std,actions_used_above_1_percent_mean,actions_used_above_1_percent_std,dominant_action_pct_mean,dominant_action_pct_std,dominance_any_seed,hint_mean_freq,scaffold_mean_freq,encouragement_mean_freq,simplify_problem_mean_freq,harder_problem_mean_freq,break_mean_freq,explanation_mean_freq,no_action_mean_freq
+A_original_thesis,A: Original Thesis,1.0948,0.3342,4.6667,1.5055,0.5185,0.1638,True,0.067,0.3168,0.0596,0.0304,0.456,0.0048,0.0588,0.0068
+B_balanced_1,B: Balanced-1,1.1416,0.3709,4.6667,1.633,0.5276,0.1591,True,0.0555,0.3595,0.0911,0.0257,0.3866,0.0002,0.0746,0.0067
+C_balanced_2,C: Balanced-2,1.3543,0.1276,4.6667,1.0328,0.4168,0.06,False,0.0293,0.3555,0.0732,0.0918,0.2915,0.0289,0.1176,0.0122
+D_equal,D: Equal,1.4855,0.1056,5.6667,1.0328,0.4224,0.0604,False,0.019,0.4074,0.0451,0.0889,0.1519,0.0132,0.171,0.1034

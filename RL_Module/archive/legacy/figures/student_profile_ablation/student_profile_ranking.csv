@@ -1,0 +1,4 @@
+rank,condition,condition_label,population_mode,learning_gain_mean,learning_gain_std,coefficient_of_variation,seed_range,success_rate_mean,adaptation_accuracy_mean,mean_episode_reward_mean,shannon_entropy_mean,actions_used_above_1_percent_mean,best_seed,worst_seed
+1,B_single_canonical,Single Canonical Student (B),single_canonical,0.6411,0.061,0.0952,0.1514,0.349,0.7864,3.1661,1.1523,4.1667,21,42
+2,A_mixed,Mixed Population (A),mixed,0.5634,0.0929,0.1649,0.2464,0.3473,0.6786,3.1265,1.2782,4.6667,7,42
+3,C_low_variance,Low Variance Population (C),low_variance,0.5834,0.1332,0.2283,0.3481,0.2793,0.6662,3.1923,1.2436,4.5,13,314

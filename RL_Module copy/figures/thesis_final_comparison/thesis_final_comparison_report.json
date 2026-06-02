@@ -1,0 +1,41 @@
+{
+  "study": "thesis_final_comparison",
+  "gain_id": "G4",
+  "ratio": "10:1",
+  "seeds": [
+    42,
+    0,
+    1,
+    7,
+    13,
+    21,
+    99,
+    100,
+    200,
+    314
+  ],
+  "eval_episodes": 1000,
+  "dqn_hyperparameters": {
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "buffer_size": 100000,
+    "target_update_interval": 500,
+    "exploration_fraction": 0.3,
+    "exploration_final_eps": 0.05
+  },
+  "conclusion": {
+    "best_educational_tutor_g4": "DQN",
+    "safest_emotional_tutor_g4": "Random",
+    "best_wellbeing_tutor_g4": "ERT",
+    "dqn_significantly_outperforms_ert_primary": false,
+    "dqn_significant_primary_metrics": [],
+    "dqn_higher_learning_gain_than_ert_g4": true,
+    "ert_competitive": false,
+    "ratio_10_1_winner_learning_gain": "DQN",
+    "ranking_stable_strict": false,
+    "ranking_stable_ert_vs_random": 0.0,
+    "ranking_stable_dqn_vs_ert": 0.8,
+    "ratio_10_1_justified": true,
+    "conclusions_robust_across_ratios": false
+  }
+}

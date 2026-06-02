@@ -1,0 +1,2 @@
+model,model_label,n_seeds,learning_gain_mean,learning_gain_std,learning_gain_ci,final_knowledge_mean,final_knowledge_std,final_knowledge_ci,success_rate_mean,success_rate_std,success_rate_ci,adaptation_accuracy_mean,adaptation_accuracy_std,adaptation_accuracy_ci,mean_episode_reward_mean,mean_episode_reward_std,mean_episode_reward_ci
+tier_a_no_emotion_id,Tier A: No Emotion ID + Stabilized Affect,20,0.5888,0.0923,"[0.548, 0.629]",0.716,0.0634,"[0.688, 0.744]",0.3697,0.1528,"[0.303, 0.437]",0.7058,0.1658,"[0.633, 0.778]",2.9564,0.398,"[2.782, 3.131]"

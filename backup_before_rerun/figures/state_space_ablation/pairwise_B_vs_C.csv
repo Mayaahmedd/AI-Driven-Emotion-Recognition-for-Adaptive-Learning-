@@ -1,0 +1,8 @@
+comparison,eval_type,metric,mean_B_v7_with_persistent,mean_C_v7_persistent_no_eid,delta,cohens_d,p_raw,p_holm
+B_v7_with_persistent_vs_C_v7_persistent_no_eid,best,learning_gain,0.5503,0.5571,-0.0068,-0.0542,0.904955,1.0
+B_v7_with_persistent_vs_C_v7_persistent_no_eid,best,final_knowledge,0.6902,0.6952,-0.0049,-0.0572,0.899783,1.0
+B_v7_with_persistent_vs_C_v7_persistent_no_eid,best,success_rate,0.3326,0.3226,0.01,0.0528,0.907437,1.0
+B_v7_with_persistent_vs_C_v7_persistent_no_eid,best,adaptation_accuracy,0.6218,0.6404,-0.0186,-0.0873,0.847702,1.0
+B_v7_with_persistent_vs_C_v7_persistent_no_eid,best,mean_episode_reward,2.7505,2.9708,-0.2203,-0.4574,0.31997,1.0
+B_v7_with_persistent_vs_C_v7_persistent_no_eid,best,dropout_rate,0.0,0.0,0.0,0.0,,1.0
+B_v7_with_persistent_vs_C_v7_persistent_no_eid,best,action_diversity,0.4875,0.5199,-0.0324,-0.1553,0.732398,1.0

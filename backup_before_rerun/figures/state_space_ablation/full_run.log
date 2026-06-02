@@ -1,0 +1,84 @@
+=== State-Space Ablation: RUN ===
+
+--- A: Original 6-dim ---
+[1/30] seed=42
+  best_lg=0.674 adapt=0.990 dropout=0.000 diversity=0.318 (28.9s)
+[2/30] seed=0
+  best_lg=0.698 adapt=0.973 dropout=0.000 diversity=0.292 (28.8s)
+[3/30] seed=1
+  best_lg=0.453 adapt=0.489 dropout=0.000 diversity=0.564 (28.9s)
+[4/30] seed=7
+  best_lg=0.605 adapt=0.719 dropout=0.000 diversity=0.494 (28.1s)
+[5/30] seed=13
+  best_lg=0.669 adapt=0.943 dropout=0.000 diversity=0.383 (28.3s)
+[6/30] seed=21
+  best_lg=0.649 adapt=0.745 dropout=0.000 diversity=0.540 (28.4s)
+[7/30] seed=99
+  best_lg=0.588 adapt=0.648 dropout=0.000 diversity=0.540 (28.0s)
+[8/30] seed=100
+  best_lg=0.678 adapt=0.990 dropout=0.000 diversity=0.356 (27.6s)
+[9/30] seed=200
+  best_lg=0.437 adapt=0.484 dropout=0.000 diversity=0.536 (28.2s)
+[10/30] seed=314
+  best_lg=0.330 adapt=0.524 dropout=0.000 diversity=0.594 (27.5s)
+
+--- B: + Persistent Steps ---
+[11/30] seed=42
+  best_lg=0.591 adapt=0.728 dropout=0.000 diversity=0.646 (27.9s)
+[12/30] seed=0
+  best_lg=0.384 adapt=0.489 dropout=0.000 diversity=0.563 (27.7s)
+[13/30] seed=1
+  best_lg=0.320 adapt=0.139 dropout=0.000 diversity=0.725 (27.9s)
+[14/30] seed=7
+  best_lg=0.640 adapt=0.887 dropout=0.000 diversity=0.446 (27.7s)
+[15/30] seed=13
+  best_lg=0.647 adapt=0.714 dropout=0.000 diversity=0.321 (28.0s)
+[16/30] seed=21
+  best_lg=0.685 adapt=0.980 dropout=0.000 diversity=0.358 (27.7s)
+[17/30] seed=99
+  best_lg=0.629 adapt=0.812 dropout=0.000 diversity=0.422 (27.9s)
+[18/30] seed=100
+  best_lg=0.700 adapt=0.560 dropout=0.000 diversity=0.113 (27.7s)
+[19/30] seed=200
+  best_lg=0.562 adapt=0.429 dropout=0.000 diversity=0.524 (27.9s)
+[20/30] seed=314
+  best_lg=0.347 adapt=0.481 dropout=0.000 diversity=0.757 (28.0s)
+
+--- C: Persistent, No Emotion ID ---
+[21/30] seed=42
+  best_lg=0.476 adapt=0.570 dropout=0.000 diversity=0.649 (27.8s)
+[22/30] seed=0
+  best_lg=0.613 adapt=0.845 dropout=0.000 diversity=0.522 (27.9s)
+[23/30] seed=1
+  best_lg=0.484 adapt=0.634 dropout=0.000 diversity=0.643 (27.8s)
+[24/30] seed=7
+  best_lg=0.648 adapt=0.927 dropout=0.000 diversity=0.414 (27.8s)
+[25/30] seed=13
+  best_lg=0.693 adapt=0.483 dropout=0.000 diversity=0.050 (27.7s)
+[26/30] seed=21
+  best_lg=0.553 adapt=0.664 dropout=0.000 diversity=0.660 (27.8s)
+[27/30] seed=99
+  best_lg=0.426 adapt=0.497 dropout=0.000 diversity=0.382 (27.7s)
+[28/30] seed=100
+  best_lg=0.678 adapt=0.775 dropout=0.000 diversity=0.388 (27.3s)
+[29/30] seed=200
+  best_lg=0.579 adapt=0.598 dropout=0.000 diversity=0.681 (26.9s)
+[30/30] seed=314
+  best_lg=0.421 adapt=0.411 dropout=0.000 diversity=0.810 (26.8s)
+
+=== ANALYZE ===
+{
+  "recommended_condition": "A_original_v6",
+  "recommended_label": "A: Original 6-dim",
+  "recommended_stats": {
+    "learning_gain_mean": 0.5781,
+    "learning_gain_std": 0.1269,
+    "learning_gain_ci": "[0.499, 0.657]",
+    "adaptation_mean": 0.7505,
+    "adaptation_ci": "[0.619, 0.882]"
+  },
+  "persistent_obs_improves_lg": false,
+  "emotion_id_proven_redundant": true,
+  "pairwise_B_vs_C_lg_delta": -0.0068,
+  "justification": "persistent channel delta vs original=+0.0278 (not significant); emotion_id is redundant when persistent steps are present (B?C); Recommended: A: Original 6-dim"
+}

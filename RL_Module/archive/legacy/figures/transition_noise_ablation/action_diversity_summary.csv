@@ -1,0 +1,4 @@
+condition,condition_label,transition_noise_std,shannon_entropy_mean,shannon_entropy_std,actions_used_above_1_percent_mean,actions_used_above_1_percent_std,dominance_any_seed,hint_mean_freq,scaffold_mean_freq,encouragement_mean_freq,simplify_problem_mean_freq,harder_problem_mean_freq,break_mean_freq,explanation_mean_freq,no_action_mean_freq
+A_baseline_noise,Baseline Noise (A),0.02,1.2782,0.333,4.6667,1.5055,False,0.0606,0.2742,0.0549,0.0916,0.403,0.0099,0.0633,0.0426
+B_half_noise,Half Noise (B),0.01,1.3616,0.2863,5.1667,0.7528,False,0.0411,0.3126,0.0908,0.0648,0.2947,0.0318,0.0797,0.0846
+C_no_noise,No Noise (C),0.0,1.2153,0.2863,4.3333,1.0328,True,0.0197,0.3401,0.1014,0.0391,0.3694,0.0417,0.0309,0.0577

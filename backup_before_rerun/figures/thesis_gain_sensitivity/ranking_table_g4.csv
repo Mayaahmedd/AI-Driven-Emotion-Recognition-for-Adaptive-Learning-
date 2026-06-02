@@ -1,0 +1,4 @@
+Tutor,Learning Gain,Final Knowledge,Success Rate,Dropout,Adaptation,Reward,Wellbeing
+Random,0.3825,0.5748,0.0817,0.0,0.288,2.7049,0.3696
+ERT,0.4108,0.5943,0.1157,0.0,0.3732,3.1242,0.4018
+DQN,0.4362,0.6123,0.1997,0.0,0.5455,2.9853,0.3887

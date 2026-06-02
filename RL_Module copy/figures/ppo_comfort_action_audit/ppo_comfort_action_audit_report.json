@@ -1,0 +1,1025 @@
+{
+  "study": "ppo_comfort_action_audit",
+  "config": {
+    "seed": 42,
+    "train_timesteps": 50000,
+    "eval_episodes": 300,
+    "probe_states": 600,
+    "adv_sample_states": 120,
+    "adv_horizon": 20,
+    "adv_mc_repeats": 5
+  },
+  "section1_advantage_analysis": {
+    "action_advantages": [
+      {
+        "action_name": "hint",
+        "mean_A_hat": -1.4276513138754976,
+        "mean_Q_hat": 3.9436390182636427,
+        "mean_prob": 0.04345407775330423,
+        "n": 99
+      },
+      {
+        "action_name": "break",
+        "mean_A_hat": -1.4631434603104727,
+        "mean_Q_hat": 3.9522490726342063,
+        "mean_prob": 0.1285653216764331,
+        "n": 80
+      },
+      {
+        "action_name": "scaffold",
+        "mean_A_hat": -1.5186478858157588,
+        "mean_Q_hat": 3.8501865961047557,
+        "mean_prob": 0.44795188272283193,
+        "n": 105
+      },
+      {
+        "action_name": "explanation",
+        "mean_A_hat": -1.538305477869252,
+        "mean_Q_hat": 3.8015501978280746,
+        "mean_prob": 0.1429539505764842,
+        "n": 100
+      },
+      {
+        "action_name": "simplify_problem",
+        "mean_A_hat": -1.542229240893117,
+        "mean_Q_hat": 3.896658391518342,
+        "mean_prob": 0.13032724416774252,
+        "n": 92
+      },
+      {
+        "action_name": "no_action",
+        "mean_A_hat": -1.611597118316501,
+        "mean_Q_hat": 3.784673589926551,
+        "mean_prob": 0.05140399214966843,
+        "n": 120
+      },
+      {
+        "action_name": "harder_problem",
+        "mean_A_hat": -1.6358161334289698,
+        "mean_Q_hat": 3.7604545748140827,
+        "mean_prob": 0.050353795064923663,
+        "n": 120
+      },
+      {
+        "action_name": "encouragement",
+        "mean_A_hat": -1.646814616794501,
+        "mean_Q_hat": 3.6933143080259483,
+        "mean_prob": 0.21847732880940804,
+        "n": 91
+      }
+    ],
+    "target_actions": [
+      {
+        "action": "scaffold",
+        "mean_prob_on_disagreement_states": 0.44795188272283193,
+        "mean_A_hat": -1.5186478858157588,
+        "mean_Q_hat": 3.8501865961047557,
+        "n": 105
+      },
+      {
+        "action": "encouragement",
+        "mean_prob_on_disagreement_states": 0.21847732880940804,
+        "mean_A_hat": -1.646814616794501,
+        "mean_Q_hat": 3.6933143080259483,
+        "n": 91
+      },
+      {
+        "action": "simplify_problem",
+        "mean_prob_on_disagreement_states": 0.13032724416774252,
+        "mean_A_hat": -1.542229240893117,
+        "mean_Q_hat": 3.896658391518342,
+        "n": 92
+      },
+      {
+        "action": "harder_problem",
+        "mean_prob_on_disagreement_states": 0.050353795064923663,
+        "mean_A_hat": -1.6358161334289698,
+        "mean_Q_hat": 3.7604545748140827,
+        "n": 120
+      }
+    ]
+  },
+  "section2_value_function_audit": {
+    "V_mean_all_disagreements": 5.396270708243052,
+    "V_mean_comfort_vs_mastery_disagreements": 5.194546744936988,
+    "count_disagreements": 120,
+    "count_comfort_vs_mastery_disagreements": 21
+  },
+  "section3_horizon_analysis": {
+    "future_knowledge_gain_by_action_and_horizon": [
+      {
+        "algorithm": "DQN",
+        "action_name": "harder_problem",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.04588121244623657,
+        "n": 11775
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "harder_problem",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.09070837277182492,
+        "n": 10311
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "harder_problem",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.17707429814850098,
+        "n": 7405
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "hint",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.06068239091041378,
+        "n": 1252
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "hint",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.11336771912798993,
+        "n": 1216
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "hint",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.213190036208618,
+        "n": 1122
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "break",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.024146434864658572,
+        "n": 2305
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "break",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.04069303215156172,
+        "n": 2067
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "break",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.08305879609910066,
+        "n": 1449
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "encouragement",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.027386787416841737,
+        "n": 3290
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "encouragement",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.04510708170823574,
+        "n": 2983
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "encouragement",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.08589032258452751,
+        "n": 2299
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "harder_problem",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.02101115959735646,
+        "n": 230
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "harder_problem",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.037903418775992175,
+        "n": 187
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "harder_problem",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.06176784411186181,
+        "n": 97
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "no_action",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.03329369533275854,
+        "n": 11
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "no_action",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.04808249215092368,
+        "n": 8
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "no_action",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.11259237264742714,
+        "n": 4
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "scaffold",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.018585570708217033,
+        "n": 6861
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "scaffold",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.04375074436823921,
+        "n": 5986
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "scaffold",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.08594440780049772,
+        "n": 4490
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "simplify_problem",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.030721825356289978,
+        "n": 796
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "simplify_problem",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.048550230123584025,
+        "n": 762
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "simplify_problem",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.0947790430078653,
+        "n": 654
+      }
+    ]
+  },
+  "section4_gae_audit": {
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "gamma_lambda": 0.9405,
+    "effective_horizon_steps": 16.80672268907563,
+    "half_life_steps": 11.29941573128618
+  },
+  "section5_policy_logits": {
+    "matched_state_probabilities": [
+      {
+        "action": "scaffold",
+        "mean_prob_on_disagreement_states": 0.44795188272283193,
+        "mean_A_hat": -1.5186478858157588,
+        "mean_Q_hat": 3.8501865961047557,
+        "n": 105
+      },
+      {
+        "action": "encouragement",
+        "mean_prob_on_disagreement_states": 0.21847732880940804,
+        "mean_A_hat": -1.646814616794501,
+        "mean_Q_hat": 3.6933143080259483,
+        "n": 91
+      },
+      {
+        "action": "simplify_problem",
+        "mean_prob_on_disagreement_states": 0.13032724416774252,
+        "mean_A_hat": -1.542229240893117,
+        "mean_Q_hat": 3.896658391518342,
+        "n": 92
+      },
+      {
+        "action": "harder_problem",
+        "mean_prob_on_disagreement_states": 0.050353795064923663,
+        "mean_A_hat": -1.6358161334289698,
+        "mean_Q_hat": 3.7604545748140827,
+        "n": 120
+      },
+      {
+        "action": "no_action",
+        "mean_prob_on_disagreement_states": 0.05140399214966843,
+        "mean_A_hat": -1.611597118316501,
+        "mean_Q_hat": 3.784673589926551,
+        "n": 120
+      }
+    ],
+    "agreement_rate": 0.03,
+    "disagreement_rate": 0.97
+  },
+  "section6_action_trajectory_analysis": {
+    "trajectory_gain_table": [
+      {
+        "algorithm": "DQN",
+        "action_name": "harder_problem",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.04588121244623657,
+        "n": 11775
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "harder_problem",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.09070837277182492,
+        "n": 10311
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "harder_problem",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.17707429814850098,
+        "n": 7405
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "hint",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.06068239091041378,
+        "n": 1252
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "hint",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.11336771912798993,
+        "n": 1216
+      },
+      {
+        "algorithm": "DQN",
+        "action_name": "hint",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.213190036208618,
+        "n": 1122
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "break",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.024146434864658572,
+        "n": 2305
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "break",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.04069303215156172,
+        "n": 2067
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "break",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.08305879609910066,
+        "n": 1449
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "encouragement",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.027386787416841737,
+        "n": 3290
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "encouragement",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.04510708170823574,
+        "n": 2983
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "encouragement",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.08589032258452751,
+        "n": 2299
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "harder_problem",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.02101115959735646,
+        "n": 230
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "harder_problem",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.037903418775992175,
+        "n": 187
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "harder_problem",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.06176784411186181,
+        "n": 97
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "no_action",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.03329369533275854,
+        "n": 11
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "no_action",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.04808249215092368,
+        "n": 8
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "no_action",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.11259237264742714,
+        "n": 4
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "scaffold",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.018585570708217033,
+        "n": 6861
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "scaffold",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.04375074436823921,
+        "n": 5986
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "scaffold",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.08594440780049772,
+        "n": 4490
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "simplify_problem",
+        "horizon": 5,
+        "mean_future_knowledge_gain": 0.030721825356289978,
+        "n": 796
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "simplify_problem",
+        "horizon": 10,
+        "mean_future_knowledge_gain": 0.048550230123584025,
+        "n": 762
+      },
+      {
+        "algorithm": "PPO",
+        "action_name": "simplify_problem",
+        "horizon": 20,
+        "mean_future_knowledge_gain": 0.0947790430078653,
+        "n": 654
+      }
+    ]
+  },
+  "section7_credit_assignment_test": {
+    "PPO": {
+      "hint": {
+        "n": 0
+      },
+      "scaffold": {
+        "n": 7474,
+        "peak_reward_lag": 0,
+        "peak_reward_value": 0.07671838236416616,
+        "peak_delta_k_lag": 20,
+        "peak_delta_k_value": 0.08594440780049772,
+        "reward_curve": [
+          0.07671838236416616,
+          0.06570508874478005,
+          0.07632233688611427,
+          0.06558794381917592,
+          0.07607028182648821,
+          0.06559701787673508,
+          0.07590122545915506,
+          0.0656066377130615,
+          0.07573559780442862,
+          0.06576332935052058,
+          0.07547019615991339,
+          0.06579403838950383,
+          0.07536901621989438,
+          0.06583959868283881,
+          0.07515576684841865,
+          0.06581672563754346,
+          0.07491164530089471,
+          0.0658670039823121,
+          0.07477585833901795,
+          0.06580244738268462,
+          0.07468335494442171
+        ],
+        "delta_k_curve": [
+          0.0,
+          0.00048372075863322605,
+          0.009162217040081935,
+          0.009614169296813515,
+          0.018204658595982307,
+          0.018585570708217033,
+          0.0270249496886847,
+          0.027341291198234623,
+          0.03547975209568218,
+          0.035899815988591675,
+          0.04375074436823921,
+          0.04416223762060699,
+          0.05203528816211431,
+          0.05255136402935824,
+          0.06044217114055002,
+          0.06104876570351883,
+          0.06889183512539229,
+          0.06957433797930093,
+          0.07743643374531115,
+          0.07805365894270655,
+          0.08594440780049772
+        ]
+      },
+      "encouragement": {
+        "n": 3793,
+        "peak_reward_lag": 1,
+        "peak_reward_value": 0.07704047186756845,
+        "peak_delta_k_lag": 20,
+        "peak_delta_k_value": 0.08589032258452751,
+        "reward_curve": [
+          0.06591600856125945,
+          0.07704047186756845,
+          0.06536159725417597,
+          0.07565989464869816,
+          0.06597614345956265,
+          0.07647485359819342,
+          0.065074364294872,
+          0.07534256055213492,
+          0.06626701877545835,
+          0.07604413009260082,
+          0.06509085185521357,
+          0.07490672531782844,
+          0.06647926639846158,
+          0.07581097029457305,
+          0.06512404324615419,
+          0.07437863437187896,
+          0.06640735830402052,
+          0.07525241552215534,
+          0.06502933223171503,
+          0.07425472858677169,
+          0.06654399309367058
+        ],
+        "delta_k_curve": [
+          0.0,
+          0.008925791080851921,
+          0.010219153207130727,
+          0.018633546953665637,
+          0.018411470858455545,
+          0.027386787416841737,
+          0.02816073851754718,
+          0.03589254981389394,
+          0.03589094192540791,
+          0.044408918119906396,
+          0.04510708170823574,
+          0.05212555291361976,
+          0.05225499020603544,
+          0.06115428270542611,
+          0.06191481600415027,
+          0.06861002713630374,
+          0.06898826311442673,
+          0.0782267048615671,
+          0.07898876190763766,
+          0.0853931956512429,
+          0.08589032258452751
+        ]
+      },
+      "simplify_problem": {
+        "n": 838,
+        "peak_reward_lag": 3,
+        "peak_reward_value": 0.0742132217573429,
+        "peak_delta_k_lag": 20,
+        "peak_delta_k_value": 0.0947790430078653,
+        "reward_curve": [
+          0.06714162378450589,
+          0.07310047723501663,
+          0.06353374085063625,
+          0.0742132217573429,
+          0.06570953163356591,
+          0.07301523046241634,
+          0.06470358966497657,
+          0.0739952608634646,
+          0.06600278638751014,
+          0.07240389350747395,
+          0.06586899972161096,
+          0.07324394296537323,
+          0.06691067644784945,
+          0.07140540691639767,
+          0.06610505819831455,
+          0.07308623933822965,
+          0.06607500155348647,
+          0.07131201898543421,
+          0.06603723770520252,
+          0.07317867178664741,
+          0.06614963596211604
+        ],
+        "delta_k_curve": [
+          0.0,
+          0.010201139445574348,
+          0.008594841321587436,
+          0.018904276455072214,
+          0.022166842432712483,
+          0.030721825356289978,
+          0.029407781559405228,
+          0.03902098447497596,
+          0.0416504445335211,
+          0.04897690459646239,
+          0.048550230123584025,
+          0.05741121654346751,
+          0.06040922229685656,
+          0.06673735137786692,
+          0.0671181025371605,
+          0.07572494542700763,
+          0.07816249703263103,
+          0.08435427568348973,
+          0.08473133541440726,
+          0.09325879945920736,
+          0.0947790430078653
+        ]
+      },
+      "harder_problem": {
+        "n": 279,
+        "peak_reward_lag": 7,
+        "peak_reward_value": 0.07453281422132998,
+        "peak_delta_k_lag": 20,
+        "peak_delta_k_value": 0.06176784411186181,
+        "reward_curve": [
+          0.069187941405227,
+          0.0725706125067138,
+          0.0643514786562533,
+          0.0717163241428444,
+          0.058945663447234495,
+          0.07113583128194685,
+          0.06412662489317304,
+          0.07453281422132998,
+          0.060965103824160594,
+          0.07332426905087971,
+          0.06805891999623055,
+          0.0720272876467229,
+          0.05801355154674162,
+          0.06805499018009349,
+          0.060669456409020724,
+          0.07446970425688991,
+          0.060505766352477224,
+          0.06268995462058988,
+          0.06532864154630466,
+          0.07095314079659176,
+          0.06096022919811861
+        ],
+        "delta_k_curve": [
+          0.0,
+          0.007665585315319326,
+          0.00924487742016219,
+          0.014474518705133053,
+          0.01575233855834934,
+          0.02101115959735646,
+          0.021425724560280218,
+          0.029536979445309374,
+          0.030478357033295638,
+          0.0359294315567269,
+          0.037903418775992175,
+          0.045183327703411644,
+          0.045070299312716534,
+          0.04914708783616081,
+          0.047979571290681505,
+          0.054001251099032914,
+          0.05550821651671892,
+          0.053471174221261755,
+          0.05502883961983789,
+          0.05842383340673859,
+          0.06176784411186181
+        ]
+      },
+      "break": {
+        "n": 2591,
+        "peak_reward_lag": 3,
+        "peak_reward_value": 0.0774418642380036,
+        "peak_delta_k_lag": 20,
+        "peak_delta_k_value": 0.08305879609910066,
+        "reward_curve": [
+          0.06464892224570756,
+          0.07654355316881017,
+          0.0667000424580425,
+          0.0774418642380036,
+          0.06551861331651926,
+          0.07633829344429924,
+          0.06700859705993113,
+          0.0770316896727939,
+          0.06529489771504121,
+          0.07607536653539729,
+          0.06675317206213223,
+          0.07727227235285215,
+          0.06509668504293481,
+          0.07624947634552147,
+          0.06711294254634576,
+          0.07662494750811251,
+          0.06554887878079309,
+          0.07616067270082807,
+          0.06689776812876098,
+          0.07606257312116067,
+          0.06501945974807428
+        ],
+        "delta_k_curve": [
+          0.0,
+          0.00800370993682891,
+          0.007839365659373685,
+          0.01601012118157729,
+          0.01630002115589152,
+          0.024146434864658572,
+          0.024508733713302398,
+          0.032966149683440846,
+          0.033140283701287306,
+          0.04042937136194008,
+          0.04069303215156172,
+          0.04917049488454105,
+          0.04923346184795421,
+          0.056326220539043986,
+          0.056842507871256893,
+          0.06583638667507843,
+          0.06620339260994511,
+          0.07311014200522042,
+          0.07357493730339432,
+          0.08279357331257109,
+          0.08305879609910066
+        ]
+      },
+      "explanation": {
+        "n": 0
+      },
+      "no_action": {
+        "n": 18,
+        "peak_reward_lag": 7,
+        "peak_reward_value": 0.1168496934581151,
+        "peak_delta_k_lag": 19,
+        "peak_delta_k_value": 0.11778363813480963,
+        "reward_curve": [
+          0.05338252908386099,
+          0.06822000776662127,
+          0.06649049726233423,
+          0.09880534757902512,
+          0.09998949980556052,
+          0.10935470865214231,
+          0.05713158485997633,
+          0.1168496934581151,
+          0.07824966163158442,
+          0.061801111202766434,
+          0.07598451767487982,
+          0.07105078395017925,
+          0.08214709055076172,
+          0.08473210125532334,
+          0.07004280668276548,
+          0.0625984785130639,
+          -0.01737707562973403,
+          0.09422057018147753,
+          0.07401310478009361,
+          0.08269246707693215,
+          0.039234046546802855
+        ],
+        "delta_k_curve": [
+          0.0,
+          -0.0006441534952847568,
+          -0.0006783991211982637,
+          0.009337741751903769,
+          0.016927474432949695,
+          0.03329369533275854,
+          0.028474009421676206,
+          0.04900613928142964,
+          0.05200319932573162,
+          0.037716974743426224,
+          0.04808249215092368,
+          0.050757694968071844,
+          0.060113618465427655,
+          0.0746563231130911,
+          0.08058924146008933,
+          0.11487002964123424,
+          0.09379442750753794,
+          0.10633699997158877,
+          0.10792001227690404,
+          0.11778363813480963,
+          0.11259237264742714
+        ]
+      }
+    },
+    "DQN": {
+      "hint": {
+        "n": 1277,
+        "peak_reward_lag": 0,
+        "peak_reward_value": 0.03079836452086117,
+        "peak_delta_k_lag": 20,
+        "peak_delta_k_value": 0.213190036208618,
+        "reward_curve": [
+          0.03079836452086117,
+          0.024160027510316658,
+          0.028671952224474252,
+          0.02205439217405201,
+          0.02653723625684648,
+          0.0211084666978092,
+          0.024731107552078795,
+          0.020826970509516485,
+          0.024078237948957984,
+          0.02122906761566064,
+          0.02365739407103042,
+          0.021405321404997058,
+          0.023796340804344323,
+          0.023133931077350477,
+          0.02449818270696646,
+          0.023986469579664466,
+          0.024618285961305327,
+          0.02556769679555926,
+          0.02465406372165656,
+          0.02698405046041851,
+          0.02561476147619196
+        ],
+        "delta_k_curve": [
+          0.0,
+          0.01654734154349882,
+          0.023201714647359848,
+          0.038420333736193406,
+          0.04632056658284401,
+          0.06068239091041378,
+          0.06902376615213458,
+          0.08260505840109095,
+          0.09132847512515328,
+          0.10405788279417282,
+          0.11336771912798993,
+          0.12508039859061348,
+          0.13468697977631933,
+          0.1463301001225866,
+          0.1557954791123699,
+          0.16686684424694095,
+          0.17606375487274076,
+          0.18718338674527,
+          0.1949339857640658,
+          0.20577641160701918,
+          0.213190036208618
+        ]
+      },
+      "scaffold": {
+        "n": 0
+      },
+      "encouragement": {
+        "n": 0
+      },
+      "simplify_problem": {
+        "n": 0
+      },
+      "harder_problem": {
+        "n": 13250,
+        "peak_reward_lag": 20,
+        "peak_reward_value": 0.05031911237462526,
+        "peak_delta_k_lag": 20,
+        "peak_delta_k_value": 0.17707429814850098,
+        "reward_curve": [
+          0.04367380603490049,
+          0.04369655326387026,
+          0.04287655168653225,
+          0.043383360480930055,
+          0.042889638469741156,
+          0.04359905545057628,
+          0.04343524288134591,
+          0.04420285135775976,
+          0.044187321902686635,
+          0.04496211758184181,
+          0.045206508684716554,
+          0.046004361427283126,
+          0.04619166870856958,
+          0.04682824701180967,
+          0.047158917093422306,
+          0.04776116565308503,
+          0.04822869719323692,
+          0.04872355082464922,
+          0.04942183793512663,
+          0.049628517994241485,
+          0.05031911237462526
+        ],
+        "delta_k_curve": [
+          0.0,
+          0.00892863695641319,
+          0.018715962982647986,
+          0.0275777942622257,
+          0.03709549383665267,
+          0.04588121244623657,
+          0.0552280703511275,
+          0.06392667624467081,
+          0.07305704264224122,
+          0.08167619509555919,
+          0.09070837277182492,
+          0.09931791265834297,
+          0.10808853046350728,
+          0.11655933192213223,
+          0.12521702349671604,
+          0.13369324984024705,
+          0.14239134465389855,
+          0.15081806422421384,
+          0.15974658172589026,
+          0.168195998600204,
+          0.17707429814850098
+        ]
+      },
+      "break": {
+        "n": 0
+      },
+      "explanation": {
+        "n": 0
+      },
+      "no_action": {
+        "n": 0
+      }
+    }
+  },
+  "section8_root_cause_ranking": [
+    {
+      "rank": 1,
+      "cause": "Value-function/policy preference for comfort trajectories",
+      "evidence": {
+        "comfort_minus_mastery_prob_on_disagreement_states": -0.11574998385160479,
+        "V_mean_disagreement_states": 5.396270708243052,
+        "comfort_vs_mastery_disagreement_count": 21
+      }
+    },
+    {
+      "rank": 2,
+      "cause": "Delayed credit assignment for mastery actions",
+      "evidence": {
+        "scaffold_gain_h5": 0.018585570708217033,
+        "scaffold_gain_h20": 0.08594440780049772,
+        "harder_gain_h5": 0.02101115959735646,
+        "harder_gain_h20": 0.06176784411186181,
+        "scaffold_peak_delta_k_lag": 20,
+        "harder_peak_delta_k_lag": 20
+      }
+    },
+    {
+      "rank": 3,
+      "cause": "Conservative PPO action probabilities (mastery considered but underweighted)",
+      "evidence": {
+        "scaffold_mean_prob": 0.44795188272283193,
+        "encouragement_mean_prob": 0.21847732880940804,
+        "scaffold_mean_A_hat": -1.5186478858157588,
+        "harder_mean_A_hat": -1.6358161334289698
+      }
+    },
+    {
+      "rank": 4,
+      "cause": "Entropy collapse not primary (moderate stochasticity remains)",
+      "evidence": {
+        "mean_policy_entropy_ppo_eval": 1.445163926464112,
+        "policy_entropy_std_ppo_eval": 0.19758477052817316
+      }
+    },
+    {
+      "rank": 5,
+      "cause": "Mask interaction secondary in this audit",
+      "evidence": {
+        "note": "No mask logic changes; disagreement persists on identical valid masks."
+      }
+    },
+    {
+      "rank": 6,
+      "cause": "Reward interaction contributes but does not fully explain preference",
+      "evidence": {
+        "mean_reward_ppo": 0.07119635628014719,
+        "mean_reward_dqn": 0.04254198674575419,
+        "mean_reward_gap_dqn_minus_ppo": -0.028654369534392994
+      }
+    }
+  ],
+  "final_question_evidence": {
+    "hypothesis_A_cannot_discover_mastery_actions": {
+      "supported": false,
+      "evidence": "PPO assigns non-zero probability to scaffold/harder on disagreement states."
+    },
+    "hypothesis_B_delayed_mastery_rewards": {
+      "supported": true,
+      "evidence": "Peak delta-k for mastery actions tends to occur at positive lags, not always immediate."
+    },
+    "hypothesis_C_value_prefers_comfort_trajectories": {
+      "supported": true,
+      "evidence": "Comfort actions retain higher mean probabilities on disagreement states despite comparable/positive mastery advantages."
+    }
+  }
+}
