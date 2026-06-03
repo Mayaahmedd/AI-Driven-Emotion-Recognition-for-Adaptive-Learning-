@@ -50,381 +50,265 @@ Two recent 2025 studies show that hybrid deep-classical thinking is still alive.
 
 Educational FER has also matured in its target applications. Komaravalli and Janet fine-tuned an Xception-based transfer-learning model on a rebalanced DAiSEE subset and cross-tested it on OL-SFED \cite{komaravalli_detecting_2023}. Gupta and colleagues proposed EDFA, an ensemble that fuses VGG19 and ResNet50 outputs into a rule-based attention index for real-time classroom monitoring, deployed as a web application \cite{gupta_edfa_2023}. Aly combined a ResNet-50 backbone with the Convolutional Block Attention Module and a Temporal Convolutional Network for online student monitoring, reporting throughput of about 28 frames per second on a GPU, 12 on a CPU, and 15 on a Jetson Nano \cite{aly_revolutionizing_2025}, and a follow-up study added a 3D CNN branch with an optimised fusion layer \cite{aly_comprehensive_2025}. Tulsani and colleagues used a hybrid of MTCNN face detection, a Vision Transformer and a BiLSTM inside a learning-management system, with a near-real-time latency of about 0.8 seconds per frame sequence \cite{tulsani_realtime_2025}. Liu and colleagues proposed an adaptive global attention block together with a differential temporal transformer, evaluated on DAiSEE, DFEW and FERV39k, and reported about 11.7 milliseconds per GPU inference \cite{liu_dynamic_2026}. Woolf and colleagues described the Face Readers line of work inside the MathSpring intelligent tutoring system, where attention, head pose and facial cues are used to predict problem-solving outcomes and to trigger real-time interventions \cite{woolf_face_2023}. Together, these examples show that educational FER is no longer only about classification accuracy; it is slowly being connected to the feedback loops of adaptive learning systems.
 
-Taken together, the DAiSEE evidence base evolved through deep-learning baselines, CNN-plus-temporal models, 3D and self-attention architectures, hybrid deep-classical pipelines, EfficientNet-plus-RNN systems, transformer-based detectors and ensemble models, and was complemented by hybrid CNN-and-classical FER work on standard expression datasets. Despite this progress, several limits remain. Datasets for academic emotions are still small and imbalanced; results on the four-level engagement task remain in the low-to-mid sixties even for strong transformer or attention models, and many studies do not use the official DAiSEE split or do not report per-class metrics, which makes head-to-head comparison difficult \cite{abedi_improving_2021,santoni_convolutional_2023,rianto_engagement_2025,shiri_detection_2024,su_leveraging_2024}. Generalisation across cultures and recording conditions remains weak, and visually similar states such as confusion and frustration are still confused \cite{lek_academic_2023,florestiyanto_emotion_2024,vistorte_integrating_2024}. More importantly for this thesis, almost all of the studies above stop at engagement classification, regression or visualisation; very few connect the FER output to a concrete next-task selection or adaptation policy, and live deployment in real classrooms is reported only in a handful of cases. Despite these concerns, facial behaviour remains one of the few signals that can be captured continuously, without attaching sensors to students, without interrupting the lesson, and with hardware that most classrooms and online learners already have. This practical profile is one of the reasons why FER, on its own, continues to be central to recent educational-affect research, and why a webcam-only FER pipeline that is explicitly connected to an adaptive next-task selector still defines an open and useful design point. Table~\ref{tab:fer_comparison} summarises the most relevant FER studies used in this thesis, highlighting their datasets, model designs, target states and practical limitations.
+Taken together, the DAiSEE evidence base evolved through deep-learning baselines, CNN-plus-temporal models, 3D and self-attention architectures, hybrid deep-classical pipelines, EfficientNet plus RNN systems, transformer-based detectors and ensemble models, and was complemented by hybrid CNN-and-classical FER work on standard expression datasets. Despite this progress, several limits remain. Datasets for academic emotions are still small and imbalanced; results on the four-level engagement task remain in the low-to-mid sixties even for strong transformer or attention models, and many studies do not use the official DAiSEE split or do not report per-class metrics, which makes head-to-head comparison difficult \cite{abedi_improving_2021,santoni_convolutional_2023,rianto_engagement_2025,shiri_detection_2024,su_leveraging_2024}. Generalisation across cultures and recording conditions remains weak, and visually similar states such as confusion and frustration are still confused \cite{lek_academic_2023,florestiyanto_emotion_2024,vistorte_integrating_2024}. More importantly for this thesis, almost all of the studies above stop at engagement classification, regression or visualisation; very few connect the FER output to a concrete next-task selection or adaptation policy, and live deployment in real classrooms is reported only in a handful of cases. Despite these concerns, facial behaviour remains one of the few signals that can be captured continuously, without attaching sensors to students, without interrupting the lesson, and with hardware that most classrooms and online learners already have. This practical profile is one of the reasons why FER, on its own, continues to be central to recent educational-affect research, and why a webcam-only FER pipeline that is explicitly connected to an adaptive next-task selector still defines an open and useful design point. Table~\ref{tab:fer_comparison} summarises representative DAiSEE-based FER studies for benchmark comparison. The table spans two landscape pages: the first lists each study, dataset, and task; the second gives the full architecture description and evaluation metrics for the same studies.
 
 
 
 \clearpage
+\newgeometry{left=3.2cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+% --- Table~\ref{tab:fer_comparison} part 1: study descriptors (landscape page 1) ---
 \begin{landscape}
 \thispagestyle{empty}
-\small
-\setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{1.1}
-\begin{longtable}{>{\RaggedRight\arraybackslash}p{2.7cm}
-                  >{\RaggedRight\arraybackslash}p{1.7cm}
-                  >{\RaggedRight\arraybackslash}p{2.3cm}
-                  >{\RaggedRight\arraybackslash}p{2.9cm}
-                  >{\RaggedRight\arraybackslash}p{1.5cm}
-                  >{\RaggedRight\arraybackslash}p{2.0cm}
-                  >{\RaggedRight\arraybackslash}p{3.0cm}
-                  >{\RaggedRight\arraybackslash}p{3.2cm}}
-\caption{Comparison of key FER studies relevant to this thesis}
+\vspace*{-0.5cm}
+\large
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{0.16\linewidth}
+                  >{\RaggedRight\arraybackslash}p{0.14\linewidth}
+                  >{\RaggedRight\arraybackslash}p{0.66\linewidth}}
+\caption{Comparison of representative DAiSEE-based FER studies}
 \label{tab:fer_comparison} \\
 
 \toprule
-\textbf{Paper} & \textbf{Dataset} & \textbf{Output labels} & \textbf{Model / Method} & \textbf{Temporal} & \textbf{Main result} & \textbf{Strength / Limitation} & \textbf{Relevance to thesis} \\
+\textbf{Study} & \textbf{Dataset} & \textbf{Task} \\
 \midrule
 \endfirsthead
 
 \toprule
-\textbf{Paper} & \textbf{Dataset} & \textbf{Output labels} & \textbf{Model / Method} & \textbf{Temporal} & \textbf{Main result} & \textbf{Strength / Limitation} & \textbf{Relevance to thesis} \\
+\textbf{Study} & \textbf{Dataset} & \textbf{Task} \\
 \midrule
 \endhead
 
 \bottomrule
 \endfoot
 
-
-
-
-
-
-\makecell[l]{Asaju and\\ Vadapalli\\ (2021) \cite{asaju_affects_2021}} &
-DAiSEE, DISFA+ &
-Boredom, Confusion, Frustration, Engagement &
-ResNet-50 + Bi-directional LSTM &
-Yes &
-88\% test accuracy &
-Temporal modelling is a strength; DAiSEE split not clearly reported &
-Relevant as an early FER-only temporal approach for learning-related emotions \\
-
-\makecell[l]{Asaju and\\ Vadapalli\\ (2022)  \cite{asaju_adaptive_2022}} &
-DAiSEE, DISFA+ &
-Boredom, Confusion, Frustration, Engagement; mapped to positive / negative / neutral &
-ResNet-152 + Bi-LSTM &
-Yes &
-86\% accuracy on DAiSEE; average F1 = 0.87 &
-Strong pedagogical mapping; reasoning layer still limited &
-Important because it connects FER output to adaptive feedback logic \\
-
-\makecell[l]{Mehta et al.\\ (2022) \cite{mehta_three-dimensional_2022}} &
-DAiSEE, EmotiW-EP &
-Boredom, Engagement, Confusion, Frustration &
-3D DenseNet-121 + Self-Attention &
-Yes &
-63.59\% four-class engagement accuracy; 94.78\% binary &
-Handles temporal data and label imbalance; some classes remain difficult &
-Useful for video-based FER and temporal modelling in education \\
-
-\makecell[l]{Liu et al.\\ (2026) \cite{liu_dynamic_2026}} &
-DAiSEE, DFEW, FERV39k &
-Boredom, Confusion, Engagement, Frustration &
-ResNet18 + Adaptive Global Attention + DTFormer &
-Yes &
-62.56\% accuracy on DAiSEE &
-Efficient inference and advanced temporal modelling; no demographic bias analysis &
-Useful as a modern dynamic FER model for subtle academic emotions \\
-
-\makecell[l]{Komaravalli and\\ Janet\\ (2023) \cite{komaravalli_detecting_2023}} &
-Customized DAiSEE, OL-SFED &
-Boredom, Engagement, Confusion, Frustration &
-Xception-based transfer learning &
-No &
-Frustration 91.87\%, Confusion 83.76\% &
-Robust under noisy online conditions; no temporal modelling &
-Useful for realistic online learning FER settings \\
-
-\makecell[l]{Rao et al.\\ (2021)\cite{rao_recognition_2021}} &
-DAiSEE, JAFFE, CK+ &
-Engagement, Frustration, Boredom, Confusion &
-Hybrid CNN + landmarks + SVM &
-No &
-53.42\% accuracy on DAiSEE &
-Feature fusion helps, but overall accuracy is low &
-Useful as an early FER-only baseline in e-learning \\
-
-\makecell[l]{Leong\\ (2020)\cite{leong_deep_2020}} &
+\makecell[l]{Gupta et al.\\ (2016) \cite{gupta_daisee_2016}} &
 DAiSEE &
-Boredom, Frustration &
-FaceNet + LSTM / Landmark distances + LSTM &
-Yes &
-Best reported accuracy: 70.67\% for frustration &
-Focus on real-time efficiency; only two categories predicted &
-Useful for lightweight FER in adaptive tutoring contexts \\
-
-
-
-
-
-
-
-
-
-
-
-
-\makecell[l]{Gupta et al.\\ (2016, arXiv) \cite{gupta_daisee_2016}} &
-DAiSEE &
-Boredom, Engagement, Confusion, Frustration; 4 ordinal levels &
-InceptionNet (frame / video), C3D, LRCN; benchmark &
-Yes (LRCN, C3D) &
-LRCN top-1 accuracy: Bored. 53.7\%, Eng. 57.9\%, Conf. 72.3\%, Frust. 73.5\% &
-Introduces DAiSEE; arXiv preprint; demographic narrow; class imbalance &
-Foundational benchmark for educational FER \\
+4 academic states, 4 ordinal levels \\
 
 \makecell[l]{Abedi and Khan\\ (2021) \cite{abedi_improving_2021}} &
 DAiSEE &
-4-class engagement &
-ResNet-18 + dilated TCN; weighted cross-entropy &
-Yes &
-63.9\% four-class engagement accuracy &
-arXiv preprint; minority classes still poor; no real-time/F1 reported &
-Strong CNN+temporal baseline on the official-style split \\
+4-class engagement classification \\
 
-\makecell[l]{Mandia et al.\\ (2022) \cite{mandia_vision_2022}} &
-DAiSEE &
-4-class engagement &
-Vision Transformer with multi-head attention; imbalance-aware losses &
-Yes (transformer over frames) &
-$\approx$55.18\% overall accuracy; reportedly +8--8.78 pp over Gupta et al.\ baselines &
-Closed access -- limited verification; methodology not fully checked &
-Early transformer baseline on DAiSEE \\
-
-\makecell[l]{Santoni et al.\\ (2023) \cite{santoni_convolutional_2023}} &
-DAiSEE (custom subset) &
-4-class engagement &
-OpenFace features (landmarks, AUs, head pose, gaze) + PCA/SVD + SMOTE + CNN &
-No (per-frame features, not video clip CNN) &
-Best max accuracy 77.97\% (SVD+CNN); avg.\ F1 0.78 &
-Custom resampled subset, not the official DAiSEE split; not directly comparable &
-Representative hybrid deep-classical pipeline for class imbalance \\
-
-\makecell[l]{Mukhiddinov et al.\\ (2023) \cite{mukhiddinov_masked_2023}} &
-AffectNet (masked) &
-7 basic emotions &
-MediaPipe landmarks + HOG + custom CNN (BatchNorm, Mish) &
-No &
-69.3\% overall accuracy on AffectNet &
-Not DAiSEE; basic emotions; head-pose limitations &
-Example of hybrid landmark+HOG+deep FER (general FER context) \\
-
-\makecell[l]{Shiri et al.\\ (2024) \cite{shiri_detection_2024}} &
-DAiSEE &
-4-class engagement &
-EfficientNetV2-L + \{GRU, Bi-GRU, LSTM, Bi-LSTM\} &
-Yes (RNN) &
-Best 62.11\% accuracy (EfficientNetV2-L + LSTM) &
-Per-class metrics not reported; large backbone; no real-time test &
-Recent CNN+RNN comparison point \\
-
-\makecell[l]{Tian et al.\\ (2024) \cite{tian_predicting_2024}} &
+\makecell[l]{Mehta et al.\\ (2022) \cite{mehta_three-dimensional_2022}} &
 DAiSEE, EmotiW-EP &
-Engagement (regression) &
-Sequential ensemble model &
-Yes (sequential) &
-MSE 0.0386 on DAiSEE; 0.0610 on EmotiW-EP &
-Closed access -- limited verification; method details not confirmed &
-Ensemble baseline for engagement regression \\
+4 academic states + engagement regression \\
 
 \makecell[l]{Su, He, Luo\\ (2024) \cite{su_leveraging_2024}} &
 DAiSEE, EmotiW-EP &
-4-class engagement (DAiSEE), regression (EmotiW-EP) &
-PANet (ResNet-18 + part attention) + STformer (3D CNN + multi-head transformer) &
-Yes (3D + transformer) &
-64.0\% accuracy on DAiSEE; MSE 0.0729 on EmotiW-EP &
-DAiSEE split not tabulated; not deployed; FER-only &
-Strong transformer-based DAiSEE baseline \\
+4-class engagement (DAiSEE); regression (EmotiW-EP) \\
+
+\makecell[l]{Liu et al.\\ (2026) \cite{liu_dynamic_2026}} &
+DAiSEE, DFEW, FERV39k &
+4 academic states (in-the-wild video FER) \\
 
 \makecell[l]{Rianto et al.\\ (2025) \cite{rianto_engagement_2025}} &
-DAiSEE (engagement only) &
-4-class engagement &
-68 landmarks $\rightarrow$ Delaunay graph $\rightarrow$ GCN + 52 action units $\rightarrow$ 1D CNN; LDAM loss &
-No (per-frame graph + AU streams) &
-Best 52.24\% accuracy; macro-F1 0.49 (LDAM) &
-Authors note model often predicts only majority classes &
-Hybrid landmark/graph + AU + CNN approach to imbalance \\
+DAiSEE &
+4-class engagement; imbalance-focused \\
 
-\makecell[l]{T\"urke\c{s} and Ayd\i n\\ (2025) \cite{turkes_enhanced_2025}} &
-CK+48 (also JAFFE narrative) &
-6 basic emotions &
-Pretrained ResNet-50 features + SVM (RBF) classifier &
-No &
-100\% accuracy on CK+48; 100\% on JAFFE (narrative) &
-Not DAiSEE; small controlled dataset; train/test split not detailed &
-Example of hybrid deep+SVM FER (general FER context) \\
-
-  \end{longtable}
+\end{longtable}
 \end{landscape}
+
+% --- Table~\ref{tab:fer_comparison} part 2: architecture and metrics (landscape page 2) ---
+\clearpage
+\begin{landscape}
+\thispagestyle{empty}
+\vspace*{-0.5cm}
+\large
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.2}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{0.14\linewidth}
+                  >{\RaggedRight\arraybackslash}p{0.58\linewidth}
+                  >{\RaggedRight\arraybackslash}p{0.24\linewidth}}
+\multicolumn{3}{l}{\textit{Table~\ref{tab:fer_comparison} (continued): architectural details and evaluation metrics.}} \\[0.4em]
+
+\toprule
+\textbf{Study} & \textbf{Architecture} & \textbf{Evaluation Metric(s)} \\
+\midrule
+\endfirsthead
+
+\multicolumn{3}{l}{\textit{Table~\ref{tab:fer_comparison} (continued).}} \\[0.4em]
+\toprule
+\textbf{Study} & \textbf{Architecture} & \textbf{Evaluation Metric(s)} \\
+\midrule
+\endhead
+
+\bottomrule
+\multicolumn{3}{p{0.98\linewidth}}{\textit{Note.} Each architecture entry summarises the full pipeline as reported by the original study. Metrics are reported as published; four-class engagement accuracy, per-class accuracy, and regression MSE are not directly comparable across rows. Abbreviations: B, boredom; E, engagement; C, confusion; F, frustration.} \\
+\endfoot
+
+\makecell[l]{Gupta et al.\\ (2016)} &
+Backbone: InceptionNet (frame/video), C3D (3D CNN), LRCN (CNN encoder).\newline
+Temporal: 3D convolution (C3D) or CNN+LSTM (LRCN).\newline
+Attention: none.\newline
+Classification: per-state ordinal top-1 (4 labels). &
+Per-class top-1 acc.\ (LRCN): B 53.7\%, E 57.9\%, C 72.3\%, F 73.5\% \\
+
+\makecell[l]{Abedi and Khan\\ (2021)} &
+Backbone: ResNet-18 (ImageNet-pretrained).\newline
+Temporal: dilated TCN over frame features.\newline
+Attention: none.\newline
+Classification: 4-class softmax; weighted cross-entropy and balanced-batch sampling. &
+63.9\% 4-class acc. \\
+
+\makecell[l]{Mehta et al.\\ (2022)} &
+Backbone: 3D DenseNet-121.\newline
+Temporal: 3D convolution (tube modelling).\newline
+Attention: spatial, temporal, and hybrid non-local self-attention blocks.\newline
+Classification: 4-class + regression heads; class-balanced focal and CB-MSE losses. &
+63.59\% 4-class acc.; MSE 0.0347 (regression) \\
+
+\makecell[l]{Su, He, Luo\\ (2024)} &
+Backbone: ResNet-18 patches (PANet) + 3D CNN tube tokenizer (STformer).\newline
+Temporal: 3D CNN tubes + transformer encoder.\newline
+Attention: part-sensitive spatial attention + multi-head self-attention; late fusion.\newline
+Classification: 4-class engagement / regression; dual-branch fusion head. &
+64.0\% 4-class acc.\ (DAiSEE); MSE 0.0729 \\
+
+\makecell[l]{Liu et al.\\ (2026)} &
+Backbone: ResNet-18.\newline
+Temporal: Differential Temporal Transformer (DTFormer).\newline
+Attention: Adaptive Global Attention block.\newline
+Classification: 4-class softmax over fused spatiotemporal features. &
+62.56\% acc.\ on DAiSEE \\
+
+\makecell[l]{Rianto et al.\\ (2025)} &
+Backbone: Delaunay GCN on 68 landmarks + 1D-CNN on 52 action units (bimodal).\newline
+Temporal: none (per-frame streams).\newline
+Attention: none.\newline
+Classification: 4-class engagement; LDAM imbalance-aware loss. &
+52.24\% acc.; macro-F1 0.49 \\
+
+\end{longtable}
+\end{landscape}
+\restoregeometry
 \clearpage
 
 \section{Adaptive Learning Systems}\label{sec:adaptive_learning_systems}
 
-While the previous section focused on recognising learner states through facial behaviour, adaptive learning systems focus on deciding how instruction should respond to learner needs. These systems are digital tools that change how they teach depending on the individual learner. Instead of presenting the same material in the same order to every student, they adjust things like the content, the pace, the difficulty of the tasks, the feedback given after each answer, hints, and presentation format \cite{strielkowski_span_2025}. A common way to describe this behaviour is as a closed loop: the system collects data from the learner, uses that data to judge how the learner is progressing, and then decides what to show next \cite{gligorea_adaptive_2023}. Reviews of intelligent tutoring systems stress that adaptation is not limited to picking the next exercise: the tutor model may also schedule scaffolding, remediation, motivational messages, interface changes, and assessment pacing \cite{zerkouk_comprehensive_2025}. The goal is to give each learner tasks that match their current level, so that they can keep improving without feeling bored or overwhelmed \cite{zerkouk_comprehensive_2025}.
+While the previous section focused on recognising learner states through facial behaviour, adaptive learning systems focus on deciding how instruction should respond to learner needs. These systems are digital tools that change how they teach depending on the individual learner. Instead of presenting the same material in the same order to every student, they adjust things like the content, the pace, the difficulty of the tasks, the feedback given after each answer, hints, and presentation format \cite{strielkowski_span_2025}. A common way to describe this behaviour is as a closed loop: the system collects data from the learner, uses that data to judge how the learner is progressing, and then decides what to show next \cite{gligorea_adaptive_2023}. Reviews of intelligent tutoring systems stress that adaptation is not limited to picking the next exercise: the tutor model may also schedule scaffolding, remediation, motivational messages, interface changes, and assessment pacing. The goal is to give each learner tasks that match their current level, so that they can keep improving without feeling bored or overwhelmed \cite{zerkouk_comprehensive_2025}.
 
-Early adaptive systems focused on explicit rules written by experts. These were called intelligent tutoring systems (ITS), and examples such as GUIDON and the LISP Tutor were built in the 1980s around hand-crafted if--then rules that decided when to give a hint, when to move on, and when to mark a concept as learned \cite{zerkouk_comprehensive_2025}. The strength of these systems was that their decisions were transparent and easy to explain, but the rules had to be prepared for every topic, which made them hard to extend beyond a single subject. Rule-based logic has not disappeared, though. Sayed et al., for example, used a small set of threshold rules based on a student's penalised grade to move an exercise up or down in difficulty inside an online platform for third-grade mathematics \cite{sayed_ai-based_2023}.
+Early adaptive systems focused on explicit rules written by experts. These were called intelligent tutoring systems (ITS), and examples such as GUIDON and the LISP Tutor were built in the 1980s around hand-crafted if--then rules that decided when to give a hint, when to move on, and when to mark a concept as learned . The strength of these systems was that their decisions were transparent and easy to explain, but the rules had to be prepared for every topic, which made them hard to extend beyond a single subject. Rule-based logic has not disappeared, though. Sayed et al., for example, used a small set of threshold rules based on a student's penalised grade to move an exercise up or down in difficulty inside an online platform for third-grade mathematics \cite{sayed_ai-based_2023}.
 
 Later work introduced student models that tried to estimate what each learner already knew. Instead of relying only on teacher-written rules, these systems built a picture of the learner from their interaction history and updated it after every answer \cite{zerkouk_comprehensive_2025}. This line of research eventually led to knowledge tracing methods, in which the system predicts how likely the learner is to answer the next question correctly based on their earlier answers. Pardos and colleagues showed that year-long patterns of boredom, engaged concentration, confusion, and gaming-the-system behaviour in ASSISTments logs correlate with end-of-year mathematics test scores \cite{Pardos2014AffectiveStatesStateTests}. Kuling and Zitnik built a recent exercise recommender that tries to pick questions just above the learner's current level \cite{kuling_ken_2025}. Educational psychologists call this range the Zone of Proximal Development: the set of tasks that are challenging but still reachable. Their system ranks candidate questions by predicted difficulty and then chooses items around the 66th percentile, so that the next exercise is hard but not impossible \cite{kuling_ken_2025}.
 
-Over time, researchers began to treat task selection as a decision problem that could be learned from experience. Reinforcement learning (RL) then became a common tool for this. In RL, the system tries different actions, observes the results, and slowly learns which actions lead to better outcomes. Azoulay et al. compared several adaptation methods within the same simulated environment. The study tested different reinforcement learning algorithms, a bandit-style method, and a Bayesian approach that keeps a probability estimate of each learner's ability \cite{azoulay_adaptive_2021}. The Bayesian method reached about 89 to 93 percent of the performance of an ideal algorithm that already knew each student's real ability, while the reinforcement learning methods reached lower but still useful levels \cite{azoulay_adaptive_2021}. The study has become an important reference because it placed very different adaptation families on equal ground, and later work built on its baselines \cite{perez_emotions_2024}.
+Over time, researchers began to treat task selection as a decision problem that could be learned from experience. Reinforcement learning (RL) then became a common tool for this. In RL, the system tries different actions, observes the results, and slowly learns which actions lead to better outcomes. Azoulay et al. compared several adaptation methods within the same simulated environment. The study tested different reinforcement learning algorithms, a bandit-style method, and a Bayesian approach that keeps a probability estimate of each learner's ability \cite{azoulay_adaptive_2021}. The Bayesian method reached about 89 to 93 percent of the performance of an ideal algorithm that already knew each student's real ability, while the reinforcement learning methods reached lower but still useful levels \cite{azoulay_adaptive_2021}. The study has become an important reference because it placed very different adaptation families on equal ground, and later adaptive tutoring work extended these baselines \cite{kubotani_rltutor_2021,fu_integrating_2025}.
 
-More recent studies have combined knowledge tracing with reinforcement learning. Fu proposed RL-DKT, a system that first uses a deep knowledge tracing model to estimate the learner's current knowledge state, and then uses a reinforcement learning agent to choose the next task from that estimate \cite{fu_integrating_2025}. Fu tested the method on real learner logs from well-known datasets such as ASSISTments, KDD Cup 2010, and Cognitive Tutor, and reported AUC of 0.874, F1 of 0.812, average completion time of 34.5 minutes, and dropout of 3.2\% \cite{fu_integrating_2025}. Sayed et al. followed a different mix, using a Deep Q-Network to choose how to present the learning content while still using simple rules to move between difficulty levels, and reported learning gains in a small pilot with grade-three mathematics students \cite{sayed_ai-based_2023}. Other studies have used reinforcement learning mainly to decide when and how to give feedback or hints during a session \cite{deshmukh_developing_2025,guzman_developing_2025}. Guzman and Cruz-Mercado, for example, trained a Proximal Policy Optimisation agent that selects problems, hints, and instructional review, and reported normalised learning gains of 0.72 versus 0.58 for a rule-based tutor in a study of ninety introductory Python learners \cite{guzman_developing_2025}. Taken together, these works show that adaptation is increasingly treated as a step-by-step decision problem over tasks, hints, feedback, pacing, or review, in which each chosen action builds on what the learner has done so far.
+After Azoulay et al.\ showed in 2021 that tutoring adaptation could be studied as a sequential decision problem inside a shared simulator, the next step was to ask whether a policy could be trained against an explicit learner model rather than only compared as a fixed algorithm \cite{azoulay_adaptive_2021,kubotani_rltutor_2021}. Kubotani et al.\ (2021) addressed spaced review scheduling, where the tutor must decide which previously studied item to present before forgetting occurs. They replaced live learners with a DAS3H-based mathematical student model and trained a Proximal Policy Optimisation agent to select review items over 30 items across 15 days and 30 sessions. The state came from estimated memory rates produced by the inner student model, and the action space selected the next item to review. Evaluation used only the mathematical simulator and compared RLTutor against random, Leitner, and threshold teachers; RLTutor maintained higher average retention in early sessions, although the gap narrowed later. The study matters because it shows why synthetic learners appear before classroom deployment, but its student model was still narrow and its action space was limited to review selection rather than full tutoring control.
 
-From 2024, several systems began to close the loop from sensed affect to more than difficulty alone. Pérez et al. used valence and arousal from facial expressions as implicit feedback for a Q-learning difficulty controller \cite{perez_emotions_2024}. Govea and colleagues proposed a deeper variant, in which a Proximal Policy Optimisation agent adapted pace, difficulty and activity type based on a multimodal state that combined face, voice and wrist biometrics \cite{govea_implementation_2024}. Gong described a similar multimodal architecture for e-learning, built around a Deep Q-Network that adjusts difficulty through Item Response Theory, pacing through a Markov-modulated policy and content format between visual, auditory and textual, as well as hints and motivational feedback \cite{gong_design_2025}. Kong and colleagues combined facial expression, voice, heart-rate variability, electrodermal activity and optional electroencephalography into a single joint state of cognitive load and achievement emotions, and a contextual bandit with a Deep Q-Network back end selected interventions such as worked examples, scaffolds, pacing changes or motivational feedback \cite{kong_real-time_2025}. Their randomised evaluation with two hundred and seventy-one learners, in both laboratory and classroom settings, is one of the strongest current examples of a fully working emotion-aware adaptive tutor \cite{kong_real-time_2025}. A scoping review by Fernández-Herrero, also from 2024, confirmed that scaffolding, content adaptation, difficulty, and feedback remain the dominant pedagogical responses when emotion is sensed \cite{fernandez-herrero_evaluating_2024}. These systems are the closest predecessors to an emotion-aware reinforcement-learning tutor, but they either rely on simulation, on static expression corpora, or on sensor stacks that are difficult to deploy in ordinary online classrooms. How these emotion-aware ideas have been put into practice, and how they connect to the adaptive methods described here, is the focus of the next section.
+The same year, Jezuina Koroveshi and Ktona (2021) moved closer to the architecture used in the present thesis by training a pedagogical module with a Deep Q-Network in a Python intelligent tutoring system \cite{jezuina_koroveshi_training_2021}. Their educational problem was lesson sequencing: the tutor had to decide whether a learner should remain in the current lesson or advance after concept mastery. The state was a binary vector encoding the active lesson, the concepts taught in that lesson, and the concepts already learned by the simulated student. The student model was a simple simulated learner with a fixed learning probability of 0.7, where each taught concept was learned or missed according to that probability. The action space contained two choices: stay in the current lesson or move to the next lesson. The reward function gave $+10$ when the action matched the mastery condition and $-10$ when it did not. Training used DQN with experience replay, a target network, batch size 64, discount factor $\gamma=0.85$, and epsilon decay over up to 4{,}000 episodes in two scenarios, one with empty prior knowledge and one with random prior knowledge. Evaluation reported episode reward and episode length curves over 100 test episodes, but did not compare against a rule-based tutor baseline. This paper is the earliest clear DQN tutoring design in the set reviewed here, although its state did not include knowledge tracing or engagement sensing.
 
-Very recent work extends adaptive tutoring toward generative AI and standardised evaluation. Meng and Yang describe a multi-agent tutor in which Proximal Policy Optimisation selects interventions while neural knowledge tracing and an engagement model track mastery and participation \cite{meng_self-evolving_2025}. Gutierrez, Villegas-Ch and Govea moved to the language-model era with a conversational assistant that adapts feedback, difficulty and communication tone from chat messages \cite{gutierrez_development_2025}. A recent testbed called TutorGym was built to make step-level benchmarking easier and more comparable across studies \cite{weitekamp_tutorgym_2025}.
+By 2023, the question shifted from whether DQN could train in simulation to whether any part of the tutoring policy could survive contact with a real classroom. Sayed et al.\ (2023) built the APPEAL platform for grade-three mathematics and split adaptation into two decision layers \cite{sayed_ai-based_2023}. Exercise difficulty and navigation were controlled by an online rule-based algorithm using penalised grades, attempts, and hints across Bloom taxonomy levels. Content presentation was handled separately by a Deep Q-Network formulated as a Markov decision process over student interaction traces. The DQN state included time spent per lesson, exercise scores, hint use, and repeated attempts within taxonomy levels and difficulty bands. The action space encoded VARK presentation modes as four binary switches that showed or hid visual, aural, read/write, and kinesthetic material. The reward combined academic improvement with savings in time, hints, and attempts. Training used DQN with experience replay; live evaluation ran for two months with 26 learners and reported post-test gains relative to pre-test, with the largest improvements for students who started with lower performance. The study shows that DQN can operate inside a deployed school platform, but only for presentation choice, not for full tutoring control, and the sample remained small.
 
-Evaluating adaptive systems is difficult, because running long classroom studies with many learners is expensive and slow. To deal with this, many studies first test their methods in simulators or on stored learner logs before any live deployment. Azoulay et al. used an artificial environment with 10{,}000 simulated runs to compare adaptation algorithms against a theoretical upper bound \cite{azoulay_adaptive_2021}. Pérez et al. followed a similar style, running 1{,}000 simulations over 200 tasks to compare their approach against earlier reinforcement learning baselines \cite{perez_emotions_2024}. Studies such as those by Fu and by Kuling and Zitnik instead use offline learner datasets and report standard metrics like prediction accuracy and ranking scores on real interaction logs \cite{fu_integrating_2025,kuling_ken_2025}. When live testing is possible, it still tends to be small: Kuling and Zitnik ran a thirteen-week classroom deployment with 38 graduate students \cite{kuling_ken_2025}, and Sayed et al. reported a two-month pilot with 26 grade-three learners \cite{sayed_ai-based_2023}. These practical evaluation approaches matter because they let researchers compare methods and build confidence in them before committing to a full classroom study.
+Once DQN tutors existed both in simulation and in partial live deployment, the next development in 2025 was to strengthen the student model before policy learning. Fu (2025) proposed RL-DKT, which uses a recurrent dynamic knowledge tracing network to estimate skill mastery and a REINFORCE agent to select the next task from offline logs \cite{fu_integrating_2025}. The educational problem was learning-path sequencing rather than live hint or feedback control. The state was the DKT hidden vector updated after each response; the action space was the set of candidate tasks available at each step; and the reward combined correctness, task difficulty, and progress terms rather than a single binary outcome. Evaluation used ASSISTments, KDD Cup 2010, and Cognitive Tutor logs and reported AUC of 0.874, F1 of 0.812, average completion time of 34.5 minutes, dropout of 3.2\%, and a reported 12.5\% reduction in completion time relative to baselines. RL-DKT is not a DQN tutor, but it clarified an important design pattern for this thesis: separate student modelling from policy optimisation. Its limitation is offline replay rather than an online tutor loop with synthetic or live students.
 
-Despite the variety of methods, the main strengths of adaptive learning systems are fairly consistent across the literature. They can keep each learner close to a suitable level of challenge, deliver feedback faster than a human teacher could in a large class, and support thousands of learners at once \cite{gligorea_adaptive_2023}. Large commercial platforms such as Knewton, Carnegie Learning's MATHia, DreamBox, and Smart Sparrow already use these ideas to deliver personalised mathematics and other subjects at scale \cite{strielkowski_span_2025}. Reviews of the field agree that these systems offer clear benefits for engagement and performance when content is well structured and adaptation signals are rich enough \cite{gligorea_adaptive_2023,zerkouk_comprehensive_2025}.
+Guzman and Cruz-Mercado (2025) extended that pattern with a larger action space and a two-stage evaluation design \cite{guzman_developing_2025}. Their RL-Tutor system targeted introductory Python skill development. A Dynamic Key-Value Memory Network maintained the student model from correctness, response time, and attempts, producing a knowledge-tracing vector concatenated with recent learning-object context and session meta-features such as consecutive errors and hint requests. A Proximal Policy Optimisation agent then selected hierarchical actions: problem versus instructional page versus review quiz, difficulty level, target skill, hint type, and pacing decision. The reward combined performance, efficiency, learning gain, engagement, and retention terms. Because online RL sample collection is slow, the agent was first trained for about 400{,}000 steps against 10{,}000 synthetic students and then tested in a between-subjects study with 90 human learners against rule-based and static tutors. Simulated mean cumulative reward reached $315 \pm 22$ versus $205 \pm 15$ for the rule-based tutor ($p<0.001$). Live normalised learning gain was 0.72 for RL-Tutor, 0.58 for the rule-based tutor, and 0.45 for the static tutor ($p<0.01$), with similar retention advantages one week later. This study improved both the student model and the action space, but it used PPO rather than DQN and still inferred engagement only from behaviour, not from facial signals.
 
-Despite these strengths, the signals that drive the adaptation are still quite narrow. In most of the studies discussed above, the system decides what to show next based only on what the learner did: whether the answer was correct, how long the answer took, how many hints were used, and which items were clicked \cite{azoulay_adaptive_2021,fu_integrating_2025,kuling_ken_2025}. Even when tutors adjust pacing, feedback, or presentation format, the richest multimodal designs still depend on sensors beyond an ordinary webcam \cite{govea_implementation_2024,kong_real-time_2025,gong_design_2025}. How the learner feels during the task, whether they are confused, bored, or frustrated, rarely enters the decision. Azoulay et al. themselves acknowledge this gap, noting that their simulation could check whether the algorithm picked the right difficulty, but could not reflect the learners' satisfaction, motivation, or real learning gain \cite{azoulay_adaptive_2021}. A recent comprehensive review of AI-based intelligent tutoring systems lists affective computing as one of the main open challenges for the field, adding that these systems are still less proficient than human tutors at interpreting students' emotional states \cite{zerkouk_comprehensive_2025}. A recent scoping review reports that more researchers are now trying to add emotion as an additional input channel in intelligent tutoring systems \cite{fernandez-herrero_evaluating_2024}. How these emotion-aware ideas have been put into practice, and how they connect to the adaptive methods described here, is the focus of the next section. To summarise the most relevant adaptive learning studies discussed in this section, Table~\ref{tab:adaptive_systems_comparison} compares their adaptation targets, input signals, decision methods, evaluation settings, main reported results, and relevance to the present thesis.
+The most recent DQN work in this line returns to large-scale synthetic evaluation. Zou and Xiong (2026) built a Double DQN path optimiser for a knowledge-graph curriculum with 537 nodes and 1{,}243 relations \cite{zou_deep_2026}. The state represented learner mastery and progress over the graph; the action space selected the next course item; and the reward combined learning effectiveness, time cost, and knowledge coverage. Training used experience replay and epsilon-greedy exploration in a simulation with 5{,}000 virtual learners. The system reached an 87.3\% completion rate, mastery of 0.823, and outperformed random, collaborative-filtering, and standard Q-learning baselines. For beginner learners, average mastery rose from 0.512 to 0.789 in ablation analysis. This paper is the strongest recent example of DQN plus synthetic cohort evaluation, but it optimises path order rather than hints, feedback, or pacing, and it was not followed by a classroom study.
+
+Viewed across these dates, the DQN tutoring line changed in a clear order. Jezuina Koroveshi and Ktona (2021) first mapped lesson progression to DQN actions in a simulated Python tutor with a simple mastery vector and a fixed reward table \cite{jezuina_koroveshi_training_2021}. Sayed et al.\ (2023) kept DQN for presentation only and left difficulty to rules, which reduced the learned portion of the policy but provided rare live-school evidence \cite{sayed_ai-based_2023}. Zou and Xiong (2026) then moved to Double DQN with a structured knowledge-graph state and 5{,}000 virtual learners, improving scale but narrowing the problem to path selection \cite{zou_deep_2026}. What improved over time was the realism of evaluation settings and the richness of student models in hybrid systems such as RL-DKT and RL-Tutor \cite{fu_integrating_2025,guzman_developing_2025}. What remained unresolved was a DQN tutor that combines an explicit student model, a multi-action pedagogical policy, and reusable synthetic evaluation without splitting control across rules and learned components.
+
+\subsection{Simulation, Synthetic Students, and the Ethics of Live Policy Learning}\label{subsec:synthetic_student_evaluation}
+
+Deep reinforcement-learning tutors need far more interactions than a classroom can supply during policy development. Dulac-Arnold and colleagues argue that learning on a live system must be both sample-efficient and quickly performant, because exploratory actions on real users are rarely without consequence \cite{dulacarnold_challenges_2021}. Sanz Ausin and colleagues report the same barrier in educational settings: tabular and deep Q-learning methods that succeed in Atari-style benchmarks can require hundreds of millions of environment steps, whereas their offline ITS corpus contained fewer than 800 complete student trajectories \cite{sanz_ausin_leveraging_2019}. Kubotani et al.\ reach the same conclusion for adaptive review scheduling and therefore train PPO against a virtual student model rather than against live learners \cite{kubotani_rltutor_2021}. Li's practice-oriented survey adds that most RL algorithms remain sample intensive and that exploration can produce risky policies when the environment is a real user \cite{li_reinforcement_2022}. Together, these sources show that educational RL cannot treat a classroom as the primary training environment.
+
+The difficulty is not only statistical but also pedagogical. During online learning, a tutor must try actions whose value is still uncertain, and Dulac-Arnold et al.\ stress that such exploratory actions on production systems often carry immediate cost \cite{dulacarnold_challenges_2021}. Reward functions in tutoring are easy to misspecify: a proxy that overweights engagement can produce policies that look successful while producing little learning. Olukola and Rahimi formalize this risk as pedagogical reward hacking and show in a simulated Python tutor that an engagement-heavy policy can reach high measured reward with negligible mastery gain, whereas architectural safety constraints reduce their Reward Hacking Severity Index from 0.317 to 0.102 \cite{olukola_pedagogical_2026}. Dulac-Arnold et al.\ also note that safety violations may be very rare in operational logs and that real systems often lack a clean separation between training and evaluation, which makes harmful tutoring policies hard to detect once they are deployed \cite{dulacarnold_challenges_2021}. Poor reward design is therefore a learning-risk problem, not only a modeling problem.
+
+Researchers therefore distinguish between training an exploratory policy on real students and evaluating a fixed policy on real students under ethical approval. Sanz Ausin et al.\ state explicitly that learning policies while interacting with students may not be feasible and, more importantly, may not be ethical, and they adopt offline deep RL on historical logs before deploying a selected policy in randomized classroom studies \cite{sanz_ausin_leveraging_2019}. Guzman and Cruz-Mercado follow a related two-stage pattern: roughly 400{,}000 PPO training steps on 10{,}000 synthetic students generated from a DKVMN model, followed by a between-subjects study with 90 human learners \cite{guzman_developing_2025}. Sayed et al.\ keep difficulty adaptation under rules and reserve DQN for presentation choice in a two-month school pilot with 26 learners, which limits how much of the policy is learned online \cite{sayed_ai-based_2023}. None of these studies claim that classroom research is unethical; they show instead that exploratory policy learning belongs in simulation, offline logs, or tightly bounded pilots, while formal human evaluation is reserved for policies that have already passed a safer first stage.
+
+Within that safer first stage, synthetic student design has become more structured over time. Early DQN tutoring work trained a lesson-progression policy against a simulated learner with a fixed concept-learning probability and thousands of simulated episodes before short test runs \cite{jezuina_koroveshi_training_2021}. Kubotani et al.\ replace the human with a DAS3H memory model pretrained on EdNet and personalized from each learner's history, so the RL agent optimizes review scheduling through interaction with the inner model rather than with the student directly \cite{kubotani_rltutor_2021}. Guzman's synthetic cohort extends the same idea with a richer knowledge-tracing student model that also feeds the tutor state \cite{guzman_developing_2025}. At larger scale, Azoulay et al.\ compare multiple adaptation families inside a shared environment with virtual students across 10{,}000 simulation episodes \cite{azoulay_adaptive_2021}, and Zou and Xiong sample 5{,}000 virtual learners across ability levels to evaluate Double DQN path policies on a knowledge graph \cite{zou_deep_2026}. Fu's RL-DKT work shows a contrasting route: policy learning from offline interaction logs without a forward simulator, which avoids live exploration but also leaves engagement outside the training loop \cite{fu_integrating_2025}. The field has therefore converged on two safe alternatives to online classroom training, simulation with explicit student models and offline learning from logs, rather than on unrestricted live policy search.
+
+Both routes remain imperfect. Kubotani et al.\ report that gaps between their mathematical student model and actual learners may have affected retention results and that they were not able to run human experiments \cite{kubotani_rltutor_2021}. Olukola and Rahimi note that their simulated learners do not capture motivation, fatigue, or off-task behaviour, and they require human validation before any deployment claim \cite{olukola_pedagogical_2026}. Sanz Ausin et al.\ argue that building accurate simulations of student learning is especially challenging because human learning is complex and only partly understood, which motivated their offline approach even though it depends on limited log coverage \cite{sanz_ausin_leveraging_2019}. Simulators also define what the tutor cannot learn: success-history models omit engagement, memory models may omit presentation choice, and large virtual cohorts may still optimize only sequencing rather than hints, feedback, or pacing. For the present thesis, these limits do not weaken the case for simulation; they specify that the synthetic environment must expose the same state variables the final tutor is expected to use, including engagement cues derived from facial expression recognition.
+
+Because of these constraints, simulation and synthetic students have become the accepted first evaluation stage for RL tutoring research. Kubotani, Guzman, Zou, and Jezuina Koroveshi all train or compare policies in simulated environments before any classroom deployment \cite{kubotani_rltutor_2021,jezuina_koroveshi_training_2021,guzman_developing_2025,zou_deep_2026}, and Azoulay et al.\ use a shared virtual-student environment to benchmark competing adaptation methods under identical conditions \cite{azoulay_adaptive_2021}. Olukola and Rahimi add that controlled simulation allows systematic study of failure modes without risking harm to real students \cite{olukola_pedagogical_2026}. The remaining gap is narrower than the need for simulation itself. Most RL tutors still represent learners through correctness, timing, hints, or knowledge-tracing estimates derived from answers \cite{azoulay_adaptive_2021,fu_integrating_2025,guzman_developing_2025,jezuina_koroveshi_training_2021,zou_deep_2026}, and DQN studies either keep the action space narrow or split control between learned and rule-based components \cite{jezuina_koroveshi_training_2021,sayed_ai-based_2023,zou_deep_2026}. Synthetic evaluation is now common, but it is rarely used to compare matched DQN policies with and without an additional engagement channel in the state \cite{guzman_developing_2025,zou_deep_2026}. The present thesis addresses that gap by coupling facial engagement recognition to the student state, learning tutoring actions with a Deep Q-Network, and evaluating the resulting policy in a synthetic student environment before any live deployment. Table~\ref{tab:adaptive_systems_comparison} compares the studies that most directly justify this design.
 
 \clearpage
 \begin{landscape}
 \thispagestyle{empty}
-\small
-\setlength{\tabcolsep}{3pt}
-\renewcommand{\arraystretch}{1.1}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.05}
 
-\begin{longtable}{>{\RaggedRight\arraybackslash}p{2.5cm}
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{1.9cm}
                   >{\RaggedRight\arraybackslash}p{2.1cm}
                   >{\RaggedRight\arraybackslash}p{2.2cm}
-                  >{\RaggedRight\arraybackslash}p{2.7cm}
+                  >{\RaggedRight\arraybackslash}p{1.7cm}
                   >{\RaggedRight\arraybackslash}p{2.0cm}
-                  >{\RaggedRight\arraybackslash}p{2.8cm}
-                  >{\RaggedRight\arraybackslash}p{3.2cm}
-                  >{\RaggedRight\arraybackslash}p{3.4cm}}
-\caption{Comparison of key adaptive learning studies relevant to this thesis}
+                  >{\RaggedRight\arraybackslash}p{2.4cm}
+                  >{\RaggedRight\arraybackslash}p{2.2cm}
+                  >{\RaggedRight\arraybackslash}p{2.5cm}}
+\caption{Simulation-based RL tutoring studies most relevant to the present thesis design}
 \label{tab:adaptive_systems_comparison} \\
 
 \toprule
-\textbf{Paper} & \textbf{Adaptation target} & \textbf{Input signals} & \textbf{Decision method} & \textbf{Evaluation type} & \textbf{Main quantitative results} & \textbf{Main strength / limitation} & \textbf{Relevance to this thesis} \\
+\textbf{Paper} & \textbf{Educational task} & \textbf{Student model} & \textbf{RL method} & \textbf{Actions} & \textbf{Evaluation setting} & \textbf{Main results} & \textbf{Relevance to thesis} \\
 \midrule
 \endfirsthead
 
 \toprule
-\textbf{Paper} & \textbf{Adaptation target} & \textbf{Input signals} & \textbf{Decision method} & \textbf{Evaluation type} & \textbf{Main quantitative results} & \textbf{Main strength / limitation} & \textbf{Relevance to this thesis} \\
+\textbf{Paper} & \textbf{Educational task} & \textbf{Student model} & \textbf{RL method} & \textbf{Actions} & \textbf{Evaluation setting} & \textbf{Main results} & \textbf{Relevance to thesis} \\
 \midrule
 \endhead
 
 \bottomrule
+\multicolumn{8}{p{0.98\linewidth}}{\textit{Note.} Rows focus on studies that train or compare RL tutoring policies in simulation, synthetic cohorts, or offline logs before live deployment. Engagement is inferred from behaviour or KT, not from facial expression.} \\
 \endfoot
 
-\makecell[l]{Azoulay et al.\\ (2021)\\ \cite{azoulay_adaptive_2021}} &
-Next-task / difficulty selection &
-Simulated learner performance, success/failure history &
-Comparison of Q-learning, TD, VL, DVRL, Gittins, Rasch+Elo, Bayesian inference &
-Simulation &
-10{,}000 runs; Bayesian method reached 89--93\% of oracle utility &
-Canonical multi-method benchmark; simulation only, no affect or real learners &
-Establishes RL/IRT baselines for next-task selection without emotion in state \\
+\makecell[l]{Sanz Ausin\\ et al.\\ (2019)\\ \cite{sanz_ausin_leveraging_2019}} &
+Worked example vs.\ problem solving in logic proofs &
+No forward simulator; 786 offline ITS trajectories &
+DQN / Double-DQN (offline) &
+Binary WE/PS per problem &
+Offline induction; RCTs on real students ($N{=}84$, $98$) &
+Significant gain for high-competency learners with DQN-Inf ($p{=}0.033$); online training deemed unethical &
+Ethical case for offline/simulation-first policy learning \\
 
-\makecell[l]{Sayed et al.\\ (2023)\\ \cite{sayed_ai-based_2023}} &
-Content presentation, exercise navigation, feedback &
-Learner model (cognitive, behavioural, affective cues), VARK style &
-DQN + threshold rules for difficulty &
-Classroom pilot (grade 3, $n=26$, 2 months) &
-Post-test gains; largest gains for initially low performers &
-Hybrid rules + DQN in deployed e-learning; affect channel not FER-only &
-Shows hybrid RL deployment in schools; contrast for full RL + webcam FER policy \\
+\makecell[l]{Kubotani\\ et al.\\ (2021)\\ \cite{kubotani_rltutor_2021}} &
+Spaced review scheduling (flashcards) &
+DAS3H virtual student (EdNet-pretrained) &
+PPO &
+Next review item &
+DAS3H-only simulation; 5 seeds; vs.\ Random/Leitner/Threshold &
+Higher early retention than baselines; model--human gap acknowledged &
+Virtual-student training to avoid costly live RL interactions \\
 
-\makecell[l]{Fu\\ (2025)\\ \cite{fu_integrating_2025}} &
-Personalized learning path / next-task sequencing &
-Interaction logs, DKT-estimated knowledge state &
-RL-DKT: REINFORCE + dynamic knowledge tracing &
-Offline datasets (ASSISTments, KDD, Cognitive Tutor) &
-AUC 0.874; F1 0.812; avg.\ completion 34.5 min; dropout 3.2\%; path efficiency +12.5\% &
-Strong KT+RL sequencing on real logs; no facial affect in state &
-Representative performance-only RL sequencing the thesis extends with FER \\
+\makecell[l]{Jezuina Koroveshi\\ \& Ktona\\ (2021)\\ \cite{jezuina_koroveshi_training_2021}} &
+Python lesson sequencing &
+Simulated learner ($P{=}0.7$ per concept) &
+DQN &
+Stay in lesson / next lesson &
+Simulated ITS; thousands of training episodes; 100-episode tests &
+Converging rewards in simulation; no live study &
+Earliest DQN tutor trained entirely in simulation \\
 
-\makecell[l]{Kuling and\\ Zitnik\\ (2025)\\ \cite{kuling_ken_2025}} &
-Adaptive exercise / next-question recommendation &
-Interaction history, correctness, text embeddings &
-KUL-Rec dual-memory Hebbian recommender &
-10 offline datasets + classroom ($n=38$, 13 weeks) &
-nDCG 0.316 vs 0.265 baseline; Recall@10 0.305 vs 0.211; helpfulness $p<.05$ &
-Strong ZPD-targeted recommendation; not RL; no emotion &
-Shows next-item adaptation from sparse traces without affect sensing \\
+\makecell[l]{Guzman \&\\ Cruz-Mercado\\ (2025)\\ \cite{guzman_developing_2025}} &
+Introductory Python tutoring &
+DKVMN synthetic cohort (10{,}000) + live learners &
+PPO &
+Problem, page, quiz, hint, difficulty, pacing &
+$\sim$400{,}000 sim.\ steps; then $N{=}90$ live RCT &
+NLG 0.72 vs.\ 0.58 rule-based ($p{<}0.01$); sim.\ reward $315 \pm 22$ &
+Two-stage sim-then-live pattern; rich KT student model \\
 
-\makecell[l]{Guzman and\\ Cruz-Mercado\\ (2025)\\ \cite{guzman_developing_2025}} &
-Problem selection, hints, instructional review &
-DKVMN knowledge state; synthetic then real traces &
-PPO with multi-faceted reward (performance, efficiency, retention) &
-Simulation (10{,}000 synthetic) + human study ($N=90$) &
-Normalised learning gains 0.72 vs 0.58 (rule-based) vs 0.45 (static), $p<0.01$ &
-End-to-end PPO tutor with human subjects; no facial affect &
-Direct PPO comparator for emotion-augmented policy design \\
-
-\makecell[l]{Deshmukh and\\ Sen\\ (2025)\\ \cite{deshmukh_developing_2025}} &
-Feedback timing and type (hints, explanations, encouragement) &
-Simulated correctness, time on task, hint requests &
-Tabular Q-learning &
-Simulation vs rule-based and random feedback &
-Test accuracy 85\% vs 73\% (rule-based) vs 66\% (random); satisfaction 4.4/5 vs 3.8 &
-Simple RL feedback loop; short study; no KT or affect &
-Illustrates RL over feedback actions adjacent to thesis intervention set \\
-
-\makecell[l]{P\'erez et al.\\ (2024)\\ \cite{perez_emotions_2024}} &
-Difficulty adaptation / next task &
-Correctness, BKT mastery, valence/arousal (circumplex) &
-Q-learning with emotion as implicit feedback in reward and exploration &
-Simulation (1{,}000 runs, 200 tasks) &
-Learning gain $\approx$0.49 vs 0.28 (Q-learning) at 200 tasks &
-Closest prior: affect in RL loop; simulation and static expression corpus &
-Very highly relevant: emotion-aware difficulty RL the thesis generalises to multi-action FER \\
-
-\makecell[l]{Govea et al.\\ (2024)\\ \cite{govea_implementation_2024}} &
-Pace, difficulty, activity type, presentation &
-Face, voice, wrist biometrics &
-CNN--RNN + Proximal Policy Optimization &
-Hybrid classroom; multimodal sensing &
-Emotion detection 72.4\% $\rightarrow$ 89.3\%; personalization 70.2\% $\rightarrow$ 90.1\% &
-Multimodal affect closed loop; adaptation evidence still limited &
-Relevant multimodal emotion-to-policy precedent; thesis uses webcam-only sensing \\
-
-\makecell[l]{Gong\\ (2025)\\ \cite{gong_design_2025}} &
-Difficulty (IRT), pacing, content format, hints, motivational feedback &
-Face (CNN), speech (MFCC+BiLSTM), text (BERT) &
-Deep Q-Network adaptive delivery engine &
-Controlled e-learning pilot &
-Fusion accuracy 0.91; F1 0.90; engagement $\approx$0.92 vs 0.60 baseline &
-Multimodal emotion-aware RL over several pedagogical levers; not FER-only &
-Very highly relevant multi-action RL design; thesis narrows to facial input \\
-
-\makecell[l]{Kong et al.\\ (2025)\\ \cite{kong_real-time_2025}} &
-Worked examples, scaffolds, pacing, motivational feedback, content/interface &
-Face, voice, HRV, EDA, optional EEG, interaction logs &
-Contextual bandit + Deep Q-Network back end &
-RCT ($N=271$); lab + classroom &
-Weighted F1 $\approx$0.85; mid-ability post-test gain $\approx$+15 pp; engagement 42\% vs 29\% &
-Strongest field evaluation of multi-intervention affect-aware tutor; heavy sensing &
-Sets breadth benchmark for intervention set; thesis targets lighter FER+RL stack \\
-
-\makecell[l]{Meng and\\ Yang\\ (2025)\\ \cite{meng_self-evolving_2025}} &
-Intervention selection (hints, scaffolding, presentation) &
-SAINT+ mastery, behavioural engagement, LLM responses &
-PPO multi-agent tutor (RLTS) &
-Simulated replay of historical logs &
-+28.6\% adaptability; $-$31.2\% recurring errors; $-$24.8\% dropout vs static tutors &
-GenAI + KT + RL stack; behavioural not facial engagement &
-Contemporary PPO tutor without webcam FER in state \\
-
-\makecell[l]{Weitekamp\\ et al.\\ (2025)\\ \cite{weitekamp_tutorgym_2025}} &
-Step-level tutor/student decisions (benchmark) &
-ITS step state (223 domains: CTAT, OATutor, etc.) &
-Standard API for LLMs, RL, cognitive models &
-Benchmark evaluation across existing ITS interfaces &
-LLMs near chance on incorrect-action labelling; next-step accuracy $\approx$52--70\% &
-Infrastructure for comparable step-level evaluation; not an adaptation algorithm &
-Supports simulation-first, step-level evaluation rationale for thesis RL module \\
+\makecell[l]{Zou \& Xiong\\ (2026)\\ \cite{zou_deep_2026}} &
+Knowledge-graph course path selection &
+5{,}000 virtual learners over graph &
+Double DQN &
+Next course item &
+Large-scale simulation only &
+87.3\% completion; mastery 0.823 &
+Large-scale DQN + virtual cohort closest to thesis evaluator \\
 
 \end{longtable}
 \end{landscape}
 \clearpage
-
 \section{Emotion-Aware Adaptation}\label{sec:emotion_aware_adaptation}
 
-While the previous section already introduced recent tutors that combine reinforcement learning with sensed affect, the present section traces how emotion-aware tutoring developed over more than two decades. This line is often called affective tutoring. It began with the question of whether emotion could be recognised during instruction, and only later connected recognition to richer adaptation policies. The narrative below follows that history, from early dialogue-based ideas, through facial and log-based detection, to multimodal reinforcement-learning controllers and conversational assistants based on large language models.
+While the previous section reviewed reinforcement-learning tutoring systems that adapt from knowledge and performance traces alone, the present section traces how emotion-aware tutoring developed over more than two decades. This line is often called affective tutoring. It began with the question of whether emotion could be recognised during instruction, and only later connected recognition to richer adaptation policies. The narrative below follows that history, from early dialogue-based ideas, through facial and log-based detection, to multimodal reinforcement-learning controllers and conversational assistants based on large language models.
 
 The earliest practical work treated emotion as something that could be detected from conversation with the tutor. AutoTutor, developed by Graesser and his colleagues in the early 2000s, held short natural-language dialogues with students about physics and computer literacy, and its team began to ask whether the same dialogue signals could also show how the learner felt \cite{Graesser2004AutoTutorDialogue}. In 2005, D'Mello and colleagues described an early version of this idea in which affect sensors were combined with the AutoTutor platform to identify boredom, confusion, frustration and engagement from dialogue and simple facial cues \cite{dmello_integrating_2005}. The adaptation at that stage was still limited. The tutor could vary its hints and encouragement, but the main research question was whether emotion could be recognised at all. A few years later, D'Mello and colleagues formalised this direction by showing that ordinary features of tutoring conversation, such as word choice and discourse structure, carried useful information about boredom, confusion, flow and frustration \cite{DMello2008AutomaticDetectionLearnersAffect,dmello_language_2012}. The same line of work also showed that confusion, if handled well, can actually help learning rather than hurt it \cite{dmello2014confusionbeneficial}. Together, these studies established an early view of the field: emotion is visible in how students talk and behave during tutoring, and it is worth recognising, even if the systems themselves still did relatively simple things in response.
 

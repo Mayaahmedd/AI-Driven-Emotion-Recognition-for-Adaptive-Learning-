@@ -1,0 +1,3 @@
+condition,model,n_seeds,learning_gain_mean,final_knowledge_mean,success_rate_mean,adaptation_accuracy_mean,mean_episode_reward_mean,learning_gain_std,final_knowledge_std,success_rate_std,adaptation_accuracy_std,mean_episode_reward_std,learning_gain_ci,final_knowledge_ci,success_rate_ci,adaptation_accuracy_ci,mean_episode_reward_ci
+A: Emotion-Aware DQN,A_emotion_aware,20,0.6089,0.7297,0.4003,0.7751,2.9041,0.0887,0.0611,0.1502,0.2138,0.3868,"[0.570, 0.648]","[0.703, 0.756]","[0.334, 0.466]","[0.681, 0.869]","[2.735, 3.074]"
+C: Knowledge-Only DQN (Strict No-Emotion),C_knowledge_only_strict,20,0.69,0.7856,0.5461,0.9536,0.6279,0.0131,0.0094,0.0241,0.0772,0.0243,"[0.684, 0.696]","[0.781, 0.790]","[0.536, 0.557]","[0.920, 0.987]","[0.617, 0.639]"

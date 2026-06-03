@@ -1,0 +1,6 @@
+comparison,eval_type,metric,label_A,label_B,n_A,n_B,mean_A,mean_B,delta_A_minus_B,std_A,std_B,cohens_d,t,p_raw,p_holm
+A_emotion_aware_vs_C_knowledge_only_strict,best,learning_gain,A: Emotion-Aware DQN,C: Knowledge-Only DQN (Strict No-Emotion),20,20,0.6089,0.69,-0.0811,0.0887,0.0131,-1.2791,-4.0448,0.000643,0.001285
+A_emotion_aware_vs_C_knowledge_only_strict,best,final_knowledge,A: Emotion-Aware DQN,C: Knowledge-Only DQN (Strict No-Emotion),20,20,0.7297,0.7856,-0.0559,0.0611,0.0094,-1.2788,-4.044,0.00064,0.001919
+A_emotion_aware_vs_C_knowledge_only_strict,best,success_rate,A: Emotion-Aware DQN,C: Knowledge-Only DQN (Strict No-Emotion),20,20,0.4003,0.5461,-0.1458,0.1502,0.0241,-1.3557,-4.287,0.000361,0.001442
+A_emotion_aware_vs_C_knowledge_only_strict,best,adaptation_accuracy,A: Emotion-Aware DQN,C: Knowledge-Only DQN (Strict No-Emotion),20,20,0.7751,0.9536,-0.1785,0.2138,0.0772,-1.1108,-3.5128,0.001795,0.001795
+A_emotion_aware_vs_C_knowledge_only_strict,best,mean_episode_reward,A: Emotion-Aware DQN,C: Knowledge-Only DQN (Strict No-Emotion),20,20,2.9041,0.6279,2.2761,0.3868,0.0243,8.3054,26.264,0.0,0.0
