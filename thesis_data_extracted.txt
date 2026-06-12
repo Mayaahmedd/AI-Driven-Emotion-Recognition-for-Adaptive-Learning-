@@ -1,0 +1,3425 @@
+======================================================================
+EXPERIMENT DIRECTORIES FOUND
+======================================================================
+RESULTS/27
+RESULTS/28
+RESULTS/33
+RESULTS/Exp23
+RESULTS/daisee_thesis_figures
+RESULTS/exp 24
+RESULTS/exp 25
+RESULTS/exp10_small_backup
+RESULTS/exp11_small_backup
+RESULTS/exp12_small_backup
+RESULTS/exp16_save
+RESULTS/exp19
+RESULTS/exp20
+RESULTS/exp22
+RESULTS/exp25
+RESULTS/exp26
+RESULTS/exp29_resnet_bilstm_multihead
+RESULTS/exp30_resnet_cbam_3dcnn_agto
+RESULTS/exp31_resnet_bilstm_attention_balancedcsv
+RESULTS/exp34_multilabel_resnet_bilstm_attention_oversampled
+RESULTS/exp35_shufflenet_bilstm_attention_oversampled
+RESULTS/exp36_resnet_bilstm2_attention_24frames
+RESULTS/exp37_shufflenet_se_bilstm2_attention_24frames
+RESULTS/exp38_multilabel_resnet_se_bilstm2_attention_24frames (1)
+RESULTS/exp4_small_backup
+RESULTS/exp5_small_backup
+RESULTS/exp7_small_backup
+RESULTS/exp8_small_backup
+RESULTS/exp9_small_backup
+RESULTS/processed_exp21_singlelabel
+RESULTS/resnet50_features_svm
+RESULTS/traditional_ml_hog_lbp_svm
+FER_Module/.venv
+FER_Module/checkpoints
+FER_Module/configs
+FER_Module/data
+FER_Module/exp38_multilabel_resnet_se_bilstm2_attention_24frames (1)
+FER_Module/exp39_multilabel_resnet_se_bilstm2_attention_mtcnn
+FER_Module/exp40_imbalance_ablation
+FER_Module/exp41_stability_enhanced
+FER_Module/logs
+FER_Module/models
+FER_Module/notebooks
+FER_Module/src
+
+======================================================================
+PER-EXPERIMENT METRICS
+======================================================================
+
+── 27
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── 28
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── 33
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── Exp23
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── daisee_thesis_figures
+   [CSV] exp38_final_metrics_data.csv  (5 rows)
+   columns: ['Metric', 'Value']
+   {'Metric': 'Label Accuracy', 'Value': '0.7817'}
+   {'Metric': 'Macro F1', 'Value': '0.4528'}
+   {'Metric': 'Micro F1', 'Value': '0.7238'}
+   {'Metric': 'Samples F1', 'Value': '0.7464'}
+   {'Metric': 'Weighted F1', 'Value': '0.7981'}
+   [CSV] exp38_per_label_data.csv  (4 rows)
+   columns: ['Label', 'Label Accuracy', 'F1-score']
+   {'Label': 'Boredom', 'Label Accuracy': '0.4624', 'F1-score': '0.36'}
+   {'Label': 'Engagement', 'Label Accuracy': '0.9507', 'F1-score': '0.97'}
+   {'Label': 'Confusion', 'Label Accuracy': '0.8021', 'F1-score': '0.22'}
+   {'Label': 'Frustration', 'Label Accuracy': '0.9114', 'F1-score': '0.25'}
+   [CSV] model_f1_comparison_data.csv  (7 rows)
+   columns: ['Experiment', 'Macro F1', 'Weighted F1']
+   {'Experiment': 'HOG+LBP+SVM', 'Macro F1': '0.214', 'Weighted F1': '0.6515'}
+   {'Experiment': 'ResNet50+SVM', 'Macro F1': '0.229', 'Weighted F1': '0.6583'}
+   {'Experiment': 'Exp31\nSingle-label\nResNet50+BiLSTM+Attn', 'Macro F1': '0.3108', 'Weighted F1': '0.6659'}
+   {'Experiment': 'Exp34\nMultilabel\nResNet50+BiLSTM+Attn', 'Macro F1': '0.3831', 'Weighted F1': '0.767'}
+   {'Experiment': 'Exp35\nShuffleNetV2+BiLSTM+Attn', 'Macro F1': '0.2659', 'Weighted F1': '0.6213'}
+   [CSV] single_label_accuracy_data.csv  (5 rows)
+   columns: ['Experiment', 'Accuracy']
+   {'Experiment': 'HOG+LBP+SVM', 'Accuracy': '0.75'}
+   {'Experiment': 'ResNet50+SVM', 'Accuracy': '0.759'}
+   {'Experiment': 'Exp31\nSingle-label\nResNet50+BiLSTM+Attn', 'Accuracy': '0.7024'}
+   {'Experiment': 'Exp35\nShuffleNetV2+BiLSTM+Attn', 'Accuracy': '0.6306'}
+   {'Experiment': 'Exp37\nShuffleNetV2+SE+BiLSTM2', 'Accuracy': '0.6508'}
+
+── exp 24
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp 25
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp10_small_backup
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp11_small_backup
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp12_small_backup
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp16_save
+   [TXT/LOG] test_report_exp16.txt
+   Test Loss      : 0.3409
+   Label Accuracy : 0.7396
+   Macro F1       : 0.4450
+   Micro F1       : 0.6902
+   Samples F1     : 0.7310
+   Per-class F1:
+   Boredom: 0.3445
+   Engagement: 0.9747
+   Confusion: 0.2568
+   Frustration: 0.2039
+   Boredom: 0.10000000149011612
+   Engagement: 0.10000000149011612
+   Confusion: 0.15000000596046448
+   Frustration: 0.15000000596046448
+
+── exp19
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp20
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp22
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp25
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp26
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp29_resnet_bilstm_multihead
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp30_resnet_cbam_3dcnn_agto
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp31_resnet_bilstm_attention_balancedcsv
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp34_multilabel_resnet_bilstm_attention_oversampled
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp35_shufflenet_bilstm_attention_oversampled
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp36_resnet_bilstm2_attention_24frames
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp37_shufflenet_se_bilstm2_attention_24frames
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp38_multilabel_resnet_se_bilstm2_attention_24frames (1)
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp4_small_backup
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp5_small_backup
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp7_small_backup
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp8_small_backup
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp9_small_backup
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── processed_exp21_singlelabel
+   [CSV] train_singlelabel_all.csv  (5358 rows)
+   columns: ['ClipID', 'DominantLabel', 'Label']
+   {'ClipID': '1100011002.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '1100011003.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '1100011004.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '1100011005.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '1100011006.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   [CSV] test_singlelabel_all.csv  (1784 rows)
+   columns: ['ClipID', 'DominantLabel', 'Label']
+   {'ClipID': '5000441001.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '5000441002.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '5000441003.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '5000441005.avi', 'DominantLabel': 'Boredom', 'Label': '0'}
+   {'ClipID': '5000441006.avi', 'DominantLabel': 'Frustration', 'Label': '3'}
+   [CSV] val_singlelabel_all.csv  (1429 rows)
+   columns: ['ClipID', 'DominantLabel', 'Label']
+   {'ClipID': '4000221001.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '4000221002.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '4000221006.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '4000221008.avi', 'DominantLabel': 'Engagement', 'Label': '1'}
+   {'ClipID': '4000221009.avi', 'DominantLabel': 'Boredom', 'Label': '0'}
+
+── resnet50_features_svm
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── traditional_ml_hog_lbp_svm
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── .venv
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── checkpoints
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── configs
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── data
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp38_multilabel_resnet_se_bilstm2_attention_24frames (1)
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp39_multilabel_resnet_se_bilstm2_attention_mtcnn
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp40_imbalance_ablation
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── exp41_stability_enhanced
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── logs
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── models
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── notebooks
+   ** NO METRIC FILES FOUND - check directory manually **
+
+── src
+   ** NO METRIC FILES FOUND - check directory manually **
+
+======================================================================
+TRAINING CURVES - EXP 38 (all epoch-level data)
+======================================================================
+
+Directory: RESULTS/exp38_multilabel_resnet_se_bilstm2_attention_24frames (1)
+  Found: best_val_report.json
+{
+  "exact_match_accuracy": 0.19454163750874737,
+  "per_label_accuracy": {
+    "Boredom": 0.4471658502449265,
+    "Engagement": 0.8838348495451365,
+    "Confusion": 0.6794961511546536,
+    "Frustration": 0.7137858642407278
+  },
+  "macro_f1": 0.5117137360038144,
+  "micro_f1": 0.6883227902205505,
+  "samples_f1": 0.6798060581825452,
+  "weighted_f1": 0.7593703342083825,
+  "classification_report": {
+    "Boredom": {
+      "precision": 0.4335511982570806,
+      "recall": 0.9835255354200988,
+      "f1-score": 0.6018145161290323,
+      "support": 607.0
+    },
+    "Engagement": {
+      "precision": 0.8838348495451365,
+      "recall": 1.0,
+      "f1-score": 0.9383358098068351,
+      "support": 1263.0
+    },
+    "Confusion": {
+      "precision": 0.20641282565130262,
+      "recall": 0.6242424242424243,
+      "f1-score": 0.3102409638554217,
+      "support": 165.0
+    },
+    "Frustration": {
+      "precision": 0.12224938875305623,
+      "recall": 0.5,
+      "f1-score": 0.19646365422396855,
+      "support": 100.0
+    },
+    "micro avg": {
+      "precision": 0.5420032310177706,
+      "recall": 0.9428571428571428,
+      "f1-score": 0.6883227902205505,
+      "support": 2135.0
+    },
+    "macro avg": {
+      "precision": 0.411512065551644,
+      "recall": 0.7769419899156307,
+      "f1-score": 0.5117137360038144,
+      "support": 2135.0
+    },
+    "weighted avg": {
+      "precision": 0.6677901861476937,
+      "recall": 0.9428571428571428,
+      "f1-score": 0.7593703342083825,
+      "support": 2135.0
+    },
+    "samples avg": {
+      "precision": 0.5745276417074877,
+      "recall": 0.9353277350128296,
+      "f1-score": 0.6798060581825452,
+      "support": 2135.0
+    }
+  },
+  "thresholds": {
+    "Boredom": 0.30000000000000004,
+    "Engagement": 0.1,
+    "Confusion": 0.6000000000000002,
+    "Frustration": 0.6000000000000002
+  }
+}
+  Found: train_log.json
+[
+  {
+    "epoch": 1,
+    "train_loss": 0.7605483940438746,
+    "macro_f1": 0.5117137360038144,
+    "micro_f1": 0.6883227902205505,
+    "samples_f1": 0.6798060581825452,
+    "weighted_f1": 0.7593703342083825,
+    "exact_match_accuracy": 0.19454163750874737,
+    "thresholds": {
+      "Boredom": 0.30000000000000004,
+      "Engagement": 0.1,
+      "Confusion": 0.6000000000000002,
+      "Frustration": 0.6000000000000002
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.4471658502449265,
+      "Engagement": 0.8838348495451365,
+      "Confusion": 0.6794961511546536,
+      "Frustration": 0.7137858642407278
+    }
+  },
+  {
+    "epoch": 2,
+    "train_loss": 0.6786124505605434,
+    "macro_f1": 0.4986317932912523,
+    "micro_f1": 0.6892394965431661,
+    "samples_f1": 0.6834349695091472,
+    "weighted_f1": 0.7578562002211259,
+    "exact_match_accuracy": 0.20783764870538837,
+    "thresholds": {
+      "Boredom": 0.25000000000000006,
+      "Engagement": 0.1,
+      "Confusion": 0.5500000000000002,
+      "Frustration": 0.7000000000000002
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.5192442267319805,
+      "Engagement": 0.8838348495451365,
+      "Confusion": 0.5843247025892232,
+      "Frustration": 0.7858642407277817
+    }
+  },
+  {
+    "epoch": 3,
+    "train_loss": 0.6312921923034822,
+    "macro_f1": 0.5000326027338228,
+    "micro_f1": 0.7080485952923311,
+    "samples_f1": 0.7119464160751775,
+    "weighted_f1": 0.7598488249794991,
+    "exact_match_accuracy": 0.28761371588523443,
+    "thresholds": {
+      "Boredom": 0.5500000000000002,
+      "Engagement": 0.1,
+      "Confusion": 0.5500000000000002,
+      "Frustration": 0.5500000000000002
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.5843247025892232,
+      "Engagement": 0.8838348495451365,
+      "Confusion": 0.655003498950315,
+      "Frustration": 0.8005598320503848
+    }
+  },
+  {
+    "epoch": 4,
+    "train_loss": 0.5810167722114512,
+    "macro_f1": 0.49768884916613426,
+    "micro_f1": 0.7367413363967069,
+    "samples_f1": 0.7222399946682662,
+    "weighted_f1": 0.7572173485858922,
+    "exact_match_accuracy": 0.26801959412176346,
+    "thresholds": {
+      "Boredom": 0.15000000000000002,
+      "Engagement": 0.1,
+      "Confusion": 0.6000000000000002,
+      "Frustration": 0.6500000000000001
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.470258922323303,
+      "Engagement": 0.8838348495451365,
+      "Confusion": 0.781665500349895,
+      "Frustration": 0.9020293911826452
+    }
+  },
+  {
+    "epoch": 5,
+    "train_loss": 0.4938180131346353,
+    "macro_f1": 0.4795140523942363,
+    "micro_f1": 0.7347969691082183,
+    "samples_f1": 0.7222266653337333,
+    "weighted_f1": 0.7511609359437548,
+    "exact_match_accuracy": 0.2834149755073478,
+    "thresholds": {
+      "Boredom": 0.25000000000000006,
+      "Engagement": 0.1,
+      "Confusion": 0.6000000000000002,
+      "Frustration": 0.30000000000000004
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.47725682295311406,
+      "Engagement": 0.88383484
+  Found: train_multilabel_exp38_oversampled.csv
+ClipID,Boredom,Engagement,Confusion,Frustration
+2100521077.avi,0,1,0,0
+3100791033.avi,0,1,1,0
+3100621045.avi,0,1,0,0
+2100601068.avi,0,1,0,0
+4110212047.avi,0,1,0,0
+2100602010.avi,0,1,1,0
+2100581072.avi,1,1,0,0
+3100771032.avi,0,1,0,0
+240846027.avi,0,1,0,0
+3100681018.avi,1,0,1,0
+2100592064.avi,1,1,0,0
+1110032053.avi,1,1,1,1
+1100071018.avi,0,1,0,0
+2100532008.avi,0,1,0,0
+1100151035.avi,0,1,1,0
+1110032021.avi,0,1,0,1
+2056010279.avi,0,1,1,0
+3100771028.avi,0,1,1,0
+459999011.avi,0,1,0,0
+1100082018.avi,0,1,0,0
+3344630120.avi,0,1,0,1
+1100171045.avi,0,1,0,0
+1100141016.avi,0,1,0,0
+3503610250.avi,0,1,0,0
+1100022056.avi,0,1,0,0
+4110212004.avi,1,1,0,0
+3100751037.avi,1,1,0,0
+1100021039.avi,0,1,1,1
+2100612041.avi,0,1,1,0
+3100622009.avi,1,1,1,1
+4110212054.avi,1,1,0,0
+1110032008.avi,0,1,0,1
+3100741063.avi,0,1,0,0
+248510216.mp4,0,1,0,1
+1100071043.avi,1,1,1,0
+2100581001.avi,1,0,0,0
+240846023.avi,0,1,1,0
+2260510240.avi,0,1,1,0
+2100562044.avi,0,1,0,0
+4018350261.mp4,0,1,0,0
+4000181029.avi,0,1,1,0
+3100731013.avi,0,1,0,0
+4110212059.avi,1,1,0,0
+2100612067.avi,0,1,0,0
+248510248.mp4,0,1,0,0
+1100141035.avi,0,1,0,1
+3100812017.avi,0,1,0,0
+3100632024.avi,0,1,0,0
+2100572029.avi,0,1,0,0
+1100061061.avi,0,1,0,0
+1100071063.avi,0,1,0,0
+3100702038.avi,0,0,0,0
+4110211076.avi,1,1,0,0
+2100571044.avi,1,0,0,1
+1100412001.avi,0,1,0,0
+2100581071.avi,1,1,0,0
+3100741059.avi,0,1,0,0
+3100641004.avi,1,0,0,0
+4000181063.avi,1,1,0,0
+2408460238.avi,0,1,1,0
+202614020.mp4,0,1,1,0
+1100011027.avi,0,1,0,0
+1100152041.avi,0,1,0,0
+3100711043.avi,1,1,0,0
+1100151039.avi,0,1,0,0
+2260510259.avi,0,1,0,0
+3100711049.avi,0,1,0,0
+1100012052.avi,0,1,0,0
+3100622027.avi,0,1,1,1
+3100821035.avi,0,1,0,0
+3344630248.avi,0,1,0,1
+1110032059.avi,0,1,1,0
+4000182003.avi,0,1,0,0
+4000182014.avi,0,1,0,0
+3100772009.avi,0,1,0,0
+3100772013.avi,0,1,1,0
+2100571018.avi,1,1,0,0
+4018350213.mp4,0,1,0,0
+3100642055.avi,1,0,0,0
+2100581074.avi,0,1,1,0
+3100662053.avi,0,1,0,0
+2100591064.avi,1,1,0,0
+2056010218.avi,0,1,1,0
+2000501046.avi,0,1,1,0
+1100071029.avi,1,1,0,0
+3344630211.avi,1,0,1,0
+2100552002.avi,0,1,0,0
+2408460125.avi,0,1,0,0
+2260510158.avi,1,1,0,1
+2100602050.avi,0,1,0,1
+3344630282.avi,0,0,1,1
+1100121018.avi,0,1,0,1
+1110031031.avi,1,1,0,1
+3100702064.avi,1,1,1,1
+1100022003.avi,1,1,0,0
+1100172022.avi,0,1,0,0
+2100601078.avi,1,1,0,0
+1100122053.avi,0,1,0,0
+1813740242.avi,0,1,0,0
+1100022004.avi,1,1,0,0
+3100741068.avi,0,1,0,0
+1110032014.avi,0,0,1,1
+1100112021.avi,0,1,0,0
+2260510276.avi,0,1,1,0
+3344630276.avi,1,1,1,0
+4000181006.avi,1,1,0,0
+1100051008.avi,1,1,1,0
+1100102003.avi,1,1,0,1
+4599990231.avi,0,1,0,0
+1100152069.avi,0,1,0,0
+2100591074.avi,0,1,0,0
+2100581034.avi,1,1,0,0
+3100751064.avi,0,1,0,0
+303830258.mp4,0,1,0,0
+2100531048.avi,0,1,1,0
+2100522026.avi,1,1,0,0
+4110311004.avi,0,1,0,0
+2100581051.avi,0,1,0,0
+2100511057.avi,0,1,0,0
+3100621032.avi,0,1,1,0
+3100621059.avi,0,1,1,1
+2100581075.avi,0,1,0,0
+1100142029.avi,0,1,0,0
+2100571051.avi,1,1,0,0
+33702101150.mp4,1,1,1,0
+2000481035.avi,0,1,0,0
+3100822014.avi,1,1,0,0
+4018350226.mp4,0,1,0,0
+3344630260.avi
+  Found: evaluate_exp38.py
+  Found: train_exp38.py
+
+Directory: FER_Module/exp38_multilabel_resnet_se_bilstm2_attention_24frames (1)
+  Found: best_val_report.json
+{
+  "exact_match_accuracy": 0.19454163750874737,
+  "per_label_accuracy": {
+    "Boredom": 0.4471658502449265,
+    "Engagement": 0.8838348495451365,
+    "Confusion": 0.6794961511546536,
+    "Frustration": 0.7137858642407278
+  },
+  "macro_f1": 0.5117137360038144,
+  "micro_f1": 0.6883227902205505,
+  "samples_f1": 0.6798060581825452,
+  "weighted_f1": 0.7593703342083825,
+  "classification_report": {
+    "Boredom": {
+      "precision": 0.4335511982570806,
+      "recall": 0.9835255354200988,
+      "f1-score": 0.6018145161290323,
+      "support": 607.0
+    },
+    "Engagement": {
+      "precision": 0.8838348495451365,
+      "recall": 1.0,
+      "f1-score": 0.9383358098068351,
+      "support": 1263.0
+    },
+    "Confusion": {
+      "precision": 0.20641282565130262,
+      "recall": 0.6242424242424243,
+      "f1-score": 0.3102409638554217,
+      "support": 165.0
+    },
+    "Frustration": {
+      "precision": 0.12224938875305623,
+      "recall": 0.5,
+      "f1-score": 0.19646365422396855,
+      "support": 100.0
+    },
+    "micro avg": {
+      "precision": 0.5420032310177706,
+      "recall": 0.9428571428571428,
+      "f1-score": 0.6883227902205505,
+      "support": 2135.0
+    },
+    "macro avg": {
+      "precision": 0.411512065551644,
+      "recall": 0.7769419899156307,
+      "f1-score": 0.5117137360038144,
+      "support": 2135.0
+    },
+    "weighted avg": {
+      "precision": 0.6677901861476937,
+      "recall": 0.9428571428571428,
+      "f1-score": 0.7593703342083825,
+      "support": 2135.0
+    },
+    "samples avg": {
+      "precision": 0.5745276417074877,
+      "recall": 0.9353277350128296,
+      "f1-score": 0.6798060581825452,
+      "support": 2135.0
+    }
+  },
+  "thresholds": {
+    "Boredom": 0.30000000000000004,
+    "Engagement": 0.1,
+    "Confusion": 0.6000000000000002,
+    "Frustration": 0.6000000000000002
+  }
+}
+  Found: train_log.json
+[
+  {
+    "epoch": 1,
+    "train_loss": 0.7605483940438746,
+    "macro_f1": 0.5117137360038144,
+    "micro_f1": 0.6883227902205505,
+    "samples_f1": 0.6798060581825452,
+    "weighted_f1": 0.7593703342083825,
+    "exact_match_accuracy": 0.19454163750874737,
+    "thresholds": {
+      "Boredom": 0.30000000000000004,
+      "Engagement": 0.1,
+      "Confusion": 0.6000000000000002,
+      "Frustration": 0.6000000000000002
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.4471658502449265,
+      "Engagement": 0.8838348495451365,
+      "Confusion": 0.6794961511546536,
+      "Frustration": 0.7137858642407278
+    }
+  },
+  {
+    "epoch": 2,
+    "train_loss": 0.6786124505605434,
+    "macro_f1": 0.4986317932912523,
+    "micro_f1": 0.6892394965431661,
+    "samples_f1": 0.6834349695091472,
+    "weighted_f1": 0.7578562002211259,
+    "exact_match_accuracy": 0.20783764870538837,
+    "thresholds": {
+      "Boredom": 0.25000000000000006,
+      "Engagement": 0.1,
+      "Confusion": 0.5500000000000002,
+      "Frustration": 0.7000000000000002
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.5192442267319805,
+      "Engagement": 0.8838348495451365,
+      "Confusion": 0.5843247025892232,
+      "Frustration": 0.7858642407277817
+    }
+  },
+  {
+    "epoch": 3,
+    "train_loss": 0.6312921923034822,
+    "macro_f1": 0.5000326027338228,
+    "micro_f1": 0.7080485952923311,
+    "samples_f1": 0.7119464160751775,
+    "weighted_f1": 0.7598488249794991,
+    "exact_match_accuracy": 0.28761371588523443,
+    "thresholds": {
+      "Boredom": 0.5500000000000002,
+      "Engagement": 0.1,
+      "Confusion": 0.5500000000000002,
+      "Frustration": 0.5500000000000002
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.5843247025892232,
+      "Engagement": 0.8838348495451365,
+      "Confusion": 0.655003498950315,
+      "Frustration": 0.8005598320503848
+    }
+  },
+  {
+    "epoch": 4,
+    "train_loss": 0.5810167722114512,
+    "macro_f1": 0.49768884916613426,
+    "micro_f1": 0.7367413363967069,
+    "samples_f1": 0.7222399946682662,
+    "weighted_f1": 0.7572173485858922,
+    "exact_match_accuracy": 0.26801959412176346,
+    "thresholds": {
+      "Boredom": 0.15000000000000002,
+      "Engagement": 0.1,
+      "Confusion": 0.6000000000000002,
+      "Frustration": 0.6500000000000001
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.470258922323303,
+      "Engagement": 0.8838348495451365,
+      "Confusion": 0.781665500349895,
+      "Frustration": 0.9020293911826452
+    }
+  },
+  {
+    "epoch": 5,
+    "train_loss": 0.4938180131346353,
+    "macro_f1": 0.4795140523942363,
+    "micro_f1": 0.7347969691082183,
+    "samples_f1": 0.7222266653337333,
+    "weighted_f1": 0.7511609359437548,
+    "exact_match_accuracy": 0.2834149755073478,
+    "thresholds": {
+      "Boredom": 0.25000000000000006,
+      "Engagement": 0.1,
+      "Confusion": 0.6000000000000002,
+      "Frustration": 0.30000000000000004
+    },
+    "per_label_accuracy": {
+      "Boredom": 0.47725682295311406,
+      "Engagement": 0.88383484
+  Found: train_multilabel_exp38_oversampled.csv
+ClipID,Boredom,Engagement,Confusion,Frustration
+2100521077.avi,0,1,0,0
+3100791033.avi,0,1,1,0
+3100621045.avi,0,1,0,0
+2100601068.avi,0,1,0,0
+4110212047.avi,0,1,0,0
+2100602010.avi,0,1,1,0
+2100581072.avi,1,1,0,0
+3100771032.avi,0,1,0,0
+240846027.avi,0,1,0,0
+3100681018.avi,1,0,1,0
+2100592064.avi,1,1,0,0
+1110032053.avi,1,1,1,1
+1100071018.avi,0,1,0,0
+2100532008.avi,0,1,0,0
+1100151035.avi,0,1,1,0
+1110032021.avi,0,1,0,1
+2056010279.avi,0,1,1,0
+3100771028.avi,0,1,1,0
+459999011.avi,0,1,0,0
+1100082018.avi,0,1,0,0
+3344630120.avi,0,1,0,1
+1100171045.avi,0,1,0,0
+1100141016.avi,0,1,0,0
+3503610250.avi,0,1,0,0
+1100022056.avi,0,1,0,0
+4110212004.avi,1,1,0,0
+3100751037.avi,1,1,0,0
+1100021039.avi,0,1,1,1
+2100612041.avi,0,1,1,0
+3100622009.avi,1,1,1,1
+4110212054.avi,1,1,0,0
+1110032008.avi,0,1,0,1
+3100741063.avi,0,1,0,0
+248510216.mp4,0,1,0,1
+1100071043.avi,1,1,1,0
+2100581001.avi,1,0,0,0
+240846023.avi,0,1,1,0
+2260510240.avi,0,1,1,0
+2100562044.avi,0,1,0,0
+4018350261.mp4,0,1,0,0
+4000181029.avi,0,1,1,0
+3100731013.avi,0,1,0,0
+4110212059.avi,1,1,0,0
+2100612067.avi,0,1,0,0
+248510248.mp4,0,1,0,0
+1100141035.avi,0,1,0,1
+3100812017.avi,0,1,0,0
+3100632024.avi,0,1,0,0
+2100572029.avi,0,1,0,0
+1100061061.avi,0,1,0,0
+1100071063.avi,0,1,0,0
+3100702038.avi,0,0,0,0
+4110211076.avi,1,1,0,0
+2100571044.avi,1,0,0,1
+1100412001.avi,0,1,0,0
+2100581071.avi,1,1,0,0
+3100741059.avi,0,1,0,0
+3100641004.avi,1,0,0,0
+4000181063.avi,1,1,0,0
+2408460238.avi,0,1,1,0
+202614020.mp4,0,1,1,0
+1100011027.avi,0,1,0,0
+1100152041.avi,0,1,0,0
+3100711043.avi,1,1,0,0
+1100151039.avi,0,1,0,0
+2260510259.avi,0,1,0,0
+3100711049.avi,0,1,0,0
+1100012052.avi,0,1,0,0
+3100622027.avi,0,1,1,1
+3100821035.avi,0,1,0,0
+3344630248.avi,0,1,0,1
+1110032059.avi,0,1,1,0
+4000182003.avi,0,1,0,0
+4000182014.avi,0,1,0,0
+3100772009.avi,0,1,0,0
+3100772013.avi,0,1,1,0
+2100571018.avi,1,1,0,0
+4018350213.mp4,0,1,0,0
+3100642055.avi,1,0,0,0
+2100581074.avi,0,1,1,0
+3100662053.avi,0,1,0,0
+2100591064.avi,1,1,0,0
+2056010218.avi,0,1,1,0
+2000501046.avi,0,1,1,0
+1100071029.avi,1,1,0,0
+3344630211.avi,1,0,1,0
+2100552002.avi,0,1,0,0
+2408460125.avi,0,1,0,0
+2260510158.avi,1,1,0,1
+2100602050.avi,0,1,0,1
+3344630282.avi,0,0,1,1
+1100121018.avi,0,1,0,1
+1110031031.avi,1,1,0,1
+3100702064.avi,1,1,1,1
+1100022003.avi,1,1,0,0
+1100172022.avi,0,1,0,0
+2100601078.avi,1,1,0,0
+1100122053.avi,0,1,0,0
+1813740242.avi,0,1,0,0
+1100022004.avi,1,1,0,0
+3100741068.avi,0,1,0,0
+1110032014.avi,0,0,1,1
+1100112021.avi,0,1,0,0
+2260510276.avi,0,1,1,0
+3344630276.avi,1,1,1,0
+4000181006.avi,1,1,0,0
+1100051008.avi,1,1,1,0
+1100102003.avi,1,1,0,1
+4599990231.avi,0,1,0,0
+1100152069.avi,0,1,0,0
+2100591074.avi,0,1,0,0
+2100581034.avi,1,1,0,0
+3100751064.avi,0,1,0,0
+303830258.mp4,0,1,0,0
+2100531048.avi,0,1,1,0
+2100522026.avi,1,1,0,0
+4110311004.avi,0,1,0,0
+2100581051.avi,0,1,0,0
+2100511057.avi,0,1,0,0
+3100621032.avi,0,1,1,0
+3100621059.avi,0,1,1,1
+2100581075.avi,0,1,0,0
+1100142029.avi,0,1,0,0
+2100571051.avi,1,1,0,0
+33702101150.mp4,1,1,1,0
+2000481035.avi,0,1,0,0
+3100822014.avi,1,1,0,0
+4018350226.mp4,0,1,0,0
+3344630260.avi
+  Found: evaluate_exp38.py
+  Found: train_exp38.py
+
+======================================================================
+SVM / TRADITIONAL BASELINES
+======================================================================
+
+RESULTS/resnet50_features_svm
+  .DS_Store
+  resnet50_svm_model.joblib
+  test_predictions.csv
+  test_report.json
+  test_report.txt
+  val_report.json
+  X_test.npy
+  X_train.npy
+  X_val.npy
+  feature_config.json
+  test_metadata.csv
+  train_metadata.csv
+  val_metadata.csv
+  y_test.npy
+  y_train.npy
+  y_val.npy
+  evaluate_resnet50_svm.py
+  extract_resnet50_features.py
+  train_resnet50_svm.py
+
+RESULTS/traditional_ml_hog_lbp_svm
+  hog_lbp_svm_model.joblib
+  test_predictions.csv
+  test_report.json
+  test_report.txt
+  val_report.json
+  X_test.npy
+  X_train.npy
+  X_val.npy
+  feature_config.json
+  test_metadata.csv
+  train_metadata.csv
+  val_metadata.csv
+  y_test.npy
+  y_train.npy
+  y_val.npy
+  evaluate_svm_hog_lbp.py
+  extract_features_hog_lbp.py
+  train_svm_hog_lbp.py
+
+======================================================================
+DAiSEE CLASS DISTRIBUTION (test set)
+======================================================================
+  Found: FER_Module/src/preprocessing/check_multilabel_distribution.py
+import pandas as pd
+
+files = {
+    "train": "data/metadata/TrainLabels.csv",
+    "val": "data/metadata/ValidationLabels.csv",
+    "test": "data/metadata/TestLabels.csv",
+}
+
+emotion_cols = ["Boredom", "Engagement", "Confusion", "Frustration"]
+
+for split, path in files.items():
+    df = pd.read_csv(path)
+    df.columns = df.columns.str.strip()
+
+    bin_df = (df[emotion_cols] >= 2).astype(int)
+
+    print(f"\n--- {split.upper()} ---")
+    print("Positive counts per emotion:")
+    print(bin_df.sum())
+
+    print("\nNumber of active labels per clip:")
+    print(bin_df.sum(axis=1).value_counts().sort_index())
+  Found: FER_Module/.venv/lib/python3.9/site-packages/sympy/stats/matrix_distributions.py
+from math import prod
+
+from sympy.core.basic import Basic
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.special.gamma_functions import multigamma
+from sympy.core.sympify import sympify, _sympify
+from sympy.matrices import (ImmutableMatrix, Inverse, Trace, Determinant,
+                            MatrixSymbol, MatrixBase, Transpose, MatrixSet,
+                            matrix2numpy)
+from sympy.stats.rv import (_value_check, RandomMatrixSymbol, NamedArgsMixin, PSpace,
+                            _symbol_converter, MatrixDomain, Distribution)
+from sympy.external import import_module
+
+
+################################################################################
+#------------------------Matrix Probability Space------------------------------#
+################################################################################
+class MatrixPSpace(PSpace):
+    """
+    Represents probability spac
+  Found: FER_Module/.venv/lib/python3.9/site-packages/sympy/stats/tests/test_matrix_distributions.py
+from sympy.concrete.products import Product
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.core.symbol import (Dummy, symbols)
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.elementary.miscellaneous import sqrt
+from sympy.functions.special.gamma_functions import gamma
+from sympy.matrices import Determinant, Matrix, Trace, MatrixSymbol, MatrixSet
+from sympy.stats import density, sample
+from sympy.stats.matrix_distributions import (MatrixGammaDistribution,
+                MatrixGamma, MatrixPSpace, Wishart, MatrixNormal, MatrixStudentT)
+from sympy.testing.pytest import raises, skip
+from sympy.external import import_module
+
+
+def test_MatrixPSpace():
+    M = MatrixGammaDistribution(1, 2, [[2, 1], [1, 2]])
+    MP = MatrixPSpace('M', M, 2, 2)
+    assert MP.distribution == M
+    raises(ValueError, lambda: MatrixPSpace('M', M, 1.2, 2))
+
+def test_MatrixGamma():
+    M = MatrixGamma('M', 1, 2, [[1, 0], [0, 1]])
+    assert M.pspace.dist
+  Found: FER_Module/.venv/lib/python3.9/site-packages/torch/distributions
+  Found: FER_Module/.venv/lib/python3.9/site-packages/torch/distributions/transformed_distribution.py
+# mypy: allow-untyped-defs
+from typing import Optional, Union
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.distribution import Distribution
+from torch.distributions.independent import Independent
+from torch.distributions.transforms import ComposeTransform, Transform
+from torch.distributions.utils import _sum_rightmost
+from torch.types import _size
+
+
+__all__ = ["TransformedDistribution"]
+
+
+class TransformedDistribution(Distribution):
+    r"""
+    Extension of the Distribution class, which applies a sequence of Transforms
+    to a base distribution.  Let f be the composition of transforms applied::
+
+        X ~ BaseDistribution
+        Y = f(X) ~ TransformedDistribution(BaseDistribution, f)
+        log p(Y) = log p(X) + log |det (dX/dY)|
+
+    Note that the ``.event_shape`` of a :class:`TransformedDistribution` is the
+    maximum shape of its base distribution and its transforms, since transforms
+    can introduce correlations
+  Found: FER_Module/.venv/lib/python3.9/site-packages/torch/distributions/distribution.py
+# mypy: allow-untyped-defs
+import warnings
+from typing import Optional
+from typing_extensions import deprecated
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.utils import lazy_property
+from torch.types import _size
+
+
+__all__ = ["Distribution"]
+
+
+class Distribution:
+    r"""
+    Distribution is the abstract base class for probability distributions.
+
+    Args:
+        batch_shape (torch.Size): The shape over which parameters are batched.
+        event_shape (torch.Size): The shape of a single sample (without batching).
+        validate_args (bool, optional): Whether to validate arguments. Default: None.
+    """
+
+    has_rsample = False
+    has_enumerate_support = False
+    _validate_args = __debug__
+
+    @staticmethod
+    def set_default_validate_args(value: bool) -> None:
+        """
+        Sets whether validation is enabled or disabled.
+
+        The default behavior mimics Python's ``assert`` statement: validation
+        i
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/distutils/numpy_distribution.py
+# XXX: Handle setuptools ?
+from distutils.core import Distribution
+
+# This class is used because we add new files (sconscripts, and so on) with the
+# scons command
+class NumpyDistribution(Distribution):
+    def __init__(self, attrs = None):
+        # A list of (sconscripts, pre_hook, post_hook, src, parent_names)
+        self.scons_data = []
+        # A list of installable libraries
+        self.installed_libraries = []
+        # A dict of pkg_config files to generate/install
+        self.installed_pkg_config = {}
+        Distribution.__init__(self, attrs)
+
+    def has_scons_scripts(self):
+        return bool(self.scons_data)
+
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/_core/include/numpy/random/distributions.h
+#ifndef NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+#define NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <Python.h>
+#include "numpy/npy_common.h"
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#include "numpy/npy_math.h"
+#include "numpy/random/bitgen.h"
+
+/*
+ * RAND_INT_TYPE is used to share integer generators with RandomState which
+ * used long in place of int64_t. If changing a distribution that uses
+ * RAND_INT_TYPE, then the original unmodified copy must be retained for
+ * use in RandomState by copying to the legacy distributions source file.
+ */
+#ifdef NP_RANDOM_LEGACY
+#define RAND_INT_TYPE long
+#define RAND_INT_MAX LONG_MAX
+#else
+#define RAND_INT_TYPE int64_t
+#define RAND_INT_MAX INT64_MAX
+#endif
+
+#ifdef _MSC_VER
+#define DECLDIR __declspec(dllexport)
+#else
+#define DECLDIR extern
+#endif
+
+#ifndef MIN
+#define MIN(x, y) (((x) < (y)) ? x : y)
+#define MAX(x, y) (((x) > (y)) ? x : y)
+#endif
+
+#ifndef M_PI
+#define M_
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/random/c_distributions.pxd
+#!python
+#cython: wraparound=False, nonecheck=False, boundscheck=False, cdivision=True, language_level=3
+from numpy cimport npy_intp
+
+from libc.stdint cimport (uint64_t, int32_t, int64_t)
+from numpy.random cimport bitgen_t
+
+cdef extern from "numpy/random/distributions.h":
+
+    struct s_binomial_t:
+        int has_binomial
+        double psave
+        int64_t nsave
+        double r
+        double q
+        double fm
+        int64_t m
+        double p1
+        double xm
+        double xl
+        double xr
+        double c
+        double laml
+        double lamr
+        double p2
+        double p3
+        double p4
+
+    ctypedef s_binomial_t binomial_t
+
+    float random_standard_uniform_f(bitgen_t *bitgen_state) nogil
+    double random_standard_uniform(bitgen_t *bitgen_state) nogil
+    void random_standard_uniform_fill(bitgen_t* bitgen_state, npy_intp cnt, double *out) nogil
+    void random_standard_uniform_fill_f(bitgen_t *bitgen_state, npy_intp cnt, float *out) nogil
+    
+    double ran
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/random/_examples/cython/extending_distributions.pyx
+#!/usr/bin/env python3
+#cython: language_level=3
+"""
+This file shows how the to use a BitGenerator to create a distribution.
+"""
+import numpy as np
+cimport numpy as np
+cimport cython
+from cpython.pycapsule cimport PyCapsule_IsValid, PyCapsule_GetPointer
+from libc.stdint cimport uint16_t, uint64_t
+from numpy.random cimport bitgen_t
+from numpy.random import PCG64
+from numpy.random.c_distributions cimport (
+      random_standard_uniform_fill, random_standard_uniform_fill_f)
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def uniforms(Py_ssize_t n):
+    """
+    Create an array of `n` uniformly distributed doubles.
+    A 'real' distribution would want to process the values into
+    some non-uniform distribution
+    """
+    cdef Py_ssize_t i
+    cdef bitgen_t *rng
+    cdef const char *capsule_name = "BitGenerator"
+    cdef double[::1] random_values
+
+    x = PCG64()
+    capsule = x.capsule
+    # Optional check that the capsule if from a BitGenerator
+    if not PyCapsule_IsValid(capsule
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/random/_examples/numba/extending_distributions.py
+r"""
+Building the required library in this example requires a source distribution
+of NumPy or clone of the NumPy git repository since distributions.c is not
+included in binary distributions.
+
+On *nix, execute in numpy/random/src/distributions
+
+export ${PYTHON_VERSION}=3.8 # Python version
+export PYTHON_INCLUDE=#path to Python's include folder, usually \
+    ${PYTHON_HOME}/include/python${PYTHON_VERSION}m
+export NUMPY_INCLUDE=#path to numpy's include folder, usually \
+    ${PYTHON_HOME}/lib/python${PYTHON_VERSION}/site-packages/numpy/_core/include
+gcc -shared -o libdistributions.so -fPIC distributions.c \
+    -I${NUMPY_INCLUDE} -I${PYTHON_INCLUDE}
+mv libdistributions.so ../../_examples/numba/
+
+On Windows
+
+rem PYTHON_HOME and PYTHON_VERSION are setup dependent, this is an example
+set PYTHON_HOME=c:\Anaconda
+set PYTHON_VERSION=38
+cl.exe /LD .\distributions.c -DDLL_EXPORT \
+    -I%PYTHON_HOME%\lib\site-packages\numpy\_core\include \
+    -I%PYTHON_HOME%\include %PYTHON_HOME%\libs\python%PYT
+  Found: FER_Module/.venv/lib/python3.9/site-packages/pip/_internal/distributions
+  Found: FER_Module/.venv/lib/python3.9/site-packages/sklearn/datasets/_species_distributions.py
+"""
+=============================
+Species distribution dataset
+=============================
+
+This dataset represents the geographic distribution of species.
+The dataset is provided by Phillips et. al. (2006).
+
+The two species are:
+
+ - `"Bradypus variegatus"
+   <http://www.iucnredlist.org/details/3038/0>`_ ,
+   the Brown-throated Sloth.
+
+ - `"Microryzomys minutus"
+   <http://www.iucnredlist.org/details/13408/0>`_ ,
+   also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+   Colombia, Ecuador, Peru, and Venezuela.
+
+References
+----------
+
+`"Maximum entropy modeling of species geographic distributions"
+<http://rob.schapire.net/papers/ecolmod.pdf>`_ S. J. Phillips,
+R. P. Anderson, R. E. Schapire - Ecological Modelling, 190:231-259, 2006.
+"""
+
+# Authors: The scikit-learn developers
+# SPDX-License-Identifier: BSD-3-Clause
+
+import logging
+from io import BytesIO
+from numbers import Integral, Real
+from os import PathLike, makedirs, remove
+from os.path import exists
+
+import jobli
+  Found: FER_Module/.venv/lib/python3.9/site-packages/sklearn/datasets/descr/species_distributions.rst
+.. _species_distribution_dataset:
+
+Species distribution dataset
+----------------------------
+
+This dataset represents the geographic distribution of two species in Central and
+South America. The two species are:
+
+- `"Bradypus variegatus" <http://www.iucnredlist.org/details/3038/0>`_ ,
+  the Brown-throated Sloth.
+
+- `"Microryzomys minutus" <http://www.iucnredlist.org/details/13408/0>`_ ,
+  also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+  Colombia, Ecuador, Peru, and Venezuela.
+
+The dataset is not a typical dataset since a :class:`~sklearn.datasets.base.Bunch`
+containing the attributes `data` and `target` is not returned. Instead, we have
+information allowing to create a "density" map of the different species.
+
+The grid for the map can be built using the attributes `x_left_lower_corner`,
+`y_left_lower_corner`, `Nx`, `Ny` and `grid_size`, which respectively correspond
+to the x and y coordinates of the lower left corner of the grid, the number of
+points along the x- 
+  Found: FER_Module/.venv/lib/python3.9/site-packages/scipy/stats/distributions.py
+#
+# Author:  Travis Oliphant  2002-2011 with contributions from
+#          SciPy Developers 2004-2011
+#
+# NOTE: To look at history using `git blame`, use `git blame -M -C -C`
+#       instead of `git blame -Lxxx,+x`.
+#
+from ._distn_infrastructure import (rv_discrete, rv_continuous, rv_frozen)  # noqa: F401
+
+from . import _continuous_distns
+from . import _discrete_distns
+
+from ._continuous_distns import *  # noqa: F403
+from ._levy_stable import levy_stable
+from ._discrete_distns import *  # noqa: F403
+from ._entropy import entropy
+
+# For backwards compatibility e.g. pymc expects distributions.__all__.
+__all__ = ['rv_discrete', 'rv_continuous', 'rv_histogram', 'entropy']  # noqa: F405
+
+# Add only the distribution names, not the *_gen names.
+__all__ += _continuous_distns._distn_names
+__all__ += ['levy_stable']
+__all__ += _discrete_distns._distn_names
+
+  Found: FER_Module/.venv/lib/python3.9/site-packages/scipy/stats/tests/test_distributions.py
+"""
+Test functions for stats module
+"""
+import warnings
+import re
+import sys
+import pickle
+from pathlib import Path
+import os
+import json
+import platform
+
+from numpy.testing import (assert_equal, assert_array_equal,
+                           assert_almost_equal, assert_array_almost_equal,
+                           assert_allclose, assert_, assert_warns,
+                           assert_array_less, suppress_warnings)
+import pytest
+from pytest import raises as assert_raises
+
+import numpy
+import numpy as np
+from numpy import typecodes, array
+from numpy.lib.recfunctions import rec_append_fields
+from scipy import special
+from scipy._lib._util import check_random_state
+from scipy.integrate import (IntegrationWarning, quad, trapezoid,
+                             cumulative_trapezoid)
+import scipy.stats as stats
+from scipy.stats._distn_infrastructure import argsreduce
+import scipy.stats.distributions
+
+from scipy.special import xlogy, polygamma, entr
+from scipy.stats._distr_params import di
+  Found: FER_Module/src/preprocessing/check_multilabel_distribution.py
+import pandas as pd
+
+files = {
+    "train": "data/metadata/TrainLabels.csv",
+    "val": "data/metadata/ValidationLabels.csv",
+    "test": "data/metadata/TestLabels.csv",
+}
+
+emotion_cols = ["Boredom", "Engagement", "Confusion", "Frustration"]
+
+for split, path in files.items():
+    df = pd.read_csv(path)
+    df.columns = df.columns.str.strip()
+
+    bin_df = (df[emotion_cols] >= 2).astype(int)
+
+    print(f"\n--- {split.upper()} ---")
+    print("Positive counts per emotion:")
+    print(bin_df.sum())
+
+    print("\nNumber of active labels per clip:")
+    print(bin_df.sum(axis=1).value_counts().sort_index())
+  Found: FER_Module/src/preprocessing/check_multilabel_distribution.py
+import pandas as pd
+
+files = {
+    "train": "data/metadata/TrainLabels.csv",
+    "val": "data/metadata/ValidationLabels.csv",
+    "test": "data/metadata/TestLabels.csv",
+}
+
+emotion_cols = ["Boredom", "Engagement", "Confusion", "Frustration"]
+
+for split, path in files.items():
+    df = pd.read_csv(path)
+    df.columns = df.columns.str.strip()
+
+    bin_df = (df[emotion_cols] >= 2).astype(int)
+
+    print(f"\n--- {split.upper()} ---")
+    print("Positive counts per emotion:")
+    print(bin_df.sum())
+
+    print("\nNumber of active labels per clip:")
+    print(bin_df.sum(axis=1).value_counts().sort_index())
+  Found: Bachelor_thesis_MET_Bachelor/Figures/fer_oversampled_label_dist.png
+�PNG
+
+   
+IHDR    �   %Ӌ�   9tEXtSoftware Matplotlib version3.9.4, https://matplotlib.org/��h   	pHYs  �  �Iu��  �+IDATx�������������T$E�DBRIALD@DIᣈA�(]
+�t7Hww��������w�n�bgｯ�㱏ݝ<�;3;�s�'��p8     ���F     (                                                                                                                                                                        �Sƍ'aaa�ɒ%��Y�JѢE�y���駟ʾ}����w�}׹ܧ�z*B�,]��9��Ç}N��J�֭�`���2eJS�ܹsK�2e�^�Q�FɁ�Λ/_>����C�+O��_���
+�KL�~�~��=��#���mU�Cqq?�3g�H�Ν�H�"�<y�~�@�U�zu�m�k���9���~߶yD������={V���#S�N��={��:u�D*�p��=�8q���ڵke�޽�.�իW�g��g�}V~��w$�y�)����e���f���4n�X�������~G����~��T�XQF�i���o�v϶j.���K�u ��;w�T�Rż~���\�|YN�8a.���gٲe�����R�T)sqިQ��˜7o�	D��0a�4(Ze�Z,0�k׮-;v�G}�Ԛ�r�l߾]/^l��T�\ٔ3�����v=zt�e�7 �O�������Bu̘1R�~}I�&��A_  �*����6U�T��z��'O��@�!���/��oȍ7�M�6�j�*)Y���e�?�<gʔI
+.,�W�6�������w��qz��
+h��#F��O�>���ްaC��/�
+  Found: FER_Module/.venv/lib/python3.9/site-packages/sympy/stats/matrix_distributions.py
+from math import prod
+
+from sympy.core.basic import Basic
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.special.gamma_functions import multigamma
+from sympy.core.sympify import sympify, _sympify
+from sympy.matrices import (ImmutableMatrix, Inverse, Trace, Determinant,
+                            MatrixSymbol, MatrixBase, Transpose, MatrixSet,
+                            matrix2numpy)
+from sympy.stats.rv import (_value_check, RandomMatrixSymbol, NamedArgsMixin, PSpace,
+                            _symbol_converter, MatrixDomain, Distribution)
+from sympy.external import import_module
+
+
+################################################################################
+#------------------------Matrix Probability Space------------------------------#
+################################################################################
+class MatrixPSpace(PSpace):
+    """
+    Represents probability spac
+  Found: FER_Module/.venv/lib/python3.9/site-packages/sympy/stats/tests/test_matrix_distributions.py
+from sympy.concrete.products import Product
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.core.symbol import (Dummy, symbols)
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.elementary.miscellaneous import sqrt
+from sympy.functions.special.gamma_functions import gamma
+from sympy.matrices import Determinant, Matrix, Trace, MatrixSymbol, MatrixSet
+from sympy.stats import density, sample
+from sympy.stats.matrix_distributions import (MatrixGammaDistribution,
+                MatrixGamma, MatrixPSpace, Wishart, MatrixNormal, MatrixStudentT)
+from sympy.testing.pytest import raises, skip
+from sympy.external import import_module
+
+
+def test_MatrixPSpace():
+    M = MatrixGammaDistribution(1, 2, [[2, 1], [1, 2]])
+    MP = MatrixPSpace('M', M, 2, 2)
+    assert MP.distribution == M
+    raises(ValueError, lambda: MatrixPSpace('M', M, 1.2, 2))
+
+def test_MatrixGamma():
+    M = MatrixGamma('M', 1, 2, [[1, 0], [0, 1]])
+    assert M.pspace.dist
+  Found: FER_Module/.venv/lib/python3.9/site-packages/torch/distributions
+  Found: FER_Module/.venv/lib/python3.9/site-packages/torch/distributions/transformed_distribution.py
+# mypy: allow-untyped-defs
+from typing import Optional, Union
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.distribution import Distribution
+from torch.distributions.independent import Independent
+from torch.distributions.transforms import ComposeTransform, Transform
+from torch.distributions.utils import _sum_rightmost
+from torch.types import _size
+
+
+__all__ = ["TransformedDistribution"]
+
+
+class TransformedDistribution(Distribution):
+    r"""
+    Extension of the Distribution class, which applies a sequence of Transforms
+    to a base distribution.  Let f be the composition of transforms applied::
+
+        X ~ BaseDistribution
+        Y = f(X) ~ TransformedDistribution(BaseDistribution, f)
+        log p(Y) = log p(X) + log |det (dX/dY)|
+
+    Note that the ``.event_shape`` of a :class:`TransformedDistribution` is the
+    maximum shape of its base distribution and its transforms, since transforms
+    can introduce correlations
+  Found: FER_Module/.venv/lib/python3.9/site-packages/torch/distributions/distribution.py
+# mypy: allow-untyped-defs
+import warnings
+from typing import Optional
+from typing_extensions import deprecated
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.utils import lazy_property
+from torch.types import _size
+
+
+__all__ = ["Distribution"]
+
+
+class Distribution:
+    r"""
+    Distribution is the abstract base class for probability distributions.
+
+    Args:
+        batch_shape (torch.Size): The shape over which parameters are batched.
+        event_shape (torch.Size): The shape of a single sample (without batching).
+        validate_args (bool, optional): Whether to validate arguments. Default: None.
+    """
+
+    has_rsample = False
+    has_enumerate_support = False
+    _validate_args = __debug__
+
+    @staticmethod
+    def set_default_validate_args(value: bool) -> None:
+        """
+        Sets whether validation is enabled or disabled.
+
+        The default behavior mimics Python's ``assert`` statement: validation
+        i
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/distutils/numpy_distribution.py
+# XXX: Handle setuptools ?
+from distutils.core import Distribution
+
+# This class is used because we add new files (sconscripts, and so on) with the
+# scons command
+class NumpyDistribution(Distribution):
+    def __init__(self, attrs = None):
+        # A list of (sconscripts, pre_hook, post_hook, src, parent_names)
+        self.scons_data = []
+        # A list of installable libraries
+        self.installed_libraries = []
+        # A dict of pkg_config files to generate/install
+        self.installed_pkg_config = {}
+        Distribution.__init__(self, attrs)
+
+    def has_scons_scripts(self):
+        return bool(self.scons_data)
+
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/_core/include/numpy/random/distributions.h
+#ifndef NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+#define NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <Python.h>
+#include "numpy/npy_common.h"
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#include "numpy/npy_math.h"
+#include "numpy/random/bitgen.h"
+
+/*
+ * RAND_INT_TYPE is used to share integer generators with RandomState which
+ * used long in place of int64_t. If changing a distribution that uses
+ * RAND_INT_TYPE, then the original unmodified copy must be retained for
+ * use in RandomState by copying to the legacy distributions source file.
+ */
+#ifdef NP_RANDOM_LEGACY
+#define RAND_INT_TYPE long
+#define RAND_INT_MAX LONG_MAX
+#else
+#define RAND_INT_TYPE int64_t
+#define RAND_INT_MAX INT64_MAX
+#endif
+
+#ifdef _MSC_VER
+#define DECLDIR __declspec(dllexport)
+#else
+#define DECLDIR extern
+#endif
+
+#ifndef MIN
+#define MIN(x, y) (((x) < (y)) ? x : y)
+#define MAX(x, y) (((x) > (y)) ? x : y)
+#endif
+
+#ifndef M_PI
+#define M_
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/random/c_distributions.pxd
+#!python
+#cython: wraparound=False, nonecheck=False, boundscheck=False, cdivision=True, language_level=3
+from numpy cimport npy_intp
+
+from libc.stdint cimport (uint64_t, int32_t, int64_t)
+from numpy.random cimport bitgen_t
+
+cdef extern from "numpy/random/distributions.h":
+
+    struct s_binomial_t:
+        int has_binomial
+        double psave
+        int64_t nsave
+        double r
+        double q
+        double fm
+        int64_t m
+        double p1
+        double xm
+        double xl
+        double xr
+        double c
+        double laml
+        double lamr
+        double p2
+        double p3
+        double p4
+
+    ctypedef s_binomial_t binomial_t
+
+    float random_standard_uniform_f(bitgen_t *bitgen_state) nogil
+    double random_standard_uniform(bitgen_t *bitgen_state) nogil
+    void random_standard_uniform_fill(bitgen_t* bitgen_state, npy_intp cnt, double *out) nogil
+    void random_standard_uniform_fill_f(bitgen_t *bitgen_state, npy_intp cnt, float *out) nogil
+    
+    double ran
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/random/_examples/cython/extending_distributions.pyx
+#!/usr/bin/env python3
+#cython: language_level=3
+"""
+This file shows how the to use a BitGenerator to create a distribution.
+"""
+import numpy as np
+cimport numpy as np
+cimport cython
+from cpython.pycapsule cimport PyCapsule_IsValid, PyCapsule_GetPointer
+from libc.stdint cimport uint16_t, uint64_t
+from numpy.random cimport bitgen_t
+from numpy.random import PCG64
+from numpy.random.c_distributions cimport (
+      random_standard_uniform_fill, random_standard_uniform_fill_f)
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def uniforms(Py_ssize_t n):
+    """
+    Create an array of `n` uniformly distributed doubles.
+    A 'real' distribution would want to process the values into
+    some non-uniform distribution
+    """
+    cdef Py_ssize_t i
+    cdef bitgen_t *rng
+    cdef const char *capsule_name = "BitGenerator"
+    cdef double[::1] random_values
+
+    x = PCG64()
+    capsule = x.capsule
+    # Optional check that the capsule if from a BitGenerator
+    if not PyCapsule_IsValid(capsule
+  Found: FER_Module/.venv/lib/python3.9/site-packages/numpy/random/_examples/numba/extending_distributions.py
+r"""
+Building the required library in this example requires a source distribution
+of NumPy or clone of the NumPy git repository since distributions.c is not
+included in binary distributions.
+
+On *nix, execute in numpy/random/src/distributions
+
+export ${PYTHON_VERSION}=3.8 # Python version
+export PYTHON_INCLUDE=#path to Python's include folder, usually \
+    ${PYTHON_HOME}/include/python${PYTHON_VERSION}m
+export NUMPY_INCLUDE=#path to numpy's include folder, usually \
+    ${PYTHON_HOME}/lib/python${PYTHON_VERSION}/site-packages/numpy/_core/include
+gcc -shared -o libdistributions.so -fPIC distributions.c \
+    -I${NUMPY_INCLUDE} -I${PYTHON_INCLUDE}
+mv libdistributions.so ../../_examples/numba/
+
+On Windows
+
+rem PYTHON_HOME and PYTHON_VERSION are setup dependent, this is an example
+set PYTHON_HOME=c:\Anaconda
+set PYTHON_VERSION=38
+cl.exe /LD .\distributions.c -DDLL_EXPORT \
+    -I%PYTHON_HOME%\lib\site-packages\numpy\_core\include \
+    -I%PYTHON_HOME%\include %PYTHON_HOME%\libs\python%PYT
+  Found: FER_Module/.venv/lib/python3.9/site-packages/pip/_internal/distributions
+  Found: FER_Module/.venv/lib/python3.9/site-packages/sklearn/datasets/_species_distributions.py
+"""
+=============================
+Species distribution dataset
+=============================
+
+This dataset represents the geographic distribution of species.
+The dataset is provided by Phillips et. al. (2006).
+
+The two species are:
+
+ - `"Bradypus variegatus"
+   <http://www.iucnredlist.org/details/3038/0>`_ ,
+   the Brown-throated Sloth.
+
+ - `"Microryzomys minutus"
+   <http://www.iucnredlist.org/details/13408/0>`_ ,
+   also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+   Colombia, Ecuador, Peru, and Venezuela.
+
+References
+----------
+
+`"Maximum entropy modeling of species geographic distributions"
+<http://rob.schapire.net/papers/ecolmod.pdf>`_ S. J. Phillips,
+R. P. Anderson, R. E. Schapire - Ecological Modelling, 190:231-259, 2006.
+"""
+
+# Authors: The scikit-learn developers
+# SPDX-License-Identifier: BSD-3-Clause
+
+import logging
+from io import BytesIO
+from numbers import Integral, Real
+from os import PathLike, makedirs, remove
+from os.path import exists
+
+import jobli
+  Found: FER_Module/.venv/lib/python3.9/site-packages/sklearn/datasets/descr/species_distributions.rst
+.. _species_distribution_dataset:
+
+Species distribution dataset
+----------------------------
+
+This dataset represents the geographic distribution of two species in Central and
+South America. The two species are:
+
+- `"Bradypus variegatus" <http://www.iucnredlist.org/details/3038/0>`_ ,
+  the Brown-throated Sloth.
+
+- `"Microryzomys minutus" <http://www.iucnredlist.org/details/13408/0>`_ ,
+  also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+  Colombia, Ecuador, Peru, and Venezuela.
+
+The dataset is not a typical dataset since a :class:`~sklearn.datasets.base.Bunch`
+containing the attributes `data` and `target` is not returned. Instead, we have
+information allowing to create a "density" map of the different species.
+
+The grid for the map can be built using the attributes `x_left_lower_corner`,
+`y_left_lower_corner`, `Nx`, `Ny` and `grid_size`, which respectively correspond
+to the x and y coordinates of the lower left corner of the grid, the number of
+points along the x- 
+  Found: FER_Module/.venv/lib/python3.9/site-packages/scipy/stats/distributions.py
+#
+# Author:  Travis Oliphant  2002-2011 with contributions from
+#          SciPy Developers 2004-2011
+#
+# NOTE: To look at history using `git blame`, use `git blame -M -C -C`
+#       instead of `git blame -Lxxx,+x`.
+#
+from ._distn_infrastructure import (rv_discrete, rv_continuous, rv_frozen)  # noqa: F401
+
+from . import _continuous_distns
+from . import _discrete_distns
+
+from ._continuous_distns import *  # noqa: F403
+from ._levy_stable import levy_stable
+from ._discrete_distns import *  # noqa: F403
+from ._entropy import entropy
+
+# For backwards compatibility e.g. pymc expects distributions.__all__.
+__all__ = ['rv_discrete', 'rv_continuous', 'rv_histogram', 'entropy']  # noqa: F405
+
+# Add only the distribution names, not the *_gen names.
+__all__ += _continuous_distns._distn_names
+__all__ += ['levy_stable']
+__all__ += _discrete_distns._distn_names
+
+  Found: FER_Module/.venv/lib/python3.9/site-packages/scipy/stats/tests/test_distributions.py
+"""
+Test functions for stats module
+"""
+import warnings
+import re
+import sys
+import pickle
+from pathlib import Path
+import os
+import json
+import platform
+
+from numpy.testing import (assert_equal, assert_array_equal,
+                           assert_almost_equal, assert_array_almost_equal,
+                           assert_allclose, assert_, assert_warns,
+                           assert_array_less, suppress_warnings)
+import pytest
+from pytest import raises as assert_raises
+
+import numpy
+import numpy as np
+from numpy import typecodes, array
+from numpy.lib.recfunctions import rec_append_fields
+from scipy import special
+from scipy._lib._util import check_random_state
+from scipy.integrate import (IntegrationWarning, quad, trapezoid,
+                             cumulative_trapezoid)
+import scipy.stats as stats
+from scipy.stats._distn_infrastructure import argsreduce
+import scipy.stats.distributions
+
+from scipy.special import xlogy, polygamma, entr
+from scipy.stats._distr_params import di
+  Found: FER_Module/src/preprocessing/check_multilabel_distribution.py
+import pandas as pd
+
+files = {
+    "train": "data/metadata/TrainLabels.csv",
+    "val": "data/metadata/ValidationLabels.csv",
+    "test": "data/metadata/TestLabels.csv",
+}
+
+emotion_cols = ["Boredom", "Engagement", "Confusion", "Frustration"]
+
+for split, path in files.items():
+    df = pd.read_csv(path)
+    df.columns = df.columns.str.strip()
+
+    bin_df = (df[emotion_cols] >= 2).astype(int)
+
+    print(f"\n--- {split.upper()} ---")
+    print("Positive counts per emotion:")
+    print(bin_df.sum())
+
+    print("\nNumber of active labels per clip:")
+    print(bin_df.sum(axis=1).value_counts().sort_index())
+  Found: RL_Module copy/figures/ert_validation/ert_action_distribution.png
+�PNG
+
+   
+IHDR    �   ��B�   9tEXtSoftware Matplotlib version3.9.4, https://matplotlib.org/��h   	pHYs    g��R   IDATx���	�M�����1�{�}�B��JD��Ҟ��RD)%ي�E�gi%)R��!K�ž�}�r����n�޹w���������t��>��s��|��ylv��.          r��P          @�          r�         @B�         �A         9B          !@         �         �� !         ��          r�         @B�         �A         9B          !@         �         �� !         ��          r�         @B�         �A         9B          !@         �      �Z�d��l63D��]��}���hʔ)Ҹqc)P����y���B],D�9 �B 9J�f��E����%���X�|ZVg;w�tL���J�/-��o�բE��>�|�͡.
+�������3�{�����> @h�.�y��ҥKK�v���O?���"i�Jϡ�S�J�3f�t��MV�\)			R�X1���$>>>�E  � ¨R�m��d���7o^)[���o�>U���2�Y�)��7�8֣eKII�@�3g�9���SΙ��(�D����k�gϞ2k�,�p�BP˦�:-_N��_���g�?}���~����C�	uq ��s�='���2h� 9{�l�� �
+zX�����'s�Ε;�Cڴi#�ϟu�B��O/@X�D	�V��y�nF�e^�x�	s���?������u��� dg�0��y�� ��|ܳg�|��W�Rx�-�8*����K/�Ա>
+6y��H�
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/sympy/stats/matrix_distributions.py
+from math import prod
+
+from sympy.core.basic import Basic
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.special.gamma_functions import multigamma
+from sympy.core.sympify import sympify, _sympify
+from sympy.matrices import (ImmutableMatrix, Inverse, Trace, Determinant,
+                            MatrixSymbol, MatrixBase, Transpose, MatrixSet,
+                            matrix2numpy)
+from sympy.stats.rv import (_value_check, RandomMatrixSymbol, NamedArgsMixin, PSpace,
+                            _symbol_converter, MatrixDomain, Distribution)
+from sympy.external import import_module
+
+
+################################################################################
+#------------------------Matrix Probability Space------------------------------#
+################################################################################
+class MatrixPSpace(PSpace):
+    """
+    Represents probability spac
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/sympy/stats/tests/test_matrix_distributions.py
+from sympy.concrete.products import Product
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.core.symbol import (Dummy, symbols)
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.elementary.miscellaneous import sqrt
+from sympy.functions.special.gamma_functions import gamma
+from sympy.matrices import Determinant, Matrix, Trace, MatrixSymbol, MatrixSet
+from sympy.stats import density, sample
+from sympy.stats.matrix_distributions import (MatrixGammaDistribution,
+                MatrixGamma, MatrixPSpace, Wishart, MatrixNormal, MatrixStudentT)
+from sympy.testing.pytest import raises, skip
+from sympy.external import import_module
+
+
+def test_MatrixPSpace():
+    M = MatrixGammaDistribution(1, 2, [[2, 1], [1, 2]])
+    MP = MatrixPSpace('M', M, 2, 2)
+    assert MP.distribution == M
+    raises(ValueError, lambda: MatrixPSpace('M', M, 1.2, 2))
+
+def test_MatrixGamma():
+    M = MatrixGamma('M', 1, 2, [[1, 0], [0, 1]])
+    assert M.pspace.dist
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/torch/distributions
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/torch/distributions/transformed_distribution.py
+# mypy: allow-untyped-defs
+from typing import Optional, Union
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.distribution import Distribution
+from torch.distributions.independent import Independent
+from torch.distributions.transforms import ComposeTransform, Transform
+from torch.distributions.utils import _sum_rightmost
+from torch.types import _size
+
+
+__all__ = ["TransformedDistribution"]
+
+
+class TransformedDistribution(Distribution):
+    r"""
+    Extension of the Distribution class, which applies a sequence of Transforms
+    to a base distribution.  Let f be the composition of transforms applied::
+
+        X ~ BaseDistribution
+        Y = f(X) ~ TransformedDistribution(BaseDistribution, f)
+        log p(Y) = log p(X) + log |det (dX/dY)|
+
+    Note that the ``.event_shape`` of a :class:`TransformedDistribution` is the
+    maximum shape of its base distribution and its transforms, since transforms
+    can introduce correlations
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/torch/distributions/distribution.py
+# mypy: allow-untyped-defs
+import warnings
+from typing import Optional
+from typing_extensions import deprecated
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.utils import lazy_property
+from torch.types import _size
+
+
+__all__ = ["Distribution"]
+
+
+class Distribution:
+    r"""
+    Distribution is the abstract base class for probability distributions.
+
+    Args:
+        batch_shape (torch.Size): The shape over which parameters are batched.
+        event_shape (torch.Size): The shape of a single sample (without batching).
+        validate_args (bool, optional): Whether to validate arguments. Default: None.
+    """
+
+    has_rsample = False
+    has_enumerate_support = False
+    _validate_args = __debug__
+
+    @staticmethod
+    def set_default_validate_args(value: bool) -> None:
+        """
+        Sets whether validation is enabled or disabled.
+
+        The default behavior mimics Python's ``assert`` statement: validation
+        i
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/numpy/distutils/numpy_distribution.py
+# XXX: Handle setuptools ?
+from distutils.core import Distribution
+
+# This class is used because we add new files (sconscripts, and so on) with the
+# scons command
+class NumpyDistribution(Distribution):
+    def __init__(self, attrs = None):
+        # A list of (sconscripts, pre_hook, post_hook, src, parent_names)
+        self.scons_data = []
+        # A list of installable libraries
+        self.installed_libraries = []
+        # A dict of pkg_config files to generate/install
+        self.installed_pkg_config = {}
+        Distribution.__init__(self, attrs)
+
+    def has_scons_scripts(self):
+        return bool(self.scons_data)
+
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/numpy/_core/include/numpy/random/distributions.h
+#ifndef NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+#define NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <Python.h>
+#include "numpy/npy_common.h"
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#include "numpy/npy_math.h"
+#include "numpy/random/bitgen.h"
+
+/*
+ * RAND_INT_TYPE is used to share integer generators with RandomState which
+ * used long in place of int64_t. If changing a distribution that uses
+ * RAND_INT_TYPE, then the original unmodified copy must be retained for
+ * use in RandomState by copying to the legacy distributions source file.
+ */
+#ifdef NP_RANDOM_LEGACY
+#define RAND_INT_TYPE long
+#define RAND_INT_MAX LONG_MAX
+#else
+#define RAND_INT_TYPE int64_t
+#define RAND_INT_MAX INT64_MAX
+#endif
+
+#ifdef _MSC_VER
+#define DECLDIR __declspec(dllexport)
+#else
+#define DECLDIR extern
+#endif
+
+#ifndef MIN
+#define MIN(x, y) (((x) < (y)) ? x : y)
+#define MAX(x, y) (((x) > (y)) ? x : y)
+#endif
+
+#ifndef M_PI
+#define M_
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/numpy/random/c_distributions.pxd
+#!python
+#cython: wraparound=False, nonecheck=False, boundscheck=False, cdivision=True, language_level=3
+from numpy cimport npy_intp
+
+from libc.stdint cimport (uint64_t, int32_t, int64_t)
+from numpy.random cimport bitgen_t
+
+cdef extern from "numpy/random/distributions.h":
+
+    struct s_binomial_t:
+        int has_binomial
+        double psave
+        int64_t nsave
+        double r
+        double q
+        double fm
+        int64_t m
+        double p1
+        double xm
+        double xl
+        double xr
+        double c
+        double laml
+        double lamr
+        double p2
+        double p3
+        double p4
+
+    ctypedef s_binomial_t binomial_t
+
+    float random_standard_uniform_f(bitgen_t *bitgen_state) nogil
+    double random_standard_uniform(bitgen_t *bitgen_state) nogil
+    void random_standard_uniform_fill(bitgen_t* bitgen_state, npy_intp cnt, double *out) nogil
+    void random_standard_uniform_fill_f(bitgen_t *bitgen_state, npy_intp cnt, float *out) nogil
+    
+    double ran
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/numpy/random/_examples/cython/extending_distributions.pyx
+#!/usr/bin/env python3
+#cython: language_level=3
+"""
+This file shows how the to use a BitGenerator to create a distribution.
+"""
+import numpy as np
+cimport numpy as np
+cimport cython
+from cpython.pycapsule cimport PyCapsule_IsValid, PyCapsule_GetPointer
+from libc.stdint cimport uint16_t, uint64_t
+from numpy.random cimport bitgen_t
+from numpy.random import PCG64
+from numpy.random.c_distributions cimport (
+      random_standard_uniform_fill, random_standard_uniform_fill_f)
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def uniforms(Py_ssize_t n):
+    """
+    Create an array of `n` uniformly distributed doubles.
+    A 'real' distribution would want to process the values into
+    some non-uniform distribution
+    """
+    cdef Py_ssize_t i
+    cdef bitgen_t *rng
+    cdef const char *capsule_name = "BitGenerator"
+    cdef double[::1] random_values
+
+    x = PCG64()
+    capsule = x.capsule
+    # Optional check that the capsule if from a BitGenerator
+    if not PyCapsule_IsValid(capsule
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/numpy/random/_examples/numba/extending_distributions.py
+r"""
+Building the required library in this example requires a source distribution
+of NumPy or clone of the NumPy git repository since distributions.c is not
+included in binary distributions.
+
+On *nix, execute in numpy/random/src/distributions
+
+export ${PYTHON_VERSION}=3.8 # Python version
+export PYTHON_INCLUDE=#path to Python's include folder, usually \
+    ${PYTHON_HOME}/include/python${PYTHON_VERSION}m
+export NUMPY_INCLUDE=#path to numpy's include folder, usually \
+    ${PYTHON_HOME}/lib/python${PYTHON_VERSION}/site-packages/numpy/_core/include
+gcc -shared -o libdistributions.so -fPIC distributions.c \
+    -I${NUMPY_INCLUDE} -I${PYTHON_INCLUDE}
+mv libdistributions.so ../../_examples/numba/
+
+On Windows
+
+rem PYTHON_HOME and PYTHON_VERSION are setup dependent, this is an example
+set PYTHON_HOME=c:\Anaconda
+set PYTHON_VERSION=38
+cl.exe /LD .\distributions.c -DDLL_EXPORT \
+    -I%PYTHON_HOME%\lib\site-packages\numpy\_core\include \
+    -I%PYTHON_HOME%\include %PYTHON_HOME%\libs\python%PYT
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/pip/_internal/distributions
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/chardistribution.py
+######################## BEGIN LICENSE BLOCK ########################
+# The Original Code is Mozilla Communicator client code.
+#
+# The Initial Developer of the Original Code is
+# Netscape Communications Corporation.
+# Portions created by the Initial Developer are Copyright (C) 1998
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Mark Pilgrim - port to Python
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if 
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/sklearn/datasets/_species_distributions.py
+"""
+=============================
+Species distribution dataset
+=============================
+
+This dataset represents the geographic distribution of species.
+The dataset is provided by Phillips et. al. (2006).
+
+The two species are:
+
+ - `"Bradypus variegatus"
+   <http://www.iucnredlist.org/details/3038/0>`_ ,
+   the Brown-throated Sloth.
+
+ - `"Microryzomys minutus"
+   <http://www.iucnredlist.org/details/13408/0>`_ ,
+   also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+   Colombia, Ecuador, Peru, and Venezuela.
+
+References
+----------
+
+`"Maximum entropy modeling of species geographic distributions"
+<http://rob.schapire.net/papers/ecolmod.pdf>`_ S. J. Phillips,
+R. P. Anderson, R. E. Schapire - Ecological Modelling, 190:231-259, 2006.
+"""
+
+# Authors: The scikit-learn developers
+# SPDX-License-Identifier: BSD-3-Clause
+
+import logging
+from io import BytesIO
+from numbers import Integral, Real
+from os import PathLike, makedirs, remove
+from os.path import exists
+
+import jobli
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/sklearn/datasets/descr/species_distributions.rst
+.. _species_distribution_dataset:
+
+Species distribution dataset
+----------------------------
+
+This dataset represents the geographic distribution of two species in Central and
+South America. The two species are:
+
+- `"Bradypus variegatus" <http://www.iucnredlist.org/details/3038/0>`_ ,
+  the Brown-throated Sloth.
+
+- `"Microryzomys minutus" <http://www.iucnredlist.org/details/13408/0>`_ ,
+  also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+  Colombia, Ecuador, Peru, and Venezuela.
+
+The dataset is not a typical dataset since a :class:`~sklearn.datasets.base.Bunch`
+containing the attributes `data` and `target` is not returned. Instead, we have
+information allowing to create a "density" map of the different species.
+
+The grid for the map can be built using the attributes `x_left_lower_corner`,
+`y_left_lower_corner`, `Nx`, `Ny` and `grid_size`, which respectively correspond
+to the x and y coordinates of the lower left corner of the grid, the number of
+points along the x- 
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/sb3_contrib/common/maskable/distributions.py
+from abc import ABC, abstractmethod
+from typing import Optional, TypeVar, Union
+
+import numpy as np
+import torch as th
+from gymnasium import spaces
+from stable_baselines3.common.distributions import Distribution
+from torch import nn
+from torch.distributions import Categorical
+from torch.distributions.utils import logits_to_probs
+
+SelfMaskableCategoricalDistribution = TypeVar("SelfMaskableCategoricalDistribution", bound="MaskableCategoricalDistribution")
+SelfMaskableMultiCategoricalDistribution = TypeVar(
+    "SelfMaskableMultiCategoricalDistribution", bound="MaskableMultiCategoricalDistribution"
+)
+MaybeMasks = Union[th.Tensor, np.ndarray, None]
+
+
+class MaskableCategorical(Categorical):
+    """
+    Modified PyTorch Categorical distribution with support for invalid action masking.
+
+    To instantiate, must provide either probs or logits, but not both.
+
+    :param probs: Tensor containing finite non-negative values, which will be renormalized
+        to sum to 1 along the last dimension.
+
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/stable_baselines3/common/distributions.py
+"""Probability distributions."""
+
+from abc import ABC, abstractmethod
+from typing import Any, Optional, TypeVar, Union
+
+import numpy as np
+import torch as th
+from gymnasium import spaces
+from torch import nn
+from torch.distributions import Bernoulli, Categorical, Normal
+
+from stable_baselines3.common.preprocessing import get_action_dim
+
+SelfDistribution = TypeVar("SelfDistribution", bound="Distribution")
+SelfDiagGaussianDistribution = TypeVar("SelfDiagGaussianDistribution", bound="DiagGaussianDistribution")
+SelfSquashedDiagGaussianDistribution = TypeVar(
+    "SelfSquashedDiagGaussianDistribution", bound="SquashedDiagGaussianDistribution"
+)
+SelfCategoricalDistribution = TypeVar("SelfCategoricalDistribution", bound="CategoricalDistribution")
+SelfMultiCategoricalDistribution = TypeVar("SelfMultiCategoricalDistribution", bound="MultiCategoricalDistribution")
+SelfBernoulliDistribution = TypeVar("SelfBernoulliDistribution", bound="BernoulliDistribution")
+SelfStateDependentNoiseDistribution =
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/scipy/stats/distributions.py
+#
+# Author:  Travis Oliphant  2002-2011 with contributions from
+#          SciPy Developers 2004-2011
+#
+# NOTE: To look at history using `git blame`, use `git blame -M -C -C`
+#       instead of `git blame -Lxxx,+x`.
+#
+from ._distn_infrastructure import (rv_discrete, rv_continuous, rv_frozen)  # noqa: F401
+
+from . import _continuous_distns
+from . import _discrete_distns
+
+from ._continuous_distns import *  # noqa: F403
+from ._levy_stable import levy_stable
+from ._discrete_distns import *  # noqa: F403
+from ._entropy import entropy
+
+# For backwards compatibility e.g. pymc expects distributions.__all__.
+__all__ = ['rv_discrete', 'rv_continuous', 'rv_histogram', 'entropy']  # noqa: F405
+
+# Add only the distribution names, not the *_gen names.
+__all__ += _continuous_distns._distn_names
+__all__ += ['levy_stable']
+__all__ += _discrete_distns._distn_names
+
+  Found: RL_Module copy/.venv/lib/python3.9/site-packages/scipy/stats/tests/test_distributions.py
+"""
+Test functions for stats module
+"""
+import warnings
+import re
+import sys
+import pickle
+from pathlib import Path
+import os
+import json
+import platform
+
+from numpy.testing import (assert_equal, assert_array_equal,
+                           assert_almost_equal, assert_array_almost_equal,
+                           assert_allclose, assert_, assert_warns,
+                           assert_array_less, suppress_warnings)
+import pytest
+from pytest import raises as assert_raises
+
+import numpy
+import numpy as np
+from numpy import typecodes, array
+from numpy.lib.recfunctions import rec_append_fields
+from scipy import special
+from scipy._lib._util import check_random_state
+from scipy.integrate import (IntegrationWarning, quad, trapezoid,
+                             cumulative_trapezoid)
+import scipy.stats as stats
+from scipy.stats._distn_infrastructure import argsreduce
+import scipy.stats.distributions
+
+from scipy.special import xlogy, polygamma, entr
+from scipy.stats._distr_params import di
+  Found: RL_Module/archive/legacy/figures/ert_validation/ert_action_distribution.png
+�PNG
+
+   
+IHDR    �   ��B�   9tEXtSoftware Matplotlib version3.9.4, https://matplotlib.org/��h   	pHYs    g��R   IDATx���	�M�����1�,�"����,-*���B*-�JY�(�V�-B���IE)R�P�=K�ʾ��a0����O�sw��;sg�ns���u��Y�s�w�s���<6��n          yBD�           p         yB          !@         �!        �<� !         ��          ��         @B�         �C         yB          !@         �!        �<� !         ��          ��         @B�         �C         yB          !@         �!        �<� !         ��          ��      @-[�Ll6��I�.]�>�kn4}�tiذ�*T������k�.����܊ !�<�q���s�С�W�J�U>-��ݻw;���P�痖QϷ�jɒ%fn���`��|�{��O�����{>Y  8\�
+Hٲe�M�6��'���nvQ��~��Ќ3$\�7N�v�*�V����D)Q��\v�e� r!T��4xz��u�������K۶m�U
+=-�͐���_��c=Z���T�y��㪯y圉��0ODꍀn�Az��)s�̑�/�l���兠�ƍ�~��ӧ�=�ׯ�y?lذ`�=���-C��s���8 �Р�5h����2�|��{�U�Vr�`! ������J���ի���f̘1�����2�:���>|X{�`
+az�@nF��J���
+9ϧ�}��ɗ_~i*�w�q��RX�pa����K��`��y�+���s�Pв}�
+  Found: RL_Module/archive/legacy/figures/reward_weight_ablation/action_distribution_comparison.png
+�PNG
+
+   
+IHDR    �   ��e6   9tEXtSoftware Matplotlib version3.9.4, https://matplotlib.org/��h   	pHYs    g��R   IDATx����T��?𳔥�4T,�ػ��]��%64�챷�nP��$��{�
+{o�*bl(J����f�˲K��]��y�yf��3w����������      ��&��       �x�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�      PB�  P�I'������:묓JY�x2$5D��D���n������P�q-�Ƥ�����3O��K|pZx�S�-*��?��(�
+Ec�7 ��f��   J�����u�~������￟]t�پ��^{-�~��i��N�zh����뮻��[�j��k�4��e�]6����i�vH;v,j�
+Aހ��s�������q���FqD���O1�Y�f�C�i�%�L�o�y�g�}R�6mꥍ��駟N7�pCz�'������mۦ�ݻ��V[-m��vi���kPa�ĉs��wH�����4�7ׅk�O>��Q�\ И �W�\sMe8.������m��'��=��S�=�v��9���;a�Xŗ�������	ҨQ���_��������?�9�����8���1�[��-m�c������m�ϫ!����^#�- ��Z8��~q^4m�4�3fL���o��?�]tQz��G���ꫯ�n��|���i��o�>�������K/�4-�����oL�,�Hjz����y����Yc�5��~�¸���¨�lٲe�� ���
+ �z����
+  Found: RL_Module/archive/exploratory/intermediate_reward_weight_ablation/figures/action_distribution_comparison.png
+�PNG
+
+   
+IHDR  4  �   T��F   9tEXtSoftware Matplotlib version3.9.4, https://matplotlib.org/��h   	pHYs    g��R   IDATx������?��Q�jQP�(��PA��cT4�.��bK����h�%�D��l�%+ 6,�)������o�wt������������<;;��>��>e����       PB��w        �%�        ��       ��4        %G�       (9
+       @�h        J�@       Pr       ��#�        ��       ��4        %G�       (9
+       @�h        J�@       Pr       ��#�        ��       ��4        %G�       (9
+       @�h        J�@  �<2p��(++��}�Fc��A���(}?�}���V����n�!JU:��cܐ4�v3�|��|�M}��ѣG�hѢE�x|��w
+���T4��f  `�h6��  0�}���ѹs��駟����{/�_~�y���_=���Xt�E��c��M�H�t�M��ߪU�Xx�c�%���W_=6�`��s�=�}��uھB����SkA�:8/���<�g�|�n�N������͚5�v���*��;�cr�!ѦM�zicc��s��w�O?�t|���zi۶mt��5�_��}��c��6+���ԩSs��ߐ$�7�OI�&�1*\{~�a�5�0   P3�  �����[�a��뮋?���|?�3��3όnݺ�0�СC�Xq�s[C�:������)S���__|�E6,n���8������ǹ���t�֭[ϓ6�c��ήyhH�Ojc��JI�-|�ި-А�k�3��iӦ�����㫯����z*OW\qE<����������~���>�hq^
+,��"1v���۔����:�\s͸��
+  Found: RL_Module/figures/combined_improvement_validation/action_distribution_comparison.png
+�PNG
+
+   
+IHDR  4  �   T��F   9tEXtSoftware Matplotlib version3.9.4, https://matplotlib.org/��h   	pHYs    g��R  ��IDATx����T��?�gX:*b���(��ƒh4Fc!ƒ�k�
+[,�ט؍]c!�X"XbA��hlػبR����?�[`�63����\;sΙs�9SB�~�y*����       ��T�z         3h        ʎ@       Pv       ��#�        ��       ��4        eG�       (;
+       @�h        ʎ@       Pv       ��#�        ��       ��4        eG�       (;
+       @�h        ʎ@       Pv       ��#�        ��       ��4        eG�  ��2$***b���ј�k��aÆE9J�O_z�fԭ[����뮋r��k�/L�q/L>����g�}�k׮QUU����/������5�?�f��  h��
+�  ���o��N�:�?�����[ѳg��~��_~9��<1x�a�Ţ&M�m��&3�oٲe�k�.�Yf�Xm��b��֋]w�5ڷo_���{�w,��������>+LDS|>�`�}�����O�g�}cƌɟ�=z������[���:QN�����`�
+��?��[l�hѢE���I���9�q�c��W/�p   (�  ��馛j��5�\g�y�	4�r�)�����2�СC�Xy��VK,�D�ew2eʔ����/��W_}5n���8���c����׹u��u#]��U�V�eL��*+̏@Cz}���UN�DkṦ�F}��t]ט�+��v�}�x�j�5i�$�R``Ĉy�袋r���o/���-�ܒ��3���+z��5��f͚ռo���h�����Ȭ
+��;  �   J�ꫯ�>���K��믏�O
+  Found: RL_Module/.venv/lib/python3.9/site-packages/sympy/stats/matrix_distributions.py
+from math import prod
+
+from sympy.core.basic import Basic
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.special.gamma_functions import multigamma
+from sympy.core.sympify import sympify, _sympify
+from sympy.matrices import (ImmutableMatrix, Inverse, Trace, Determinant,
+                            MatrixSymbol, MatrixBase, Transpose, MatrixSet,
+                            matrix2numpy)
+from sympy.stats.rv import (_value_check, RandomMatrixSymbol, NamedArgsMixin, PSpace,
+                            _symbol_converter, MatrixDomain, Distribution)
+from sympy.external import import_module
+
+
+################################################################################
+#------------------------Matrix Probability Space------------------------------#
+################################################################################
+class MatrixPSpace(PSpace):
+    """
+    Represents probability spac
+  Found: RL_Module/.venv/lib/python3.9/site-packages/sympy/stats/tests/test_matrix_distributions.py
+from sympy.concrete.products import Product
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.core.symbol import (Dummy, symbols)
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.elementary.miscellaneous import sqrt
+from sympy.functions.special.gamma_functions import gamma
+from sympy.matrices import Determinant, Matrix, Trace, MatrixSymbol, MatrixSet
+from sympy.stats import density, sample
+from sympy.stats.matrix_distributions import (MatrixGammaDistribution,
+                MatrixGamma, MatrixPSpace, Wishart, MatrixNormal, MatrixStudentT)
+from sympy.testing.pytest import raises, skip
+from sympy.external import import_module
+
+
+def test_MatrixPSpace():
+    M = MatrixGammaDistribution(1, 2, [[2, 1], [1, 2]])
+    MP = MatrixPSpace('M', M, 2, 2)
+    assert MP.distribution == M
+    raises(ValueError, lambda: MatrixPSpace('M', M, 1.2, 2))
+
+def test_MatrixGamma():
+    M = MatrixGamma('M', 1, 2, [[1, 0], [0, 1]])
+    assert M.pspace.dist
+  Found: RL_Module/.venv/lib/python3.9/site-packages/torch/distributions
+  Found: RL_Module/.venv/lib/python3.9/site-packages/torch/distributions/transformed_distribution.py
+# mypy: allow-untyped-defs
+from typing import Optional, Union
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.distribution import Distribution
+from torch.distributions.independent import Independent
+from torch.distributions.transforms import ComposeTransform, Transform
+from torch.distributions.utils import _sum_rightmost
+from torch.types import _size
+
+
+__all__ = ["TransformedDistribution"]
+
+
+class TransformedDistribution(Distribution):
+    r"""
+    Extension of the Distribution class, which applies a sequence of Transforms
+    to a base distribution.  Let f be the composition of transforms applied::
+
+        X ~ BaseDistribution
+        Y = f(X) ~ TransformedDistribution(BaseDistribution, f)
+        log p(Y) = log p(X) + log |det (dX/dY)|
+
+    Note that the ``.event_shape`` of a :class:`TransformedDistribution` is the
+    maximum shape of its base distribution and its transforms, since transforms
+    can introduce correlations
+  Found: RL_Module/.venv/lib/python3.9/site-packages/torch/distributions/distribution.py
+# mypy: allow-untyped-defs
+import warnings
+from typing import Optional
+from typing_extensions import deprecated
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.utils import lazy_property
+from torch.types import _size
+
+
+__all__ = ["Distribution"]
+
+
+class Distribution:
+    r"""
+    Distribution is the abstract base class for probability distributions.
+
+    Args:
+        batch_shape (torch.Size): The shape over which parameters are batched.
+        event_shape (torch.Size): The shape of a single sample (without batching).
+        validate_args (bool, optional): Whether to validate arguments. Default: None.
+    """
+
+    has_rsample = False
+    has_enumerate_support = False
+    _validate_args = __debug__
+
+    @staticmethod
+    def set_default_validate_args(value: bool) -> None:
+        """
+        Sets whether validation is enabled or disabled.
+
+        The default behavior mimics Python's ``assert`` statement: validation
+        i
+  Found: RL_Module/.venv/lib/python3.9/site-packages/numpy/distutils/numpy_distribution.py
+# XXX: Handle setuptools ?
+from distutils.core import Distribution
+
+# This class is used because we add new files (sconscripts, and so on) with the
+# scons command
+class NumpyDistribution(Distribution):
+    def __init__(self, attrs = None):
+        # A list of (sconscripts, pre_hook, post_hook, src, parent_names)
+        self.scons_data = []
+        # A list of installable libraries
+        self.installed_libraries = []
+        # A dict of pkg_config files to generate/install
+        self.installed_pkg_config = {}
+        Distribution.__init__(self, attrs)
+
+    def has_scons_scripts(self):
+        return bool(self.scons_data)
+
+  Found: RL_Module/.venv/lib/python3.9/site-packages/numpy/_core/include/numpy/random/distributions.h
+#ifndef NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+#define NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <Python.h>
+#include "numpy/npy_common.h"
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#include "numpy/npy_math.h"
+#include "numpy/random/bitgen.h"
+
+/*
+ * RAND_INT_TYPE is used to share integer generators with RandomState which
+ * used long in place of int64_t. If changing a distribution that uses
+ * RAND_INT_TYPE, then the original unmodified copy must be retained for
+ * use in RandomState by copying to the legacy distributions source file.
+ */
+#ifdef NP_RANDOM_LEGACY
+#define RAND_INT_TYPE long
+#define RAND_INT_MAX LONG_MAX
+#else
+#define RAND_INT_TYPE int64_t
+#define RAND_INT_MAX INT64_MAX
+#endif
+
+#ifdef _MSC_VER
+#define DECLDIR __declspec(dllexport)
+#else
+#define DECLDIR extern
+#endif
+
+#ifndef MIN
+#define MIN(x, y) (((x) < (y)) ? x : y)
+#define MAX(x, y) (((x) > (y)) ? x : y)
+#endif
+
+#ifndef M_PI
+#define M_
+  Found: RL_Module/.venv/lib/python3.9/site-packages/numpy/random/c_distributions.pxd
+#!python
+#cython: wraparound=False, nonecheck=False, boundscheck=False, cdivision=True, language_level=3
+from numpy cimport npy_intp
+
+from libc.stdint cimport (uint64_t, int32_t, int64_t)
+from numpy.random cimport bitgen_t
+
+cdef extern from "numpy/random/distributions.h":
+
+    struct s_binomial_t:
+        int has_binomial
+        double psave
+        int64_t nsave
+        double r
+        double q
+        double fm
+        int64_t m
+        double p1
+        double xm
+        double xl
+        double xr
+        double c
+        double laml
+        double lamr
+        double p2
+        double p3
+        double p4
+
+    ctypedef s_binomial_t binomial_t
+
+    float random_standard_uniform_f(bitgen_t *bitgen_state) nogil
+    double random_standard_uniform(bitgen_t *bitgen_state) nogil
+    void random_standard_uniform_fill(bitgen_t* bitgen_state, npy_intp cnt, double *out) nogil
+    void random_standard_uniform_fill_f(bitgen_t *bitgen_state, npy_intp cnt, float *out) nogil
+    
+    double ran
+  Found: RL_Module/.venv/lib/python3.9/site-packages/numpy/random/_examples/cython/extending_distributions.pyx
+#!/usr/bin/env python3
+#cython: language_level=3
+"""
+This file shows how the to use a BitGenerator to create a distribution.
+"""
+import numpy as np
+cimport numpy as np
+cimport cython
+from cpython.pycapsule cimport PyCapsule_IsValid, PyCapsule_GetPointer
+from libc.stdint cimport uint16_t, uint64_t
+from numpy.random cimport bitgen_t
+from numpy.random import PCG64
+from numpy.random.c_distributions cimport (
+      random_standard_uniform_fill, random_standard_uniform_fill_f)
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def uniforms(Py_ssize_t n):
+    """
+    Create an array of `n` uniformly distributed doubles.
+    A 'real' distribution would want to process the values into
+    some non-uniform distribution
+    """
+    cdef Py_ssize_t i
+    cdef bitgen_t *rng
+    cdef const char *capsule_name = "BitGenerator"
+    cdef double[::1] random_values
+
+    x = PCG64()
+    capsule = x.capsule
+    # Optional check that the capsule if from a BitGenerator
+    if not PyCapsule_IsValid(capsule
+  Found: RL_Module/.venv/lib/python3.9/site-packages/numpy/random/_examples/numba/extending_distributions.py
+r"""
+Building the required library in this example requires a source distribution
+of NumPy or clone of the NumPy git repository since distributions.c is not
+included in binary distributions.
+
+On *nix, execute in numpy/random/src/distributions
+
+export ${PYTHON_VERSION}=3.8 # Python version
+export PYTHON_INCLUDE=#path to Python's include folder, usually \
+    ${PYTHON_HOME}/include/python${PYTHON_VERSION}m
+export NUMPY_INCLUDE=#path to numpy's include folder, usually \
+    ${PYTHON_HOME}/lib/python${PYTHON_VERSION}/site-packages/numpy/_core/include
+gcc -shared -o libdistributions.so -fPIC distributions.c \
+    -I${NUMPY_INCLUDE} -I${PYTHON_INCLUDE}
+mv libdistributions.so ../../_examples/numba/
+
+On Windows
+
+rem PYTHON_HOME and PYTHON_VERSION are setup dependent, this is an example
+set PYTHON_HOME=c:\Anaconda
+set PYTHON_VERSION=38
+cl.exe /LD .\distributions.c -DDLL_EXPORT \
+    -I%PYTHON_HOME%\lib\site-packages\numpy\_core\include \
+    -I%PYTHON_HOME%\include %PYTHON_HOME%\libs\python%PYT
+  Found: RL_Module/.venv/lib/python3.9/site-packages/pip/_internal/distributions
+  Found: RL_Module/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/chardistribution.py
+######################## BEGIN LICENSE BLOCK ########################
+# The Original Code is Mozilla Communicator client code.
+#
+# The Initial Developer of the Original Code is
+# Netscape Communications Corporation.
+# Portions created by the Initial Developer are Copyright (C) 1998
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Mark Pilgrim - port to Python
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if 
+  Found: RL_Module/.venv/lib/python3.9/site-packages/sklearn/datasets/_species_distributions.py
+"""
+=============================
+Species distribution dataset
+=============================
+
+This dataset represents the geographic distribution of species.
+The dataset is provided by Phillips et. al. (2006).
+
+The two species are:
+
+ - `"Bradypus variegatus"
+   <http://www.iucnredlist.org/details/3038/0>`_ ,
+   the Brown-throated Sloth.
+
+ - `"Microryzomys minutus"
+   <http://www.iucnredlist.org/details/13408/0>`_ ,
+   also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+   Colombia, Ecuador, Peru, and Venezuela.
+
+References
+----------
+
+`"Maximum entropy modeling of species geographic distributions"
+<http://rob.schapire.net/papers/ecolmod.pdf>`_ S. J. Phillips,
+R. P. Anderson, R. E. Schapire - Ecological Modelling, 190:231-259, 2006.
+"""
+
+# Authors: The scikit-learn developers
+# SPDX-License-Identifier: BSD-3-Clause
+
+import logging
+from io import BytesIO
+from numbers import Integral, Real
+from os import PathLike, makedirs, remove
+from os.path import exists
+
+import jobli
+  Found: RL_Module/.venv/lib/python3.9/site-packages/sklearn/datasets/descr/species_distributions.rst
+.. _species_distribution_dataset:
+
+Species distribution dataset
+----------------------------
+
+This dataset represents the geographic distribution of two species in Central and
+South America. The two species are:
+
+- `"Bradypus variegatus" <http://www.iucnredlist.org/details/3038/0>`_ ,
+  the Brown-throated Sloth.
+
+- `"Microryzomys minutus" <http://www.iucnredlist.org/details/13408/0>`_ ,
+  also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+  Colombia, Ecuador, Peru, and Venezuela.
+
+The dataset is not a typical dataset since a :class:`~sklearn.datasets.base.Bunch`
+containing the attributes `data` and `target` is not returned. Instead, we have
+information allowing to create a "density" map of the different species.
+
+The grid for the map can be built using the attributes `x_left_lower_corner`,
+`y_left_lower_corner`, `Nx`, `Ny` and `grid_size`, which respectively correspond
+to the x and y coordinates of the lower left corner of the grid, the number of
+points along the x- 
+  Found: RL_Module/.venv/lib/python3.9/site-packages/sb3_contrib/common/maskable/distributions.py
+from abc import ABC, abstractmethod
+from typing import Optional, TypeVar, Union
+
+import numpy as np
+import torch as th
+from gymnasium import spaces
+from stable_baselines3.common.distributions import Distribution
+from torch import nn
+from torch.distributions import Categorical
+from torch.distributions.utils import logits_to_probs
+
+SelfMaskableCategoricalDistribution = TypeVar("SelfMaskableCategoricalDistribution", bound="MaskableCategoricalDistribution")
+SelfMaskableMultiCategoricalDistribution = TypeVar(
+    "SelfMaskableMultiCategoricalDistribution", bound="MaskableMultiCategoricalDistribution"
+)
+MaybeMasks = Union[th.Tensor, np.ndarray, None]
+
+
+class MaskableCategorical(Categorical):
+    """
+    Modified PyTorch Categorical distribution with support for invalid action masking.
+
+    To instantiate, must provide either probs or logits, but not both.
+
+    :param probs: Tensor containing finite non-negative values, which will be renormalized
+        to sum to 1 along the last dimension.
+
+  Found: RL_Module/.venv/lib/python3.9/site-packages/stable_baselines3/common/distributions.py
+"""Probability distributions."""
+
+from abc import ABC, abstractmethod
+from typing import Any, Optional, TypeVar, Union
+
+import numpy as np
+import torch as th
+from gymnasium import spaces
+from torch import nn
+from torch.distributions import Bernoulli, Categorical, Normal
+
+from stable_baselines3.common.preprocessing import get_action_dim
+
+SelfDistribution = TypeVar("SelfDistribution", bound="Distribution")
+SelfDiagGaussianDistribution = TypeVar("SelfDiagGaussianDistribution", bound="DiagGaussianDistribution")
+SelfSquashedDiagGaussianDistribution = TypeVar(
+    "SelfSquashedDiagGaussianDistribution", bound="SquashedDiagGaussianDistribution"
+)
+SelfCategoricalDistribution = TypeVar("SelfCategoricalDistribution", bound="CategoricalDistribution")
+SelfMultiCategoricalDistribution = TypeVar("SelfMultiCategoricalDistribution", bound="MultiCategoricalDistribution")
+SelfBernoulliDistribution = TypeVar("SelfBernoulliDistribution", bound="BernoulliDistribution")
+SelfStateDependentNoiseDistribution =
+  Found: RL_Module/.venv/lib/python3.9/site-packages/scipy/stats/distributions.py
+#
+# Author:  Travis Oliphant  2002-2011 with contributions from
+#          SciPy Developers 2004-2011
+#
+# NOTE: To look at history using `git blame`, use `git blame -M -C -C`
+#       instead of `git blame -Lxxx,+x`.
+#
+from ._distn_infrastructure import (rv_discrete, rv_continuous, rv_frozen)  # noqa: F401
+
+from . import _continuous_distns
+from . import _discrete_distns
+
+from ._continuous_distns import *  # noqa: F403
+from ._levy_stable import levy_stable
+from ._discrete_distns import *  # noqa: F403
+from ._entropy import entropy
+
+# For backwards compatibility e.g. pymc expects distributions.__all__.
+__all__ = ['rv_discrete', 'rv_continuous', 'rv_histogram', 'entropy']  # noqa: F405
+
+# Add only the distribution names, not the *_gen names.
+__all__ += _continuous_distns._distn_names
+__all__ += ['levy_stable']
+__all__ += _discrete_distns._distn_names
+
+  Found: RL_Module/.venv/lib/python3.9/site-packages/scipy/stats/tests/test_distributions.py
+"""
+Test functions for stats module
+"""
+import warnings
+import re
+import sys
+import pickle
+from pathlib import Path
+import os
+import json
+import platform
+
+from numpy.testing import (assert_equal, assert_array_equal,
+                           assert_almost_equal, assert_array_almost_equal,
+                           assert_allclose, assert_, assert_warns,
+                           assert_array_less, suppress_warnings)
+import pytest
+from pytest import raises as assert_raises
+
+import numpy
+import numpy as np
+from numpy import typecodes, array
+from numpy.lib.recfunctions import rec_append_fields
+from scipy import special
+from scipy._lib._util import check_random_state
+from scipy.integrate import (IntegrationWarning, quad, trapezoid,
+                             cumulative_trapezoid)
+import scipy.stats as stats
+from scipy.stats._distn_infrastructure import argsreduce
+import scipy.stats.distributions
+
+from scipy.special import xlogy, polygamma, entr
+from scipy.stats._distr_params import di
+  Found: backup_before_rerun/figures/ert_validation/ert_action_distribution.png
+�PNG
+
+   
+IHDR    �   ��B�   9tEXtSoftware Matplotlib version3.9.4, https://matplotlib.org/��h   	pHYs    g��R   IDATx���	�M�����1�,�"����,-*���B*-�JY�(�V�-B���IE)R�P�=K�ʾ��a0����O�sw��;sg�ns���u��Y�s�w�s���<6��n          yBD�           p         yB          !@         �!        �<� !         ��          ��         @B�         �C         yB          !@         �!        �<� !         ��          ��         @B�         �C         yB          !@         �!        �<� !         ��          ��      @-[�Ll6��I�.]�>�kn4}�tiذ�*T������k�.����܊ !�<�q���s�С�W�J�U>-��ݻw;���P�痖QϷ�jɒ%fn���`��|�{��O�����{>Y  8\�
+Hٲe�M�6��'���nvQ��~��Ќ3$\�7N�v�*�V����D)Q��\v�e� r!T��4xz��u�������K۶m�U
+=-�͐���_��c=Z���T�y��㪯y圉��0ODꍀn�Az��)s�̑�/�l���兠�ƍ�~��ӧ�=�ׯ�y?lذ`�=���-C��s���8 �Р�5h����2�|��{�U�Vr�`! ������J���ի���f̘1�����2�:���>|X{�`
+az�@nF��J���
+9ϧ�}��ɗ_~i*�w�q��RX�pa����K��`��y�+���s�Pв}�
+  Found: .venv/lib/python3.9/site-packages/sympy/stats/matrix_distributions.py
+from math import prod
+
+from sympy.core.basic import Basic
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.special.gamma_functions import multigamma
+from sympy.core.sympify import sympify, _sympify
+from sympy.matrices import (ImmutableMatrix, Inverse, Trace, Determinant,
+                            MatrixSymbol, MatrixBase, Transpose, MatrixSet,
+                            matrix2numpy)
+from sympy.stats.rv import (_value_check, RandomMatrixSymbol, NamedArgsMixin, PSpace,
+                            _symbol_converter, MatrixDomain, Distribution)
+from sympy.external import import_module
+
+
+################################################################################
+#------------------------Matrix Probability Space------------------------------#
+################################################################################
+class MatrixPSpace(PSpace):
+    """
+    Represents probability spac
+  Found: .venv/lib/python3.9/site-packages/sympy/stats/tests/test_matrix_distributions.py
+from sympy.concrete.products import Product
+from sympy.core.numbers import pi
+from sympy.core.singleton import S
+from sympy.core.symbol import (Dummy, symbols)
+from sympy.functions.elementary.exponential import exp
+from sympy.functions.elementary.miscellaneous import sqrt
+from sympy.functions.special.gamma_functions import gamma
+from sympy.matrices import Determinant, Matrix, Trace, MatrixSymbol, MatrixSet
+from sympy.stats import density, sample
+from sympy.stats.matrix_distributions import (MatrixGammaDistribution,
+                MatrixGamma, MatrixPSpace, Wishart, MatrixNormal, MatrixStudentT)
+from sympy.testing.pytest import raises, skip
+from sympy.external import import_module
+
+
+def test_MatrixPSpace():
+    M = MatrixGammaDistribution(1, 2, [[2, 1], [1, 2]])
+    MP = MatrixPSpace('M', M, 2, 2)
+    assert MP.distribution == M
+    raises(ValueError, lambda: MatrixPSpace('M', M, 1.2, 2))
+
+def test_MatrixGamma():
+    M = MatrixGamma('M', 1, 2, [[1, 0], [0, 1]])
+    assert M.pspace.dist
+  Found: .venv/lib/python3.9/site-packages/seaborn/distributions.py
+"""Plotting functions for visualizing distributions."""
+from numbers import Number
+from functools import partial
+import math
+import textwrap
+import warnings
+
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.transforms as tx
+from matplotlib.cbook import normalize_kwargs
+from matplotlib.colors import to_rgba
+from matplotlib.collections import LineCollection
+
+from ._base import VectorPlotter
+
+# We have moved univariate histogram computation over to the new Hist class,
+# but still use the older Histogram for bivariate computation.
+from ._statistics import ECDF, Histogram, KDE
+from ._stats.counting import Hist
+
+from .axisgrid import (
+    FacetGrid,
+    _facet_docs,
+)
+from .utils import (
+    remove_na,
+    _get_transform_functions,
+    _kde_support,
+    _check_argument,
+    _assign_default_kwargs,
+    _default_color,
+)
+from .palettes import color_palette
+from .external import husl
+from .external.kde import gaussian_kde
+from .
+  Found: .venv/lib/python3.9/site-packages/torch/distributions
+  Found: .venv/lib/python3.9/site-packages/torch/distributions/transformed_distribution.py
+# mypy: allow-untyped-defs
+from typing import Optional, Union
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.distribution import Distribution
+from torch.distributions.independent import Independent
+from torch.distributions.transforms import ComposeTransform, Transform
+from torch.distributions.utils import _sum_rightmost
+from torch.types import _size
+
+
+__all__ = ["TransformedDistribution"]
+
+
+class TransformedDistribution(Distribution):
+    r"""
+    Extension of the Distribution class, which applies a sequence of Transforms
+    to a base distribution.  Let f be the composition of transforms applied::
+
+        X ~ BaseDistribution
+        Y = f(X) ~ TransformedDistribution(BaseDistribution, f)
+        log p(Y) = log p(X) + log |det (dX/dY)|
+
+    Note that the ``.event_shape`` of a :class:`TransformedDistribution` is the
+    maximum shape of its base distribution and its transforms, since transforms
+    can introduce correlations
+  Found: .venv/lib/python3.9/site-packages/torch/distributions/distribution.py
+# mypy: allow-untyped-defs
+import warnings
+from typing import Optional
+from typing_extensions import deprecated
+
+import torch
+from torch import Tensor
+from torch.distributions import constraints
+from torch.distributions.utils import lazy_property
+from torch.types import _size
+
+
+__all__ = ["Distribution"]
+
+
+class Distribution:
+    r"""
+    Distribution is the abstract base class for probability distributions.
+
+    Args:
+        batch_shape (torch.Size): The shape over which parameters are batched.
+        event_shape (torch.Size): The shape of a single sample (without batching).
+        validate_args (bool, optional): Whether to validate arguments. Default: None.
+    """
+
+    has_rsample = False
+    has_enumerate_support = False
+    _validate_args = __debug__
+
+    @staticmethod
+    def set_default_validate_args(value: bool) -> None:
+        """
+        Sets whether validation is enabled or disabled.
+
+        The default behavior mimics Python's ``assert`` statement: validation
+        i
+  Found: .venv/lib/python3.9/site-packages/numpy/distutils/numpy_distribution.py
+# XXX: Handle setuptools ?
+from distutils.core import Distribution
+
+# This class is used because we add new files (sconscripts, and so on) with the
+# scons command
+class NumpyDistribution(Distribution):
+    def __init__(self, attrs = None):
+        # A list of (sconscripts, pre_hook, post_hook, src, parent_names)
+        self.scons_data = []
+        # A list of installable libraries
+        self.installed_libraries = []
+        # A dict of pkg_config files to generate/install
+        self.installed_pkg_config = {}
+        Distribution.__init__(self, attrs)
+
+    def has_scons_scripts(self):
+        return bool(self.scons_data)
+
+  Found: .venv/lib/python3.9/site-packages/numpy/_core/include/numpy/random/distributions.h
+#ifndef NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+#define NUMPY_CORE_INCLUDE_NUMPY_RANDOM_DISTRIBUTIONS_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <Python.h>
+#include "numpy/npy_common.h"
+#include <stddef.h>
+#include <stdbool.h>
+#include <stdint.h>
+
+#include "numpy/npy_math.h"
+#include "numpy/random/bitgen.h"
+
+/*
+ * RAND_INT_TYPE is used to share integer generators with RandomState which
+ * used long in place of int64_t. If changing a distribution that uses
+ * RAND_INT_TYPE, then the original unmodified copy must be retained for
+ * use in RandomState by copying to the legacy distributions source file.
+ */
+#ifdef NP_RANDOM_LEGACY
+#define RAND_INT_TYPE long
+#define RAND_INT_MAX LONG_MAX
+#else
+#define RAND_INT_TYPE int64_t
+#define RAND_INT_MAX INT64_MAX
+#endif
+
+#ifdef _MSC_VER
+#define DECLDIR __declspec(dllexport)
+#else
+#define DECLDIR extern
+#endif
+
+#ifndef MIN
+#define MIN(x, y) (((x) < (y)) ? x : y)
+#define MAX(x, y) (((x) > (y)) ? x : y)
+#endif
+
+#ifndef M_PI
+#define M_
+  Found: .venv/lib/python3.9/site-packages/numpy/random/c_distributions.pxd
+#!python
+#cython: wraparound=False, nonecheck=False, boundscheck=False, cdivision=True, language_level=3
+from numpy cimport npy_intp
+
+from libc.stdint cimport (uint64_t, int32_t, int64_t)
+from numpy.random cimport bitgen_t
+
+cdef extern from "numpy/random/distributions.h":
+
+    struct s_binomial_t:
+        int has_binomial
+        double psave
+        int64_t nsave
+        double r
+        double q
+        double fm
+        int64_t m
+        double p1
+        double xm
+        double xl
+        double xr
+        double c
+        double laml
+        double lamr
+        double p2
+        double p3
+        double p4
+
+    ctypedef s_binomial_t binomial_t
+
+    float random_standard_uniform_f(bitgen_t *bitgen_state) nogil
+    double random_standard_uniform(bitgen_t *bitgen_state) nogil
+    void random_standard_uniform_fill(bitgen_t* bitgen_state, npy_intp cnt, double *out) nogil
+    void random_standard_uniform_fill_f(bitgen_t *bitgen_state, npy_intp cnt, float *out) nogil
+    
+    double ran
+  Found: .venv/lib/python3.9/site-packages/numpy/random/_examples/cython/extending_distributions.pyx
+#!/usr/bin/env python3
+#cython: language_level=3
+"""
+This file shows how the to use a BitGenerator to create a distribution.
+"""
+import numpy as np
+cimport numpy as np
+cimport cython
+from cpython.pycapsule cimport PyCapsule_IsValid, PyCapsule_GetPointer
+from libc.stdint cimport uint16_t, uint64_t
+from numpy.random cimport bitgen_t
+from numpy.random import PCG64
+from numpy.random.c_distributions cimport (
+      random_standard_uniform_fill, random_standard_uniform_fill_f)
+
+
+@cython.boundscheck(False)
+@cython.wraparound(False)
+def uniforms(Py_ssize_t n):
+    """
+    Create an array of `n` uniformly distributed doubles.
+    A 'real' distribution would want to process the values into
+    some non-uniform distribution
+    """
+    cdef Py_ssize_t i
+    cdef bitgen_t *rng
+    cdef const char *capsule_name = "BitGenerator"
+    cdef double[::1] random_values
+
+    x = PCG64()
+    capsule = x.capsule
+    # Optional check that the capsule if from a BitGenerator
+    if not PyCapsule_IsValid(capsule
+  Found: .venv/lib/python3.9/site-packages/numpy/random/_examples/numba/extending_distributions.py
+r"""
+Building the required library in this example requires a source distribution
+of NumPy or clone of the NumPy git repository since distributions.c is not
+included in binary distributions.
+
+On *nix, execute in numpy/random/src/distributions
+
+export ${PYTHON_VERSION}=3.8 # Python version
+export PYTHON_INCLUDE=#path to Python's include folder, usually \
+    ${PYTHON_HOME}/include/python${PYTHON_VERSION}m
+export NUMPY_INCLUDE=#path to numpy's include folder, usually \
+    ${PYTHON_HOME}/lib/python${PYTHON_VERSION}/site-packages/numpy/_core/include
+gcc -shared -o libdistributions.so -fPIC distributions.c \
+    -I${NUMPY_INCLUDE} -I${PYTHON_INCLUDE}
+mv libdistributions.so ../../_examples/numba/
+
+On Windows
+
+rem PYTHON_HOME and PYTHON_VERSION are setup dependent, this is an example
+set PYTHON_HOME=c:\Anaconda
+set PYTHON_VERSION=38
+cl.exe /LD .\distributions.c -DDLL_EXPORT \
+    -I%PYTHON_HOME%\lib\site-packages\numpy\_core\include \
+    -I%PYTHON_HOME%\include %PYTHON_HOME%\libs\python%PYT
+  Found: .venv/lib/python3.9/site-packages/pip/_internal/distributions
+  Found: .venv/lib/python3.9/site-packages/sklearn/datasets/_species_distributions.py
+"""
+=============================
+Species distribution dataset
+=============================
+
+This dataset represents the geographic distribution of species.
+The dataset is provided by Phillips et. al. (2006).
+
+The two species are:
+
+ - `"Bradypus variegatus"
+   <http://www.iucnredlist.org/details/3038/0>`_ ,
+   the Brown-throated Sloth.
+
+ - `"Microryzomys minutus"
+   <http://www.iucnredlist.org/details/13408/0>`_ ,
+   also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+   Colombia, Ecuador, Peru, and Venezuela.
+
+References
+----------
+
+`"Maximum entropy modeling of species geographic distributions"
+<http://rob.schapire.net/papers/ecolmod.pdf>`_ S. J. Phillips,
+R. P. Anderson, R. E. Schapire - Ecological Modelling, 190:231-259, 2006.
+"""
+
+# Authors: The scikit-learn developers
+# SPDX-License-Identifier: BSD-3-Clause
+
+import logging
+from io import BytesIO
+from numbers import Integral, Real
+from os import PathLike, makedirs, remove
+from os.path import exists
+
+import jobli
+  Found: .venv/lib/python3.9/site-packages/sklearn/datasets/descr/species_distributions.rst
+.. _species_distribution_dataset:
+
+Species distribution dataset
+----------------------------
+
+This dataset represents the geographic distribution of two species in Central and
+South America. The two species are:
+
+- `"Bradypus variegatus" <http://www.iucnredlist.org/details/3038/0>`_ ,
+  the Brown-throated Sloth.
+
+- `"Microryzomys minutus" <http://www.iucnredlist.org/details/13408/0>`_ ,
+  also known as the Forest Small Rice Rat, a rodent that lives in Peru,
+  Colombia, Ecuador, Peru, and Venezuela.
+
+The dataset is not a typical dataset since a :class:`~sklearn.datasets.base.Bunch`
+containing the attributes `data` and `target` is not returned. Instead, we have
+information allowing to create a "density" map of the different species.
+
+The grid for the map can be built using the attributes `x_left_lower_corner`,
+`y_left_lower_corner`, `Nx`, `Ny` and `grid_size`, which respectively correspond
+to the x and y coordinates of the lower left corner of the grid, the number of
+points along the x- 
+  Found: .venv/lib/python3.9/site-packages/sb3_contrib/common/maskable/distributions.py
+from abc import ABC, abstractmethod
+from typing import Optional, TypeVar, Union
+
+import numpy as np
+import torch as th
+from gymnasium import spaces
+from stable_baselines3.common.distributions import Distribution
+from torch import nn
+from torch.distributions import Categorical
+from torch.distributions.utils import logits_to_probs
+
+SelfMaskableCategoricalDistribution = TypeVar("SelfMaskableCategoricalDistribution", bound="MaskableCategoricalDistribution")
+SelfMaskableMultiCategoricalDistribution = TypeVar(
+    "SelfMaskableMultiCategoricalDistribution", bound="MaskableMultiCategoricalDistribution"
+)
+MaybeMasks = Union[th.Tensor, np.ndarray, None]
+
+
+class MaskableCategorical(Categorical):
+    """
+    Modified PyTorch Categorical distribution with support for invalid action masking.
+
+    To instantiate, must provide either probs or logits, but not both.
+
+    :param probs: Tensor containing finite non-negative values, which will be renormalized
+        to sum to 1 along the last dimension.
+
+  Found: .venv/lib/python3.9/site-packages/stable_baselines3/common/distributions.py
+"""Probability distributions."""
+
+from abc import ABC, abstractmethod
+from typing import Any, Optional, TypeVar, Union
+
+import numpy as np
+import torch as th
+from gymnasium import spaces
+from torch import nn
+from torch.distributions import Bernoulli, Categorical, Normal
+
+from stable_baselines3.common.preprocessing import get_action_dim
+
+SelfDistribution = TypeVar("SelfDistribution", bound="Distribution")
+SelfDiagGaussianDistribution = TypeVar("SelfDiagGaussianDistribution", bound="DiagGaussianDistribution")
+SelfSquashedDiagGaussianDistribution = TypeVar(
+    "SelfSquashedDiagGaussianDistribution", bound="SquashedDiagGaussianDistribution"
+)
+SelfCategoricalDistribution = TypeVar("SelfCategoricalDistribution", bound="CategoricalDistribution")
+SelfMultiCategoricalDistribution = TypeVar("SelfMultiCategoricalDistribution", bound="MultiCategoricalDistribution")
+SelfBernoulliDistribution = TypeVar("SelfBernoulliDistribution", bound="BernoulliDistribution")
+SelfStateDependentNoiseDistribution =
+  Found: .venv/lib/python3.9/site-packages/scipy/stats/distributions.py
+#
+# Author:  Travis Oliphant  2002-2011 with contributions from
+#          SciPy Developers 2004-2011
+#
+# NOTE: To look at history using `git blame`, use `git blame -M -C -C`
+#       instead of `git blame -Lxxx,+x`.
+#
+from ._distn_infrastructure import (rv_discrete, rv_continuous, rv_frozen)  # noqa: F401
+
+from . import _continuous_distns
+from . import _discrete_distns
+
+from ._continuous_distns import *  # noqa: F403
+from ._levy_stable import levy_stable
+from ._discrete_distns import *  # noqa: F403
+from ._entropy import entropy
+
+# For backwards compatibility e.g. pymc expects distributions.__all__.
+__all__ = ['rv_discrete', 'rv_continuous', 'rv_histogram', 'entropy']  # noqa: F405
+
+# Add only the distribution names, not the *_gen names.
+__all__ += _continuous_distns._distn_names
+__all__ += ['levy_stable']
+__all__ += _discrete_distns._distn_names
+
+  Found: .venv/lib/python3.9/site-packages/scipy/stats/tests/test_distributions.py
+"""
+Test functions for stats module
+"""
+import warnings
+import re
+import sys
+import pickle
+from pathlib import Path
+import os
+import json
+import platform
+
+from numpy.testing import (assert_equal, assert_array_equal,
+                           assert_almost_equal, assert_array_almost_equal,
+                           assert_allclose, assert_, assert_warns,
+                           assert_array_less, suppress_warnings)
+import pytest
+from pytest import raises as assert_raises
+
+import numpy
+import numpy as np
+from numpy import typecodes, array
+from numpy.lib.recfunctions import rec_append_fields
+from scipy import special
+from scipy._lib._util import check_random_state
+from scipy.integrate import (IntegrationWarning, quad, trapezoid,
+                             cumulative_trapezoid)
+import scipy.stats as stats
+from scipy.stats._distn_infrastructure import argsreduce
+import scipy.stats.distributions
+
+from scipy.special import xlogy, polygamma, entr
+from scipy.stats._distr_params import di
+  Found: .uv-pythons/cpython-3.11.15-macos-aarch64-none/lib/python3.11/site-packages/pip/_internal/distributions
+  Found: .venv311/lib/python3.11/site-packages/pip/_internal/distributions
+  Found: .venv311/lib/python3.11/site-packages/pip/_vendor/chardet/chardistribution.py
+######################## BEGIN LICENSE BLOCK ########################
+# The Original Code is Mozilla Communicator client code.
+#
+# The Initial Developer of the Original Code is
+# Netscape Communications Corporation.
+# Portions created by the Initial Developer are Copyright (C) 1998
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Mark Pilgrim - port to Python
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if 
+  Found: .venv311/lib/python3.11/site-packages/pip/_vendor/chardet/__pycache__/chardistribution.cpython-311.pyc
+�
+
+    �7j0'  �                   �d  � d dl mZmZ ddlmZmZmZ ddlmZm	Z	m
+Z
+ ddlmZm
+Z
+mZ ddlmZmZmZ ddlmZmZmZ ddlmZ  G d	� d
+�  �        Z G d� de�  �        Z G d
+� de�  �        Z G d� de�  �        Z G d� de�  �        Z G d� de�  �        Z G d� de�  �        Z G d� de�  �        Z dS )�    )�Tuple�Union�   )�BIG5_CHAR_TO_FREQ_ORDER�BIG5_TABLE_SIZE�BIG5_TYPICAL_DISTRIBUTION_RATIO)�EUCKR_CHAR_TO_FREQ_ORDER�EUCKR_TABLE_SIZE� EUCKR_TYPICAL_DISTRIBUTION_RATIO)�EUCTW_CHAR_TO_FREQ_ORDER�EUCTW_TABLE_SIZE� EUCTW_TYPICAL_DISTRIBUTION_RATIO)�GB2312_CHAR_TO_FREQ_ORDER�GB2312_TABLE_SIZE�!GB2312_TYPICAL_DISTRIBUTION_RATIO)�JIS_CHAR_TO_FREQ_ORDER�JIS_TABLE_SIZE�JIS_TYPICAL_DISTRIBUTION_RATIO)�JOHAB_TO_EUCKR_ORDER_TABLEc                   �   � e Zd ZdZdZdZdZdd�Zdd�Zd	e	e
+ef         d
+eddfd�Z
+defd�Zdefd
+�Zde	e
+ef         de
+  Found: .venv311/lib/python3.11/site-packages/pkg_resources/tests/test_find_distributions.py
+import shutil
+from pathlib import Path
+
+import pytest
+
+import pkg_resources
+
+TESTS_DATA_DIR = Path(__file__).parent / 'data'
+
+
+class TestFindDistributions:
+    @pytest.fixture
+    def target_dir(self, tmpdir):
+        target_dir = tmpdir.mkdir('target')
+        # place a .egg named directory in the target that is not an egg:
+        target_dir.mkdir('not.an.egg')
+        return target_dir
+
+    def test_non_egg_dir_named_egg(self, target_dir):
+        dists = pkg_resources.find_distributions(str(target_dir))
+        assert not list(dists)
+
+    def test_standalone_egg_directory(self, target_dir):
+        shutil.copytree(
+            TESTS_DATA_DIR / 'my-test-package_unpacked-egg',
+            target_dir,
+            dirs_exist_ok=True,
+        )
+        dists = pkg_resources.find_distributions(str(target_dir))
+        assert [dist.project_name for dist in dists] == ['my-test-package']
+        dists = pkg_resources.find_distributions(str(target_dir), only=True)
+        assert not list(dis
+  Found: .venv311/lib/python3.11/site-packages/pkg_resources/tests/__pycache__/test_find_distributions.cpython-311.pyc
+�
+
+    �7j�  �                   �j   � d dl Z d dlmZ d dlZd dlZ ee�  �        j        dz  Z G d� d�  �        ZdS )�    N)�Path�datac                   �F   � e Zd Zej        d� �   �         Zd� Zd� Zd� Zd� Z	dS )�TestFindDistributionsc                 �Z   � |�                     d�  �        }|�                     d�  �         |S )N�targetz
+not.an.egg)�mkdir)�self�tmpdir�
+target_dirs      ��/Users/mayoy/Documents/GitHub/AI-Driven-Emotion-Recognition-for-Adaptive-Learning-/.venv311/lib/python3.11/site-packages/pkg_resources/tests/test_find_distributions.pyr   z TestFindDistributions.target_dir   s-   � ��\�\�(�+�+�
+�����&�&�&���    c                 �j   � t          j        t          |�  �        �  �        }t          |�  �        rJ �d S )N)�
+pkg_resources�find_distributions�str�list�r
+   r   �distss      r
+   �test_non_egg_dir_named_eggz0TestFindDistri
+
+======================================================================
+OVERSAMPLING CONFIG - EXP 16 AND EXP 17
+======================================================================
+
+RESULTS/exp16_save
+  train_exp16.py
+    from torch.utils.data import DataLoader, WeightedRandomSampler
+    "samples_f1": float(f1_score(y_true, y_pred, average="samples", zero_division=0)),
+    def build_sample_weights(dataset):
+    weights = []
+    weight = 1.0
+    weight += 2.0
+    weight += 2.5
+    weight += 1.2
+    weight += 0.8
+    weights.append(weight)
+    return torch.DoubleTensor(weights)
+    POS_WEIGHTS = torch.tensor([1.83, 0.22, 3.13, 4.68], dtype=torch.float32)
+    print("Train samples:", len(train_dataset))
+    print("Val samples:", len(val_dataset))
+    sample_weights = build_sample_weights(train_dataset)
+    sampler = WeightedRandomSampler(
+    weights=sample_weights,
+    num_samples=len(train_dataset),
+    sampler=sampler,
+    criterion = nn.BCEWithLogitsLoss(pos_weight=POS_WEIGHTS.to(DEVICE))
+  train_log.json
+    "val_samples_f1": 0.7410776766969909,
+    "val_samples_f1": 0.7248725382385285,
+    "val_samples_f1": 0.7386750641474223,
+    "val_samples_f1": 0.7386750641474223,
+    "val_samples_f1": 0.7386750641474223,
+
+======================================================================
+UNACCOUNTED EXPERIMENTS (7, 20, 21, 29, 32, 33, 39, 40, 41)
+======================================================================
+  FOUND: RESULTS/exp7_small_backup
+  FOUND: RESULTS/exp20
+  FOUND: RESULTS/processed_exp21_singlelabel
+  FOUND: RESULTS/exp29_resnet_bilstm_multihead
+  NOT FOUND: exp32
+  NOT FOUND: exp33
+  FOUND: FER_Module/exp39_multilabel_resnet_se_bilstm2_attention_mtcnn
+  FOUND: FER_Module/exp40_imbalance_ablation
+  FOUND: FER_Module/exp41_stability_enhanced

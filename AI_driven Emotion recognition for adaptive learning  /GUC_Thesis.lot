@@ -1,0 +1,24 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Comparison of representative DAiSEE-based FER studies}}{29}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Simulation-based RL tutoring studies most relevant to the present thesis design}}{39}{table.caption.56}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Emotion-aware tutoring systems: sensing, adaptation, and reported results.}}{42}{table.3.3}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Summary of the components that constitute the proposed FER pipeline and the supporting studies in which each component, or a close relative of it, has been reported. The first five rows correspond to the five architectural blocks described in Section~\ref {sec:method_architecture}; the last two rows correspond to the training-time loss reweighting and the decision-time threshold calibration described in Section~\ref {sec:method_training}.}}{52}{table.caption.59}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces FER training hyperparameters.}}{56}{table.caption.74}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Layer 1 -- Conceptual Foundations. Each row identifies one theoretical idea that motivates a modelling decision. No equations or implementation details appear in this layer.}}{58}{table.caption.75}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Layer 2 -- Theory-to-Methodology Traceability (Part A: Cognitive Model and Affective State Structure). Each row states one inherited mechanism, its core formal rule, and the originating source. Specific coefficient values and hyperparameter settings appear in the body text. Part B (Table~\ref {tab:rl_operationalized_b}) and Part C (Table~\ref {tab:rl_operationalized_c}) follow.}}{59}{table.caption.76}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Layer 2 -- Theory-to-Methodology Traceability (Part B: Affective Dynamics, Challenge--Skill Mismatch, Emotion Taxonomy, Pedagogical Interventions, and Reward Function). Continuation of Table~\ref {tab:rl_operationalized} (Part A); Part C (Table~\ref {tab:rl_operationalized_c}) follows.}}{60}{table.caption.77}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Layer 2 -- Theory-to-Methodology Traceability (Part C: Partial Observability, Episode Termination, and DQN Learning Algorithm). Continuation of Table~\ref {tab:rl_operationalized} (Part A) and Table~\ref {tab:rl_operationalized_b} (Part B), completing the traceability matrix.}}{61}{table.caption.78}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Hyperparameters of the DQN tutor with explicit provenance. Each parameter is classified as literature-derived (with citation), inherited as a Stable-Baselines3 default~\cite {raffin_sb3_2021}, fixed as an experimental setting, or selected through empirical tuning on validation rollouts. The classification is intended to make the dependence of each value on prior work transparent and to avoid implying that all settings were directly inherited from theory.}}{73}{table.caption.109}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Single-label results on the DAiSEE test split under the standardised pipeline.}}{77}{table.caption.110}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Multi-label results on the DAiSEE test split under the standardised pipeline. The proposed system is \textbf {[OURS]}. Accuracy denotes mean per-label binary accuracy.}}{78}{table.caption.112}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Prior FER work on DAiSEE and its relationship to this thesis.}}{83}{table.caption.118}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Extended DAiSEE accuracy comparisons from works using non-standard or engagement-only evaluation protocols (reproduced from cited sources).}}{84}{table.caption.120}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Headline outcome metrics for the DQN policy and the rule and random baselines on both configurations. Effect sizes and Holm-corrected $p$-values are computed against the DQN policy. Mean values with $95\%$ bootstrap confidence intervals across ten seeds.}}{88}{table.caption.126}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Component coverage of prior reinforcement-learning intelligent tutoring systems on the seven design dimensions of the present thesis. The first column reports bibliography reference numbers; full bibliographic information is available in the References section. \textcolor {matrixGreen}{$\text {$\mathsurround \z@ \mathchar "458$}$} denotes that the component is present and central, \textcolor {matrixRed}{$\times $} that it is absent, and \textcolor {matrixAmber}{$\sim $} that it is partial or implicit.}}{92}{table.caption.131}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

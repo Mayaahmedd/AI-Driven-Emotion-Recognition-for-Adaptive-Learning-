@@ -1,0 +1,298 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Methodology}{45}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chap:Methodology}{{4}{45}{Methodology}{chapter.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Chapter Overview}{45}{section.4.1}\protected@file@percent }
+\newlabel{sec:method_overview}{{4.1}{45}{Chapter Overview}{section.4.1}{}}
+\citation{gupta_daisee_2016}
+\citation{gupta_daisee_2016}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Affect-informed adaptive tutoring framework. The Perception zone maps a learner webcam clip to an affective state vector over Boredom, Engagement, Confusion, and Frustration. The Adaptive Decision Making zone combines this vector with the learner's knowledge state to form the student state consumed by the DQN tutoring policy, which selects a pedagogical action. The Learning Environment zone houses the synthetic student simulator and the reward signal that closes the reinforcement-learning loop.}}{46}{figure.caption.57}\protected@file@percent }
+\newlabel{fig:system_overview}{{4.1}{46}{Affect-informed adaptive tutoring framework. The Perception zone maps a learner webcam clip to an affective state vector over Boredom, Engagement, Confusion, and Frustration. The Adaptive Decision Making zone combines this vector with the learner's knowledge state to form the student state consumed by the DQN tutoring policy, which selects a pedagogical action. The Learning Environment zone houses the synthetic student simulator and the reward signal that closes the reinforcement-learning loop}{figure.caption.57}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Dataset Description}{46}{section.4.2}\protected@file@percent }
+\newlabel{sec:method_dataset}{{4.2}{46}{Dataset Description}{section.4.2}{}}
+\citation{malekshahi_engagement_2024}
+\citation{gupta_daisee_2016}
+\citation{gupta_daisee_2016}
+\citation{malekshahi_engagement_2024}
+\citation{malekshahi_engagement_2024}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Data Preparation}{47}{section.4.3}\protected@file@percent }
+\newlabel{sec:method_preparation}{{4.3}{47}{Data Preparation}{section.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Ordinal-to-Binary Label Mapping}{47}{subsection.4.3.1}\protected@file@percent }
+\newlabel{sec:method_binary_mapping}{{4.3.1}{47}{Ordinal-to-Binary Label Mapping}{subsection.4.3.1}{}}
+\newlabel{eq:binary_mapping}{{1}{47}{Ordinal-to-Binary Label Mapping}{equation.4.1}{}}
+\citation{he_resnet_2016}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Frame Extraction and Sampling}{48}{subsection.4.3.2}\protected@file@percent }
+\newlabel{sec:method_frames}{{4.3.2}{48}{Frame Extraction and Sampling}{subsection.4.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Spatial Preprocessing}{48}{subsection.4.3.3}\protected@file@percent }
+\newlabel{sec:method_preprocessing}{{4.3.3}{48}{Spatial Preprocessing}{subsection.4.3.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Training-Time Augmentation}{48}{subsection.4.3.4}\protected@file@percent }
+\newlabel{sec:method_augmentation}{{4.3.4}{48}{Training-Time Augmentation}{subsection.4.3.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.5}Dominant-Group Resampling}{48}{subsection.4.3.5}\protected@file@percent }
+\newlabel{sec:method_oversampling}{{4.3.5}{48}{Dominant-Group Resampling}{subsection.4.3.5}{}}
+\citation{he_resnet_2016}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}FER Architecture Overview}{49}{section.4.4}\protected@file@percent }
+\newlabel{sec:method_architecture}{{4.4}{49}{FER Architecture Overview}{section.4.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces End-to-end FER architecture for multi-label academic affect recognition. A learner video clip is sampled to a fixed length of $T = 24$ frames and preprocessed, per-frame spatial features are extracted with a ResNet-50 backbone and recalibrated by a Squeeze-and-Excitation channel-attention block, their temporal pattern is encoded by a two-layer Bidirectional LSTM, the time steps are aggregated by a temporal attention pooling layer, and a multi-label classification head produces four independent sigmoid scores for Boredom, Engagement, Confusion, and Frustration. Per-label thresholds tuned on the validation set turn these scores into the final binary affect labels.}}{49}{figure.caption.58}\protected@file@percent }
+\newlabel{fig:fer_pipeline}{{4.2}{49}{End-to-end FER architecture for multi-label academic affect recognition. A learner video clip is sampled to a fixed length of $T = 24$ frames and preprocessed, per-frame spatial features are extracted with a ResNet-50 backbone and recalibrated by a Squeeze-and-Excitation channel-attention block, their temporal pattern is encoded by a two-layer Bidirectional LSTM, the time steps are aggregated by a temporal attention pooling layer, and a multi-label classification head produces four independent sigmoid scores for Boredom, Engagement, Confusion, and Frustration. Per-label thresholds tuned on the validation set turn these scores into the final binary affect labels}{figure.caption.58}{}}
+\citation{hu_squeeze_2018}
+\citation{hochreiter_lstm_1997}
+\citation{vaswani_attention_2017}
+\citation{gupta_daisee_2016}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Spatial Backbone: ResNet-50}{50}{subsection.4.4.1}\protected@file@percent }
+\newlabel{sec:method_resnet}{{4.4.1}{50}{Spatial Backbone: ResNet-50}{subsection.4.4.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Squeeze-and-Excitation Channel Attention}{50}{subsection.4.4.2}\protected@file@percent }
+\newlabel{sec:method_se}{{4.4.2}{50}{Squeeze-and-Excitation Channel Attention}{subsection.4.4.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Temporal Encoder: Two-Layer BiLSTM}{50}{subsection.4.4.3}\protected@file@percent }
+\newlabel{sec:method_bilstm}{{4.4.3}{50}{Temporal Encoder: Two-Layer BiLSTM}{subsection.4.4.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Temporal Attention Pooling}{50}{subsection.4.4.4}\protected@file@percent }
+\newlabel{sec:method_temporal_attention}{{4.4.4}{50}{Temporal Attention Pooling}{subsection.4.4.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}Multi-label Classification Head}{50}{subsection.4.4.5}\protected@file@percent }
+\newlabel{sec:method_head}{{4.4.5}{50}{Multi-label Classification Head}{subsection.4.4.5}{}}
+\citation{he_resnet_2016}
+\citation{aly_revolutionizing_2025}
+\citation{hu_squeeze_2018}
+\citation{aly_revolutionizing_2025}
+\citation{liu_dynamic_2026}
+\citation{hochreiter_lstm_1997}
+\citation{tulsani_realtime_2025}
+\citation{vaswani_attention_2017}
+\citation{mehta_three-dimensional_2022}
+\citation{su_leveraging_2024}
+\citation{gupta_daisee_2016}
+\citation{rianto_engagement_2025}
+\citation{abedi_improving_2021}
+\citation{mehta_three-dimensional_2022}
+\citation{rianto_engagement_2025}
+\citation{rianto_engagement_2025}
+\citation{mehta_three-dimensional_2022}
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Summary of the components that constitute the proposed FER pipeline and the supporting studies in which each component, or a close relative of it, has been reported. The first five rows correspond to the five architectural blocks described in Section~\ref {sec:method_architecture}; the last two rows correspond to the training-time loss reweighting and the decision-time threshold calibration described in Section~\ref {sec:method_training}.}}{52}{table.caption.59}\protected@file@percent }
+\newlabel{tab:fer_architecture_motivation}{{4.1}{52}{Summary of the components that constitute the proposed FER pipeline and the supporting studies in which each component, or a close relative of it, has been reported. The first five rows correspond to the five architectural blocks described in Section~\ref {sec:method_architecture}; the last two rows correspond to the training-time loss reweighting and the decision-time threshold calibration described in Section~\ref {sec:method_training}}{table.caption.59}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Training and Evaluation Protocol}{53}{section.4.5}\protected@file@percent }
+\newlabel{sec:method_training}{{4.5}{53}{Training and Evaluation Protocol}{section.4.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Loss Function and Imbalance Handling}{53}{subsection.4.5.1}\protected@file@percent }
+\newlabel{sec:method_loss}{{4.5.1}{53}{Loss Function and Imbalance Handling}{subsection.4.5.1}{}}
+\newlabel{eq:pos_weight}{{[4.2]}{53}{Loss Function and Imbalance Handling}{AMS.60}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Optimisation}{53}{subsection.4.5.2}\protected@file@percent }
+\newlabel{sec:method_optim}{{4.5.2}{53}{Optimisation}{subsection.4.5.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.3}Per-Label Threshold Tuning}{53}{subsection.4.5.3}\protected@file@percent }
+\newlabel{sec:method_thresholds}{{4.5.3}{53}{Per-Label Threshold Tuning}{subsection.4.5.3}{}}
+\citation{gothwal_vibed-net_2025}
+\citation{gothwal_vibed-net_2025}
+\newlabel{eq:threshold_tuning}{{[4.3]}{54}{Per-Label Threshold Tuning}{AMS.61}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.4}Evaluation Metrics}{54}{subsection.4.5.4}\protected@file@percent }
+\newlabel{sec:method_metrics}{{4.5.4}{54}{Evaluation Metrics}{subsection.4.5.4}{}}
+\@writefile{toc}{\contentsline {paragraph}{Per-label Accuracy.}{54}{section*.62}\protected@file@percent }
+\newlabel{eq:accuracy}{{[4.4]}{54}{Per-label Accuracy}{AMS.63}{}}
+\@writefile{toc}{\contentsline {paragraph}{Precision.}{54}{section*.64}\protected@file@percent }
+\citation{gothwal_vibed-net_2025}
+\citation{gothwal_vibed-net_2025}
+\citation{scikit_learn}
+\citation{scikit_learn}
+\citation{scikit_learn}
+\citation{tsoumakas2007multi}
+\citation{scikit_learn}
+\newlabel{eq:precision}{{[4.6]}{55}{Precision}{AMS.65}{}}
+\@writefile{toc}{\contentsline {paragraph}{Recall.}{55}{section*.66}\protected@file@percent }
+\newlabel{eq:recall}{{[4.7]}{55}{Recall}{AMS.67}{}}
+\@writefile{toc}{\contentsline {paragraph}{F1 Score.}{55}{section*.68}\protected@file@percent }
+\newlabel{eq:f1}{{[4.8]}{55}{F1 Score}{AMS.69}{}}
+\@writefile{toc}{\contentsline {paragraph}{Macro F1.}{55}{section*.70}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Micro F1.}{55}{section*.71}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Weighted F1.}{55}{section*.72}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Samples F1.}{55}{section*.73}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.5}Implementation Details}{56}{subsection.4.5.5}\protected@file@percent }
+\newlabel{sec:method_impl}{{4.5.5}{56}{Implementation Details}{subsection.4.5.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces FER training hyperparameters.}}{56}{table.caption.74}\protected@file@percent }
+\newlabel{tab:fer_hparams}{{4.2}{56}{FER training hyperparameters}{table.caption.74}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Adaptive Tutoring via Reinforcement Learning (DQN-Based)}{56}{section.4.6}\protected@file@percent }
+\newlabel{sec:method_rl_chapter}{{4.6}{56}{Adaptive Tutoring via Reinforcement Learning (DQN-Based)}{section.4.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.1}Theoretical Foundations and Citation Mapping}{56}{subsection.4.6.1}\protected@file@percent }
+\newlabel{sec:method_rl_intro}{{4.6.1}{56}{Theoretical Foundations and Citation Mapping}{subsection.4.6.1}{}}
+\citation{guzman_developing_2025}
+\citation{henke_dsem_2026}
+\citation{wang_factored_pomdp_2018}
+\citation{pekrun_control-value_2006}
+\citation{csikszentmihalyi_flow_1990}
+\citation{kong_real-time_2025}
+\citation{hernandez_affective_2015}
+\citation{ramachandran_pomdp_2018}
+\citation{guzman_developing_2025}
+\citation{guzman_developing_2025}
+\citation{wang_factored_pomdp_2018}
+\citation{wang_factored_pomdp_2018}
+\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Layer 1 -- Conceptual Foundations. Each row identifies one theoretical idea that motivates a modelling decision. No equations or implementation details appear in this layer.}}{58}{table.caption.75}\protected@file@percent }
+\newlabel{tab:rl_foundations}{{4.3}{58}{Layer 1 -- Conceptual Foundations. Each row identifies one theoretical idea that motivates a modelling decision. No equations or implementation details appear in this layer}{table.caption.75}{}}
+\citation{henke_dsem_2026}
+\citation{csikszentmihalyi_flow_1990}
+\citation{pekrun_control-value_2006}
+\citation{sudharsan_intervention_2026}
+\citation{hake_normalized_gain_1998}
+\citation{kong_real-time_2025}
+\@writefile{lot}{\contentsline {table}{\numberline {4.4}{\ignorespaces Layer 2 -- Theory-to-Methodology Traceability (Part A: Cognitive Model and Affective State Structure). Each row states one inherited mechanism, its core formal rule, and the originating source. Specific coefficient values and hyperparameter settings appear in the body text. Part B (Table~\ref {tab:rl_operationalized_b}) and Part C (Table~\ref {tab:rl_operationalized_c}) follow.}}{59}{table.caption.76}\protected@file@percent }
+\newlabel{tab:rl_operationalized}{{4.4}{59}{Layer 2 -- Theory-to-Methodology Traceability (Part A: Cognitive Model and Affective State Structure). Each row states one inherited mechanism, its core formal rule, and the originating source. Specific coefficient values and hyperparameter settings appear in the body text. Part B (Table~\ref {tab:rl_operationalized_b}) and Part C (Table~\ref {tab:rl_operationalized_c}) follow}{table.caption.76}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4.5}{\ignorespaces Layer 2 -- Theory-to-Methodology Traceability (Part B: Affective Dynamics, Challenge--Skill Mismatch, Emotion Taxonomy, Pedagogical Interventions, and Reward Function). Continuation of Table~\ref {tab:rl_operationalized} (Part A); Part C (Table~\ref {tab:rl_operationalized_c}) follows.}}{60}{table.caption.77}\protected@file@percent }
+\newlabel{tab:rl_operationalized_b}{{4.5}{60}{Layer 2 -- Theory-to-Methodology Traceability (Part B: Affective Dynamics, Challenge--Skill Mismatch, Emotion Taxonomy, Pedagogical Interventions, and Reward Function). Continuation of Table~\ref {tab:rl_operationalized} (Part A); Part C (Table~\ref {tab:rl_operationalized_c}) follows}{table.caption.77}{}}
+\citation{ramachandran_pomdp_2018}
+\citation{ramachandran_pomdp_2018}
+\citation{mnih_dqn_2015}
+\citation{raffin_sb3_2021}
+\citation{wang_factored_pomdp_2018}
+\citation{guzman_developing_2025}
+\citation{kong_real-time_2025}
+\@writefile{lot}{\contentsline {table}{\numberline {4.6}{\ignorespaces Layer 2 -- Theory-to-Methodology Traceability (Part C: Partial Observability, Episode Termination, and DQN Learning Algorithm). Continuation of Table~\ref {tab:rl_operationalized} (Part A) and Table~\ref {tab:rl_operationalized_b} (Part B), completing the traceability matrix.}}{61}{table.caption.78}\protected@file@percent }
+\newlabel{tab:rl_operationalized_c}{{4.6}{61}{Layer 2 -- Theory-to-Methodology Traceability (Part C: Partial Observability, Episode Termination, and DQN Learning Algorithm). Continuation of Table~\ref {tab:rl_operationalized} (Part A) and Table~\ref {tab:rl_operationalized_b} (Part B), completing the traceability matrix}{table.caption.78}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.2}System Architecture and Reinforcement Learning Formulation}{61}{subsection.4.6.2}\protected@file@percent }
+\newlabel{sec:method_rl_architecture}{{4.6.2}{61}{System Architecture and Reinforcement Learning Formulation}{subsection.4.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces End-to-end DQN-based adaptive tutoring framework. The perception module contributes affective information to the state representation, the DQN selects tutoring actions, and the environment provides rewards and state transitions for replay-based learning. For clarity, the state is depicted as $\mathbf  {s}_t=[k_t,e_t]$, where $e_t$ denotes the affective components of Equation~\eqref  {eq:student_state}.}}{63}{figure.caption.79}\protected@file@percent }
+\newlabel{fig:dqn_mdp}{{4.3}{63}{End-to-end DQN-based adaptive tutoring framework. The perception module contributes affective information to the state representation, the DQN selects tutoring actions, and the environment provides rewards and state transitions for replay-based learning. For clarity, the state is depicted as $\mathbf {s}_t=[k_t,e_t]$, where $e_t$ denotes the affective components of Equation~\eqref {eq:student_state}}{figure.caption.79}{}}
+\citation{guzman_developing_2025}
+\citation{kong_real-time_2025}
+\citation{mnih_dqn_2015}
+\citation{wang_factored_pomdp_2018}
+\citation{ramachandran_pomdp_2018}
+\citation{pekrun_control-value_2006}
+\citation{ramachandran_pomdp_2018}
+\citation{guzman_developing_2025}
+\newlabel{sec:method_rl_formulation}{{4.6.2}{64}{System Architecture and Reinforcement Learning Formulation}{figure.caption.79}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.3}Markov Decision Process and Environment Model}{64}{subsection.4.6.3}\protected@file@percent }
+\newlabel{sec:method_rl_mdp_parent}{{4.6.3}{64}{Markov Decision Process and Environment Model}{subsection.4.6.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{State Space and Cognitive Model}{64}{section*.80}\protected@file@percent }
+\newlabel{sec:method_mdp}{{4.6.3}{64}{State Space and Cognitive Model}{section*.80}{}}
+\newlabel{eq:student_state}{{[4.13]}{64}{State Space and Cognitive Model}{AMS.81}{}}
+\citation{pekrun_control-value_2006}
+\citation{henke_dsem_2026}
+\citation{csikszentmihalyi_flow_1990}
+\citation{sudharsan_intervention_2026}
+\newlabel{eq:irt}{{[4.14]}{65}{State Space and Cognitive Model}{AMS.82}{}}
+\newlabel{eq:knowledge_update}{{[4.15]}{65}{State Space and Cognitive Model}{AMS.83}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Affective State Dynamics}{65}{section*.84}\protected@file@percent }
+\newlabel{sec:method_emotion_engagement}{{4.6.3}{65}{Affective State Dynamics}{section*.84}{}}
+\citation{wang_factored_pomdp_2018}
+\citation{pekrun_control-value_2006}
+\citation{guzman_developing_2025}
+\citation{kong_real-time_2025}
+\citation{ramachandran_pomdp_2018}
+\newlabel{eq:ar1_affect}{{[4.16]}{66}{Affective State Dynamics}{AMS.85}{}}
+\@writefile{toc}{\contentsline {paragraph}{Emotion taxonomy and two separate thresholding rules.}{66}{section*.86}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Synthetic Student Population}{66}{section*.87}\protected@file@percent }
+\newlabel{sec:method_synthetic_student}{{4.6.3}{66}{Synthetic Student Population}{section*.87}{}}
+\citation{ramachandran_pomdp_2018}
+\citation{ramachandran_pomdp_2018}
+\@writefile{toc}{\contentsline {subsubsection}{Observation, Transition, and Termination}{67}{section*.88}\protected@file@percent }
+\newlabel{sec:method_gymnasium}{{4.6.3}{67}{Observation, Transition, and Termination}{section*.88}{}}
+\@writefile{toc}{\contentsline {paragraph}{State definition.}{67}{section*.89}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Observation model.}{67}{section*.90}\protected@file@percent }
+\newlabel{eq:obs_v6}{{[4.17]}{67}{Observation model}{AMS.91}{}}
+\newlabel{sec:method_observation}{{4.6.3}{67}{Observation model}{AMS.91}{}}
+\@writefile{toc}{\contentsline {paragraph}{Transition function.}{67}{section*.92}\protected@file@percent }
+\citation{kong_real-time_2025}
+\citation{hake_normalized_gain_1998}
+\citation{kong_real-time_2025}
+\citation{mnih_dqn_2015}
+\@writefile{toc}{\contentsline {paragraph}{Episode termination.}{68}{section*.93}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Reward Function}{68}{section*.94}\protected@file@percent }
+\newlabel{sec:method_reward}{{4.6.3}{68}{Reward Function}{section*.94}{}}
+\newlabel{eq:delta_k_norm}{{[4.18]}{68}{Reward Function}{AMS.95}{}}
+\newlabel{eq:reward_total}{{[4.19]}{68}{Reward Function}{AMS.96}{}}
+\citation{sudharsan_intervention_2026}
+\citation{sudharsan_intervention_2026}
+\citation{mnih_dqn_2015}
+\citation{raffin_sb3_2021}
+\@writefile{toc}{\contentsline {subsubsection}{Action Space and Pedagogical Interventions}{69}{section*.97}\protected@file@percent }
+\newlabel{sec:method_action_space}{{4.6.3}{69}{Action Space and Pedagogical Interventions}{section*.97}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.4}DQN Architecture and Training}{69}{subsection.4.6.4}\protected@file@percent }
+\newlabel{sec:method_rl_dqn_parent}{{4.6.4}{69}{DQN Architecture and Training}{subsection.4.6.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Q-Network Architecture and Learning Algorithm}{69}{section*.98}\protected@file@percent }
+\newlabel{sec:method_ppo}{{4.6.4}{69}{Q-Network Architecture and Learning Algorithm}{section*.98}{}}
+\newlabel{eq:dqn_target}{{[4.20]}{70}{Q-Network Architecture and Learning Algorithm}{AMS.99}{}}
+\newlabel{eq:dqn_loss}{{[4.21]}{70}{Q-Network Architecture and Learning Algorithm}{AMS.100}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Training and Inference Procedure}{70}{section*.101}\protected@file@percent }
+\newlabel{sec:method_rl_training}{{4.6.4}{70}{Training and Inference Procedure}{section*.101}{}}
+\newlabel{sec:method_policy}{{4.6.4}{70}{Training and Inference Procedure}{section*.101}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.5}Evaluation Protocol}{70}{subsection.4.6.5}\protected@file@percent }
+\newlabel{sec:method_rl_eval_parent}{{4.6.5}{70}{Evaluation Protocol}{subsection.4.6.5}{}}
+\citation{hake_normalized_gain_1998}
+\citation{nandimandalam_ai-powered_2025}
+\citation{govea_implementation_2024}
+\citation{nandimandalam_ai-powered_2025}
+\@writefile{toc}{\contentsline {subsubsection}{Performance Metrics}{71}{section*.102}\protected@file@percent }
+\newlabel{sec:method_eval}{{4.6.5}{71}{Performance Metrics}{section*.102}{}}
+\newlabel{eq:metric_reward}{{[4.22]}{71}{Performance Metrics}{AMS.103}{}}
+\newlabel{eq:metric_raw_gain}{{[4.23]}{71}{Performance Metrics}{AMS.104}{}}
+\newlabel{eq:metric_norm_gain}{{[4.24]}{71}{Performance Metrics}{AMS.105}{}}
+\newlabel{eq:metric_success}{{[4.25]}{71}{Performance Metrics}{AMS.106}{}}
+\newlabel{eq:metric_convergence}{{[4.26]}{71}{Performance Metrics}{AMS.107}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Baselines and Comparisons}{71}{section*.108}\protected@file@percent }
+\newlabel{sec:method_baselines}{{4.6.5}{71}{Baselines and Comparisons}{section*.108}{}}
+\citation{towers_gymnasium_2023}
+\citation{raffin_sb3_2021}
+\citation{raffin_sb3_2021}
+\citation{raffin_sb3_2021}
+\citation{mnih_dqn_2015}
+\citation{raffin_sb3_2021}
+\citation{nandimandalam_ai-powered_2025}
+\citation{raffin_sb3_2021}
+\citation{raffin_sb3_2021}
+\citation{raffin_sb3_2021}
+\citation{raffin_sb3_2021}
+\citation{mnih_dqn_2015}
+\citation{raffin_sb3_2021}
+\citation{mnih_dqn_2015}
+\citation{mnih_dqn_2015}
+\citation{raffin_sb3_2021}
+\citation{mnih_dqn_2015}
+\citation{mnih_dqn_2015}
+\citation{mnih_dqn_2015}
+\citation{axak_adaptive_2025}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.6}Implementation Details}{72}{subsection.4.6.6}\protected@file@percent }
+\newlabel{sec:method_rl_implementation}{{4.6.6}{72}{Implementation Details}{subsection.4.6.6}{}}
+\citation{doroudi_where_2019}
+\citation{mandel_offline_2014}
+\@writefile{lot}{\contentsline {table}{\numberline {4.7}{\ignorespaces Hyperparameters of the DQN tutor with explicit provenance. Each parameter is classified as literature-derived (with citation), inherited as a Stable-Baselines3 default~\cite  {raffin_sb3_2021}, fixed as an experimental setting, or selected through empirical tuning on validation rollouts. The classification is intended to make the dependence of each value on prior work transparent and to avoid implying that all settings were directly inherited from theory.}}{73}{table.caption.109}\protected@file@percent }
+\newlabel{tab:dqn_hparams}{{4.7}{73}{Hyperparameters of the DQN tutor with explicit provenance. Each parameter is classified as literature-derived (with citation), inherited as a Stable-Baselines3 default~\cite {raffin_sb3_2021}, fixed as an experimental setting, or selected through empirical tuning on validation rollouts. The classification is intended to make the dependence of each value on prior work transparent and to avoid implying that all settings were directly inherited from theory}{table.caption.109}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6.7}Ethical Considerations}{74}{subsection.4.6.7}\protected@file@percent }
+\newlabel{sec:method_rl_ethics}{{4.6.7}{74}{Ethical Considerations}{subsection.4.6.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Chapter Summary}{74}{section.4.7}\protected@file@percent }
+\newlabel{sec:method_summary}{{4.7}{74}{Chapter Summary}{section.4.7}{}}
+\@setckpt{chapters/Methodology}{
+\setcounter{page}{76}
+\setcounter{equation}{1}
+\setcounter{enumi}{2}
+\setcounter{enumii}{0}
+\setcounter{enumiii}{0}
+\setcounter{enumiv}{0}
+\setcounter{footnote}{0}
+\setcounter{mpfootnote}{0}
+\setcounter{part}{0}
+\setcounter{chapter}{4}
+\setcounter{section}{7}
+\setcounter{subsection}{0}
+\setcounter{subsubsection}{0}
+\setcounter{paragraph}{0}
+\setcounter{subparagraph}{0}
+\setcounter{figure}{3}
+\setcounter{table}{7}
+\setcounter{float@type}{8}
+\setcounter{@pps}{0}
+\setcounter{@ppsavesec}{0}
+\setcounter{@ppsaveapp}{0}
+\setcounter{section@level}{1}
+\setcounter{Item}{9}
+\setcounter{Hfootnote}{0}
+\setcounter{bookmark@seq@number}{74}
+\setcounter{ALC@unique}{0}
+\setcounter{ALC@line}{0}
+\setcounter{ALC@rem}{0}
+\setcounter{ALC@depth}{0}
+\setcounter{algorithm}{0}
+\setcounter{parentequation}{0}
+\setcounter{caption@flags}{2}
+\setcounter{continuedfloat}{0}
+\setcounter{subfigure}{0}
+\setcounter{subtable}{0}
+\setcounter{nlinenum}{0}
+\setcounter{LT@tables}{3}
+\setcounter{LT@chunks}{4}
+}

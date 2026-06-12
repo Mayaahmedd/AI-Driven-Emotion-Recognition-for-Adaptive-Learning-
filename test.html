@@ -1,0 +1,754 @@
+
+cat > /mnt/user-data/outputs/dqn_affect_its_diagram.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DQN-Affect ITS — Architecture Diagram</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400;1,9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --blue:#3B82F6;--blue-bg:#EFF6FF;--blue-border:#BFDBFE;--blue-text:#1D4ED8;
+  --green:#22C55E;--green-bg:#F0FDF4;--green-border:#BBF7D0;--green-text:#15803D;
+  --teal:#14B8A6;--teal-bg:#F0FDFA;--teal-border:#99F6E4;--teal-text:#0F766E;
+  --purple:#A855F7;--purple-bg:#FAF5FF;--purple-border:#E9D5FF;--purple-text:#7E22CE;
+  --amber:#F59E0B;--amber-bg:#FFFBEB;--amber-border:#FDE68A;--amber-text:#B45309;
+  --red:#EF4444;--red-bg:#FEF2F2;--red-border:#FECACA;--red-text:#B91C1C;
+  --gray-50:#F9FAFB;--gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-400:#9CA3AF;
+  --gray-600:#4B5563;--gray-700:#374151;--gray-900:#111827;
+  --radius:10px;--radius-lg:16px;--radius-pill:100px;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 12px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.05);
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#F8F7FF;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 20px 60px;
+  color:var(--gray-900);
+}
+
+.page-title{
+  text-align:center;
+  margin-bottom:32px;
+}
+.page-title .kicker{
+  font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gray-400);margin-bottom:8px;
+}
+.page-title h1{
+  font-size:22px;font-weight:600;color:var(--gray-900);letter-spacing:-.02em;
+}
+.page-title .sub{
+  font-size:13px;color:var(--gray-400);margin-top:4px;font-style:italic;
+}
+
+.toolbar{
+  display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;justify-content:center;
+}
+.btn{
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
+  padding:6px 16px;border-radius:var(--radius-pill);
+  border:1px solid var(--gray-200);background:#fff;color:var(--gray-700);
+  cursor:pointer;transition:all .15s;
+}
+.btn:hover{background:var(--gray-100);border-color:var(--gray-400);}
+
+.card{
+  background:#fff;border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-md);
+  border:1px solid var(--gray-200);
+  width:100%;max-width:1400px;
+  overflow:hidden;
+}
+
+.diagram-body{
+  padding:40px 32px 32px;
+  overflow-x:auto;
+}
+
+/* ── SVG wrapper ── */
+svg{
+  display:block;
+  width:100%;
+  min-width:1200px;
+  height:auto;
+}
+
+/* ── Section panels ── */
+.sec-panel{fill:var(--sec-bg);stroke:var(--sec-border);stroke-width:1}
+.sec-label{font-family:'DM Sans',sans-serif;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.sec-sub{font-family:'DM Sans',sans-serif;font-size:8px;font-weight:400;letter-spacing:.05em}
+
+/* ── Module boxes ── */
+.mod-box{
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.08));
+}
+.mod-rect{stroke-width:1.2;rx:10}
+.mod-title{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600}
+.mod-sub{font-family:'DM Sans',sans-serif;font-size:9.5px;font-style:italic}
+.mod-mono{font-family:'DM Mono',monospace;font-size:8.5px}
+.mod-tag{font-family:'DM Sans',sans-serif;font-size:8px;font-weight:500}
+
+/* ── Arrows ── */
+.arr-solid{stroke-width:1.8;fill:none}
+.arr-dash{stroke-width:1.6;fill:none;stroke-dasharray:5,3}
+.arr-red{stroke-width:1.8;fill:none;stroke-dasharray:4,3}
+
+/* ── Bottom band ── */
+.band-rect{fill:#FEF2F2;stroke:#FECACA;stroke-width:1;rx:12}
+.band-box{fill:#FFF5F5;stroke:#FECACA;stroke-width:1;rx:8}
+
+/* ── Legend ── */
+.legend-box{fill:#FAFAFA;stroke:#E5E7EB;stroke-width:1;rx:10}
+.legend-label{font-family:'DM Sans',sans-serif;font-size:9px}
+.legend-title{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <p class="kicker">Methodology Figure · Bachelor Thesis</p>
+  <h1>DQN-Based Affective Intelligent Tutoring System</h1>
+  <p class="sub">Architecture · Closed-Loop Reinforcement Learning Pipeline</p>
+</div>
+
+<div class="toolbar">
+  <button class="btn" onclick="exportPNG()">⬇ Export PNG (3×)</button>
+  <button class="btn" onclick="exportSVG()">⬇ Export SVG</button>
+  <button class="btn" onclick="window.print()">🖨 Print / PDF</button>
+</div>
+
+<div class="card">
+<div class="diagram-body">
+<svg id="mainSVG" viewBox="0 0 1380 760" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <!-- Arrow markers per color -->
+  <marker id="aBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="#3B82F6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="aGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="#22C55E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="aTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="#14B8A6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="aPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="#A855F7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="aAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="#F59E0B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="aRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+  <marker id="aGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+
+  <!-- Soft drop shadow filter -->
+  <filter id="elev1" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000012"/>
+  </filter>
+  <filter id="elev2" x="-12%" y="-12%" width="124%" height="136%">
+    <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000016"/>
+  </filter>
+</defs>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION BACKGROUND PANELS
+═════════════════════════════════════════════════ -->
+
+<!-- Section 1: Student -->
+<rect x="12" y="50" width="194" height="540" rx="14"
+      fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" filter="url(#elev1)"/>
+<text x="109" y="37" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" font-weight="600" fill="#1D4ED8" letter-spacing=".12em">STUDENT</text>
+<text x="109" y="47" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#60A5FA" letter-spacing=".05em">simulator · knowledge · affect</text>
+
+<!-- Section 2: Perception / FER -->
+<rect x="218" y="50" width="194" height="540" rx="14"
+      fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1" filter="url(#elev1)"/>
+<text x="315" y="37" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" font-weight="600" fill="#15803D" letter-spacing=".12em">PERCEPTION (FER)</text>
+<text x="315" y="47" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#4ADE80" letter-spacing=".05em">ResNet50 · SE Attention · BiLSTM</text>
+
+<!-- Section 3: State Fusion -->
+<rect x="424" y="50" width="194" height="540" rx="14"
+      fill="#F0FDFA" stroke="#99F6E4" stroke-width="1" filter="url(#elev1)"/>
+<text x="521" y="37" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" font-weight="600" fill="#0F766E" letter-spacing=".12em">STATE FUSION</text>
+<text x="521" y="47" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#2DD4BF" letter-spacing=".05em">MDP state sₜ = [θₜ, eₜ, hₜ]</text>
+
+<!-- Section 4: DQN Agent -->
+<rect x="630" y="50" width="220" height="540" rx="14"
+      fill="#FAF5FF" stroke="#E9D5FF" stroke-width="1" filter="url(#elev1)"/>
+<text x="740" y="37" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" font-weight="600" fill="#7E22CE" letter-spacing=".12em">DQN AGENT</text>
+<text x="740" y="47" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#C084FC" letter-spacing=".05em">policy · masking · action space</text>
+
+<!-- Section 5: Environment -->
+<rect x="862" y="50" width="220" height="540" rx="14"
+      fill="#FFFBEB" stroke="#FDE68A" stroke-width="1" filter="url(#elev1)"/>
+<text x="972" y="37" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" font-weight="600" fill="#B45309" letter-spacing=".12em">ENVIRONMENT</text>
+<text x="972" y="47" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#FCD34D" letter-spacing=".05em">transition · reward · feedback</text>
+
+<!-- Section 6: Learning Loop -->
+<rect x="1094" y="50" width="274" height="540" rx="14"
+      fill="#FEF2F2" stroke="#FECACA" stroke-width="1" filter="url(#elev1)"/>
+<text x="1231" y="37" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" font-weight="600" fill="#B91C1C" letter-spacing=".12em">LEARNING LOOP</text>
+<text x="1231" y="47" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#FCA5A5" letter-spacing=".05em">replay · bellman · target network</text>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 1 — STUDENT BLOCKS
+═════════════════════════════════════════════════ -->
+
+<!-- 1A: Student Simulator -->
+<g filter="url(#elev2)">
+  <rect x="28" y="74" width="162" height="92" rx="10"
+        fill="#DBEAFE" stroke="#93C5FD" stroke-width="1.2"/>
+  <text x="109" y="99" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="12.5" font-weight="600" fill="#1D4ED8">Student Simulator</text>
+  <text x="109" y="115" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9.5" font-style="italic" fill="#3B82F6">N synthetic learners</text>
+  <line x1="44" y1="122" x2="174" y2="122" stroke="#93C5FD" stroke-width="0.6"/>
+  <text x="109" y="137" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#2563EB">outputs θₜ · video frames</text>
+  <text x="109" y="151" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#60A5FA">stochastic behavior model</text>
+</g>
+
+<!-- 1B: Knowledge State -->
+<g filter="url(#elev1)">
+  <rect x="28" y="190" width="162" height="70" rx="10"
+        fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+  <text x="109" y="213" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11.5" font-weight="600" fill="#1D4ED8">Knowledge State θₜ</text>
+  <text x="109" y="229" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#3B82F6">per-concept mastery vector</text>
+  <text x="109" y="245" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8" fill="#60A5FA">attempts · accuracy · streak</text>
+</g>
+
+<!-- 1C: Affective State (updated by FER) -->
+<g filter="url(#elev1)">
+  <rect x="28" y="282" width="162" height="70" rx="10"
+        fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+  <text x="109" y="305" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11.5" font-weight="600" fill="#1D4ED8">Affective State</text>
+  <text x="109" y="320" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#3B82F6">updated by FER output eₜ</text>
+  <text x="109" y="334" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8" fill="#60A5FA">engagement · frustration ...</text>
+</g>
+
+<!-- 1D: Interaction History -->
+<g filter="url(#elev1)">
+  <rect x="28" y="374" width="162" height="58" rx="10"
+        fill="#EFF6FF" stroke="#93C5FD" stroke-width="1"/>
+  <text x="109" y="397" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11" font-weight="600" fill="#1D4ED8">Interaction History hₜ</text>
+  <text x="109" y="413" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#3B82F6">action sequence · responses</text>
+  <text x="109" y="425" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8" fill="#60A5FA">sliding window context</text>
+</g>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 2 — FER MODULE (SINGLE INSTANCE)
+═════════════════════════════════════════════════ -->
+
+<!-- 2A: FER Module (main, prominent) -->
+<g filter="url(#elev2)">
+  <rect x="234" y="74" width="162" height="108" rx="10"
+        fill="#DCFCE7" stroke="#4ADE80" stroke-width="1.4"/>
+  <text x="315" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="12.5" font-weight="600" fill="#15803D">FER Module</text>
+  <text x="315" y="111" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#16A34A">input: video frames only</text>
+  <line x1="248" y1="118" x2="382" y2="118" stroke="#86EFAC" stroke-width="0.7"/>
+  <text x="315" y="132" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#15803D">ResNet50 + SE Attention</text>
+  <text x="315" y="145" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#15803D">2-layer BiLSTM · temp. fusion</text>
+  <text x="315" y="158" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8" fill="#22C55E">→ 1×1024 context vector</text>
+  <text x="315" y="170" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8" fill="#22C55E">→ multilabel sigmoid output</text>
+</g>
+
+<!-- 2B: Emotion Vector eₜ (FER output) -->
+<g filter="url(#elev2)">
+  <rect x="234" y="206" width="162" height="138" rx="10"
+        fill="#F0FDF4" stroke="#4ADE80" stroke-width="1.2"/>
+  <text x="315" y="226" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11.5" font-weight="600" fill="#15803D">Emotion vector eₜ</text>
+  <text x="315" y="239" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" font-style="italic" fill="#16A34A">multilabel · co-occurring</text>
+
+  <!-- Engagement bar -->
+  <rect x="248" y="248" width="130" height="18" rx="4" fill="#DCFCE7" stroke="#86EFAC" stroke-width="0.7"/>
+  <text x="256" y="261" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#15803D">Engagement</text>
+  <rect x="320" y="251" width="50" height="10" rx="3" fill="#22C55E" opacity=".8"/>
+  <text x="374" y="260" font-family="'DM Mono',monospace" font-size="7.5" fill="#15803D">0.76</text>
+
+  <!-- Confusion bar -->
+  <rect x="248" y="271" width="130" height="18" rx="4" fill="#FEF9C3" stroke="#FDE047" stroke-width="0.7"/>
+  <text x="256" y="284" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#854D0E">Confusion</text>
+  <rect x="320" y="274" width="30" height="10" rx="3" fill="#EAB308" opacity=".8"/>
+  <text x="354" y="283" font-family="'DM Mono',monospace" font-size="7.5" fill="#854D0E">0.45</text>
+
+  <!-- Frustration bar -->
+  <rect x="248" y="294" width="130" height="18" rx="4" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="0.7"/>
+  <text x="256" y="307" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#991B1B">Frustration</text>
+  <rect x="320" y="297" width="20" height="10" rx="3" fill="#EF4444" opacity=".8"/>
+  <text x="344" y="306" font-family="'DM Mono',monospace" font-size="7.5" fill="#991B1B">0.30</text>
+
+  <!-- Boredom bar -->
+  <rect x="248" y="317" width="130" height="18" rx="4" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.7"/>
+  <text x="256" y="330" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#475569">Boredom</text>
+  <rect x="320" y="320" width="14" height="10" rx="3" fill="#94A3B8" opacity=".8"/>
+  <text x="338" y="329" font-family="'DM Mono',monospace" font-size="7.5" fill="#475569">0.20</text>
+</g>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 3 — STATE FUSION (single merge point)
+═════════════════════════════════════════════════ -->
+
+<!-- 3A: State Construction block -->
+<g filter="url(#elev2)">
+  <rect x="440" y="160" width="162" height="106" rx="10"
+        fill="#CCFBF1" stroke="#2DD4BF" stroke-width="1.6"/>
+  <text x="521" y="183" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="12.5" font-weight="600" fill="#0F766E">State Construction</text>
+  <text x="521" y="197" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#0D9488">sole MDP fusion point</text>
+  <line x1="454" y1="204" x2="588" y2="204" stroke="#5EEAD4" stroke-width="0.7"/>
+  <text x="521" y="218" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="9" fill="#0F766E">sₜ = [ θₜ, eₜ, hₜ ]</text>
+  <text x="521" y="232" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#0D9488">knowledge · affect · history</text>
+  <text x="521" y="246" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#0D9488">→ state vector sₜ</text>
+  <text x="521" y="259" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8" fill="#14B8A6">dim(sₜ) = d_k + d_e + d_h</text>
+</g>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 4 — DQN AGENT
+═════════════════════════════════════════════════ -->
+
+<!-- 4A: Q-Network (online) -->
+<g filter="url(#elev2)">
+  <rect x="646" y="74" width="188" height="96" rx="10"
+        fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1.4"/>
+  <text x="740" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="12.5" font-weight="600" fill="#6D28D9">DQN Policy Network</text>
+  <text x="740" y="111" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#7C3AED">online Q-network · FC layers</text>
+  <line x1="660" y1="118" x2="820" y2="118" stroke="#C4B5FD" stroke-width="0.7"/>
+  <text x="740" y="131" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="9" fill="#6D28D9">Q(sₜ, a) → action values</text>
+  <text x="740" y="144" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#7C3AED">ε-greedy exploration</text>
+  <text x="740" y="157" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8" fill="#A855F7">π(sₜ) = argmax Q(sₜ,a)</text>
+</g>
+
+<!-- 4B: Action Masking & Safety -->
+<g filter="url(#elev1)">
+  <rect x="646" y="192" width="188" height="84" rx="10"
+        fill="#FDF4FF" stroke="#E879F9" stroke-width="1.2"/>
+  <text x="740" y="213" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11.5" font-weight="600" fill="#86198F">Action Masking</text>
+  <text x="740" y="227" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#A21CAF">safety constraint layer</text>
+  <line x1="660" y1="233" x2="820" y2="233" stroke="#E879F9" stroke-width="0.6"/>
+  <text x="740" y="246" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#A21CAF">cooldown timers · frustration guard</text>
+  <text x="740" y="259" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#A21CAF">emergency constraints</text>
+  <text x="740" y="270" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8" fill="#C026D3">mask(a) ∈ {0,1}^|A|</text>
+</g>
+
+<!-- 4C: Action Selector + Action Space combined -->
+<g filter="url(#elev1)">
+  <rect x="646" y="298" width="188" height="118" rx="10"
+        fill="#FAF5FF" stroke="#C4B5FD" stroke-width="1.2"/>
+  <text x="740" y="318" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11.5" font-weight="600" fill="#6D28D9">Action Space |A|=6</text>
+  <text x="740" y="332" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#7C3AED">pedagogical interventions</text>
+
+  <!-- 6 action pills -->
+  <rect x="654" y="341" width="44" height="16" rx="8" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="0.8"/>
+  <text x="676" y="353" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="#6D28D9">hint</text>
+
+  <rect x="703" y="341" width="56" height="16" rx="8" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="0.8"/>
+  <text x="731" y="353" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="#6D28D9">scaffold</text>
+
+  <rect x="764" y="341" width="54" height="16" rx="8" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="0.8"/>
+  <text x="791" y="353" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="#6D28D9">explain</text>
+
+  <rect x="654" y="362" width="70" height="16" rx="8" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="0.8"/>
+  <text x="689" y="374" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="#6D28D9">encourage</text>
+
+  <rect x="729" y="362" width="80" height="16" rx="8" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="0.8"/>
+  <text x="769" y="374" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="#6D28D9">adjust difficulty</text>
+
+  <rect x="654" y="383" width="44" height="16" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.8"/>
+  <text x="676" y="395" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="#475569">no-op</text>
+
+  <text x="740" y="409" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#7C3AED">aₜ = argmax_masked Q(sₜ,a)</text>
+</g>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 5 — ENVIRONMENT
+═════════════════════════════════════════════════ -->
+
+<!-- 5A: Environment Update -->
+<g filter="url(#elev2)">
+  <rect x="878" y="74" width="188" height="96" rx="10"
+        fill="#FEF3C7" stroke="#FCD34D" stroke-width="1.4"/>
+  <text x="972" y="97" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="12.5" font-weight="600" fill="#92400E">Environment Update</text>
+  <text x="972" y="111" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#B45309">student state transition</text>
+  <line x1="892" y1="118" x2="1052" y2="118" stroke="#FCD34D" stroke-width="0.7"/>
+  <text x="972" y="132" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#92400E">sₜ + aₜ → sₜ₊₁</text>
+  <text x="972" y="145" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#B45309">Δknowledge · Δaffect</text>
+  <text x="972" y="158" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#B45309">new interaction logged in hₜ₊₁</text>
+</g>
+
+<!-- 5B: Reward Generator -->
+<g filter="url(#elev1)">
+  <rect x="878" y="192" width="188" height="90" rx="10"
+        fill="#FFFBEB" stroke="#FCD34D" stroke-width="1.2"/>
+  <text x="972" y="212" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11.5" font-weight="600" fill="#92400E">Reward Generator</text>
+  <text x="972" y="226" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#B45309">shaped reward signal</text>
+  <line x1="892" y1="232" x2="1052" y2="232" stroke="#FDE68A" stroke-width="0.7"/>
+  <text x="972" y="245" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#B45309">+ learning gain · + engagement</text>
+  <text x="972" y="259" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#B45309">− frustration · − boredom</text>
+  <text x="972" y="272" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#92400E">rₜ = f(Δθ, eₜ, penalty)</text>
+</g>
+
+<!-- 5C: Next State Feedback -->
+<g filter="url(#elev1)">
+  <rect x="878" y="304" width="188" height="66" rx="10"
+        fill="#FFFBEB" stroke="#FCD34D" stroke-width="1"/>
+  <text x="972" y="325" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11" font-weight="600" fill="#92400E">Next State sₜ₊₁</text>
+  <text x="972" y="340" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#B45309">sₜ₊₁ · rₜ · done flag</text>
+  <text x="972" y="355" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8" fill="#B45309">→ replay buffer</text>
+</g>
+
+<!-- ═════════════════════════════════════════════════
+     SECTION 6 — LEARNING LOOP
+═════════════════════════════════════════════════ -->
+
+<!-- 6A: Replay Buffer -->
+<g filter="url(#elev1)">
+  <rect x="1110" y="74" width="242" height="84" rx="10"
+        fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1.2"/>
+  <text x="1231" y="96" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11.5" font-weight="600" fill="#991B1B">Replay Buffer</text>
+  <text x="1231" y="110" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#B91C1C">experience storage (FIFO)</text>
+  <line x1="1124" y1="116" x2="1338" y2="116" stroke="#FCA5A5" stroke-width="0.7"/>
+  <text x="1231" y="130" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#991B1B">(sₜ, aₜ, rₜ, sₜ₊₁, done)</text>
+  <text x="1231" y="145" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8.5" fill="#B91C1C">capacity C · uniform sampling</text>
+</g>
+
+<!-- 6B: Mini-Batch Sampler -->
+<g filter="url(#elev1)">
+  <rect x="1110" y="180" width="242" height="68" rx="10"
+        fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1"/>
+  <text x="1231" y="200" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11" font-weight="600" fill="#991B1B">Mini-Batch Sampler</text>
+  <text x="1231" y="215" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#B91C1C">uniform / prioritized PER</text>
+  <text x="1231" y="230" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#991B1B">N = 64 transitions per batch</text>
+  <text x="1231" y="242" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8" fill="#DC2626">when |buffer| ≥ N_min</text>
+</g>
+
+<!-- 6C: Q-Network Training -->
+<g filter="url(#elev2)">
+  <rect x="1110" y="270" width="242" height="92" rx="10"
+        fill="#FFCDD2" stroke="#EF4444" stroke-width="1.4"/>
+  <text x="1231" y="292" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="12" font-weight="600" fill="#991B1B">Q-Network Training</text>
+  <text x="1231" y="306" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#B91C1C">Bellman loss · SGD update</text>
+  <line x1="1124" y1="312" x2="1338" y2="312" stroke="#FCA5A5" stroke-width="0.7"/>
+  <text x="1231" y="326" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="9" fill="#991B1B">y = r + γ max_a' Q̂(s',a')</text>
+  <text x="1231" y="341" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="9" fill="#991B1B">L = E[(y − Q(s,a))²]</text>
+  <text x="1231" y="354" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8" fill="#B91C1C">minimize TD error · update θ</text>
+</g>
+
+<!-- 6D: Target Network -->
+<g filter="url(#elev1)">
+  <rect x="1110" y="384" width="242" height="72" rx="10"
+        fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1.2"/>
+  <text x="1231" y="405" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="11" font-weight="600" fill="#991B1B">Target Network</text>
+  <text x="1231" y="419" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="9" font-style="italic" fill="#B91C1C">stable Q̂(s,a) · frozen weights</text>
+  <text x="1231" y="434" text-anchor="middle" font-family="'DM Mono',monospace"
+        font-size="8.5" fill="#991B1B">θ⁻ ← θ  every C steps</text>
+  <text x="1231" y="446" text-anchor="middle" font-family="'DM Sans',sans-serif"
+        font-size="8" fill="#DC2626">prevents oscillation</text>
+</g>
+
+<!-- ═════════════════════════════════════════════════
+     ARROWS — MAIN FORWARD FLOW (left → right)
+     Solid = data flow  |  Dashed = feedback/learning
+═════════════════════════════════════════════════ -->
+
+<!-- Student Sim → Knowledge State -->
+<line x1="109" y1="166" x2="109" y2="190"
+      stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#aBlue)"/>
+
+<!-- Student Sim → Affective State (dashed, FER updates this) -->
+<line x1="109" y1="166" x2="109" y2="282"
+      stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#aBlue)"/>
+
+<!-- Student Sim → Interaction History -->
+<line x1="109" y1="166" x2="109" y2="374"
+      stroke="#3B82F6" stroke-width="1.3" stroke-dasharray="4,4" fill="none" marker-end="url(#aBlue)"/>
+
+<!-- Student Sim → FER (video frames) -->
+<line x1="190" y1="120" x2="234" y2="120"
+      stroke="#22C55E" stroke-width="1.8" fill="none" marker-end="url(#aGreen)"/>
+<!-- label above this arrow -->
+<text x="212" y="112" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#15803D">frames</text>
+
+<!-- FER Module → Emotion Vector -->
+<line x1="315" y1="182" x2="315" y2="206"
+      stroke="#22C55E" stroke-width="1.8" fill="none" marker-end="url(#aGreen)"/>
+
+<!-- Emotion Vector → Affective State (FER branch 1) -->
+<path d="M234 282 L218 282 L218 322 L190 322"
+      stroke="#22C55E" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#aGreen)"/>
+<text x="204" y="312" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="7.5" fill="#15803D">eₜ→affect</text>
+
+<!-- Emotion Vector → State Fusion (FER branch 2) -->
+<path d="M396 272 L424 272 L424 213 L440 213"
+      stroke="#22C55E" stroke-width="1.8" fill="none" marker-end="url(#aGreen)"/>
+<text x="430" y="264" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#15803D">eₜ</text>
+
+<!-- Knowledge State → State Fusion -->
+<path d="M190 225 L424 225 L424 213 L440 213"
+      stroke="#3B82F6" stroke-width="1.8" fill="none" marker-end="url(#aBlue)"/>
+<text x="300" y="218" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#1D4ED8">θₜ</text>
+
+<!-- Interaction History → State Fusion -->
+<path d="M190 403 L412 403 L412 246 L440 246"
+      stroke="#3B82F6" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#aBlue)"/>
+<text x="340" y="395" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#1D4ED8">hₜ</text>
+
+<!-- State Fusion → DQN Policy (sₜ) -->
+<line x1="602" y1="213" x2="646" y2="122"
+      stroke="#14B8A6" stroke-width="2" fill="none" marker-end="url(#aTeal)"/>
+<text x="640" y="167" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" fill="#0F766E">sₜ</text>
+
+<!-- DQN Policy → Action Masking -->
+<line x1="740" y1="170" x2="740" y2="192"
+      stroke="#A855F7" stroke-width="1.8" fill="none" marker-end="url(#aPurple)"/>
+
+<!-- Action Masking → Action Space -->
+<line x1="740" y1="276" x2="740" y2="298"
+      stroke="#A855F7" stroke-width="1.8" fill="none" marker-end="url(#aPurple)"/>
+
+<!-- Action Space → Environment Update (aₜ) -->
+<line x1="834" y1="357" x2="878" y2="122"
+      stroke="#F59E0B" stroke-width="2" fill="none" marker-end="url(#aAmber)"/>
+<text x="868" y="248" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" fill="#B45309">aₜ</text>
+
+<!-- Environment Update → Reward Generator -->
+<line x1="972" y1="170" x2="972" y2="192"
+      stroke="#F59E0B" stroke-width="1.8" fill="none" marker-end="url(#aAmber)"/>
+
+<!-- Reward Generator → Next State -->
+<line x1="972" y1="282" x2="972" y2="304"
+      stroke="#F59E0B" stroke-width="1.8" fill="none" marker-end="url(#aAmber)"/>
+
+<!-- Next State → Replay Buffer (store transition) -->
+<line x1="1066" y1="337" x2="1110" y2="116"
+      stroke="#EF4444" stroke-width="1.8" stroke-dasharray="5,3" fill="none" marker-end="url(#aRed)"/>
+<text x="1098" y="228" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#B91C1C">(s,a,r,s′)</text>
+
+<!-- Replay Buffer → Mini-Batch -->
+<line x1="1231" y1="158" x2="1231" y2="180"
+      stroke="#EF4444" stroke-width="1.8" fill="none" marker-end="url(#aRed)"/>
+
+<!-- Mini-Batch → Q-Network Training -->
+<line x1="1231" y1="248" x2="1231" y2="270"
+      stroke="#EF4444" stroke-width="1.8" fill="none" marker-end="url(#aRed)"/>
+
+<!-- Q-Network Training → Target Network -->
+<line x1="1231" y1="362" x2="1231" y2="384"
+      stroke="#EF4444" stroke-width="1.6" stroke-dasharray="5,3" fill="none" marker-end="url(#aRed)"/>
+<text x="1270" y="375" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#B91C1C">θ⁻←θ</text>
+
+<!-- Weight update θ back to DQN Policy (curved feedback arc) -->
+<path d="M1110 316 Q1090 560 740 560 L740 416"
+      stroke="#A855F7" stroke-width="1.6" stroke-dasharray="6,4" fill="none" marker-end="url(#aPurple)"/>
+<text x="910" y="570" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8.5" fill="#7E22CE">θ update → online Q-network</text>
+
+<!-- sₜ₊₁ feedback to Student Simulator (large feedback loop) -->
+<path d="M878 337 Q840 614 109 614 L109 462"
+      stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#aBlue)"/>
+<text x="480" y="628" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8.5" fill="#1D4ED8">sₜ₊₁ → student state updated → new episode step</text>
+
+<!-- ═════════════════════════════════════════════════
+     EPISODE CONTROL STRIP (bottom)
+═════════════════════════════════════════════════ -->
+<rect x="12" y="648" width="1356" height="48" rx="12"
+      fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1"/>
+<text x="109" y="665" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" font-weight="600" fill="#15803D">Episode control</text>
+<text x="109" y="679" text-anchor="middle" font-family="'DM Mono',monospace"
+      font-size="8" fill="#16A34A">t=0 · s₀~P₀</text>
+
+<line x1="200" y1="652" x2="200" y2="692" stroke="#BBF7D0" stroke-width="1"/>
+
+<text x="690" y="665" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9.5" font-weight="600" fill="#0F766E">Main RL loop</text>
+<text x="690" y="679" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8.5" fill="#0D9488">Student → FER → sₜ → DQN → aₜ → Env → rₜ → Replay → Train → θ update → t+1</text>
+
+<line x1="1080" y1="652" x2="1080" y2="692" stroke="#BBF7D0" stroke-width="1"/>
+
+<text x="1231" y="665" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="9" font-weight="600" fill="#B91C1C">Convergence check</text>
+<text x="1231" y="679" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8.5" fill="#DC2626">|buffer|≥N_min → update · monitor avg_reward · ε decay</text>
+
+<!-- ═════════════════════════════════════════════════
+     LEGEND
+═════════════════════════════════════════════════ -->
+<rect x="12" y="704" width="1356" height="46" rx="10"
+      fill="#FAFAFA" stroke="#E5E7EB" stroke-width="1"/>
+<text x="46" y="722" font-family="'DM Sans',sans-serif" font-size="9" font-weight="600" fill="#374151">Legend</text>
+
+<!-- solid arrow -->
+<line x1="96" y1="722" x2="130" y2="722" stroke="#6B7280" stroke-width="1.8" marker-end="url(#aGray)"/>
+<text x="136" y="726" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#374151">Data flow (solid)</text>
+
+<!-- dashed arrow -->
+<line x1="248" y1="722" x2="282" y2="722" stroke="#6B7280" stroke-width="1.6" stroke-dasharray="5,3" marker-end="url(#aGray)"/>
+<text x="288" y="726" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#374151">Feedback / learning (dashed)</text>
+
+<!-- red reward arrow -->
+<line x1="440" y1="722" x2="474" y2="722" stroke="#EF4444" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#aRed)"/>
+<text x="480" y="726" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#374151">Reward / training signal</text>
+
+<!-- purple weight update -->
+<line x1="618" y1="722" x2="652" y2="722" stroke="#A855F7" stroke-width="1.6" stroke-dasharray="6,4" marker-end="url(#aPurple)"/>
+<text x="658" y="726" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#374151">Weight update (θ)</text>
+
+<!-- Color swatches -->
+<rect x="766" y="714" width="10" height="10" rx="2" fill="#DBEAFE" stroke="#93C5FD" stroke-width="0.8"/>
+<text x="780" y="723" font-family="'DM Sans',sans-serif" font-size="8" fill="#374151">Student</text>
+<rect x="826" y="714" width="10" height="10" rx="2" fill="#DCFCE7" stroke="#4ADE80" stroke-width="0.8"/>
+<text x="840" y="723" font-family="'DM Sans',sans-serif" font-size="8" fill="#374151">FER / Affect</text>
+<rect x="898" y="714" width="10" height="10" rx="2" fill="#CCFBF1" stroke="#2DD4BF" stroke-width="0.8"/>
+<text x="912" y="723" font-family="'DM Sans',sans-serif" font-size="8" fill="#374151">State Fusion</text>
+<rect x="970" y="714" width="10" height="10" rx="2" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="0.8"/>
+<text x="984" y="723" font-family="'DM Sans',sans-serif" font-size="8" fill="#374151">DQN Agent</text>
+<rect x="1040" y="714" width="10" height="10" rx="2" fill="#FEF3C7" stroke="#FCD34D" stroke-width="0.8"/>
+<text x="1054" y="723" font-family="'DM Sans',sans-serif" font-size="8" fill="#374151">Environment</text>
+<rect x="1120" y="714" width="10" height="10" rx="2" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="0.8"/>
+<text x="1134" y="723" font-family="'DM Sans',sans-serif" font-size="8" fill="#374151">Learning Loop</text>
+
+<!-- bottom note -->
+<text x="690" y="740" text-anchor="middle" font-family="'DM Sans',sans-serif"
+      font-size="8" fill="#9CA3AF">Single FER instance · sole state fusion point · multi-label co-occurring emotions · ε-greedy exploration · frustration-protected intervention</text>
+</svg>
+</div>
+</div>
+
+<script>
+function exportPNG(){
+  const svg=document.getElementById('mainSVG');
+  const scale=3;
+  const vb=svg.viewBox.baseVal;
+  const w=vb.width*scale,h=vb.height*scale;
+  const canvas=document.createElement('canvas');
+  canvas.width=w;canvas.height=h;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#ffffff';
+  ctx.fillRect(0,0,w,h);
+  const data=new XMLSerializer().serializeToString(svg);
+  const blob=new Blob([data],{type:'image/svg+xml;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const img=new Image();
+  img.onload=()=>{
+    ctx.drawImage(img,0,0,w,h);
+    URL.revokeObjectURL(url);
+    const a=document.createElement('a');
+    a.download='dqn_affect_its_3x.png';
+    a.href=canvas.toDataURL('image/png');
+    a.click();
+  };
+  img.src=url;
+}
+function exportSVG(){
+  const svg=document.getElementById('mainSVG');
+  const data=new XMLSerializer().serializeToString(svg);
+  const blob=new Blob([data],{type:'image/svg+xml;charset=utf-8'});
+  const a=document.createElement('a');
+  a.download='dqn_affect_its.svg';
+  a.href=URL.createObjectURL(blob);
+  a.click();
+}
+</script>
+</body>
+</html>
+HTMLEOF
+echo "done"

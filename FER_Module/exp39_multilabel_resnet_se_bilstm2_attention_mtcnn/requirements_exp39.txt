@@ -1,0 +1,8 @@
+# exp39 additional dependencies (on top of the exp38 stack)
+#
+# facenet-pytorch provides the MTCNN detector used to crop the dominant
+# face region once per clip. It is the only library not already required
+# by exp38; everything else (torch, torchvision, opencv-python, pandas,
+# scikit-learn, tqdm, numpy) is already available in the exp38 environment.
+
+facenet-pytorch>=2.5.3

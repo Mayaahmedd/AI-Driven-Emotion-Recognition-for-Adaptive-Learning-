@@ -1,0 +1,7 @@
+{
+  "variant": "B",
+  "name": "posweight_only",
+  "description": "Loss-level imbalance correction only. Training set is the original DAiSEE train_multilabel.csv (no duplication). BCE pos_weight is computed from the original training set as negatives / max(positives, 1), clipped to [0.5, 6.0]. Per-label threshold tuning on validation is active.",
+  "use_oversampling": false,
+  "use_pos_weight": true
+}

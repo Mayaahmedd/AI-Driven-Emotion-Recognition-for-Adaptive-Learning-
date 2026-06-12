@@ -1,0 +1,7 @@
+{
+  "variant": "C",
+  "name": "combined",
+  "description": "Combined data-level + loss-level imbalance correction (the exp38 baseline configuration). Training set is the dominant-group oversampled CSV and BCE pos_weight is computed from that oversampled CSV, clipped to [0.5, 6.0]. Per-label threshold tuning on validation is active.",
+  "use_oversampling": true,
+  "use_pos_weight": true
+}

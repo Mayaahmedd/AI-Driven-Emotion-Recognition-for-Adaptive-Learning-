@@ -1,0 +1,7 @@
+{
+  "variant": "A",
+  "name": "oversampling_only",
+  "description": "Data-level imbalance correction only. Training set is the dominant-group oversampled CSV. BCE pos_weight is set to ones(4) so the loss applies no per-label re-weighting. Per-label threshold tuning on validation is active.",
+  "use_oversampling": true,
+  "use_pos_weight": false
+}
